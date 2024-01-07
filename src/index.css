@@ -1,4 +1,11 @@
 @charset "utf-8";
+@import url(./styles/reset.css);
+@import url(./styles/font.css);
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
 
 * {
   outline: none;
@@ -23,7 +30,16 @@ img {
 }
 html,
 body {
-  font-size: 14px;
+  font-size: 10px;
   color: #000000;
   word-break: keep-all;
+  font-family:
+    "Noto Sans KR",
+    "Pretendard Variable",
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    "Helvetica Neue";
 }
