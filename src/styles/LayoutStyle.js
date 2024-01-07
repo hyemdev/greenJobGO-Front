@@ -6,6 +6,6 @@ export const ContentWrap = styled.div`
   justify-content: center;
   margin-top: 40px;
 & > div {
-  width: 1400px;
+  /* width: 1660px; */
 }
 `;

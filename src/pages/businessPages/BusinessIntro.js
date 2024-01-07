@@ -1,7 +1,8 @@
 import React from "react";
+import BusinessSwipe from "../../components/business/BusinessHome/BusinessSwipe";
 
 const BusinessIntro = () => {
-  return <div>Business - Intro</div>;
+  return <div><BusinessSwipe /></div>;
 };
 
 export default BusinessIntro;
