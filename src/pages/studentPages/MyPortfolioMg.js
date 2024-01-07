@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ResumeAdd = () => {
+const MyPortfolioMg = () => {
   return (
     <div>ResumeAdd</div>
   )
 }
 
-export default ResumeAdd
+export default MyPortfolioMg
