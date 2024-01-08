@@ -1,7 +1,18 @@
 import styled from "@emotion/styled";
 
+export const BusinessStyWrap = styled.div`
+  margin-top: 130px;
+  h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+`;
+
 export const SwiperWrapStyle = styled.div`
   width: 1660px;
+  margin-top: 10px;
   .swiper-button-prev {
     position: absolute;
     top: calc(50% - 15px);
