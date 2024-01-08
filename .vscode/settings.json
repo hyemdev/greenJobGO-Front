@@ -1,5 +1,3 @@
 {
-  "workbench.colorTheme": "Atom Material Theme",
-  "workbench.preferredDarkColorTheme": "Quiet Light",
-  "workbench.editor.decorations.colors": false
+  "workbench.colorTheme": "Monokai Dimmed"
 }
