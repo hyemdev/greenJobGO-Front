@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ConnectCompanyWrap } from "../../styles/ConnectCompanyStyle";
+import CompanyListPaging from "../../components/student/CompanyListPaging";
+import { getCompanyList } from "../../api/companyListAxios";
 
 const data = [
   {
@@ -71,6 +73,12 @@ const data = [
 ];
 
 const ConnectCompany = () => {
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+  const [listData, setListData] = useState([]);
+  useEffect(() => {
+    getCompanyList(setListData, setCount, page);
+  }, []);
   return (
     <ConnectCompanyWrap>
       <h2>협약 기업 목록</h2>
@@ -93,6 +101,7 @@ const ConnectCompany = () => {
           ))}
         </ul>
       </div>
+      <CompanyListPaging page={page} setPage={setPage} count={count} />
     </ConnectCompanyWrap>
   );
 };
