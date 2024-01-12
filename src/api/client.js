@@ -57,10 +57,10 @@ client.interceptors.response.use(
 );
 
 // 로그인 함수
-export const fetchLogin = async (adminId, password) => {
+export const fetchLogin = async (userId, password) => {
   try {
-    const res = await client.post(`/company/sign-in`, {
-      id: adminId,
+    const res = await client.post(`/sign/sign-in`, {
+      email: userId,
       pw: password,
     });
 
@@ -79,7 +79,7 @@ export const fetchLogin = async (adminId, password) => {
       setCookie("refreshToken", refreshToken, cookieOptions);
       setCookie("accessToken", accessToken, cookieOptions);
 
-      return { role, accessToken };
+      return role;
     } else {
       throw new Error("잘못된 응답 형식");
     }
@@ -92,7 +92,7 @@ export const fetchLogin = async (adminId, password) => {
 // 로그아웃 함수
 export const postLogout = async (accessToken, refreshToken) => {
   try {
-    const res = await client.post("/admin/sign/logout");
+    const res = await client.post("/sign/logout");
     removeCookie(accessToken);
     removeCookie(refreshToken);
   } catch (error) {

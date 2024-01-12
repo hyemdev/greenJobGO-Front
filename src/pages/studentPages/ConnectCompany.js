@@ -78,27 +78,28 @@ const ConnectCompany = () => {
   const [listData, setListData] = useState([]);
   useEffect(() => {
     getCompanyList(setListData, setCount, page);
-  }, []);
+  }, [page]);
   return (
     <ConnectCompanyWrap>
       <h2>협약 기업 목록</h2>
       <div className="connect-company-inner">
         <ul>
-          {data.map((item, index) => (
-            <li key={item.companyCode}>
-              <h3>{item.companyName}</h3>
-              <div className="company-info">
-                <div>
-                  <span>지역</span>
-                  <span>{item.area}</span>
+          {listData &&
+            listData.map((item, index) => (
+              <li key={item.companyCode}>
+                <h3>{item.companyName}</h3>
+                <div className="company-info">
+                  <div>
+                    <span>지역</span>
+                    <span>{item.area}</span>
+                  </div>
+                  <div>
+                    <span>홈페이지</span>
+                    <span>{item.homepage}</span>
+                  </div>
                 </div>
-                <div>
-                  <span>채용분야</span>
-                  <span>{item.jobField}</span>
-                </div>
-              </div>
-            </li>
-          ))}
+              </li>
+            ))}
         </ul>
       </div>
       <CompanyListPaging page={page} setPage={setPage} count={count} />
