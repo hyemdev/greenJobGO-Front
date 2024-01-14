@@ -59,7 +59,10 @@ export const SwiperWrapStyle = styled.div`
     z-index: 99;
     width: 40px;
     height: 40px;
-    background: url(${process.env.PUBLIC_URL}/assets/prevBtn.png) no-repeat;
+    /* background: url(${process.env
+      .PUBLIC_URL}/assets/prevBtn.png) no-repeat; */
+    border-radius: 50%;
+    background: ${Maincolor.white};
     background-position: center;
     cursor: pointer;
   }
@@ -67,19 +70,34 @@ export const SwiperWrapStyle = styled.div`
   .swiper-button-next {
     position: absolute;
     /* top: 50%; */
-    top: calc(50% - 25px);
-    right: 120px;
+    top: calc(50% - 22px);
+    right: 130px;
     z-index: 99;
     width: 40px;
     height: 40px;
-    background: url(${process.env.PUBLIC_URL}/assets/nextBtn.png) no-repeat;
+    /* background: url(${process.env
+      .PUBLIC_URL}/assets/nextBtn.png) no-repeat; */
+    border-radius: 50%;
+    background: ${Maincolor.white};
     background-position: center;
     cursor: pointer;
   }
 
-  .swiper-button-next::after,
   .swiper-button-prev::after {
-    display: none;
+    color: ${Maincolor.btn};
+    font-size: 20px;
+    font-weight: 900;
+    position: absolute;
+    top: 10px;
+    left: 14px;
+  }
+  .swiper-button-next::after {
+    color: ${Maincolor.btn};
+    font-size: 20px;
+    font-weight: 900;
+    position: absolute;
+    top: 10px;
+    left: 17px;
   }
   .swiper-slide {
     width: 300px;

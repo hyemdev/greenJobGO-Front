@@ -36,7 +36,7 @@ function App() {
         <Route path="/business/*" element={<Business />}>
           {/* 기업 페이지 초기화면 */}
           <Route index element={<BusinessIntro />} />
-          <Route path="businessintro" element={<BusinessIntro />} />
+          {/* <Route path="businessintro" element={<BusinessIntro />} /> */}
           {/* 포트폴리오 리스트 */}
           <Route path="portpoliolist" element={<PortfolioList />} />
           {/* 포트폴리오 상세내역(수강생 정보) */}

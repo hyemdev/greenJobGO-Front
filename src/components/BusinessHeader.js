@@ -20,7 +20,7 @@ const BusinessHeader = () => {
               src={`${process.env.PUBLIC_URL}/assets/HomeIcon.svg`}
               alt="home"
             />
-            <Link to="./businessintro"> 홈</Link>
+            <Link to="/business"> 홈</Link>
           </li>
           <li>
             <img
