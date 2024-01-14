@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Maincolor } from "./GlobalStyle";
+import { Maincolor, ellipsis } from "./GlobalStyle";
 
 export const BusinessPortfolioWrap = styled.div`
   margin: 0 auto;
@@ -36,7 +36,7 @@ export const PfSearchWrap = styled.div`
       margin-right: 16px;
       margin-left: 30px;
     }
-    li > select {
+    & li > select {
       border: 1px solid ${Maincolor.input};
       width: 154px;
       height: 40px;
@@ -44,14 +44,14 @@ export const PfSearchWrap = styled.div`
       align-items: center;
       gap: 10px;
     }
-    li > div > input {
+    & li > div > input {
       width: 215px;
       height: 40px;
       border: 1px solid ${Maincolor.input};
       border-radius: 5px;
       padding: 8px 12px;
     }
-    li > button {
+    & li > button {
       margin-left: 270px;
       width: 180px;
       height: 50px;
@@ -89,7 +89,7 @@ export const ContentListWrap = styled.div`
     padding: 14px 0;
     border-bottom: 1px solid ${Maincolor.maingray};
     margin-top: 30px;
-    li {
+    & > li {
       color: ${Maincolor.black};
       text-align: center;
       font-size: 14px;
@@ -129,7 +129,7 @@ export const ContentListViewer = styled.div`
       .thumb-img {
         width: 360px;
         height: 230px;
-        img {
+        & > img {
           width: 100%;
           height: 100%;
           object-fit: contain;
@@ -155,7 +155,7 @@ export const ContentListViewer = styled.div`
   /* 게시판형 스타일 */
   .boardStyle {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
     padding: 30px 0;
@@ -181,6 +181,7 @@ export const ContentListViewer = styled.div`
         display: flex;
         justify-content: left;
         flex-direction: column;
+        width: 600px;
         margin-left: 60px;
         color: ${Maincolor.black};
 
@@ -198,11 +199,12 @@ export const ContentListViewer = styled.div`
           margin-top: 52px;
           font-size: 14px;
           font-weight: 400;
-          display: flex;
-          justify-content: center;
+          ${ellipsis}
           & > span:first-of-type {
-            width: 50px;
+            display: inline-block;
+            width: 70px;
             font-weight: 500;
+            /* margin-right: 10px; */
           }
         }
         .date {
@@ -210,13 +212,16 @@ export const ContentListViewer = styled.div`
           font-size: 14px;
           font-weight: 400;
           & > span:first-of-type {
-            width: 50px;
+            display: inline-block;
+            width: 70px;
             font-weight: 500;
+            /* margin-right: 10px; */
           }
         }
       }
       .detail-view-btn {
-        margin-left: 467px;
+        width: 220px;
+        margin-left: 167px;
         & > button {
           width: 220px;
         }

@@ -20,14 +20,12 @@ const ListBoard = ({ dummydata }) => {
               <li className="oneword">{item.oneword}</li>
               <li className="student-name">{item.name}</li>
               <li className="subject-name">
-                <span>과정명</span>
+                <span className="label">과정명</span>
                 <span>{item.subjectName}</span>
               </li>
               <li className="date">
-                <span>수강기간</span>{" "}
-                <span>
-                  {item.startedAt} ~ {item.endedAt}
-                </span>
+                <span className="label">수강기간</span>{" "}
+                <span>{item.startedAt} ~ {item.endedAt}</span>
               </li>
             </ul>
             <div className="detail-view-btn">

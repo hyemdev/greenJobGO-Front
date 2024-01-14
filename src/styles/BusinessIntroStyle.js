@@ -57,8 +57,11 @@ export const SwiperWrapStyle = styled.div`
     top: calc(50% - 25px);
     left: 120px;
     z-index: 99;
+    width: 40px;
+    height: 40px;
+    background: url(${process.env.PUBLIC_URL}/assets/prevBtn.png) no-repeat;
+    background-position: center;
     cursor: pointer;
-    /* background-image: url(${process.env.PUBLIC_URL}/assets/prevBtn.png); */
   }
 
   .swiper-button-next {
@@ -67,7 +70,16 @@ export const SwiperWrapStyle = styled.div`
     top: calc(50% - 25px);
     right: 120px;
     z-index: 99;
+    width: 40px;
+    height: 40px;
+    background: url(${process.env.PUBLIC_URL}/assets/nextBtn.png) no-repeat;
+    background-position: center;
     cursor: pointer;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    display: none;
   }
   .swiper-slide {
     width: 300px;
