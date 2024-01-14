@@ -3,7 +3,7 @@ import { Maincolor } from "./GlobalStyle";
 
 export const HeaderSty = styled.div`
   /* max-width: 196rem; */
-  height: 10rem;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;

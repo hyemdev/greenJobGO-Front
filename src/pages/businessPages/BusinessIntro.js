@@ -1,24 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BusinessSwipe from "../../components/business/BusinessHome/BusinessSwipe";
 import { BusinessStyWrap } from "../../styles/BusinessIntroStyle";
+import { getBigcate } from "../../api/businessMainAxios";
+import { Link } from "react-router-dom";
 
 const BusinessIntro = () => {
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    getBigcate(setCategory);
+  }, []);
   return (
     <BusinessStyWrap>
       <h2> 수강생 포트폴리오 </h2>
       <div className="main-tab-menu">
+        {/* {category?.map(item => {
+          <ul key={item.iclassification}>
+            <li>{item.classification}</li>
+          </ul>;
+        })} */}
         <ul>
-          <li>IT</li>
-          <li>UIUX</li>
-          <li>건축기계</li>
-          <li>빅데이터</li>
-          <li>영상</li>
-          <li>편집디자인</li>
+          <li value="1">it 분야</li>
+          <li value="2">건축 기계 분야</li>
+          <li value="3">UIUX 분야</li>
+          <li value="4">빅데이터 분야</li>
+          <li value="5">영상분야</li>
+          <li value="6">편집디자인 분야</li>
         </ul>
       </div>
       <BusinessSwipe />
       <div className="main-portfolio-linkBtn">
-        <span> 포트폴리오 전체보기 </span>
+        <Link to="/business/portpoliolist">
+          <span> 포트폴리오 전체보기 </span>
+        </Link>
       </div>
     </BusinessStyWrap>
   );

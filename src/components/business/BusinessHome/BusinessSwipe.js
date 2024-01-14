@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
+import NoImage from "../../../assets/NoImage.jpg";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -53,6 +54,10 @@ const DummyData = [
   },
 ];
 const BusinessSwipe = () => {
+  // 이미지 없을 때 error처리
+  const onImgError = e => {
+    e.target.src = NoImage;
+  };
   return (
     <SwiperWrapStyle>
       <Swiper
@@ -67,11 +72,7 @@ const BusinessSwipe = () => {
           <SwiperSlide key={index} className="swiper-slide">
             {/* <NavLink to={`/${item.productId}`}> */}
             <div className="img">
-              <img
-                src={`${item.img}`}
-                alt={item.name}
-                // onError={onImgError}
-              />
+              <img src={`${item.img}`} alt={item.name} onError={onImgError} />
             </div>
             <div className="txt">
               <p className="name">{item.name} 수강생</p>

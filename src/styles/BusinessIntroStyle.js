@@ -50,19 +50,22 @@ export const BusinessStyWrap = styled.div`
 export const SwiperWrapStyle = styled.div`
   width: 1660px;
   margin-top: 10px;
+  margin-bottom: 80px;
 
   .swiper-button-prev {
     position: absolute;
-    top: calc(50% - 15px);
-    left: -0px;
+    top: calc(50% - 25px);
+    left: 120px;
     z-index: 99;
     cursor: pointer;
+    /* background-image: url(${process.env.PUBLIC_URL}/assets/prevBtn.png); */
   }
 
   .swiper-button-next {
     position: absolute;
-    top: 50%;
-    top: calc(50% - 15px);
+    /* top: 50%; */
+    top: calc(50% - 25px);
+    right: 120px;
     z-index: 99;
     cursor: pointer;
   }
@@ -71,19 +74,25 @@ export const SwiperWrapStyle = styled.div`
     text-align: center;
     img {
       width: 300px;
-      height: 200px;
+      height: 204px;
       display: block;
       width: 100%;
     }
-    .name {
-      margin-top: 15px;
-      font-size: 16px;
-      font-weight: 500;
-    }
-    .subject {
-      margin-top: 8px;
-      font-size: 16px;
-      font-weight: 400;
+    .txt {
+      width: 300px;
+      text-align: left;
+      .name {
+        margin-top: 15px;
+        font-size: 16px;
+        font-weight: 500;
+        color: ${Maincolor.black};
+      }
+      .subject {
+        margin-top: 8px;
+        font-size: 16px;
+        font-weight: 400;
+        color: ${Maincolor.btn};
+      }
     }
   }
 `;
