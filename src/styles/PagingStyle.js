@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 
 export const PagiWrap = styled.div`
+  position: fixed;
+  left: 40.5%;
+  bottom: 30px;
   ul {
     display: flex;
     justify-content: center;
@@ -19,8 +22,8 @@ export const PagiWrap = styled.div`
       a {
         text-decoration: none;
         color: #000;
-        font-size: 14px;
-        line-height: 14px;
+        font-size: 15px;
+        line-height: 15px;
       }
     }
     .active a {
@@ -30,10 +33,4 @@ export const PagiWrap = styled.div`
       background-color: #228fcf;
     }
   }
-  /* .page-selection {
-    width: 40px;
-    height: 30px;
-    line-height: 25px;
-    color: #228fcf;
-  } */
 `;

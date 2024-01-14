@@ -11,20 +11,24 @@ const Login = () => {
 
   const handleLoginId = e => {
     setUserId(e.target.value);
+    console.log(e.target.value);
   };
 
   const handleLoginPass = e => {
     setPassword(e.target.value);
+    console.log(e.target.value);
   };
 
   const handleUserTypeChange = e => {
     setUserType(e.target.value);
+    console.log(e.target.value);
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     const role = await fetchLogin(userId, password);
+
     if (role === "ROLE_USER") {
       navigate("/student");
     } else if (role === "ROLE_COMPANY") {

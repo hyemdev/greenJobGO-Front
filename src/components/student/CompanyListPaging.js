@@ -7,7 +7,7 @@ const CompanyListPaging = ({ page, setPage, count }) => {
     <PagiWrap>
       <Pagination
         activePage={page}
-        itemsCountPerPage={10}
+        itemsCountPerPage={12}
         totalItemsCount={count}
         pageRangeDisplayed={10}
         marginPagesDisplayed={0}

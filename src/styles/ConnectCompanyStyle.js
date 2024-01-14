@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const ConnectCompanyWrap = styled.div`
-width: 100%;
+  width: 100%;
   h2 {
     font-size: 24px;
     font-weight: 700;
