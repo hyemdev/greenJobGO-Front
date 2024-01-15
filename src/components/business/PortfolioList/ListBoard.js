@@ -2,6 +2,7 @@ import React from "react";
 import { v4 } from "uuid";
 import NoImage from "../../../assets/NoImage.jpg";
 import { BtnGlobal } from "../../../styles/GlobalStyle";
+import { Link } from "react-router-dom";
 
 const ListBoard = ({ dummydata }) => {
   // 이미지 없을 때 error처리
@@ -25,11 +26,15 @@ const ListBoard = ({ dummydata }) => {
               </li>
               <li className="date">
                 <span className="label">수강기간</span>{" "}
-                <span>{item.startedAt} ~ {item.endedAt}</span>
+                <span>
+                  {item.startedAt} ~ {item.endedAt}
+                </span>
               </li>
             </ul>
             <div className="detail-view-btn">
-              <BtnGlobal>포트폴리오 상세보기</BtnGlobal>
+              <Link to="/business/portfoliodetail">
+                <BtnGlobal>포트폴리오 상세보기</BtnGlobal>
+              </Link>
             </div>
           </div>
         ))}

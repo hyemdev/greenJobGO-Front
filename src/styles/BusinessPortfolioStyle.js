@@ -222,7 +222,7 @@ export const ContentListViewer = styled.div`
       .detail-view-btn {
         width: 220px;
         margin-left: 167px;
-        & > button {
+        & button {
           width: 220px;
         }
       }
