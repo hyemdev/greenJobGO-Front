@@ -21,11 +21,18 @@ export const BusinessStyWrap = styled.div`
         border-radius: 20px;
         border: 1px solid ${Maincolor.grayLight2};
         padding: 9px 26px;
-        font-size: 16px;
-        font-weight: 500;
-        text-align: center;
-        letter-spacing: -0.24px;
-        cursor: pointer;
+        .cate-btn {
+          cursor: pointer;
+          border: none;
+          background: none;
+          font-size: 16px;
+          font-weight: 500;
+          text-align: center;
+          letter-spacing: -0.24px;
+          font-family: "Noto Sans KR";
+          /* line-height: 1.2; */
+          
+        }
       }
     }
   }
@@ -51,54 +58,40 @@ export const SwiperWrapStyle = styled.div`
   width: 1660px;
   margin-top: 10px;
   margin-bottom: 80px;
-
-  .swiper-button-prev {
-    position: absolute;
-    top: calc(50% - 25px);
-    left: 120px;
-    z-index: 99;
+  position: relative;
+  .prev-btn,
+  .next-btn {
+    border-radius: 50%;
+    border: 1px solid ${Maincolor.maingray};
     width: 40px;
     height: 40px;
-    /* background: url(${process.env
-      .PUBLIC_URL}/assets/prevBtn.png) no-repeat; */
-    border-radius: 50%;
     background: ${Maincolor.white};
-    background-position: center;
     cursor: pointer;
+    & > svg {
+      font-size: 25px;
+      color: ${Maincolor.btn};
+    }
   }
-
+  .prev-btn {
+    position: absolute;
+    top: 85px;
+    left: -20px;
+    z-index: 9;
+  }
+  .next-btn {
+    position: absolute;
+    top: 85px;
+    right: -20px;
+    z-index: 9;
+  }
+  .swiper-button-prev,
   .swiper-button-next {
-    position: absolute;
-    /* top: 50%; */
-    top: calc(50% - 22px);
-    right: 130px;
-    z-index: 99;
-    width: 40px;
-    height: 40px;
-    /* background: url(${process.env
-      .PUBLIC_URL}/assets/nextBtn.png) no-repeat; */
-    border-radius: 50%;
-    background: ${Maincolor.white};
-    background-position: center;
-    cursor: pointer;
+    display: none;
   }
-
-  .swiper-button-prev::after {
-    color: ${Maincolor.btn};
-    font-size: 20px;
-    font-weight: 900;
-    position: absolute;
-    top: 10px;
-    left: 14px;
-  }
+  /* .swiper-button-prev::after,
   .swiper-button-next::after {
-    color: ${Maincolor.btn};
-    font-size: 20px;
-    font-weight: 900;
-    position: absolute;
-    top: 10px;
-    left: 17px;
-  }
+    display: none;
+  } */
   .swiper-slide {
     width: 300px;
     text-align: center;
@@ -122,6 +115,7 @@ export const SwiperWrapStyle = styled.div`
         font-size: 16px;
         font-weight: 400;
         color: ${Maincolor.btn};
+        line-height: 1.2;
       }
     }
   }

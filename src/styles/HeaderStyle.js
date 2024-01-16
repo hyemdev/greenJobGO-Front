@@ -2,11 +2,17 @@ import styled from "@emotion/styled";
 import { Maincolor } from "./GlobalStyle";
 
 export const HeaderSty = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
   /* max-width: 196rem; */
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: ${Maincolor.white};
   box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.12);
   & > div {
     width: 1400px;

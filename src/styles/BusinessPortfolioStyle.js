@@ -9,6 +9,7 @@ export const BusinessPortfolioWrap = styled.div`
     color: ${Maincolor.black};
     font-size: 24px;
     font-weight: 700;
+    margin-top: 20px;
   }
 `;
 
@@ -146,7 +147,7 @@ export const ContentListViewer = styled.div`
         margin-top: 8px;
         font-size: 16px;
         font-weight: 400;
-        color: ${Maincolor.maingray};
+        color: ${Maincolor.btn};
         letter-spacing: -0.24px;
       }
     }

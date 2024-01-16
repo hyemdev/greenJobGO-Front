@@ -8,6 +8,7 @@ export const JobManagerBoxWrap = styled.div`
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 40px;
+    margin-top: 20px;
   }
   .jobmanager-content {
     width: 1400px;
