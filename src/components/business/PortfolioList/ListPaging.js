@@ -1,27 +1,31 @@
-import React from 'react'
-import { ListPagingSty } from '../../../styles/ListPagingStyle'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import Pagination from 'react-js-pagination'
+import React from "react";
+import { ListPagingSty } from "../../../styles/ListPagingStyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+} from "@fortawesome/free-solid-svg-icons";
+import Pagination from "react-js-pagination";
 
-const ListPaging = () => {
+const ListPaging = ({ setPage, page, count }) => {
   return (
-    <div>  <ListPagingSty>
-    <Pagination
-      // activePage={page}
-      activePage={1}
-      // itemsCountPerPage={10}
-      // totalItemsCount={count}
-      pageRangeDisplayed={5}
-      marginPagesDisplayed={0}
-      prevPageText={<FontAwesomeIcon icon={faChevronLeft} />}
-      nextPageText={<FontAwesomeIcon icon={faChevronRight} />}
-      firstPageText={""}
-      lastPageText={""}
-      // onChange={setPage}
-    />
-  </ListPagingSty></div>
-  )
-}
+    <div>
+      <ListPagingSty>
+        <Pagination
+          activePage={page}
+          itemsCountPerPage={10}
+          totalItemsCount={count}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={0}
+          prevPageText={<FontAwesomeIcon icon={faChevronLeft} />}
+          nextPageText={<FontAwesomeIcon icon={faChevronRight} />}
+          firstPageText={""}
+          lastPageText={""}
+          onChange={setPage}
+        />
+      </ListPagingSty>
+    </div>
+  );
+};
 
-export default ListPaging
+export default ListPaging;

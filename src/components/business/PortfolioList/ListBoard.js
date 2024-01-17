@@ -4,22 +4,22 @@ import NoImage from "../../../assets/NoImage.jpg";
 import { BtnGlobal } from "../../../styles/GlobalStyle";
 import { Link } from "react-router-dom";
 
-const ListBoard = ({ dummydata }) => {
+const ListBoard = ({ listData }) => {
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
   };
   return (
     <div className="boardStyle">
-      {dummydata &&
-        dummydata?.map(item => (
-          <div className="boardbox" key={v4()}>
+      {listData &&
+        listData?.map(item => (
+          <div className="boardbox" key={item.istudent}>
             <div className="thumb-img">
-              <img src={`${item}`} alt="thumb-img" onError={onImgError} />
+              <img src={`${item.img}`} alt="thumb-img" onError={onImgError} />
             </div>
             <ul className="board-list">
-              <li className="oneword">{item.oneword}</li>
-              <li className="student-name">{item.name}</li>
+              <li className="oneword">{item.introducedLine}</li>
+              <li className="student-name">{item.studentName}</li>
               <li className="subject-name">
                 <span className="label">과정명</span>
                 <span>{item.subjectName}</span>

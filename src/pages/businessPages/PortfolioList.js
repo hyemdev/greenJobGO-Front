@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ListSearch from "../../components/business/PortfolioList/ListSearch";
 import ListPortfolioContent from "../../components/business/PortfolioList/ListPortfolioContent";
 import { BusinessPortfolioWrap } from "../../styles/BusinessPortfolioStyle";
 import ListPaging from "../../components/business/PortfolioList/ListPaging";
+import {
+  getCategory,
+  getStudentGalleryList,
+  getStudentList,
+} from "../../api/businessPortfolioAxios";
 
 const dummydata = [
   {
@@ -86,12 +91,84 @@ const dummydata = [
 ];
 
 const PortfolioList = () => {
+  const [galleryData, setGalleryData] = useState([]);
+  const [listData, setListData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const [searchsubj, setSearchSubj] = useState("");
+  const [searchname, setSearchname] = useState("");
+  const [viewState, setViewState] = useState(true);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
+  const [category, setCategory] = useState(0);
+
+  const studentGalleryData = () => {
+    getStudentGalleryList(
+      setGalleryData,
+      setCount,
+      page,
+      category,
+      searchsubj,
+      searchname,
+    );
+  };
+
+  const studentList = () => {
+    getStudentList(
+      setListData,
+      setCount,
+      page,
+      category,
+      searchsubj,
+      searchname,
+    );
+  };
+
+  useEffect(() => {
+    if (viewState === true) {
+      studentGalleryData();
+    } else if (viewState === false) {
+      studentList();
+    }
+    getCategory(setCategoryData);
+  }, [page, viewState]);
+
+  // 검색버튼 클릭
+  const handleSearch = () => {
+    if (viewState === true) {
+      studentGalleryData();
+    } else if (viewState === false) {
+      studentList();
+    }
+    setPage(1);
+  };
+
+  // 카테변경값 저장
+  const handleCategoryFilter = e => {
+    setCategory(e.target.value);
+    setPage(1);
+  };
+
   return (
     <BusinessPortfolioWrap>
       <h2>수강생 포트폴리오</h2>
-      <ListSearch />
-      <ListPortfolioContent dummydata={dummydata} />
-      <ListPaging />
+      <ListSearch
+        handleCategoryFilter={handleCategoryFilter}
+        handleSearch={handleSearch}
+        searchsubj={searchsubj}
+        setSearchSubj={setSearchSubj}
+        searchname={searchname}
+        setSearchname={setSearchname}
+        categoryData={categoryData}
+        category={category}
+      />
+      <ListPortfolioContent
+        listData={listData}
+        count={count}
+        galleryData={galleryData}
+        viewState={viewState}
+        setViewState={setViewState}
+      />
+      <ListPaging setPage={setPage} page={page} count={count} />
     </BusinessPortfolioWrap>
   );
 };
