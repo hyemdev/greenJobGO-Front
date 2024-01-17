@@ -8,6 +8,7 @@ import {
   getStudentGalleryList,
   getStudentList,
 } from "../../api/businessPortfolioAxios";
+import NoImage from "../../assets/NoImage.jpg";
 
 const dummydata = [
   {
@@ -97,10 +98,17 @@ const PortfolioList = () => {
   const [searchsubj, setSearchSubj] = useState("");
   const [searchname, setSearchname] = useState("");
   const [viewState, setViewState] = useState(true);
+  const [userId, setUserId] = useState(0);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(0);
   const [category, setCategory] = useState(0);
 
+  // 이미지 없을 때 error처리
+  const onImgError = e => {
+    e.target.src = NoImage;
+  };
+
+  // 갤러리형 수강생 목록
   const studentGalleryData = () => {
     getStudentGalleryList(
       setGalleryData,
@@ -112,6 +120,7 @@ const PortfolioList = () => {
     );
   };
 
+  // 리스트형 수강생 목록
   const studentList = () => {
     getStudentList(
       setListData,
@@ -167,6 +176,7 @@ const PortfolioList = () => {
         galleryData={galleryData}
         viewState={viewState}
         setViewState={setViewState}
+        onImgError={onImgError}
       />
       <ListPaging setPage={setPage} page={page} count={count} />
     </BusinessPortfolioWrap>

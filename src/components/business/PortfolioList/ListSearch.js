@@ -63,8 +63,6 @@ const ListSearch = ({
   // useEffect(() => {
   //   getBigcate(setCategory);
   // }, []);
-  console.log(searchname);
-  console.log(searchsubj);
   return (
     <PfSearchWrap>
       <ul className="student-portfolio-search">

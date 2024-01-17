@@ -70,3 +70,29 @@ export const getStudentList = async (
     console.log(error);
   }
 };
+
+export const getStdentInfo = async (userId, setPayload) => {
+  try {
+    const res = await client.get(`/company/student/${userId}`);
+
+    const { certificates, birthday, ...vo } = res.data.vo;
+    const { aboutMe, thumbnail, portfolio, fileLink } = res.data.file;
+
+    const birthYear = birthday.split("-", 1);
+    const certificateResult = certificates
+      .map(item => item.certificate)
+      .join(", ");
+      
+    setPayload({
+      userData: vo,
+      certificateValue: certificateResult,
+      birth: birthYear,
+      thumbNail: thumbnail ? thumbnail.file : null,
+      resume: aboutMe ? aboutMe.file : null,
+      pofolData: portfolio || [],
+      fileLinks: fileLink || [],
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

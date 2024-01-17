@@ -14,6 +14,7 @@ const ListPortfolioContent = ({
   galleryData,
   viewState,
   setViewState,
+  onImgError,
 }) => {
   return (
     <ContentListWrap>
@@ -26,11 +27,11 @@ const ListPortfolioContent = ({
       </ul>
       {viewState ? (
         <ContentListViewer>
-          <Listgallery galleryData={galleryData} />
+          <Listgallery galleryData={galleryData} onImgError={onImgError} />
         </ContentListViewer>
       ) : (
         <ContentListViewer>
-          <ListBoard listData={listData} />
+          <ListBoard listData={listData} onImgError={onImgError} />
         </ContentListViewer>
       )}
     </ContentListWrap>

@@ -4,18 +4,18 @@ import NoImage from "../../../assets/NoImage.jpg";
 import { BtnGlobal } from "../../../styles/GlobalStyle";
 import { Link } from "react-router-dom";
 
-const ListBoard = ({ listData }) => {
-  // 이미지 없을 때 error처리
-  const onImgError = e => {
-    e.target.src = NoImage;
-  };
+const ListBoard = ({ listData, onImgError }) => {
   return (
     <div className="boardStyle">
       {listData &&
         listData?.map(item => (
           <div className="boardbox" key={item.istudent}>
             <div className="thumb-img">
-              <img src={`${item.img}`} alt="thumb-img" onError={onImgError} />
+              <img
+                src={`http://112.222.157.156${item.img}`}
+                alt="thumb-img"
+                onError={onImgError}
+              />
             </div>
             <ul className="board-list">
               <li className="oneword">{item.introducedLine}</li>
@@ -32,7 +32,7 @@ const ListBoard = ({ listData }) => {
               </li>
             </ul>
             <div className="detail-view-btn">
-              <Link to="/business/portfoliodetail">
+              <Link to={`/business/portfoliodetail/${item.istudent}`}>
                 <BtnGlobal>포트폴리오 상세보기</BtnGlobal>
               </Link>
             </div>

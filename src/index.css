@@ -9,9 +9,18 @@
   margin: 0;
 }
 
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 /* 스크롤바 전체 */
 ::-webkit-scrollbar {
-  display: none;
 }
 /* 스크롤바 막대 */
 ::-webkit-scrollbar-thumb {

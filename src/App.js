@@ -41,8 +41,8 @@ function App() {
           <Route path="portpoliolist" element={<PortfolioList />} />
           {/* 포트폴리오 상세내역(수강생 정보) */}
           <Route
-            // path="portfoliodetail/:iportNum"
-            path="portfoliodetail"
+            path="portfoliodetail/:userId"
+            // path="portfoliodetail"
             element={<PortfolioDetail />}
           />
           {/* 취업담당자 리스트 */}
