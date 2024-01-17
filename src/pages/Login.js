@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { fetchLogin } from "../api/client";
 import { LoginInner, LoginWrap } from "../styles/LoginStyle";
+import { useRecoilState } from "recoil";
+import { AuthStateAtom } from "../recoil/atoms/AuthState";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("ROLE_USER");
+  const [authState, setAuthState] = useRecoilState(AuthStateAtom);
+
   const navigate = useNavigate();
 
   const handleLoginId = e => {
@@ -19,19 +22,25 @@ const Login = () => {
     console.log(e.target.value);
   };
 
-  const handleUserTypeChange = e => {
-    setUserType(e.target.value);
-    console.log(e.target.value);
-  };
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const role = await fetchLogin(userId, password);
+    const { role, accessTokene } = await fetchLogin(userId, password);
 
-    if (role === "ROLE_USER") {
+    if (role === "ROLE_USER" && accessTokene) {
+      setAuthState({
+        isLogin: true,
+        accessToken: accessTokene,
+        role: role,
+      });
       navigate("/student");
     } else if (role === "ROLE_COMPANY") {
+      setAuthState({
+        isLogin: true,
+        accessToken: accessTokene,
+        role: role,
+      });
       navigate("/business");
     }
   };
@@ -45,26 +54,6 @@ const Login = () => {
         <li>
           <div className="login-title">
             <img src="../../assets/LoginTitle.png" alt="LoginTitle" />
-          </div>
-          <div className="login-radio">
-            <input
-              type="radio"
-              id="student"
-              name="role"
-              value="ROLE_USER"
-              checked={userType === "ROLE_USER"}
-              onChange={handleUserTypeChange}
-            />
-            <label htmlFor="student">수강생 로그인</label>
-            <input
-              type="radio"
-              id="company"
-              name="role"
-              value="ROLE_COMPANY"
-              checked={userType === "ROLE_COMPANY"}
-              onChange={handleUserTypeChange}
-            />
-            <label htmlFor="company">기업 로그인</label>
           </div>
           <form>
             <div>
@@ -94,16 +83,6 @@ const Login = () => {
         </li>
       </LoginInner>
     </LoginWrap>
-    // <div>
-    //   Login
-    //   {/* 임시 접속 버튼 */}
-    //   <Link to="/student">
-    //     <button>수강생 접속</button>
-    //   </Link>
-    //   <Link to="/business">
-    //     <button>기업 접속</button>
-    //   </Link>
-    // </div>
   );
 };
 export default Login;

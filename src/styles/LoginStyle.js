@@ -27,30 +27,6 @@ export const LoginInner = styled.ul`
       .login-title {
         padding-left: 65px;
       }
-      .login-radio {
-        padding: 20px 0 10px 65px;
-        > input[type="radio"] {
-          display: none;
-        }
-        > input[type="radio"] + label {
-          display: inline-block;
-          cursor: pointer;
-          height: 45px;
-          width: 160px;
-          border: 1px solid #d9d9d9;
-          line-height: 45px;
-          text-align: center;
-          font-size: 18px;
-        }
-        > input[type="radio"] + label {
-          background-color: #fff;
-          color: #d9d9d9;
-        }
-        > input[type="radio"]:checked + label {
-          background-color: #d9d9d9;
-          color: #333;
-        }
-      }
       form {
         display: flex;
         justify-content: flex-end;
@@ -68,8 +44,8 @@ export const LoginInner = styled.ul`
           input {
             width: 440px;
             height: 40px;
-            border: 1px solid black;
-            border-radius: 6px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
             padding: 0 5px;
           }
           button {
@@ -78,9 +54,10 @@ export const LoginInner = styled.ul`
             font-size: 16px;
             font-weight: 600;
             color: #fff;
-            background: #6d6d6d;
-            border: 1px solid;
+            background: #228fcf;
+            border: none;
             border-radius: 6px;
+            cursor: pointer;
           }
         }
       }

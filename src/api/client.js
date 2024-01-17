@@ -79,7 +79,7 @@ export const fetchLogin = async (userId, password) => {
       setCookie("refreshToken", refreshToken, cookieOptions);
       setCookie("accessToken", accessToken, cookieOptions);
 
-      return role;
+      return { role, accessToken };
     } else {
       throw new Error("잘못된 응답 형식");
     }

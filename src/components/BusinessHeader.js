@@ -1,8 +1,27 @@
 import React from "react";
 import { HeaderSty } from "../styles/HeaderStyle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { postLogout } from "../api/client";
+import { useRecoilState } from "recoil";
+import { AuthStateAtom } from "../recoil/atoms/AuthState";
 
 const BusinessHeader = () => {
+  const [authState, setAuthState] = useRecoilState(AuthStateAtom);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    postLogout();
+
+    setAuthState(prevAuthState => ({
+      ...prevAuthState,
+      isLogin: false,
+      accessToken: null,
+      role: "",
+      id: "",
+    }));
+    navigate("/");
+  };
+
   return (
     <HeaderSty>
       <div className="business-header">
@@ -37,7 +56,7 @@ const BusinessHeader = () => {
             <Link to="./jobmanagerlist">취업 담당자 안내</Link>
           </li>
         </ul>
-        <div className="loguout-btn">
+        <div className="loguout-btn" onClick={handleLogout}>
           로그아웃
           <img
             src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}
