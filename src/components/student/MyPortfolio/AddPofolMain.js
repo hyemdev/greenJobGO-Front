@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AddPortfolioContent,
   AddPortfolioWrap,
 } from "../../../styles/AddPortfolioStyle";
 import AddPofolPofol from "./AddPofolPofol";
 import AddPofolResume from "./AddPofolResume";
+import AddPofolModal from "./AddPofolModal";
 
 const AddPortfolio = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleAddModalOpen = () => {
+    setModalOpen(true);
+  };
+  const handleAddModalClose = () => {
+    setModalOpen(false);
+  };
+  const handleFileUpload = () => {
+    setModalOpen(false);
+  };
   return (
     <AddPortfolioWrap>
+      {modalOpen && (
+        <AddPofolModal
+          modalOpen={modalOpen}
+          handleAddModalClose={handleAddModalClose}
+          handleFileUpload={handleFileUpload}
+        />
+      )}
       <div>
         <h2>이력서 등록</h2>
       </div>
@@ -64,7 +83,7 @@ const AddPortfolio = () => {
           <AddPofolResume />
         </li>
         <li>
-          <AddPofolPofol />
+          <AddPofolPofol handleAddModalOpen={handleAddModalOpen} />
         </li>
       </AddPortfolioContent>
       <div>

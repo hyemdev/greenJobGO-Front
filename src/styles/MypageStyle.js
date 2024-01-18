@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Maincolor } from "./GlobalStyle";
-export const ListDetailWrapSty = styled.div`
+export const MypageWrap = styled.div`
   margin: 0 auto;
   width: 1400px;
   & > h2 {
