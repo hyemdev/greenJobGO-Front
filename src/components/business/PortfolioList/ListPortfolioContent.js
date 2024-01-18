@@ -7,6 +7,7 @@ import {
   ContentListViewer,
   ContentListWrap,
 } from "../../../styles/BusinessPortfolioStyle";
+import NolistItem from "../../../pages/NolistItem";
 
 const ListPortfolioContent = ({
   listData,
@@ -15,6 +16,7 @@ const ListPortfolioContent = ({
   viewState,
   setViewState,
   onImgError,
+  nothing,
 }) => {
   return (
     <ContentListWrap>
@@ -25,6 +27,8 @@ const ListPortfolioContent = ({
           <Boardbtn onClick={() => setViewState(false)} />
         </li>
       </ul>
+      {nothing && <NolistItem />}
+
       {viewState ? (
         <ContentListViewer>
           <Listgallery galleryData={galleryData} onImgError={onImgError} />

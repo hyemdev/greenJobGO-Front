@@ -16,9 +16,10 @@ export const getStudentGalleryList = async (
   category,
   searchsubj,
   searchname,
+  setNothing,
 ) => {
   try {
-    let apiUrl = `/company/student?page=${page}&size=10&sort=istudent%2CASC`;
+    let apiUrl = `/company/student?page=${page}&size=9&sort=istudent%2CASC`;
     if (category) {
       apiUrl += `&icategory=${category}`;
     }
@@ -35,6 +36,11 @@ export const getStudentGalleryList = async (
 
     setCount(res.data.totalcount);
     setGalleryData(res.data.vo);
+    setNothing(false);
+    if (res.data.vo.length === 0) {
+      setNothing(true);
+      console.log("결과 없어요");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -47,9 +53,10 @@ export const getStudentList = async (
   category,
   searchsubj,
   searchname,
+  setNothing,
 ) => {
   try {
-    let apiUrl = `/company/student/list?page=${page}&size=10&sort=istudent%2CASC`;
+    let apiUrl = `/company/student/list?page=${page}&size=5&sort=istudent%2CASC`;
     if (category) {
       apiUrl += `&icategory=${category}`;
     }
@@ -66,6 +73,11 @@ export const getStudentList = async (
 
     setListData(res.data.vo);
     setCount(res.data.totalcount);
+    setNothing(false);
+    if (res.data.vo.length === 0) {
+      setNothing(true);
+      console.log("결과 없어요");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -82,7 +94,7 @@ export const getStdentInfo = async (userId, setPayload) => {
     const certificateResult = certificates
       .map(item => item.certificate)
       .join(", ");
-      
+
     setPayload({
       userData: vo,
       certificateValue: certificateResult,

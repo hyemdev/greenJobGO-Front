@@ -3,44 +3,16 @@ import { JobManagerBoxWrap } from "../../styles/BusinessJobmanager";
 import NoImage from "../../assets/NoImage.jpg";
 import { getJobManagerInfo } from "../../api/jobmanagerAxios";
 
-// const dummydata = [
-//   {
-//     iemply: 4,
-//     oneWord: "2",
-//     name: "김성미",
-//     counselingNumber: "1",
-//     phoneNumber: "244",
-//     email: "2144",
-//     profilePic: "/img/employee/4/ce375ffb-8e57-49e9-8252-110b43012626.jpg",
-//   },
-//   {
-//     iemply: 16,
-//     oneWord: "ㄷㄷㄷ14",
-//     name: "ㄷㄷㄷ",
-//     counselingNumber: "ㄷㄷㄷ",
-//     phoneNumber: "ㄷㄷㄷ14",
-//     email: "ㄷㄷㄷ",
-//     profilePic: "/img/employee/16/85208ab6-9cf6-40a6-acd5-7b1479d4f517.png",
-//   },
-//   {
-//     iemply: 21,
-//     oneWord: "테테스트",
-//     name: "ㅂㅂㅂㅂ",
-//     counselingNumber: "ㅁㄴㅇㅁㄴㅇ",
-//     phoneNumber: "ㅁㄴㅇㅁㄴ111",
-//     email: "ㅁㄴㅇ",
-//     profilePic: "/img/employee/21/11ab6b9f-5729-42ba-aaff-4e3d5baedd2c.jpg",
-//   },
-// ];
 const JobManagerList = () => {
   const [mngProfiledata, setmngProflieData] = useState([]);
+  const [nothing, setNothing] = useState(false);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
   };
 
   useEffect(() => {
-    getJobManagerInfo(setmngProflieData);
+    getJobManagerInfo({ setmngProflieData, setNothing });
   }, []);
   return (
     <JobManagerBoxWrap>
@@ -76,9 +48,7 @@ const JobManagerList = () => {
           </div>
         ))}
       </div>
-      {mngProfiledata && mngProfiledata.length === 0 && (
-        <div>취업담당자의 정보가 없습니다.</div>
-      )}
+      {nothing && <div>취업담당자의 정보가 없습니다.</div>}
     </JobManagerBoxWrap>
   );
 };
