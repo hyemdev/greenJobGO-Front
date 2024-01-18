@@ -13,56 +13,6 @@ const ListSearch = ({
   categoryData,
   category,
 }) => {
-  // const [searchsubj, setSearchSubj] = useState("");
-  // const [searchname, setSearchname] = useState("");
-  // const [category, setCategory] = useState([]);
-  // const [selectCate, setSelectCate] = useState("");
-
-  // 카테변경값 저장
-  // const handleCategoryFilter = e => {
-  //   console.log("필터변경e", e.target.value);
-  //   setSelectCate(e.target.value);
-  // };
-
-  // 쿼리 주소를 변환하자
-  // const makeUrl = () => {
-  //   let query = "";
-
-  //   if (selectCate !== "") {
-  //     query += `iclassfication=${selectCate}&`;
-  //   }
-  //   if (searchsubj !== "") {
-  //     query += `subjectName=${searchsubj}&`;
-  //   }
-  //   if (searchname !== "") {
-  //     query += `studentName=${searchname}&`;
-  //   }
-  //   query = query ? query.slice(0, -1) : "";
-  //   return query;
-  // };
-
-  // 검색버튼 클릭
-  // const handleSearchClick = async () => {
-  //   try {
-  //     // await setPage(1);
-  //     const query = makeUrl();
-  //     console.log("query?", query);
-  //     // const data = await getPortFolioList({
-  //     //   setStudentPFList,
-  //     //   page,
-  //     //   setCount,
-  //     //   query,
-  //     //   setNothing,
-  //     // });
-  //     // setStudentPFList(data);
-  //   } catch (error) {
-  //     console.error("데이터 가져오기 실패:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getBigcate(setCategory);
-  // }, []);
   return (
     <PfSearchWrap>
       <ul className="student-portfolio-search">
