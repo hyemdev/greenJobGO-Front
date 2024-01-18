@@ -22,27 +22,29 @@ const Login = () => {
     console.log(e.target.value);
   };
 
-
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const { role, accessTokene } = await fetchLogin(userId, password);
+    const { role, accessToken } = await fetchLogin(userId, password);
 
-    if (role === "ROLE_USER" && accessTokene) {
+    if (role === "ROLE_USER" && accessToken) {
       setAuthState({
         isLogin: true,
-        accessToken: accessTokene,
+        accessToken: accessToken,
         role: role,
       });
       navigate("/student");
-    } else if (role === "ROLE_COMPANY") {
+    } else if (role === "ROLE_COMPANY" && accessToken) {
       setAuthState({
         isLogin: true,
-        accessToken: accessTokene,
+        accessToken: accessToken,
         role: role,
       });
       navigate("/business");
     }
+
+    console.log(authState.isLogin);
+    console.log(authState.role);
   };
 
   return (
