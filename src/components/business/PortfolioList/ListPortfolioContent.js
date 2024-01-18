@@ -3,14 +3,23 @@ import Listgallery from "./Listgallery";
 import ListBoard from "./ListBoard";
 import { ReactComponent as Gallerybtn } from "../../../assets/galleryBtn.svg";
 import { ReactComponent as Boardbtn } from "../../../assets/boardBtn.svg";
-import { ContentListViewer, ContentListWrap } from "../../../styles/BusinessPortfolioStyle";
+import {
+  ContentListViewer,
+  ContentListWrap,
+} from "../../../styles/BusinessPortfolioStyle";
 
-const ListPortfolioContent = ({ dummydata }) => {
-  const [viewState, setViewState] = useState(true);
+const ListPortfolioContent = ({
+  listData,
+  count,
+  galleryData,
+  viewState,
+  setViewState,
+  onImgError,
+}) => {
   return (
     <ContentListWrap>
       <ul className="content-top-line">
-        <li>총 {dummydata.length}건</li>
+        <li>총 {count}건</li>
         <li>
           <Gallerybtn onClick={() => setViewState(true)} />
           <Boardbtn onClick={() => setViewState(false)} />
@@ -18,11 +27,11 @@ const ListPortfolioContent = ({ dummydata }) => {
       </ul>
       {viewState ? (
         <ContentListViewer>
-          <Listgallery dummydata={dummydata} />
+          <Listgallery galleryData={galleryData} onImgError={onImgError} />
         </ContentListViewer>
       ) : (
         <ContentListViewer>
-          <ListBoard dummydata={dummydata} />
+          <ListBoard listData={listData} onImgError={onImgError} />
         </ContentListViewer>
       )}
     </ContentListWrap>

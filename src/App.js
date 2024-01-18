@@ -14,6 +14,7 @@ import Student from "./pages/studentPages/Student";
 import MyPortfolioMg from "./pages/studentPages/MyPortfolioMg";
 import Mypage from "./pages/studentPages/Mypage";
 import ConnectCompany from "./pages/studentPages/ConnectCompany";
+import { PrivateRoutes } from "./components/PrivateRoutes";
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
         {/* 로그인 페이지 */}
         <Route path="/" element={<Login />} />
         {/* 수강생 페이지 */}
-        <Route path="/student/*" element={<Student />}>
+        <Route
+          path="/student/*"
+          element={<PrivateRoutes element={<Student />} />}
+        >
           {/* 나의 포트폴리오 관리*/}
           <Route index element={<MyPortfolioMg />} />
           <Route path="myportfolio" element={<MyPortfolioMg />} />
@@ -33,18 +37,17 @@ function App() {
         </Route>
 
         {/* 기업페이지 */}
-        <Route path="/business/*" element={<Business />}>
+        <Route
+          path="/business/*"
+          element={<PrivateRoutes element={<Business />} />}
+        >
           {/* 기업 페이지 초기화면 */}
           <Route index element={<BusinessIntro />} />
           {/* <Route path="businessintro" element={<BusinessIntro />} /> */}
           {/* 포트폴리오 리스트 */}
           <Route path="portpoliolist" element={<PortfolioList />} />
           {/* 포트폴리오 상세내역(수강생 정보) */}
-          <Route
-            // path="portfoliodetail/:iportNum"
-            path="portfoliodetail"
-            element={<PortfolioDetail />}
-          />
+          <Route path="portfoliodetail/:userId" element={<PortfolioDetail />} />
           {/* 취업담당자 리스트 */}
           <Route path="jobmanagerlist" element={<JobManagerList />} />
         </Route>

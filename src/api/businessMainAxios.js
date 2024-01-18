@@ -24,7 +24,7 @@ export const getMainImgList = async ({
 
   try {
     const res = await client.get(`/company/mainstudent?icategory=${clickCate}`);
-    const result = await res.data;
+    const result = await res.data.list;
     console.log("스와이퍼용 데이터", result);
     setSwiperData(result);
     {

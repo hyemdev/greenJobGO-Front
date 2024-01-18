@@ -38,7 +38,7 @@ const BusinessIntro = () => {
           ))}
         </ul>
         {/* <ul>
-          <li value="1">it 분야</li>
+          <li value="1">IT 분야</li>
           <li value="2">건축 기계 분야</li>
           <li value="3">UIUX 분야</li>
           <li value="4">빅데이터 분야</li>

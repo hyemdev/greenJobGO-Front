@@ -3,53 +3,62 @@ import { PfSearchWrap } from "../../../styles/BusinessPortfolioStyle";
 import { v4 } from "uuid";
 import { BtnGlobal } from "../../../styles/GlobalStyle";
 
-const ListSearch = () => {
-  const [searchsubj, setSearchSubj] = useState("");
-  const [searchname, setSearchname] = useState("");
-  const [category, setCategory] = useState([]);
-  const [selectCate, setSelectCate] = useState("");
+const ListSearch = ({
+  handleCategoryFilter,
+  handleSearch,
+  searchsubj,
+  setSearchSubj,
+  searchname,
+  setSearchname,
+  categoryData,
+  category,
+}) => {
+  // const [searchsubj, setSearchSubj] = useState("");
+  // const [searchname, setSearchname] = useState("");
+  // const [category, setCategory] = useState([]);
+  // const [selectCate, setSelectCate] = useState("");
 
   // 카테변경값 저장
-  const handleCategoryFilter = e => {
-    console.log("필터변경e", e.target.value);
-    setSelectCate(e.target.value);
-  };
+  // const handleCategoryFilter = e => {
+  //   console.log("필터변경e", e.target.value);
+  //   setSelectCate(e.target.value);
+  // };
 
   // 쿼리 주소를 변환하자
-  const makeUrl = () => {
-    let query = "";
+  // const makeUrl = () => {
+  //   let query = "";
 
-    if (selectCate !== "") {
-      query += `iclassfication=${selectCate}&`;
-    }
-    if (searchsubj !== "") {
-      query += `subjectName=${searchsubj}&`;
-    }
-    if (searchname !== "") {
-      query += `studentName=${searchname}&`;
-    }
-    query = query ? query.slice(0, -1) : "";
-    return query;
-  };
+  //   if (selectCate !== "") {
+  //     query += `iclassfication=${selectCate}&`;
+  //   }
+  //   if (searchsubj !== "") {
+  //     query += `subjectName=${searchsubj}&`;
+  //   }
+  //   if (searchname !== "") {
+  //     query += `studentName=${searchname}&`;
+  //   }
+  //   query = query ? query.slice(0, -1) : "";
+  //   return query;
+  // };
 
   // 검색버튼 클릭
-  const handleSearchClick = async () => {
-    try {
-      // await setPage(1);
-      const query = makeUrl();
-      console.log("query?", query);
-      // const data = await getPortFolioList({
-      //   setStudentPFList,
-      //   page,
-      //   setCount,
-      //   query,
-      //   setNothing,
-      // });
-      // setStudentPFList(data);
-    } catch (error) {
-      console.error("데이터 가져오기 실패:", error);
-    }
-  };
+  // const handleSearchClick = async () => {
+  //   try {
+  //     // await setPage(1);
+  //     const query = makeUrl();
+  //     console.log("query?", query);
+  //     // const data = await getPortFolioList({
+  //     //   setStudentPFList,
+  //     //   page,
+  //     //   setCount,
+  //     //   query,
+  //     //   setNothing,
+  //     // });
+  //     // setStudentPFList(data);
+  //   } catch (error) {
+  //     console.error("데이터 가져오기 실패:", error);
+  //   }
+  // };
 
   // useEffect(() => {
   //   getBigcate(setCategory);
@@ -60,15 +69,13 @@ const ListSearch = () => {
         <li className="select-wrap">
           <label htmlFor="category-select">직종</label>
           <select
-            value={selectCate}
+            value={category}
             id="category-select"
-            onChange={e => handleCategoryFilter(e)}
+            onChange={handleCategoryFilter}
           >
-            <option value="" defaultValue>
-              전체
-            </option>
-            {category?.map(item => (
-              <option key={v4()} value={item.iclassification}>
+            <option value="">전체</option>
+            {categoryData?.map(item => (
+              <option key={item.iclassification} value={item.iclassification}>
                 {item.classification}
               </option>
             ))}
@@ -84,7 +91,7 @@ const ListSearch = () => {
               onChange={e => setSearchSubj(e.target.value)}
               onKeyDown={e => {
                 if (e.key === "Enter") {
-                  handleSearchClick();
+                  handleSearch();
                 }
               }}
             />
@@ -100,14 +107,14 @@ const ListSearch = () => {
               onChange={e => setSearchname(e.target.value)}
               onKeyDown={e => {
                 if (e.key === "Enter") {
-                  handleSearchClick();
+                  handleSearch();
                 }
               }}
             />
           </div>
         </li>
         <li>
-          <BtnGlobal onClick={handleSearchClick}>조회</BtnGlobal>
+          <BtnGlobal onClick={handleSearch}>조회</BtnGlobal>
         </li>
       </ul>
     </PfSearchWrap>

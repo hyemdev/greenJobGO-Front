@@ -33,10 +33,14 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
         className={swiperData.length > 0 ? null : "active"}
       >
         {swiperData?.map((item, index) => (
-          <SwiperSlide key={index} className="swiper-slide">
+          <SwiperSlide key={item.istudent} className="swiper-slide">
             {/* <NavLink to={`/${item.productId}`}> */}
             <div className="img">
-              <img src={`${item.file}`} alt={item.name} onError={onImgError} />
+              <img
+                src={`http://112.222.157.156${item.img}`}
+                alt={item.name}
+                onError={onImgError}
+              />
             </div>
             <div className="txt">
               <p className="name">{item.name} 수강생</p>

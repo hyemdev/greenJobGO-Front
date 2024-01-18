@@ -1,8 +1,26 @@
 import React from "react";
 import { HeaderSty } from "../styles/HeaderStyle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { postLogout } from "../api/client";
+import { useRecoilState } from "recoil";
+import { AuthStateAtom } from "../recoil/atoms/AuthState";
 
 const StudentHeader = () => {
+  const [authState, setAuthState] = useRecoilState(AuthStateAtom);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    postLogout();
+
+    setAuthState(prevAuthState => ({
+      ...prevAuthState,
+      isLogin: false,
+      accessToken: null,
+      role: "",
+      id: "",
+    }));
+    navigate("/");
+  };
   return (
     <HeaderSty>
       <div className="student-header">
@@ -37,7 +55,7 @@ const StudentHeader = () => {
             <Link to="./connectcompany">협약 기업</Link>
           </li>
         </ul>
-        <div className="loguout-btn">
+        <div className="loguout-btn" onClick={handleLogout}>
           로그아웃
           <img
             src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}

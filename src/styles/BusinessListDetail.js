@@ -22,6 +22,20 @@ export const ListDetailWrapSty = styled.div`
     letter-spacing: -0.3px;
     line-height: 1.5;
   }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > button {
+      width: 180px;
+      height: 50px;
+      color: ${Maincolor.white};
+      background: ${Maincolor.grayDeep};
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const DefaultInfo = styled.div`
@@ -138,18 +152,19 @@ export const ResumeInfo = styled.div`
 
 export const PortfolioInfo = styled.div`
   margin: 0 auto;
-  height: 408px;
+  max-height: 408px;
   border-radius: 10px;
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;
   color: ${Maincolor.black};
+  overflow-y: auto;
+
   .portfolio-list {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.4;
     margin-bottom: 14px;
-
     & > li:first-of-type {
       width: 690px;
       height: 40px;
