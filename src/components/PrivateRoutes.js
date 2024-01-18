@@ -7,6 +7,7 @@ export const PrivateRoutes = ({ element }) => {
   const navigate = useNavigate();
   const { isLogin } = useRecoilValue(AuthStateAtom);
 
+  console.log("isLogin 잘들어오니?", isLogin);
   useEffect(() => {
     if (!isLogin) {
       navigate("/");
