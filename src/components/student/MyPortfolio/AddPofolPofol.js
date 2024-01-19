@@ -1,7 +1,13 @@
 import React from "react";
 import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
+import { useRecoilValueLoadable } from "recoil";
+import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 
 const AddPofolPofol = ({ handleAddModalOpen }) => {
+  const userInfoData = useRecoilValueLoadable(userInfo);
+
+  const std =
+    userInfoData.state === "hasValue" ? userInfoData.contents.std : null;
   return (
     <AddPofolPofolWrap>
       <div className="title">

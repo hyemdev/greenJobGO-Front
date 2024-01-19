@@ -1,33 +1,58 @@
 import React from "react";
 import { YesResumeWrap } from "../../../styles/YesResumStyle";
 import NoImage from "../../../assets/NoImage.jpg";
+import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
+import { AuthStateAtom } from "../../../recoil/atoms/AuthState";
+import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 
 const YesResume = () => {
+  const authState = useRecoilValue(AuthStateAtom);
+  const userInfoData = useRecoilValue(userInfo);
+
+  const navigate = useNavigate();
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
   };
+  const handleMovePage = () => {
+    navigate("/student/mypage");
+  };
+  console.log(userInfoData);
   return (
     <YesResumeWrap>
-      <div>
-        <img src="" alt="자료없음" onError={onImgError} />
-      </div>
-      <div>
-        <div className="content">
-          <div>
-            <h3>열정적인 디자이너, 김그린입니다.</h3>
-            <span>UI/UX 반응형 디자인 & 퍼블리싱 과정</span>
+      <div className="contain">
+        <div>
+          <img
+            src={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${userInfoData.file.img.img}`}
+            alt="자료없음"
+            onError={onImgError}
+          />
+        </div>
+        <div>
+          <div className="content">
+            <div>
+              <h3>{userInfoData.std.introducedLine}</h3>
+              <span>{userInfoData.std.subject.subjectName}</span>
+            </div>
+            <div>
+              <span>수강기간</span>
+              <span>
+                {userInfoData.std.startedAt} ~ {userInfoData.std.endedAt}
+              </span>
+            </div>
           </div>
-          <div>
-            <span>수강기간</span>
-            <span>2023-06-01 ~ 2023-12-01</span>
+          <div className="move-button">
+            <button onClick={handleMovePage}>포트폴리오 상세보기</button>
           </div>
         </div>
+      </div>
+      {authState.editableYn === 0 ? (
         <div className="buttons">
-          <button>수정</button>
           <button>삭제</button>
+          <button>수정</button>
         </div>
-      </div>
+      ) : null}
     </YesResumeWrap>
   );
 };

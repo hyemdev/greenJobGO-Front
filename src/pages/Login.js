@@ -25,13 +25,18 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const { role, accessToken } = await fetchLogin(userId, password);
+    const { role, accessToken, editableYn, portfolioYn } = await fetchLogin(
+      userId,
+      password,
+    );
 
     if (role === "ROLE_USER" && accessToken) {
       setAuthState({
         isLogin: true,
         accessToken: accessToken,
         role: role,
+        editableYn: editableYn,
+        portfolioYn: portfolioYn,
       });
       navigate("/student");
     } else if (role === "ROLE_COMPANY" && accessToken) {
@@ -49,7 +54,7 @@ const Login = () => {
 
   return (
     <LoginWrap>
-      <LoginInner>
+      <LoginInner>  
         <li>
           <img src="../../assets/Login.png" alt="LoginImage" />
         </li>

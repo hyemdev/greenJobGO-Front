@@ -1,47 +1,27 @@
-import React from "react";
-import NoResume from "../../components/student/MyPortfolio/NoResume";
-import YesResume from "../../components/student/MyPortfolio/YesResume";
+import React, { useEffect, useState } from "react";
+import { getStudentInfo } from "../../api/studentAxios";
 import {
-  MyPortfolioButton,
-  MyPortfolioContent,
-  MyPortfolioTitle,
-  MyPortfolioWrap,
-} from "../../styles/MyPofolMgStyle";
-import { element } from "prop-types";
+  useRecoilValue,
+  useRecoilValueLoadable,
+  useSetRecoilState,
+} from "recoil";
+import { ChangeAtom } from "../../recoil/atoms/ChangeState";
 import AddPortfolio from "../../components/student/MyPortfolio/AddPofolMain";
+import MyPortfolioMain from "../../components/student/MyPortfolioMain";
+import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
+import { fileInfoAtom } from "../../recoil/atoms/UserFileState";
+import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 
 const MyPortfolioMg = () => {
-  return (
-    <>
-      <AddPortfolio />
-      {/* <MyPortfolioWrap>
-        <ul className="resume-add-inner">
-          <MyPortfolioTitle>
-            <h2>나의 포트폴리오 관리</h2>
-          </MyPortfolioTitle>
-          <MyPortfolioButton>
-            <div>
-              <span>수강하신&ensp;</span>
-              <span>UI/UX 디자인 & 퍼블리싱 과정</span>
-              <span>
-                의&ensp;포트폴리오를 등록하고 취업의 기회를 넓혀 보세요!
-              </span>
-            </div>
-            <div>
-              이력서 있거나 없거나 처리하기
-              <button>이력서 등록</button>
-            </div>
-          </MyPortfolioButton>
-          <MyPortfolioContent>
-            이력서 있거나 없거나 처리하기
-            <YesResume />
-            <NoResume />
-          </MyPortfolioContent>
-        </ul>
-      </MyPortfolioWrap>
-      <div></div> */}
-    </>
-  );
+  const changeState = useRecoilValue(ChangeAtom);
+  const userInfoData = useRecoilValue(userInfo);
+
+  useEffect(() => {
+    console.log(userInfoData.std);
+  }, []);
+
+  console.log("컴포 교체가 되야해 ㅠㅠ 잘들어오니?", changeState);
+  return <>{changeState ? <MyPortfolioMain /> : <AddPortfolio />}</>;
 };
 
 export default MyPortfolioMg;

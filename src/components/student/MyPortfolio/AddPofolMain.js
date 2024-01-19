@@ -6,10 +6,18 @@ import {
 import AddPofolPofol from "./AddPofolPofol";
 import AddPofolResume from "./AddPofolResume";
 import AddPofolModal from "./AddPofolModal";
+import { ChangeAtom } from "../../../recoil/atoms/ChangeState";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 
 const AddPortfolio = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [changeState, setChangeState] = useRecoilState(ChangeAtom);
+  const userInfoData = useRecoilValueLoadable(userInfo);
 
+  const std =
+    userInfoData.state === "hasValue" ? userInfoData.contents.std : null;
+    
   const handleAddModalOpen = () => {
     setModalOpen(true);
   };
@@ -19,6 +27,7 @@ const AddPortfolio = () => {
   const handleFileUpload = () => {
     setModalOpen(false);
   };
+  console.log(changeState);
   return (
     <AddPortfolioWrap>
       {modalOpen && (
@@ -37,22 +46,28 @@ const AddPortfolio = () => {
             <h3>기본 정보</h3>
           </div>
           <div>
-            <span className="name">김그린</span>
-            <span className="age"> 여 1999년생 (만 25세)</span>
+            {std && (
+              <>
+                <span className="name">{std.name}</span>
+                <span className="age">
+                  {std.gender} {std.birthday} (만 {std.age}세)
+                </span>
+              </>
+            )}
           </div>
           <ul className="info">
             <li>
               <div>
                 <span>과정명</span>
-                <span> UI/UX 반응형 디자인&퍼블리싱 과정</span>
+                <span> {std.subject && std.subject.subjectName}</span>
               </div>
               <div>
                 <span>주소</span>
-                <span> 대구 중구</span>
+                <span> {std && std.address}</span>
               </div>
               <div>
                 <span>Email</span>
-                <span> TEST@NAVER.COM</span>
+                <span> {std && std.email}</span>
               </div>
               <div>
                 <span>자격증 </span>
@@ -66,15 +81,18 @@ const AddPortfolio = () => {
             <li>
               <div>
                 <span>수강기간</span>
-                <span> 2024-01-08 ~ 2024-01-31</span>
+                <span>
+                  {" "}
+                  {std && std.startedAt} ~ {std && std.endedAt}
+                </span>
               </div>
               <div>
                 <span> 전화번호</span>
-                <span> 010-1234-1234</span>
+                <span> {std && std.mobileNumber}</span>
               </div>
               <div>
                 <span>학력</span>
-                <span> 4년제 졸업</span>
+                <span> {std && std.education}</span>
               </div>
             </li>
           </ul>
@@ -87,7 +105,13 @@ const AddPortfolio = () => {
         </li>
       </AddPortfolioContent>
       <div>
-        <button>취소</button>
+        <button
+          onClick={() => {
+            setChangeState(true);
+          }}
+        >
+          취소
+        </button>
         <button>등록</button>
       </div>
     </AddPortfolioWrap>
