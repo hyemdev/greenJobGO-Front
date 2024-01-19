@@ -1,32 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import NoImage from "../../assets/NoImage.jpg";
-import { getStdentInfo } from "../../api/businessPortfolioAxios";
-import { v4 } from "uuid";
 import {
   DefaultInfo,
   MypageWrap,
   PortfolioInfo,
   ResumeInfo,
 } from "../../styles/MypageStyle";
+import { useRecoilValue } from "recoil";
+import { userInfo } from "../../recoil/selectors/UserInfoSelector";
+import { v4 } from "uuid";
 
 const Mypage = () => {
-  const [payload, setPayload] = useState({
-    userData: {},
-    certificateValue: [],
-    birth: "",
-    thumbNail: "",
-    resume: "",
-    pofolData: [],
-    fileLinks: [],
-  });
-  const { userId } = useParams();
+  const userInfoData = useRecoilValue(userInfo);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getStdentInfo(userId, setPayload);
-  }, [userId]);
 
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -44,9 +32,9 @@ const Mypage = () => {
       <div className="sub-title">기본정보</div>
       <DefaultInfo>
         <div className="thumb-img">
-          {payload.thumbNail && (
+          {userInfoData.file.img.img && (
             <img
-              src={`http://112.222.157.156/img/student/${userId}/${payload.thumbNail}`}
+              src={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${userInfoData.file.img.img}`}
               alt="thumb-img"
               onError={onImgError}
             />
@@ -54,42 +42,42 @@ const Mypage = () => {
         </div>
         <div className="info">
           <ul className="text-upper">
-            <li className="name">{payload.userData.name}</li>
+            <li className="name">{userInfoData.std.name}</li>
             <li className="age">
-              {payload.userData.gender} {payload.birth} (만
-              {payload.userData.age}세)
+              {userInfoData.std.gender} {userInfoData.std.birthday} (만
+              {userInfoData.std.age}세)
             </li>
           </ul>
           <ul className="text-info">
             <li>
               <span>과정명</span>
-              <span> {payload.userData.subject}</span>
+              <span> {userInfoData.std.subject.subjectName}</span>
             </li>
             <li>
               <span>주소</span>
-              <span> {payload.userData.address}</span>
+              <span> {userInfoData.std.address}</span>
             </li>
             <li>
               <span>Email</span>
-              <span> {payload.userData.email}</span>
+              <span> {userInfoData.std.email}</span>
             </li>
             <li>
               <span>자격증</span>
-              <span> {payload.certificateValue}</span>
+              <span> {userInfoData.std.certificateValue}</span>
             </li>
             <li>
               <span>수강기간</span>
               <span>
-                {payload.userData.startedAt} ~ {payload.userData.endedAt}
+                {userInfoData.std.startedAt} ~ {userInfoData.std.endedAt}
               </span>
             </li>
             <li>
               <span> 휴대폰</span>
-              <span> {payload.userData.mobileNumber}</span>
+              <span> {userInfoData.std.mobileNumber}</span>
             </li>
             <li>
               <span>학력</span>
-              <span> {payload.userData.education}</span>
+              <span> {userInfoData.std.education}</span>
             </li>
           </ul>
         </div>
@@ -99,8 +87,8 @@ const Mypage = () => {
         <div className="oneword">
           <ul>
             <li>한 줄 소개</li>
-            {payload.userData && payload.userData.introducedLine ? (
-              <li>{payload.userData.introducedLine}</li>
+            {userInfoData.std && userInfoData.std.introducedLine ? (
+              <li>{userInfoData.std.introducedLine}</li>
             ) : (
               <li>등록 된 한줄소개가 없습니다.</li>
             )}
@@ -110,18 +98,18 @@ const Mypage = () => {
           <ul>
             <li>이력서 및 자기소개서</li>
             <li>
-              {payload.resume && payload.resume ? (
+              {userInfoData.file && userInfoData.file.resume.resume ? (
                 <div>
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
                     alt="portfolio"
                   />
                   <a
-                    href={`http://112.222.157.156/img/student/${userId}/${payload.resume}`}
+                    href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${userInfoData.file.resume.resume}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {payload.resume}
+                    {userInfoData.file.resume.resume}
                   </a>
                 </div>
               ) : (
@@ -133,10 +121,11 @@ const Mypage = () => {
       </ResumeInfo>
       <div className="sub-title">포트폴리오</div>
       <PortfolioInfo>
-        {payload.pofolData.length > 0 || payload.fileLinks.length > 0 ? (
+        {userInfoData.file.portfolio.length > 0 ||
+        userInfoData.file.fileLinks.length > 0 ? (
           <>
-            {payload.pofolData?.length > 0 &&
-              payload.pofolData.map(item => (
+            {userInfoData.file.portfolio?.length > 0 &&
+              userInfoData.file.portfolio.map(item => (
                 <ul key={v4()} className="portfolio-list">
                   <li>
                     <img
@@ -144,7 +133,7 @@ const Mypage = () => {
                       alt="portfolio"
                     />
                     <a
-                      href={`http://112.222.157.156/img/student/${userId}/${item.file}`}
+                      href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${item.file}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -154,8 +143,8 @@ const Mypage = () => {
                   <li>{item.oneWord}</li>
                 </ul>
               ))}
-            {payload.fileLinks?.length > 0 &&
-              payload.fileLinks.map(item => (
+            {userInfoData.file.fileLinks?.length > 0 &&
+              userInfoData.file.fileLinks.map(item => (
                 <ul key={v4()} className="portfolio-list">
                   <li>
                     <img

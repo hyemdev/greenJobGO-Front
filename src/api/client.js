@@ -66,7 +66,8 @@ export const fetchLogin = async (userId, password) => {
 
     const { data } = res;
 
-    const { role, refreshToken, accessToken } = await data;
+    const { role, refreshToken, accessToken, editableYn, portfolioYn } =
+      await data;
 
     if (role && refreshToken && accessToken) {
       const cookieOptions = {
@@ -79,7 +80,7 @@ export const fetchLogin = async (userId, password) => {
       setCookie("refreshToken", refreshToken, cookieOptions);
       setCookie("accessToken", accessToken, cookieOptions);
 
-      return { role, accessToken };
+      return { role, accessToken, editableYn, portfolioYn };
     } else {
       throw new Error("잘못된 응답 형식");
     }

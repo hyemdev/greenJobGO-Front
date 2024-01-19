@@ -1,6 +1,12 @@
 import { client } from "../api/client";
 
-export const postFileUpload = async () => {
+export const postFileUpload = async (
+  studentId,
+  iFile,
+  description,
+  linkUrl,
+  formData,
+) => {
   try {
     let res;
     if (iFile === 1) {
