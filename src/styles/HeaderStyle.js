@@ -5,7 +5,7 @@ export const HeaderSty = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 999;
   width: 100vw;
   /* max-width: 196rem; */
   height: 100px;

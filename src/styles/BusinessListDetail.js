@@ -88,6 +88,7 @@ export const DefaultInfo = styled.div`
       flex-direction: column;
       flex-wrap: wrap;
       gap: 24px 0;
+    
       & > li > span:first-of-type {
         display: inline-block;
         width: 60px;

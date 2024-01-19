@@ -1,9 +1,18 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import BusinessHeader from "../../components/BusinessHeader";
 import { ContentWrap, LayoutStyle } from "../../styles/LayoutStyle";
+import BusinessPrivacyProtect from "./BusinessPrivacyProtect";
+import IndexModal from "../../components/IndexModal";
 
 const Business = () => {
+  const [agreeModalOpen, setAgreeModalOpen] = useState(true);
+  const navigate = useNavigate();
+  // 비동의 클릭
+  const handleDisagree = () => {
+    setAgreeModalOpen(false);
+    navigate("/");
+  };
   return (
     <LayoutStyle>
       {/* 헤더 */}
@@ -12,6 +21,17 @@ const Business = () => {
       <ContentWrap>
         <Outlet />
       </ContentWrap>
+      {/* 개인정보동의 모달 */}
+      {agreeModalOpen && (
+        <IndexModal
+          close={handleDisagree}
+          open={agreeModalOpen}
+          onConfirm={() => setAgreeModalOpen(false)}
+          onCancel={handleDisagree}
+        >
+          <BusinessPrivacyProtect />
+        </IndexModal>
+      )}
     </LayoutStyle>
   );
 };
