@@ -3,7 +3,6 @@ import { PortFolioAddWrap } from "../../../styles/AddPofolModalStyle";
 
 const AddPofolModal = ({
   modalOpen,
-  handleFileUpload,
   handleAddModalClose,
   fileType,
   setFileType,
@@ -11,24 +10,30 @@ const AddPofolModal = ({
   setSelectFile,
   linkUrl,
   setLinkUrl,
-  description,
-  setDescription,
+  fileOneWord,
+  setFileOneWord,
+  linkOneWord,
+  setLinkOneWord,
+  handelFileAccept,
 }) => {
   const handleDescriptionChange = e => {
     const inputText = e.target.value;
 
     const limitedText = inputText.slice(0, 150);
-    setDescription(limitedText);
+    if (fileType === 2) {
+      setFileOneWord(limitedText);
+    } else if (fileType === 3) {
+      setLinkOneWord(limitedText);
+    }
   };
 
-  const handleFileChange = e => {
+  const handleSelectFileChange = e => {
     const file = e.target.files[0];
 
     if (file) {
       setSelectFile(file);
     }
   };
-  console.log(fileType);
   return (
     <PortFolioAddWrap>
       {modalOpen && (
@@ -51,7 +56,6 @@ const AddPofolModal = ({
                   value={2}
                   checked={fileType === 2}
                   onChange={() => {
-                    console.log("바뀌냐 라디오?");
                     setFileType(2);
                   }}
                 />
@@ -73,7 +77,7 @@ const AddPofolModal = ({
                       type="file"
                       id="file"
                       accept=".pdf"
-                      onChange={handleFileChange}
+                      onChange={handleSelectFileChange}
                     />
                     <label htmlFor="file">파일첨부</label>
                     <input
@@ -88,7 +92,7 @@ const AddPofolModal = ({
                       cols="30"
                       rows="5"
                       placeholder="포트폴리오 소개 내용을 작성해주세요.(최대 150자)"
-                      value={description}
+                      value={fileOneWord}
                       onChange={handleDescriptionChange}
                     />
                   </li>
@@ -115,7 +119,7 @@ const AddPofolModal = ({
                       cols="30"
                       rows="5"
                       placeholder="포트폴리오 소개 내용을 작성해주세요.(최대 150자)"
-                      value={description}
+                      value={linkOneWord}
                       onChange={handleDescriptionChange}
                     />
                   </li>
@@ -128,7 +132,7 @@ const AddPofolModal = ({
                 </>
               ) : null}
               <li>
-                <button onClick={handleFileUpload}>등록</button>
+                <button onClick={() => handelFileAccept()}>등록</button>
               </li>
             </ul>
           </div>

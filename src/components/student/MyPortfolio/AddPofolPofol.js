@@ -1,45 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
-import AddPofolModal from "./AddPofolModal";
 
 const AddPofolPofol = ({
-  modalOpen,
   handleAddModalOpen,
-  handleAddModalClose,
-  handleFileUpload,
-  fileType,
-  setFileType,
-  selectFile,
-  setSelectFile,
-  linkUrl,
-  setLinkUrl,
-  description,
-  setDescription,
+  imgFile,
+  handleImgFileChange,
+  fileData = [],
 }) => {
   const userData = useRecoilValueLoadable(userInfo);
-
-  const file = userData.state === "hasValue" ? userData.contents.file : null;
   const std =
     userData.state === "hasValue" ? userData.contents.std.istudent : null;
+  const file =
+    userData.state === "hasValue"
+      ? userData.contents.file
+      : { portfolio: [], fileLinks: [] };
+
   return (
     <AddPofolPofolWrap>
-      {modalOpen && (
-        <AddPofolModal
-          modalOpen={modalOpen}
-          handleAddModalClose={handleAddModalClose}
-          handleFileUpload={handleFileUpload}
-          fileType={fileType}
-          setFileType={setFileType}
-          selectFile={selectFile}
-          setSelectFile={setSelectFile}
-          linkUrl={linkUrl}
-          setLinkUrl={setLinkUrl}
-          description={description}
-          setDescription={setDescription}
-        />
-      )}
       <div className="title">
         <h2>포트폴리오 첨부</h2>
       </div>
@@ -49,14 +28,14 @@ const AddPofolPofol = ({
           <div className="file-box">
             <input
               type="file"
-              id="file"
+              id="imgfile"
               accept=".jpg, png, jpeg, gif"
-              // onChange={handleFileChange}
+              onChange={handleImgFileChange}
             />
-            <label htmlFor="file">파일첨부</label>
+            <label htmlFor="imgfile">파일첨부</label>
             <input
               className="upload-name"
-              // value={selectedFile ? selectedFile.name : "첨부파일"}
+              value={imgFile ? imgFile.name : "첨부파일"}
               placeholder="첨부파일"
               readOnly
             />
@@ -77,8 +56,11 @@ const AddPofolPofol = ({
           </div>
           <div>
             {file.portfolio?.length > 0 &&
-              file.portfolio.map(item => (
-                <ul key={file.portfolio.ifle}>
+              [
+                ...file.portfolio,
+                ...fileData.filter(item => item.fileType === 2),
+              ].map(item => (
+                <ul key={item.ifile}>
                   <li>
                     <div>
                       <div>
@@ -112,8 +94,11 @@ const AddPofolPofol = ({
                 </ul>
               ))}
             {file.fileLinks?.length > 0 &&
-              file.fileLinks.map(item => (
-                <ul key={file.fileLinks.ifile}>
+              [
+                ...file.fileLinks,
+                ...fileData.filter(item => item.fileType === 3),
+              ].map(item => (
+                <ul key={item.ifile}>
                   <li>
                     <div>
                       <div>

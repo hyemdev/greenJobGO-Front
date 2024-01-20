@@ -5,34 +5,81 @@ import {
 } from "../../styles/AddPortfolioStyle";
 import AddPofolPofol from "../../components/student/MyPortfolio/AddPofolPofol";
 import AddPofolResume from "../../components/student/MyPortfolio/AddPofolResume";
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
-import { ChangeAtom } from "../../recoil/atoms/ChangeState";
+import AddPofolModal from "../../components/student/MyPortfolio/AddPofolModal";
 
 const AddPortFolio = () => {
   const [fileType, setFileType] = useState(2);
   const [selectFile, setSelectFile] = useState(null);
+  const [resumeFile, setResumeFile] = useState(null);
+  const [imgFile, setImgFile] = useState(null);
   const [linkUrl, setLinkUrl] = useState("");
-  const [description, setDescription] = useState("");
+  const [fileOneWord, setFileOneWord] = useState("");
+  const [linkOneWord, setLinkOneWord] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [changeState, setChangeState] = useRecoilState(ChangeAtom);
   const userInfoData = useRecoilValueLoadable(userInfo);
-  console.log(fileType);
+  const [fileData, setFileData] = useState([]);
+
   const std =
     userInfoData.state === "hasValue" ? userInfoData.contents.std : null;
 
+  const handleResumeFileChange = e => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setResumeFile(file);
+    }
+  };
+
+  const handleImgFileChange = e => {
+    const file = e.target.files[0];
+
+    if (file) {
+      setImgFile(file);
+    }
+  };
+  const handelFileAccept = () => {
+    setModalOpen(false);
+    setFileData(prevData => [
+      ...prevData,
+      {
+        fileType,
+        file: fileType === 2 ? selectFile.name : "",
+        oneWord:
+          fileType === 2 ? fileOneWord : fileType === 3 ? linkOneWord : "",
+        fileLink: fileType === 3 ? linkUrl : "",
+      },
+    ]);
+    // console.log(fileData);
+  };
   const handleAddModalOpen = () => {
     setModalOpen(true);
   };
+
   const handleAddModalClose = () => {
     setModalOpen(false);
   };
-  const handleFileUpload = () => {
-    setModalOpen(false);
-  };
-  console.log(changeState);
+
   return (
     <AddPortfolioWrap>
+      {modalOpen && (
+        <AddPofolModal
+          modalOpen={modalOpen}
+          handleAddModalClose={handleAddModalClose}
+          fileType={fileType}
+          setFileType={setFileType}
+          selectFile={selectFile}
+          setSelectFile={setSelectFile}
+          linkUrl={linkUrl}
+          setLinkUrl={setLinkUrl}
+          fileOneWord={fileOneWord}
+          setFileOneWord={setFileOneWord}
+          linkOneWord={linkOneWord}
+          setLinkOneWord={setLinkOneWord}
+          handelFileAccept={handelFileAccept}
+        />
+      )}
       <div>
         <h2>이력서 등록</h2>
       </div>
@@ -55,15 +102,15 @@ const AddPortFolio = () => {
             <li>
               <div>
                 <span>과정명</span>
-                <span> {std.subject && std.subject.subjectName}</span>
+                <span> {std?.subject?.subjectName}</span>
               </div>
               <div>
                 <span>주소</span>
-                <span> {std && std.address}</span>
+                <span> {std?.address}</span>
               </div>
               <div>
                 <span>Email</span>
-                <span> {std && std.email}</span>
+                <span> {std?.email}</span>
               </div>
               <div>
                 <span>자격증 </span>
@@ -79,48 +126,37 @@ const AddPortFolio = () => {
                 <span>수강기간</span>
                 <span>
                   {" "}
-                  {std && std.startedAt} ~ {std && std.endedAt}
+                  {std?.startedAt} ~ {std?.endedAt}
                 </span>
               </div>
               <div>
                 <span> 전화번호</span>
-                <span> {std && std.mobileNumber}</span>
+                <span> {std?.mobileNumber}</span>
               </div>
               <div>
                 <span>학력</span>
-                <span> {std && std.education}</span>
+                <span> {std?.education}</span>
               </div>
             </li>
           </ul>
         </li>
         <li>
-          <AddPofolResume />
+          <AddPofolResume
+            handleResumeFileChange={handleResumeFileChange}
+            resumeFile={resumeFile}
+          />
         </li>
         <li>
           <AddPofolPofol
-            modalOpen={modalOpen}
             handleAddModalOpen={handleAddModalOpen}
-            handleAddModalClose={handleAddModalClose}
-            handleFileUpload={handleFileUpload}
-            fileType={fileType}
-            setFileType={setFileType}
-            selectFile={selectFile}
-            setSelectFile={setSelectFile}
-            linkUrl={linkUrl}
-            setLinkUrl={setLinkUrl}
-            description={description}
-            setDescription={setDescription}
+            imgFile={imgFile}
+            handleImgFileChange={handleImgFileChange}
+            fileData={fileData}
           />
         </li>
       </AddPortfolioContent>
       <div>
-        <button
-          onClick={() => {
-            setChangeState(true);
-          }}
-        >
-          취소
-        </button>
+        <button>취소</button>
         <button>등록</button>
       </div>
     </AddPortfolioWrap>

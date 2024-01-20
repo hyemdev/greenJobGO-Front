@@ -1,7 +1,7 @@
 import React from "react";
 import { AddPofolResumeWrap } from "../../../styles/AddPortfolioStyle";
 
-const AddPofolResume = () => {
+const AddPofolResume = ({ handleResumeFileChange, resumeFile }) => {
   return (
     <AddPofolResumeWrap>
       <div>
@@ -22,14 +22,14 @@ const AddPofolResume = () => {
         <div className="file-box">
           <input
             type="file"
-            id="file"
+            id="resumefile"
             accept=".pdf"
-            // onChange={handleFileChange}
+            onChange={handleResumeFileChange}
           />
-          <label htmlFor="file">파일첨부</label>
+          <label htmlFor="resumefile">파일첨부</label>
           <input
             className="upload-name"
-            // value={selectedFile ? selectedFile.name : "첨부파일"}
+            value={resumeFile ? resumeFile.name : "첨부파일"}
             placeholder="첨부파일"
             readOnly
           />
