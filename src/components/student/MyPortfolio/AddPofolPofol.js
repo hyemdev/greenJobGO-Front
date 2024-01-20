@@ -4,10 +4,11 @@ import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 
 const AddPofolPofol = ({ handleAddModalOpen }) => {
-  const userInfoData = useRecoilValueLoadable(userInfo);
+  const userData = useRecoilValueLoadable(userInfo);
 
+  const file = userData.state === "hasValue" ? userData.contents.file : null;
   const std =
-    userInfoData.state === "hasValue" ? userInfoData.contents.std : null;
+    userData.state === "hasValue" ? userData.contents.std.istudent : null;
   return (
     <AddPofolPofolWrap>
       <div className="title">
@@ -46,74 +47,76 @@ const AddPofolPofol = ({ handleAddModalOpen }) => {
             </button>
           </div>
           <div>
-            <ul>
-              <li>
-                <div>
-                  <div>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
-                      alt="portfolio"
-                    />
-                    <a href="">김그린_디자인_포트폴리오.PDF</a>
-                  </div>
-                  <div>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
-                      alt="portfolio"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <input type="checkbox" />
-                  <label htmlFor="">대표 포트폴리오로 설정</label>
-                </div>
-              </li>
-              <li>
-                <span>
-                  그린컴퓨터아트학원 홈페이지 리디자인한 피그마
-                  링크입니다.그린컴퓨터아트학원 홈페이지 리디자인한 피그마
-                  링크입니다.그린컴퓨터아트학원 홈페이지 리디자인한 피그마
-                  링크입니다.그린컴퓨터아트
-                </span>
-              </li>
-            </ul>
-            <ul>
-              <li>
-                <div>
-                  <div>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/assets/ph_link.png`}
-                      alt="portfolio"
-                    />
-                    <a
-                      // href={`http://112.222.157.156/img/student/${userId}/${item.file}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      그린컴퓨터아트학원 홈페이지 리디자인한 피그마 링크입니다.
-                    </a>
-                  </div>
-                  <div>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
-                      alt="portfolio"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <input type="checkbox" />
-                  <label htmlFor="">대표 포트폴리오로 설정</label>
-                </div>
-              </li>
-              <li>
-                <span>
-                  그린컴퓨터아트학원 홈페이지 리디자인한 피그마
-                  링크입니다.그린컴퓨터아트학원 홈페이지 리디자인한 피그마
-                  링크입니다.그린컴퓨터아트학원 홈페이지 리디자인한 피그마
-                  링크입니다.그린컴퓨터아트
-                </span>
-              </li>
-            </ul>
+            {file.portfolio?.length > 0 &&
+              file.portfolio.map(item => (
+                <ul key={file.portfolio.ifle}>
+                  <li>
+                    <div>
+                      <div>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
+                          alt="portfolio"
+                        />
+                        <a
+                          href={`http://112.222.157.156/img/student/${std}/${item.file}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item.file}
+                        </a>
+                      </div>
+                      <div>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
+                          alt="portfolio"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <input type="checkbox" />
+                      <label htmlFor="">대표 포트폴리오로 설정</label>
+                    </div>
+                  </li>
+                  <li>
+                    <span>{item.oneWord}</span>
+                  </li>
+                </ul>
+              ))}
+            {file.fileLinks?.length > 0 &&
+              file.fileLinks.map(item => (
+                <ul key={file.fileLinks.ifile}>
+                  <li>
+                    <div>
+                      <div>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/assets/ph_link.png`}
+                          alt="portfolio"
+                        />
+                        <a
+                          href={`http://112.222.157.156/img/student/${std}/${item.fileLink}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item.fileLink}
+                        </a>
+                      </div>
+                      <div>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
+                          alt="portfolio"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <input type="checkbox" />
+                      <label htmlFor="">대표 포트폴리오로 설정</label>
+                    </div>
+                  </li>
+                  <li>
+                    <span>{item.oneWord}</span>
+                  </li>
+                </ul>
+              ))}
           </div>
         </div>
       </div>
