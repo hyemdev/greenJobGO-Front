@@ -50,14 +50,13 @@ client.interceptors.response.use(
         console.log("토큰 갱신 실패:", error);
       }
     }
-
     console.error("요청 실패:", error);
     return Promise.reject(error);
   },
 );
 
 // 로그인 함수
-export const fetchLogin = async (userId, password) => {
+export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
   try {
     const res = await client.post(`/sign/sign-in`, {
       email: userId,
@@ -79,13 +78,15 @@ export const fetchLogin = async (userId, password) => {
 
       setCookie("refreshToken", refreshToken, cookieOptions);
       setCookie("accessToken", accessToken, cookieOptions);
-
+      setErrorCancelInfo("");
       return { role, accessToken, editableYn, portfolioYn };
     } else {
       throw new Error("잘못된 응답 형식");
     }
   } catch (error) {
-    console.log(error);
+    if (error.response.status === 500) {
+      setErrorCancelInfo("로그인 실패");
+    }
     throw new Error("로그인에 실패했습니다.");
   }
 };
