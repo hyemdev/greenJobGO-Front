@@ -152,11 +152,11 @@ const Mypage = () => {
                       alt="portfolio"
                     />
                     <a
-                      href={`http://${item.file}`}
+                      href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${item.fileLink}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {item.file}
+                      {item.fileLink}
                     </a>
                   </li>
                   <li>{item.oneWord}</li>

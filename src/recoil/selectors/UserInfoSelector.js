@@ -9,8 +9,6 @@ export const userInfo = selector({
 
       const { std, file } = res.data;
 
-      console.log(std);
-      console.log(file);
       return { std, file };
     } catch (error) {
       console.log(error);
