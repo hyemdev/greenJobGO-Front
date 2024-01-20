@@ -34,6 +34,7 @@ const Login = () => {
       return;
     } else if (!password) {
       setErrorCancelInfo("비밀번호를 입력 해 주세요.");
+      return;
     } else {
       try {
         const { role, accessToken, editableYn, portfolioYn } = await fetchLogin(
