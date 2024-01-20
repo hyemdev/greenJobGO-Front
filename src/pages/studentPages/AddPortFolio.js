@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import {
   AddPortfolioContent,
   AddPortfolioWrap,
-} from "../../../styles/AddPortfolioStyle";
-import AddPofolPofol from "./AddPofolPofol";
-import AddPofolResume from "./AddPofolResume";
-import AddPofolModal from "./AddPofolModal";
-import { ChangeAtom } from "../../../recoil/atoms/ChangeState";
+} from "../../styles/AddPortfolioStyle";
+import AddPofolPofol from "../../components/student/MyPortfolio/AddPofolPofol";
+import AddPofolResume from "../../components/student/MyPortfolio/AddPofolResume";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
+import { userInfo } from "../../recoil/selectors/UserInfoSelector";
+import { ChangeAtom } from "../../recoil/atoms/ChangeState";
 
-const AddPortfolio = () => {
+const AddPortFolio = () => {
+  const [fileType, setFileType] = useState(2);
+  const [selectFile, setSelectFile] = useState(null);
+  const [linkUrl, setLinkUrl] = useState("");
+  const [description, setDescription] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [changeState, setChangeState] = useRecoilState(ChangeAtom);
   const userInfoData = useRecoilValueLoadable(userInfo);
-
+  console.log(fileType);
   const std =
     userInfoData.state === "hasValue" ? userInfoData.contents.std : null;
-    
+
   const handleAddModalOpen = () => {
     setModalOpen(true);
   };
@@ -30,13 +33,6 @@ const AddPortfolio = () => {
   console.log(changeState);
   return (
     <AddPortfolioWrap>
-      {modalOpen && (
-        <AddPofolModal
-          modalOpen={modalOpen}
-          handleAddModalClose={handleAddModalClose}
-          handleFileUpload={handleFileUpload}
-        />
-      )}
       <div>
         <h2>이력서 등록</h2>
       </div>
@@ -101,7 +97,20 @@ const AddPortfolio = () => {
           <AddPofolResume />
         </li>
         <li>
-          <AddPofolPofol handleAddModalOpen={handleAddModalOpen} />
+          <AddPofolPofol
+            modalOpen={modalOpen}
+            handleAddModalOpen={handleAddModalOpen}
+            handleAddModalClose={handleAddModalClose}
+            handleFileUpload={handleFileUpload}
+            fileType={fileType}
+            setFileType={setFileType}
+            selectFile={selectFile}
+            setSelectFile={setSelectFile}
+            linkUrl={linkUrl}
+            setLinkUrl={setLinkUrl}
+            description={description}
+            setDescription={setDescription}
+          />
         </li>
       </AddPortfolioContent>
       <div>
@@ -118,4 +127,4 @@ const AddPortfolio = () => {
   );
 };
 
-export default AddPortfolio;
+export default AddPortFolio;

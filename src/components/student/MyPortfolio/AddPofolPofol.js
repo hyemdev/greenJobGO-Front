@@ -2,8 +2,22 @@ import React from "react";
 import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
+import AddPofolModal from "./AddPofolModal";
 
-const AddPofolPofol = ({ handleAddModalOpen }) => {
+const AddPofolPofol = ({
+  modalOpen,
+  handleAddModalOpen,
+  handleAddModalClose,
+  handleFileUpload,
+  fileType,
+  setFileType,
+  selectFile,
+  setSelectFile,
+  linkUrl,
+  setLinkUrl,
+  description,
+  setDescription,
+}) => {
   const userData = useRecoilValueLoadable(userInfo);
 
   const file = userData.state === "hasValue" ? userData.contents.file : null;
@@ -11,6 +25,21 @@ const AddPofolPofol = ({ handleAddModalOpen }) => {
     userData.state === "hasValue" ? userData.contents.std.istudent : null;
   return (
     <AddPofolPofolWrap>
+      {modalOpen && (
+        <AddPofolModal
+          modalOpen={modalOpen}
+          handleAddModalClose={handleAddModalClose}
+          handleFileUpload={handleFileUpload}
+          fileType={fileType}
+          setFileType={setFileType}
+          selectFile={selectFile}
+          setSelectFile={setSelectFile}
+          linkUrl={linkUrl}
+          setLinkUrl={setLinkUrl}
+          description={description}
+          setDescription={setDescription}
+        />
+      )}
       <div className="title">
         <h2>포트폴리오 첨부</h2>
       </div>

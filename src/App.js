@@ -15,6 +15,7 @@ import MyPortfolioMg from "./pages/studentPages/MyPortfolioMg";
 import Mypage from "./pages/studentPages/Mypage";
 import ConnectCompany from "./pages/studentPages/ConnectCompany";
 import { PrivateRoutes } from "./components/PrivateRoutes";
+import AddPortFolio from "./pages/studentPages/AddPortFolio";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           {/* 나의 포트폴리오 관리*/}
           <Route index element={<MyPortfolioMg />} />
           <Route path="myportfolio" element={<MyPortfolioMg />} />
+          {/* 이력서 등록 */}
+          <Route path="addportfolio" element={<AddPortFolio />} />
           {/* 마이 페이지 */}
           <Route path="mypage" element={<Mypage />} />
           {/* 협약기업 리스트 */}
