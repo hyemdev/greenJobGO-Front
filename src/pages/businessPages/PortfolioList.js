@@ -10,7 +10,6 @@ import {
 } from "../../api/businessPortfolioAxios";
 import NoImage from "../../assets/NoImage.jpg";
 
-
 const PortfolioList = () => {
   const [galleryData, setGalleryData] = useState([]);
   const [listData, setListData] = useState([]);
@@ -82,6 +81,12 @@ const PortfolioList = () => {
     setPage(1);
   };
 
+  // 페이지네이션 클릭시
+  const handlePageClick = e => {
+    window.scrollTo({ top: 0 });
+    setPage(e);
+    console.log("page e", e);
+  };
   return (
     <BusinessPortfolioWrap>
       <h2>수강생 포트폴리오</h2>
@@ -105,7 +110,12 @@ const PortfolioList = () => {
         onImgError={onImgError}
         nothing={nothing}
       />
-      <ListPaging setPage={setPage} page={page} count={count} />
+      <ListPaging
+        setPage={setPage}
+        page={page}
+        count={count}
+        handlePageClick={handlePageClick}
+      />
     </BusinessPortfolioWrap>
   );
 };

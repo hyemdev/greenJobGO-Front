@@ -27,6 +27,7 @@ export const ModalWarp = styled.div`
 
   /* 모달 내용 */
   .modal-content {
+    position: relative;
     height: 100%;
     /* padding: 16px; */
     .btns {
@@ -35,7 +36,7 @@ export const ModalWarp = styled.div`
       gap: 20px;
       position: absolute;
       left: calc(50% - 200px);
-      bottom: 80px;
+      bottom: 40px;
       z-index: 99999;
       > button {
         width: 180px;

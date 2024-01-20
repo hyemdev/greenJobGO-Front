@@ -7,6 +7,7 @@ export const ListPagingSty = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0 !important;
+    margin-top: 25px;
     li {
       display: inline-block;
       width: 25px;

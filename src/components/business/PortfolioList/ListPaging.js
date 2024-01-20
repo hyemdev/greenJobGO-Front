@@ -7,13 +7,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "react-js-pagination";
 
-const ListPaging = ({ setPage, page, count }) => {
+const ListPaging = ({ setPage, page, count,handlePageClick }) => {
   return (
     <div>
       <ListPagingSty>
         <Pagination
           activePage={page}
-          itemsCountPerPage={10}
+          itemsCountPerPage={9}
           totalItemsCount={count}
           pageRangeDisplayed={5}
           marginPagesDisplayed={0}
@@ -21,7 +21,7 @@ const ListPaging = ({ setPage, page, count }) => {
           nextPageText={<FontAwesomeIcon icon={faChevronRight} />}
           firstPageText={""}
           lastPageText={""}
-          onChange={setPage}
+          onChange={(e) => handlePageClick(e)}
         />
       </ListPagingSty>
     </div>
