@@ -5,6 +5,8 @@ export const LayoutStyle = styled.div`
 `;
 export const ContentWrap = styled.div`
   width: 1400px;
+  width: 100%;
+  min-width: 280px;
   display: flex;
   justify-content: center;
   margin: 0 auto;

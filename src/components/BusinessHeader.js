@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { HeaderSty } from "../styles/HeaderStyle";
+import React, { useEffect, useState } from "react";
+import { HeaderSty, MobileHeaderSty } from "../styles/HeaderStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
 import { useRecoilState } from "recoil";
@@ -12,6 +12,9 @@ const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
   const [select, setSelect] = useState("businessintro");
   const navigate = useNavigate();
+
+  // 반응형 state
+  const [isMobile, setIsMobile] = useState("");
 
   const menus = [
     {
@@ -50,44 +53,82 @@ const BusinessHeader = () => {
     setSelect("businessintro");
   };
   const handleColor = e => {
-    // console.log("eeeee", e);
-    // headerColor === "#7b7b7b" ? setHeaderColor("#222") : setHeaderColor("#7b7b7b");
     setSelect(e);
   };
 
+  // 헤더 반응형
+  const handleResize = () => {
+    if (window.innerWidth < 800) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    // unmount 시 실행되는 cleanup 함수
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
   return (
-    <HeaderSty>
-      <div className="business-header">
-        <div className="upper-logo-div" onClick={handleLogoClick}>
-          <Link to="/business">
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/LoginTitle.png`}
-              alt="greenlogo"
-            />
-          </Link>
-        </div>
-        <ul className="header-menu">
-          {menus.map(item => (
-            <li
-              key={item.ibt}
-              onClick={() => handleColor(item.type)}
-              className={`${select === item.type ? "select" : ""}`}
-            >
-              <Link to={`./${item.type}`}>
-                {item.icon} {item.title}
+    <>
+      {isMobile ? (
+        <MobileHeaderSty>
+          <div className="business-header">
+            <div className="upper-logo-div" onClick={handleLogoClick}>
+              <Link to="/business">
+                <img
+                  src={`${process.env.PUBLIC_URL}/assets/LoginTitle.png`}
+                  alt="greenlogo"
+                />
               </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="loguout-btn" onClick={handleLogout}>
-          로그아웃
-          <img
-            src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}
-            alt="logout"
-          />
-        </div>
-      </div>
-    </HeaderSty>
+            </div>
+            {/* <div className="loguout-btn" onClick={handleLogout}>
+              로그아웃
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}
+                alt="logout"
+              />
+            </div> */}
+          </div>
+        </MobileHeaderSty>
+      ) : (
+        <HeaderSty>
+          <div className="business-header">
+            <div className="upper-logo-div" onClick={handleLogoClick}>
+              <Link to="/business">
+                <img
+                  src={`${process.env.PUBLIC_URL}/assets/LoginTitle.png`}
+                  alt="greenlogo"
+                />
+              </Link>
+            </div>
+            <ul className="header-menu">
+              {menus.map(item => (
+                <li
+                  key={item.ibt}
+                  onClick={() => handleColor(item.type)}
+                  className={`${select === item.type ? "select" : ""}`}
+                >
+                  <Link to={`./${item.type}`}>
+                    {item.icon} {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="loguout-btn" onClick={handleLogout}>
+              로그아웃
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}
+                alt="logout"
+              />
+            </div>
+          </div>
+        </HeaderSty>
+      )}
+    </>
   );
 };
 

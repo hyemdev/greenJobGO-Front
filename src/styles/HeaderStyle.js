@@ -72,3 +72,43 @@ export const HeaderSty = styled.div`
     }
   }
 `;
+export const MobileHeaderSty = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  /* max-width: 196rem; */
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${Maincolor.white};
+  box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.12);
+    & > div {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    cursor: pointer;
+    /* 상단로고style */
+    .upper-logo-div {
+      width: 159px;
+      height: 12px;
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    /* .loguout-btn {
+      font-size: 15px;
+      font-weight: 500;
+      > img {
+        width: 17px;
+        height: 17px;
+        margin-left: 8px;
+      }
+    } */
+  }
+`;
