@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { HeaderSty } from "../styles/HeaderStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
 import { useRecoilState } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
+import { ReactComponent as StudentPortFolioIcon } from "../assets/StudentPortFolioIcon.svg";
+import { ReactComponent as JobmangerIcon } from "../assets/JobmangerIcon.svg";
+import { ReactComponent as EnterpriseIcon } from "../assets/EnterpriseIcon.svg";
 
 const StudentHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
+  const [select, setSelect] = useState("myportfolio");
   const navigate = useNavigate();
+
+  const menus = [
+    {
+      ibt: "a1",
+      type: "myportfolio",
+      title: "나의 포트폴리오 관리",
+      icon: <StudentPortFolioIcon />,
+    },
+    {
+      ibt: "a2",
+      type: "mypage",
+      title: "마이페이지",
+      icon: <JobmangerIcon />,
+    },
+    {
+      ibt: "a3",
+      type: "connectcompany",
+      title: "협약 기업",
+      icon: <EnterpriseIcon />,
+    },
+  ];
 
   const handleLogout = () => {
     postLogout();
@@ -21,10 +46,20 @@ const StudentHeader = () => {
     }));
     navigate("/");
   };
+
+  const handleLogoClick = () => {
+    setSelect("myportfolio");
+  };
+  const handleColor = e => {
+    // console.log("eeeee", e);
+    // headerColor === "#7b7b7b" ? setHeaderColor("#222") : setHeaderColor("#7b7b7b");
+    setSelect(e);
+  };
+
   return (
     <HeaderSty>
       <div className="student-header">
-        <div className="upper-logo-div">
+        <div className="upper-logo-div" onClick={handleLogoClick}>
           <Link to="/student">
             <img
               src={`${process.env.PUBLIC_URL}/assets/LoginTitle.png`}
@@ -32,28 +67,18 @@ const StudentHeader = () => {
             />
           </Link>
         </div>
-        <ul>
-          <li>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/StudentPortFolioIcon.svg`}
-              alt="studentPf"
-            />
-            <Link to="./myportfolio"> 나의 포트폴리오 관리</Link>
-          </li>
-          <li>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/JobmangerIcon.svg`}
-              alt="mypage"
-            />
-            <Link to="./mypage">마이페이지</Link>
-          </li>
-          <li>
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/EnterpriseIcon.svg`}
-              alt="Enterprise"
-            />
-            <Link to="./connectcompany">협약 기업</Link>
-          </li>
+        <ul className="header-menu">
+          {menus.map(item => (
+            <li
+              key={item.ibt}
+              onClick={() => handleColor(item.type)}
+              className={`${select === item.type ? "select" : ""}`}
+            >
+              <Link to={`./${item.type}`}>
+                {item.icon} {item.title}
+              </Link>
+            </li>
+          ))}
         </ul>
         <div className="loguout-btn" onClick={handleLogout}>
           로그아웃

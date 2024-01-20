@@ -29,21 +29,35 @@ export const HeaderSty = styled.div`
         object-fit: contain;
       }
     }
-    ul {
+    .header-menu {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 1rem;
-      > li {
-        font-size: 16px;
-        font-weight: 500;
-        color: ${Maincolor.grayLight2};
-        margin-right: 70px;
-        > img {
-          width: 17px;
-          height: 17px;
-          color: ${Maincolor.grayLight2};
-          margin-right: 7px;
+      gap: 80px;
+      li {
+        > a {
+          position: relative;
+          font-size: 16px;
+          font-weight: 500;
+          color: ${Maincolor.header};
+          > svg {
+            position: absolute;
+            top: 2px;
+            left: -27px;
+            width: 20px;
+            height: 20px;
+            filter: invert(48%) sepia(6%) saturate(7%) hue-rotate(323deg)
+              brightness(98%) contrast(80%);
+          }
+        }
+      }
+      .select {
+        > a {
+          color: ${Maincolor.black};
+          > svg {
+            filter: invert(6%) sepia(79%) saturate(16%) hue-rotate(349deg)
+              brightness(91%) contrast(85%);
+          }
         }
       }
     }
