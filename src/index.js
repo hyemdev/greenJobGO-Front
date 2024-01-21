@@ -5,14 +5,17 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { FadeLoader } from "react-spinners";
+import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <RecoilRoot>
-    <BrowserRouter>
-      <Suspense fallback={<FadeLoader color="#36d7b7" />}>
+  <CookiesProvider>
+    <RecoilRoot>
+      <BrowserRouter>
+        {/* <Suspense fallback={<FadeLoader color="#36d7b7" />}> */}
         <App />
-      </Suspense>
-    </BrowserRouter>
-  </RecoilRoot>,
+        {/* </Suspense> */}
+      </BrowserRouter>
+    </RecoilRoot>
+  </CookiesProvider>,
 );

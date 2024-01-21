@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 
-const AddPofolPofol = ({ handleAddModalOpen }) => {
+const AddPofolPofol = ({
+  handleAddModalOpen,
+  imgFile,
+  handleImgFileChange,
+  fileData = [],
+}) => {
   const userData = useRecoilValueLoadable(userInfo);
-
-  const file = userData.state === "hasValue" ? userData.contents.file : null;
   const std =
     userData.state === "hasValue" ? userData.contents.std.istudent : null;
+  const file =
+    userData.state === "hasValue"
+      ? userData.contents.file
+      : { portfolio: [], fileLinks: [] };
+
   return (
     <AddPofolPofolWrap>
       <div className="title">
@@ -20,14 +28,14 @@ const AddPofolPofol = ({ handleAddModalOpen }) => {
           <div className="file-box">
             <input
               type="file"
-              id="file"
+              id="imgfile"
               accept=".jpg, png, jpeg, gif"
-              // onChange={handleFileChange}
+              onChange={handleImgFileChange}
             />
-            <label htmlFor="file">파일첨부</label>
+            <label htmlFor="imgfile">파일첨부</label>
             <input
               className="upload-name"
-              // value={selectedFile ? selectedFile.name : "첨부파일"}
+              value={imgFile ? imgFile.name : "첨부파일"}
               placeholder="첨부파일"
               readOnly
             />
@@ -48,8 +56,11 @@ const AddPofolPofol = ({ handleAddModalOpen }) => {
           </div>
           <div>
             {file.portfolio?.length > 0 &&
-              file.portfolio.map(item => (
-                <ul key={file.portfolio.ifle}>
+              [
+                ...file.portfolio,
+                ...fileData.filter(item => item.fileType === 2),
+              ].map(item => (
+                <ul key={item.ifile}>
                   <li>
                     <div>
                       <div>
@@ -83,8 +94,11 @@ const AddPofolPofol = ({ handleAddModalOpen }) => {
                 </ul>
               ))}
             {file.fileLinks?.length > 0 &&
-              file.fileLinks.map(item => (
-                <ul key={file.fileLinks.ifile}>
+              [
+                ...file.fileLinks,
+                ...fileData.filter(item => item.fileType === 3),
+              ].map(item => (
+                <ul key={item.ifile}>
                   <li>
                     <div>
                       <div>

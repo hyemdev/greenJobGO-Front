@@ -4,8 +4,6 @@ import { Maincolor } from "./GlobalStyle";
 export const AddPortfolioWrap = styled.div`
   margin-top: 20px;
   width: 100%;
-  height: 750px;
-  padding-bottom: 80px;
   > div {
     padding: 0 0 40px 0;
     :first-of-type {
@@ -235,7 +233,12 @@ export const AddPofolResumeWrap = styled.div`
 `;
 
 export const AddPofolPofolWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 750px;
   .title {
+    width: 100%;
     height: 70px;
     border-radius: 12px 12px 0 0;
     background: ${Maincolor.sectiontitle};
@@ -249,6 +252,7 @@ export const AddPofolPofolWrap = styled.div`
   }
   .inner {
     overflow-y: auto;
+    max-height: 100%;
     > div {
       padding: 0 40px;
       :first-of-type {
@@ -299,6 +303,7 @@ export const AddPofolPofolWrap = styled.div`
         }
       }
       :last-of-type {
+        max-height: 100%;
         padding-top: 46px;
         div {
           :nth-of-type(1) {
