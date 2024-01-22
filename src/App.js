@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
+import { PrivateRoutes } from "./components/PrivateRoutes";
 // 기업페이지
 import Business from "./pages/businessPages/Business";
 import BusinessIntro from "./pages/businessPages/BusinessIntro";
@@ -14,8 +15,8 @@ import Student from "./pages/studentPages/Student";
 import MyPortfolioMg from "./pages/studentPages/MyPortfolioMg";
 import Mypage from "./pages/studentPages/Mypage";
 import ConnectCompany from "./pages/studentPages/ConnectCompany";
-import { PrivateRoutes } from "./components/PrivateRoutes";
 import AddPortFolio from "./pages/studentPages/AddPortFolio";
+import AddResume from "./pages/studentPages/AddResume";
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
           <Route index element={<MyPortfolioMg />} />
           <Route path="myportfolio" element={<MyPortfolioMg />} />
           {/* 이력서 등록 */}
+          <Route path="addresume" element={<AddResume />} />
+          {/* 포트폴리오 등록 */}
           <Route path="addportfolio" element={<AddPortFolio />} />
           {/* 마이 페이지 */}
           <Route path="mypage" element={<Mypage />} />

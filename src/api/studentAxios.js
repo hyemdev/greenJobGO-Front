@@ -10,10 +10,3 @@ export const getStudentInfo = async setUserData => {
   }
 };
 
-export const deleteFile = async () => {
-  try {
-    const res = await client.delete(`/student/file?istudent=150&ifile=1`);
-  } catch (error) {
-    console.log(error);
-  }
-};

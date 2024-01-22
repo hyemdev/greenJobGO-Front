@@ -1,36 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  AddPortfolioContent,
-  AddPortfolioWrap,
-} from "../../styles/AddPortfolioStyle";
+  deleteFile,
+  postFileUpload,
+  postMainPortfolioSeleted,
+  postThumbNailUpload,
+} from "../../api/addFileAxios";
+import { AddPortfolioWrap } from "../../styles/AddPortfolioStyle";
 import AddPofolPofol from "../../components/student/MyPortfolio/AddPofolPofol";
-import AddPofolResume from "../../components/student/MyPortfolio/AddPofolResume";
+import AddPofolModal from "../../components/student/MyPortfolio/AddPofolModal";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
-import AddPofolModal from "../../components/student/MyPortfolio/AddPofolModal";
-
+import { PostModal } from "../../components/AcceptModal";
 const AddPortFolio = () => {
   const [fileType, setFileType] = useState(2);
   const [selectFile, setSelectFile] = useState(null);
-  const [resumeFile, setResumeFile] = useState(null);
   const [imgFile, setImgFile] = useState(null);
   const [linkUrl, setLinkUrl] = useState("");
   const [fileOneWord, setFileOneWord] = useState("");
   const [linkOneWord, setLinkOneWord] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const userInfoData = useRecoilValueLoadable(userInfo);
+  const [acceptOkModal, setAcceptOkModal] = useState(false);
   const [fileData, setFileData] = useState([]);
+  const userData = useRecoilValueLoadable(userInfo);
+  const [mainCheck, setMainCheck] = useState("");
 
   const std =
-    userInfoData.state === "hasValue" ? userInfoData.contents.std : null;
-
-  const handleResumeFileChange = e => {
-    const file = e.target.files[0];
-
-    if (file) {
-      setResumeFile(file);
-    }
-  };
+    userData.state === "hasValue" ? userData.contents.std.istudent : null;
 
   const handleImgFileChange = e => {
     const file = e.target.files[0];
@@ -39,19 +34,34 @@ const AddPortFolio = () => {
       setImgFile(file);
     }
   };
-  const handelFileAccept = () => {
+
+  const handleFileUpload = () => {
+    const istudent = std;
+    let formData = new FormData();
+    formData.append("file", selectFile);
+    postFileUpload(
+      istudent,
+      fileType,
+      linkUrl,
+      fileOneWord,
+      linkOneWord,
+      formData,
+    );
     setModalOpen(false);
-    setFileData(prevData => [
-      ...prevData,
-      {
-        fileType,
-        file: fileType === 2 ? selectFile.name : "",
-        oneWord:
-          fileType === 2 ? fileOneWord : fileType === 3 ? linkOneWord : "",
-        fileLink: fileType === 3 ? linkUrl : "",
-      },
-    ]);
-    // console.log(fileData);
+  };
+
+  const handleThumbNailUpload = () => {
+    const istudent = std;
+    console.log("is클릭?");
+    let formData = new FormData();
+    formData.append("file", imgFile);
+    console.log("is클릭?", formData);
+    postThumbNailUpload(istudent, formData);
+    console.log("전송");
+  };
+  const handleDeleteFile = ifile => {
+    const istudent = std;
+    deleteFile(istudent, ifile);
   };
   const handleAddModalOpen = () => {
     setModalOpen(true);
@@ -59,6 +69,23 @@ const AddPortFolio = () => {
 
   const handleAddModalClose = () => {
     setModalOpen(false);
+  };
+
+  const handleOk = () => {
+    const istudent = std;
+    postMainPortfolioSeleted(istudent, mainCheck);
+    setAcceptOkModal(false);
+  };
+
+  const handleCheckboxChange = (checked, ifile) => {
+    if (checked) {
+      setMainCheck([ifile]);
+      setAcceptOkModal(true);
+      console.log(mainCheck);
+    } else if (!checked) {
+      setMainCheck([]);
+      console.log(mainCheck);
+    }
   };
 
   return (
@@ -77,85 +104,28 @@ const AddPortFolio = () => {
           setFileOneWord={setFileOneWord}
           linkOneWord={linkOneWord}
           setLinkOneWord={setLinkOneWord}
-          handelFileAccept={handelFileAccept}
+          handleFileUpload={handleFileUpload}
         />
       )}
-      <div>
-        <h2>이력서 등록</h2>
+      {acceptOkModal && (
+        <PostModal acceptOkModal={acceptOkModal} handleOk={handleOk} />
+      )}
+      <div className="addpofol-title">
+        <h2>포트폴리오 등록</h2>
       </div>
-      <AddPortfolioContent>
-        <li>
-          <div>
-            <h3>기본 정보</h3>
-          </div>
-          <div>
-            {std && (
-              <>
-                <span className="name">{std.name}</span>
-                <span className="age">
-                  {std.gender} {std.birthday} (만 {std.age}세)
-                </span>
-              </>
-            )}
-          </div>
-          <ul className="info">
-            <li>
-              <div>
-                <span>과정명</span>
-                <span> {std?.subject?.subjectName}</span>
-              </div>
-              <div>
-                <span>주소</span>
-                <span> {std?.address}</span>
-              </div>
-              <div>
-                <span>Email</span>
-                <span> {std?.email}</span>
-              </div>
-              <div>
-                <span>자격증 </span>
-                <input
-                  type="text"
-                  placeholder="자격증을 입력해주세요. ex)정보처리기사, 운전면허 2종 보통"
-                />
-                <p>내용을 입력해 주세요.</p>
-              </div>
-            </li>
-            <li>
-              <div>
-                <span>수강기간</span>
-                <span>
-                  {" "}
-                  {std?.startedAt} ~ {std?.endedAt}
-                </span>
-              </div>
-              <div>
-                <span> 전화번호</span>
-                <span> {std?.mobileNumber}</span>
-              </div>
-              <div>
-                <span>학력</span>
-                <span> {std?.education}</span>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <AddPofolResume
-            handleResumeFileChange={handleResumeFileChange}
-            resumeFile={resumeFile}
-          />
-        </li>
-        <li>
-          <AddPofolPofol
-            handleAddModalOpen={handleAddModalOpen}
-            imgFile={imgFile}
-            handleImgFileChange={handleImgFileChange}
-            fileData={fileData}
-          />
-        </li>
-      </AddPortfolioContent>
-      <div>
+      <div className="addpofol-content">
+        <AddPofolPofol
+          handleAddModalOpen={handleAddModalOpen}
+          imgFile={imgFile}
+          handleImgFileChange={handleImgFileChange}
+          fileData={fileData}
+          handleThumbNailUpload={handleThumbNailUpload}
+          handleDeleteFile={handleDeleteFile}
+          mainCheck={mainCheck}
+          handleCheckboxChange={handleCheckboxChange}
+        />
+      </div>
+      <div className="addpofol-buttons">
         <button>취소</button>
         <button>등록</button>
       </div>

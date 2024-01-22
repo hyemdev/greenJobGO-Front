@@ -15,10 +15,17 @@ const MyPortfolioMg = () => {
   const navigate = useNavigate();
   const authState = useRecoilValue(AuthStateAtom);
   const userInfoData = useRecoilValue(userInfo);
+  const std =
+    userInfoData.state === "hasValue" && userInfoData.contents.std
+      ? userInfoData.contents.std
+      : null;
 
   const handleResumeMove = () => {
-    navigate("/student/addportfolio");
+    navigate("/student/addresume");
+    // navigate("/student/addportfolio");
   };
+  console.log(userInfoData);
+  console.log(std);
 
   return (
     <div>
@@ -30,13 +37,13 @@ const MyPortfolioMg = () => {
           <MyPortfolioButton>
             <div>
               <span>수강하신&ensp;</span>
-              <span>{userInfoData.std.subject.subjectName}</span>
+              <span>{std?.subject?.subjectName}</span>
               <span>
                 의&ensp;포트폴리오를 등록하고 취업의 기회를 넓혀 보세요!
               </span>
             </div>
             <div>
-              {authState.portfolioYn === 0 ? null : (
+              {authState.portfolioYn === 1 ? null : (
                 <button onClick={handleResumeMove}>이력서 등록</button>
               )}
             </div>
