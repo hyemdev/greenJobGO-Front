@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Maincolor } from "./GlobalStyle";
 
-export const YesResumeWrap = styled.li`
+export const YesResumeWrap = styled.div`
   .contain {
     display: flex;
     align-items: center;

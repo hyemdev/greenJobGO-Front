@@ -14,7 +14,7 @@ const AddPofolModal = ({
   setFileOneWord,
   linkOneWord,
   setLinkOneWord,
-  handelFileAccept,
+  handleFileUpload,
 }) => {
   const handleDescriptionChange = e => {
     const inputText = e.target.value;
@@ -132,7 +132,7 @@ const AddPofolModal = ({
                 </>
               ) : null}
               <li>
-                <button onClick={() => handelFileAccept()}>등록</button>
+                <button onClick={handleFileUpload}>등록</button>
               </li>
             </ul>
           </div>

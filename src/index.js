@@ -17,5 +17,6 @@ root.render(
         {/* </Suspense> */}
       </BrowserRouter>
     </RecoilRoot>
+    ,
   </CookiesProvider>,
 );

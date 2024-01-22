@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Maincolor } from "./GlobalStyle";
 
-export const NoResumeWrap = styled.li`
+export const NoResumeWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
@@ -7,7 +7,10 @@ const AddPofolPofol = ({
   handleAddModalOpen,
   imgFile,
   handleImgFileChange,
-  fileData = [],
+  handleThumbNailUpload,
+  handleDeleteFile,
+  mainCheck,
+  handleCheckboxChange,
 }) => {
   const userData = useRecoilValueLoadable(userInfo);
   const std =
@@ -19,10 +22,10 @@ const AddPofolPofol = ({
 
   return (
     <AddPofolPofolWrap>
-      <div className="title">
+      <div className="addpofol-header">
         <h2>포트폴리오 첨부</h2>
       </div>
-      <div className="inner">
+      <div className="addpofol-inner">
         <div>
           <span>포트폴리오 대표 이미지</span>
           <div className="file-box">
@@ -39,6 +42,7 @@ const AddPofolPofol = ({
               placeholder="첨부파일"
               readOnly
             />
+            <button onClick={handleThumbNailUpload}>등록</button>
           </div>
           <p>*본 이력서의 썸네일로 사용할 이미지를 첨부해 주세요.</p>
         </div>
@@ -56,10 +60,7 @@ const AddPofolPofol = ({
           </div>
           <div>
             {file.portfolio?.length > 0 &&
-              [
-                ...file.portfolio,
-                ...fileData.filter(item => item.fileType === 2),
-              ].map(item => (
+              file.portfolio.map(item => (
                 <ul key={item.ifile}>
                   <li>
                     <div>
@@ -76,7 +77,11 @@ const AddPofolPofol = ({
                           {item.file}
                         </a>
                       </div>
-                      <div>
+                      <div
+                        onClick={() => {
+                          handleDeleteFile(item.ifile);
+                        }}
+                      >
                         <img
                           src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
                           alt="portfolio"
@@ -84,7 +89,16 @@ const AddPofolPofol = ({
                       </div>
                     </div>
                     <div>
-                      <input type="checkbox" />
+                      <input
+                        type="checkbox"
+                        value={item.ifile}
+                        checked={
+                          item.mainYn === 1 || mainCheck.includes(item.ifile)
+                        }
+                        onChange={e =>
+                          handleCheckboxChange(e.target.checked, item.ifile)
+                        }
+                      />
                       <label htmlFor="">대표 포트폴리오로 설정</label>
                     </div>
                   </li>
@@ -94,10 +108,7 @@ const AddPofolPofol = ({
                 </ul>
               ))}
             {file.fileLinks?.length > 0 &&
-              [
-                ...file.fileLinks,
-                ...fileData.filter(item => item.fileType === 3),
-              ].map(item => (
+              file.fileLinks.map(item => (
                 <ul key={item.ifile}>
                   <li>
                     <div>
@@ -114,7 +125,11 @@ const AddPofolPofol = ({
                           {item.fileLink}
                         </a>
                       </div>
-                      <div>
+                      <div
+                        onClick={() => {
+                          handleDeleteFile(item.ifile);
+                        }}
+                      >
                         <img
                           src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
                           alt="portfolio"
@@ -122,7 +137,16 @@ const AddPofolPofol = ({
                       </div>
                     </div>
                     <div>
-                      <input type="checkbox" />
+                      <input
+                        type="checkbox"
+                        value={item.ifile}
+                        checked={
+                          item.mainYn === 1 || mainCheck.includes(item.ifile)
+                        }
+                        onChange={e =>
+                          handleCheckboxChange(e.target.checked, item.ifile)
+                        }
+                      />
                       <label htmlFor="">대표 포트폴리오로 설정</label>
                     </div>
                   </li>
