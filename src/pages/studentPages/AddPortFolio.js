@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
   deleteFile,
+  patchMainPortfolioSeleted,
   postFileUpload,
-  postMainPortfolioSeleted,
   postThumbNailUpload,
 } from "../../api/addFileAxios";
 import { AddPortfolioWrap } from "../../styles/AddPortfolioStyle";
@@ -52,12 +52,9 @@ const AddPortFolio = () => {
 
   const handleThumbNailUpload = () => {
     const istudent = std;
-    console.log("is클릭?");
     let formData = new FormData();
     formData.append("file", imgFile);
-    console.log("is클릭?", formData);
     postThumbNailUpload(istudent, formData);
-    console.log("전송");
   };
   const handleDeleteFile = ifile => {
     const istudent = std;
@@ -73,7 +70,7 @@ const AddPortFolio = () => {
 
   const handleOk = () => {
     const istudent = std;
-    postMainPortfolioSeleted(istudent, mainCheck);
+    patchMainPortfolioSeleted(istudent, mainCheck);
     setAcceptOkModal(false);
   };
 

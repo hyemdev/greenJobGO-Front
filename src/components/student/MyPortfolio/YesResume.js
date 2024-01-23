@@ -2,14 +2,21 @@ import React from "react";
 import { YesResumeWrap } from "../../../styles/YesResumStyle";
 import NoImage from "../../../assets/NoImage.jpg";
 import { useNavigate } from "react-router";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { AuthStateAtom } from "../../../recoil/atoms/AuthState";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 
 const YesResume = () => {
   const authState = useRecoilValue(AuthStateAtom);
-  const userInfoData = useRecoilValue(userInfo);
-
+  const userInfoData = useRecoilValueLoadable(userInfo);
+  const std =
+    userInfoData.state === "hasValue" && userInfoData.contents.std
+      ? userInfoData.contents.std
+      : null;
+  const file =
+    userInfoData.state === "hasValue" && userInfoData.contents.file
+      ? userInfoData.contents.file
+      : null;
   const navigate = useNavigate();
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -18,13 +25,12 @@ const YesResume = () => {
   const handleMovePage = () => {
     navigate("/student/mypage");
   };
-  console.log(userInfoData);
   return (
     <YesResumeWrap>
       <div className="contain">
         <div>
           <img
-            src={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${userInfoData.file.img.img}`}
+            src={`http://112.222.157.156/img/student/${std?.istudent}/${file?.img?.img}`}
             alt="자료없음"
             onError={onImgError}
           />
@@ -32,13 +38,13 @@ const YesResume = () => {
         <div>
           <div className="content">
             <div>
-              <h3>{userInfoData.std.introducedLine}</h3>
-              <span>{userInfoData.std.subject.subjectName}</span>
+              <h3>{std?.introducedLine}</h3>
+              <span>{std?.subject.subjectName}</span>
             </div>
             <div>
               <span>수강기간</span>
               <span>
-                {userInfoData.std.startedAt} ~ {userInfoData.std.endedAt}
+                {std?.startedAt} ~ {std?.endedAt}
               </span>
             </div>
           </div>

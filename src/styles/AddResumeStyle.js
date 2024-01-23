@@ -94,21 +94,49 @@ export const AddResumeBaseInfo = styled.ul`
               }
             }
             :nth-of-type(4) {
-              > input {
-                width: 570px;
-                height: 40px;
-                border: 1px solid ${Maincolor.input};
-                border-radius: 4px;
-                padding: 0 10px;
-              }
-              > p {
-                color: ${Maincolor.red};
-                padding: 8px 0 0 70px;
+              display: flex;
+              width: 900px;
+              > div {
+                :first-of-type {
+                  > input {
+                    width: 570px;
+                    height: 40px;
+                    border: 1px solid ${Maincolor.input};
+                    border-radius: 4px;
+                    padding: 0 10px;
+                  }
+                  > p {
+                    color: ${Maincolor.red};
+                    padding: 8px 0 0 70px;
+                  }
+                }
+                :last-of-type {
+                  display: flex;
+                  gap: 5px;
+                  padding-left: 20px;
+                  > button {
+                    width: 85px;
+                    height: 40px;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    :first-of-type {
+                      color: ${Maincolor.white};
+                      background: ${Maincolor.sectiontitle};
+                    }
+                    :last-of-type {
+                      color: ${Maincolor.sectiontitle};
+                      background: ${Maincolor.white};
+                      border: 1px solid ${Maincolor.sectiontitle};
+                    }
+                  }
+                }
               }
             }
           }
         }
         :last-of-type {
+          height: 110px;
           > div {
             margin-bottom: 23px;
             span {

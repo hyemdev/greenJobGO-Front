@@ -6,12 +6,16 @@ import {
 } from "../../styles/AddResumeStyle";
 import { useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
-import { postResumeUpload, postcertificate } from "../../api/addFileAxios";
+import {
+  deleteFile,
+  postResumeUpload,
+  postcertificate,
+} from "../../api/addFileAxios";
 import { useNavigate } from "react-router";
 import { AcceptModal } from "../../components/AcceptModal";
 
 const AddResume = () => {
-  const [certificate, setCertificate] = useState([]);
+  const [certificate, setCertificate] = useState("");
   const [resumeFile, setResumeFile] = useState("");
   const [resumeOneWord, setResumeOneWord] = useState("");
   const [acceptOkModal, setAcceptOkModal] = useState(false);
@@ -22,10 +26,8 @@ const AddResume = () => {
     userInfoData.state === "hasValue" && userInfoData.contents
       ? userInfoData.contents.std
       : null;
-      
-  console.log(certificate);
-  console.log(resumeFile);
-  console.log(resumeOneWord);
+  const certificateData = std.certificates;
+  const certificateValue = std.certificate;
   const handleResumeFileChange = e => {
     const file = e.target.files[0];
 
@@ -66,6 +68,12 @@ const AddResume = () => {
       setAcceptOkModal(true);
     }
   };
+
+  const handleDeleteFile = ifile => {
+    const istudent = std;
+    deleteFile(istudent, ifile);
+  };
+
   const handleCancle = () => {
     navigate("/student/myportfolio");
   };
@@ -116,16 +124,22 @@ const AddResume = () => {
                 <span> {std?.email}</span>
               </div>
               <div>
-                <span>자격증 </span>
-                <input
-                  type="text"
-                  value={certificate}
-                  onChange={e => {
-                    setCertificate(e.target.value);
-                  }}
-                  placeholder="자격증을 입력해주세요. ex)정보처리기사, 운전면허 2종 보통"
-                />
-                <p>내용을 입력해 주세요.</p>
+                <div>
+                  <span>자격증 </span>
+                  <input
+                    type="text"
+                    value={certificate}
+                    onChange={e => {
+                      setCertificate(e.target.value);
+                    }}
+                    placeholder="자격증을 입력해주세요. ex)정보처리기사, 운전면허 2종 보통"
+                  />
+                  <p>내용을 입력해 주세요.</p>
+                </div>
+                <div>
+                  <button onClick={handleCertificateUpload}>저장</button>
+                  <button>삭제</button>
+                </div>
               </div>
             </li>
             <li>
