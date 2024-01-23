@@ -81,10 +81,8 @@ const PortfolioDetail = () => {
               <ul className="text-upper">
                 <li className="name">{payload.userData.name}</li>
                 <li className="age">
-                  <p>
-                    {payload.userData.gender} {payload.birth}년생 (만
-                    {payload.userData.age}세)
-                  </p>
+                  {payload.userData.gender} {payload.birth} 년생 (만
+                  {payload.userData.age}세)
                 </li>
               </ul>
               <ul className="text-info">
@@ -226,7 +224,7 @@ const PortfolioDetail = () => {
               <ul className="text-upper">
                 <li className="name">{payload.userData.name}</li>
                 <li className="age">
-                  {payload.userData.gender} {payload.birth} (만
+                  {payload.userData.gender} {payload.birth}년생 (만
                   {payload.userData.age}세)
                 </li>
               </ul>

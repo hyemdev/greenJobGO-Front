@@ -12,8 +12,8 @@ import ConfirmModal from "../../components/ConfirmModal";
 const { persistAtom } = recoilPersist();
 
 export const AgreeModalAtom = atom({
-  // key: `AgreeModalAtom${v4()}`,
-  key: `AgreeModalAtom`,
+  key: `AgreeModalAtom/${v4()}`,
+  // key: `AgreeModalAtom`,
   default: { isAgree: false },
   effects_UNSTABLE: [persistAtom],
 });
@@ -23,7 +23,6 @@ const Business = () => {
   const [cautionModalOpen, setCautionModalOpen] = useState(false);
   const [clickAgree, setClickAgree] = useRecoilState(AgreeModalAtom);
 
-  console.log("?????", clickAgree.isAgree);
   const navigate = useNavigate();
 
   // 비동의 클릭

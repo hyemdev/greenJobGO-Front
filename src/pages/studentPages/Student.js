@@ -7,25 +7,17 @@ import StudentPrivacyProtect from "./StudentPrivacyProtect";
 import ConfirmModal from "../../components/ConfirmModal";
 import { recoilPersist } from "recoil-persist";
 import { postLogout } from "../../api/client";
-import { atom, selector, useRecoilState } from "recoil";
+import { atom, useRecoilState } from "recoil";
 import { v4 } from "uuid";
 const { persistAtom } = recoilPersist();
 
 export const AgreeStudentModalAtom = atom({
-  // key: `AgreeStudentModalAtom${v4()}`,
-  key: `AgreeStudentModalAtom`,
+  key: `AgreeStudentModalAtom/${v4()}`,
+  // key: `AgreeStudentModalAtom`,
   default: { isAgree: false },
   effects_UNSTABLE: [persistAtom],
 });
-// 선택된 필터정보 읽자
-// export const readStudentModalTF = selector({
-//   key: `readStudentModalTF`,
-//   // 값을 읽겠다
-//   get: ({ get }) => {
-//     const result = get(AgreeStudentModalAtom);
-//     return result;
-//   },
-// });
+
 
 const Student = () => {
   const [agreeModalOpen, setAgreeModalOpen] = useState(true);
@@ -34,7 +26,6 @@ const Student = () => {
     AgreeStudentModalAtom,
   );
 
-  console.log("clickStudentAgree", clickStudentAgree.isAgree);
   const navigate = useNavigate();
 
   // 비동의 클릭
