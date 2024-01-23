@@ -19,12 +19,12 @@ const Login = () => {
 
   const handleLoginId = e => {
     setUserId(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const handleLoginPass = e => {
     setPassword(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const handleSubmit = async e => {

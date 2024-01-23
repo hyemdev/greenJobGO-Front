@@ -19,7 +19,7 @@ export const getStudentGalleryList = async (
   setNothing,
 ) => {
   try {
-    let apiUrl = `/company/student?page=${page}&size=9&sort=istudent%2CASC`;
+    let apiUrl = `/company/student?page=${page}&size=6&sort=istudent%2CASC`;
     if (category) {
       apiUrl += `&icategory=${category}`;
     }
@@ -56,8 +56,7 @@ export const getStudentList = async (
   setNothing,
 ) => {
   try {
-    let apiUrl = `/company/student/list?page=${page}&size=5&sort=istudent%2CASC`;
-    if (category) {
+    let apiUrl = `/company/student/list?page=${page}&size=6&sort=istudent%2CASC`;    if (category) {
       apiUrl += `&icategory=${category}`;
     }
 

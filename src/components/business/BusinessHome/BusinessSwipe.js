@@ -29,6 +29,7 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
         slidesPerView={"auto"}
         navigation
         autoplay
+        // loop={true}
         spaceBetween={40}
         className={swiperData.length > 0 ? null : "active"}
       >
@@ -48,11 +49,11 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
             </div>
           </SwiperSlide>
         ))}
-        {noItem && <NoitemBox />}
       </Swiper>{" "}
       <button onClick={() => swipe?.slideNext()} className="next-btn">
         <FontAwesomeIcon icon={faAngleRight} />
       </button>
+      {noItem && <NoitemBox />}
     </SwiperWrapStyle>
   );
 };

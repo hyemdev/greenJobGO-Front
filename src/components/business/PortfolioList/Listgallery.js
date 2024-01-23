@@ -3,11 +3,11 @@ import { v4 } from "uuid";
 import NoImage from "../../../assets/NoImage.jpg";
 import { Link } from "react-router-dom";
 
-const Listgallery = ({ galleryData, onImgError }) => {
+const Listgallery = ({ listData, onImgError }) => {
   return (
     <div className="galleryStyle">
-      {galleryData &&
-        galleryData?.map(item => (
+      {listData &&
+        listData?.map(item => (
           <Link
             key={item.istudent}
             to={`/business/portfoliodetail/${item.istudent}`}

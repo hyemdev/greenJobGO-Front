@@ -31,17 +31,17 @@ const PortfolioList = () => {
   };
 
   // 갤러리형 수강생 목록
-  const studentGalleryData = () => {
-    getStudentGalleryList(
-      setGalleryData,
-      setCount,
-      page,
-      category,
-      searchsubj,
-      searchname,
-      setNothing,
-    );
-  };
+  // const studentGalleryData = () => {
+  //   getStudentGalleryList(
+  //     setGalleryData,
+  //     setCount,
+  //     page,
+  //     category,
+  //     searchsubj,
+  //     searchname,
+  //     setNothing,
+  //   );
+  // };
 
   // 리스트형 수강생 목록
   const studentList = () => {
@@ -57,22 +57,26 @@ const PortfolioList = () => {
   };
 
   useEffect(() => {
-    if (viewState === true) {
-      studentGalleryData();
-    } else if (viewState === false) {
-      studentList();
-    }
+    studentList();
+
+    // if (viewState === true) {
+    //   studentGalleryData();
+    // } else if (viewState === false) {
+    //   studentList();
+    // }
     getCategory(setCategoryData);
   }, [page, viewState]);
 
   // 검색버튼 클릭
   const handleSearch = () => {
-    if (viewState === true) {
-      studentGalleryData();
-    } else if (viewState === false) {
-      studentList();
-    }
-    setPage(1);
+    studentList();
+
+    // if (viewState === true) {
+    //   studentGalleryData();
+    // } else if (viewState === false) {
+    //   studentList();
+    // }
+    // setPage(1);
   };
 
   // 카테변경값 저장

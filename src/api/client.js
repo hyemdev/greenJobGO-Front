@@ -1,5 +1,7 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
+import { useRecoilState } from "recoil";
+import { AgreeModalAtom } from "../pages/businessPages/Business";
 
 // axios 인스턴스 생성
 export const client = axios.create({
@@ -93,6 +95,7 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
 // 로그아웃 함수
 export const postLogout = async (accessToken, refreshToken) => {
+
   try {
     const res = await client.post("/sign/logout");
     removeCookie(accessToken);

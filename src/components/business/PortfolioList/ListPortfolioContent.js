@@ -31,7 +31,7 @@ const ListPortfolioContent = ({
 
       {viewState ? (
         <ContentListViewer>
-          <Listgallery galleryData={galleryData} onImgError={onImgError} />
+          <Listgallery listData={listData} onImgError={onImgError} />
         </ContentListViewer>
       ) : (
         <ContentListViewer>
