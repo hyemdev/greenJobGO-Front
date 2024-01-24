@@ -24,6 +24,12 @@ export const postFileUpload = async (
     const res = await client.post(apiUrl, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    const result = res.status;
+    if (result === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
   } catch (error) {
     console.log(error);
   }
@@ -38,7 +44,12 @@ export const postThumbNailUpload = async (istudent, formData) => {
         headers: { "Content-Type": "multipart/form-data" },
       },
     );
-    console.log("전송성공?", res.data);
+    const result = res.status;
+    if (result === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
   } catch (error) {
     console.log(error);
   }
@@ -47,7 +58,7 @@ export const postThumbNailUpload = async (istudent, formData) => {
 export const postResumeUpload = async (formData, istudent, resumeOneWord) => {
   try {
     const res = await client.post(
-      `/student/file?istudent=${istudent}&iFileCategory=1&oneWord=${resumeOneWord}`,
+      `/student/file?istudent=${istudent}&iFileCategory=1&introducedLine=${resumeOneWord}`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -84,10 +95,14 @@ export const postcertificate = async (istudent, certificate) => {
   }
 };
 
-export const postMainPortfolioSeleted = async (istudent, mainCheck) => {
+export const patchMainPortfolioSeleted = async (
+  istudent,
+  mainCheck,
+  mainYn,
+) => {
   try {
-    const res = await client.post(
-      `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}&mainYn=1`,
+    const res = await client.patch(
+      `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}`,
     );
   } catch (error) {
     console.log(error);
@@ -98,6 +113,16 @@ export const deleteFile = async (istudent, ifile) => {
   try {
     const res = await client.delete(
       `/student/file?istudent=${istudent}&ifile=${ifile}`,
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const certificate = async (istudent, ifile) => {
+  try {
+    const res = await client.delete(
+      `/student/file?istudent=${istudent}&icertificate=${ifile}`,
     );
   } catch (error) {
     console.log(error);

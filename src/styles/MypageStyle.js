@@ -3,6 +3,7 @@ import { Maincolor } from "./GlobalStyle";
 export const MypageWrap = styled.div`
   margin: 0 auto;
   width: 1400px;
+  padding-top: 30px;
   & > h2 {
     color: ${Maincolor.black};
     font-size: 24px;

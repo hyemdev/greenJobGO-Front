@@ -1,7 +1,11 @@
 import React from "react";
 import { NoResumeWrap } from "../../../styles/NoResumeStyle";
+import { AuthStateAtom } from "../../../recoil/atoms/AuthState";
+import { useRecoilValue } from "recoil";
 
 const NoResume = () => {
+  const authState = useRecoilValue(AuthStateAtom);
+
   return (
     <NoResumeWrap>
       <div>
@@ -11,7 +15,15 @@ const NoResume = () => {
         />
       </div>
       <div>
-        <span>아직 이력서를 등록하지 않으셨네요.</span>
+        {authState.aboutMeYn === 0 && authState.portfolioYn === 1 && (
+          <span>아직 이력서를 등록하지 않으셨네요.</span>
+        )}
+        {authState.portfolioYn === 0 && authState.aboutMeYn === 1 && (
+          <span>아직 포트폴리오를 등록하지 않으셨네요.</span>
+        )}
+        {authState.aboutMeYn === 0 && authState.portfolioYn === 0 && (
+          <span>아직 이력서와 포트폴리오를 등록하지 않으셨네요.</span>
+        )}
       </div>
       <div>
         <span>

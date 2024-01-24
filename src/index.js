@@ -12,9 +12,7 @@ root.render(
   <CookiesProvider>
     <RecoilRoot>
       <BrowserRouter>
-        {/* <Suspense fallback={<FadeLoader color="#36d7b7" />}> */}
         <App />
-        {/* </Suspense> */}
       </BrowserRouter>
     </RecoilRoot>
     ,

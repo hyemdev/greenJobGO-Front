@@ -65,10 +65,7 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
       pw: password,
     });
 
-    const { data } = res;
-
-    const { role, refreshToken, accessToken, editableYn, portfolioYn } =
-      await data;
+    const { role, refreshToken, accessToken, vo } = await res.data;
 
     if (role && refreshToken && accessToken) {
       const cookieOptions = {
@@ -81,7 +78,7 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
       setCookie("refreshToken", refreshToken, cookieOptions);
       setCookie("accessToken", accessToken, cookieOptions);
       setErrorCancelInfo("");
-      return { role, accessToken, editableYn, portfolioYn };
+      return { role, accessToken, vo };
     } else {
       throw new Error("잘못된 응답 형식");
     }

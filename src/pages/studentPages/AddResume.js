@@ -1,31 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddResumeBaseInfo,
   AddResumeItem,
   AddResumeWrap,
 } from "../../styles/AddResumeStyle";
-import { useRecoilValueLoadable } from "recoil";
-import { userInfo } from "../../recoil/selectors/UserInfoSelector";
-import { postResumeUpload, postcertificate } from "../../api/addFileAxios";
+import {
+  deleteFile,
+  postResumeUpload,
+  postcertificate,
+} from "../../api/addFileAxios";
 import { useNavigate } from "react-router";
-import { AcceptModal } from "../../components/AcceptModal";
+import { AcceptModal, DeleteModal } from "../../components/AcceptModal";
+import { getStudentInfo } from "../../api/studentAxios";
 
 const AddResume = () => {
-  const [certificate, setCertificate] = useState([]);
+  const [std, setStd] = useState([]);
+  const [file, setFile] = useState([]);
+  const [certificate, setCertificate] = useState("");
   const [resumeFile, setResumeFile] = useState("");
   const [resumeOneWord, setResumeOneWord] = useState("");
   const [acceptOkModal, setAcceptOkModal] = useState(false);
+  const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [uploadResult, setUploadResult] = useState("");
-  const userInfoData = useRecoilValueLoadable(userInfo);
   const navigate = useNavigate();
-  const std =
-    userInfoData.state === "hasValue" && userInfoData.contents
-      ? userInfoData.contents.std
-      : null;
-      
-  console.log(certificate);
-  console.log(resumeFile);
-  console.log(resumeOneWord);
+
+  const fetchData = () => {
+    getStudentInfo(setFile, setStd);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const certificateData = std.certificates;
+  const certificateValue = std.certificate;
   const handleResumeFileChange = e => {
     const file = e.target.files[0];
 
@@ -51,6 +59,7 @@ const AddResume = () => {
       setAcceptOkModal(true);
     }
   };
+
   const handleCertificateUpload = async () => {
     const istudent = std.istudent;
 
@@ -66,6 +75,11 @@ const AddResume = () => {
       setAcceptOkModal(true);
     }
   };
+
+  const handleDeleteFile = () => {
+    setDeleteOkModal(true);
+  };
+
   const handleCancle = () => {
     navigate("/student/myportfolio");
   };
@@ -74,6 +88,18 @@ const AddResume = () => {
     setAcceptOkModal(false);
     navigate("/student/myportfolio");
   };
+
+  const handleDeleteOk = async () => {
+    const istudent = std.istudent;
+    const ifile = file.resume.ifile;
+    await deleteFile(istudent, ifile);
+    setDeleteOkModal(false);
+    fetchData();
+  };
+  
+  const handleDeleteCancel = () => {
+    setDeleteOkModal(false);
+  };
   return (
     <AddResumeWrap>
       {acceptOkModal && (
@@ -81,6 +107,13 @@ const AddResume = () => {
           acceptOkModal={acceptOkModal}
           uploadResult={uploadResult}
           handleOk={handleOk}
+        />
+      )}
+      {deleteOkModal && (
+        <DeleteModal
+          deleteOkModal={deleteOkModal}
+          handleDeleteOk={handleDeleteOk}
+          handleDeleteCancel={handleDeleteCancel}
         />
       )}
       <div className="resume-title">
@@ -116,16 +149,22 @@ const AddResume = () => {
                 <span> {std?.email}</span>
               </div>
               <div>
-                <span>자격증 </span>
-                <input
-                  type="text"
-                  value={certificate}
-                  onChange={e => {
-                    setCertificate(e.target.value);
-                  }}
-                  placeholder="자격증을 입력해주세요. ex)정보처리기사, 운전면허 2종 보통"
-                />
-                <p>내용을 입력해 주세요.</p>
+                <div>
+                  <span>자격증 </span>
+                  <input
+                    type="text"
+                    value={certificate}
+                    onChange={e => {
+                      setCertificate(e.target.value);
+                    }}
+                    placeholder="자격증을 입력해주세요. ex)정보처리기사, 운전면허 2종 보통"
+                  />
+                  <p>내용을 입력해 주세요.</p>
+                </div>
+                <div>
+                  <button onClick={handleCertificateUpload}>저장</button>
+                  <button>삭제</button>
+                </div>
               </div>
             </li>
             <li>
@@ -158,7 +197,9 @@ const AddResume = () => {
             <div className="oneword">
               <input
                 type="text"
-                value={resumeOneWord}
+                value={
+                  file?.resume?.ifile ? std?.introducedLine : resumeOneWord
+                }
                 onChange={e => {
                   setResumeOneWord(e.target.value);
                 }}
@@ -179,10 +220,19 @@ const AddResume = () => {
               <label htmlFor="resumefile">파일첨부</label>
               <input
                 className="upload-name"
-                value={resumeFile ? resumeFile.name : "첨부파일"}
-                placeholder="첨부파일"
+                value={
+                  file?.resume?.ifile
+                    ? file?.resume?.resume
+                    : resumeFile
+                      ? resumeFile.name
+                      : "첨부파일"
+                }
                 readOnly
               />
+              <div>
+                <button onClick={handleResumeUpload}>저장</button>
+                <button onClick={handleDeleteFile}>삭제</button>
+              </div>
             </div>
             <p>
               *이력서 및 자기소개서를 하나의 PDF 파일로 통합하여 첨부해 주세요.
@@ -193,7 +243,6 @@ const AddResume = () => {
       </AddResumeItem>
       <div className="resume-buttons">
         <button onClick={handleCancle}>취소</button>
-        <button onClick={handleResumeUpload}>등록</button>
       </div>
     </AddResumeWrap>
   );
