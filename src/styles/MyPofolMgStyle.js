@@ -4,7 +4,23 @@ import { Maincolor } from "./GlobalStyle";
 export const MyPortfolioWrap = styled.div`
   width: 1400px;
   height: 100%;
-  /* background: red; */
+  .btm-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 40px;
+    > button {
+      width: 150px;
+      height: 50px;
+      font-size: 16px;
+      font-weight: 500;
+      color: ${Maincolor.white};
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: ${Maincolor.btn};
+    }
+  }
 `;
 
 export const MyPortfolioTitle = styled.li`

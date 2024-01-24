@@ -37,19 +37,20 @@ const Login = () => {
       return;
     } else {
       try {
-        const { role, accessToken, editableYn, portfolioYn } = await fetchLogin(
+        const { role, accessToken, vo } = await fetchLogin(
           userId,
           password,
           setErrorCancelInfo,
         );
-
+        console.log(vo);
         if (role === "ROLE_USER" && accessToken) {
           setAuthState({
             isLogin: true,
             accessToken: accessToken,
             role: role,
-            editableYn: editableYn,
-            portfolioYn: portfolioYn,
+            editableYn: vo?.editableYn,
+            portfolioYn: vo?.portfolioYn,
+            aboutMeYn: vo?.aboutMeYn,
           });
           navigate("/student");
         } else if (role === "ROLE_COMPANY" && accessToken) {
@@ -64,11 +65,7 @@ const Login = () => {
         console.log("errorrrrrrrr", error);
       }
     }
-
-    console.log(authState.isLogin);
-    console.log(authState.role);
   };
-
   useEffect(() => {
     if (errorCancelInfo) {
       setErrorModalOpen(true);

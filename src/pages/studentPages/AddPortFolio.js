@@ -1,68 +1,109 @@
 import React, { useEffect, useState } from "react";
 import {
   deleteFile,
+  patchMainPortfolioSeleted,
   postFileUpload,
-  postMainPortfolioSeleted,
   postThumbNailUpload,
 } from "../../api/addFileAxios";
 import { AddPortfolioWrap } from "../../styles/AddPortfolioStyle";
 import AddPofolPofol from "../../components/student/MyPortfolio/AddPofolPofol";
 import AddPofolModal from "../../components/student/MyPortfolio/AddPofolModal";
-import { useRecoilValueLoadable } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
-import { PostModal } from "../../components/AcceptModal";
+import {
+  AcceptModal,
+  DeleteModal,
+  MainYnModal,
+} from "../../components/AcceptModal";
+import { getStudentInfo } from "../../api/studentAxios";
+import { useNavigate } from "react-router";
+
 const AddPortFolio = () => {
   const [fileType, setFileType] = useState(2);
-  const [selectFile, setSelectFile] = useState(null);
-  const [imgFile, setImgFile] = useState(null);
+  const [selectFile, setSelectFile] = useState("");
+  const [imgFile, setImgFile] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
   const [fileOneWord, setFileOneWord] = useState("");
   const [linkOneWord, setLinkOneWord] = useState("");
+  const [uploadResult, setUploadResult] = useState("");
+  const [mainYn, setMainYn] = useState(0);
+  const [file, setFile] = useState([]);
+  const [std, setStd] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [acceptOkModal, setAcceptOkModal] = useState(false);
-  const [fileData, setFileData] = useState([]);
-  const userData = useRecoilValueLoadable(userInfo);
+  const [mainYnModal, setMainYnModal] = useState(false);
+  const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [mainCheck, setMainCheck] = useState("");
+  const [ifile, setIfile] = useState("");
+  const userData = useRecoilValue(userInfo);
+  const istudent = userData?.std?.istudent;
+  const navigate = useNavigate();
+  const fetchData = () => {
+    getStudentInfo(setFile, setStd);
+  };
 
-  const std =
-    userData.state === "hasValue" ? userData.contents.std.istudent : null;
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleImgFileChange = e => {
     const file = e.target.files[0];
-
     if (file) {
       setImgFile(file);
     }
   };
 
-  const handleFileUpload = () => {
-    const istudent = std;
+  const handleFileUpload = async () => {
     let formData = new FormData();
     formData.append("file", selectFile);
-    postFileUpload(
-      istudent,
-      fileType,
-      linkUrl,
-      fileOneWord,
-      linkOneWord,
-      formData,
-    );
-    setModalOpen(false);
+    try {
+      const result = await postFileUpload(
+        istudent,
+        fileType,
+        linkUrl,
+        fileOneWord,
+        linkOneWord,
+        formData,
+      );
+
+      setUploadResult(result);
+
+      if (result.success === true) {
+        setModalOpen(false);
+        setAcceptOkModal(true);
+      }
+    } catch (error) {
+      setAcceptOkModal(true);
+    }
   };
 
-  const handleThumbNailUpload = () => {
-    const istudent = std;
-    console.log("is클릭?");
+  const handleThumbNailUpload = async () => {
     let formData = new FormData();
     formData.append("file", imgFile);
-    console.log("is클릭?", formData);
-    postThumbNailUpload(istudent, formData);
-    console.log("전송");
+    try {
+      const result = await postThumbNailUpload(istudent, formData);
+
+      setUploadResult(result);
+
+      if (result.success === true) {
+        setModalOpen(false);
+        setAcceptOkModal(true);
+      }
+    } catch (error) {
+      setAcceptOkModal(true);
+    }
   };
+
   const handleDeleteFile = ifile => {
-    const istudent = std;
-    deleteFile(istudent, ifile);
+    if (ifile) {
+      setIfile(ifile);
+      setDeleteOkModal(true);
+      fetchData();
+    } else {
+      alert("삭제 할 파일이 없습니다!!!");
+    }
   };
+
   const handleAddModalOpen = () => {
     setModalOpen(true);
   };
@@ -72,22 +113,49 @@ const AddPortFolio = () => {
   };
 
   const handleOk = () => {
-    const istudent = std;
-    postMainPortfolioSeleted(istudent, mainCheck);
     setAcceptOkModal(false);
+    fetchData();
   };
 
-  const handleCheckboxChange = (checked, ifile) => {
-    if (checked) {
+  const handleMainPofolOk = () => {
+    patchMainPortfolioSeleted(istudent, mainCheck, mainYn);
+    setMainYnModal(false);
+    fetchData();
+  };
+
+  const handleMainCancel = () => {
+    setMainYnModal(false);
+  };
+
+  const handleCheckboxChange = (e, ifile) => {
+    if (e.target.checked) {
       setMainCheck([ifile]);
-      setAcceptOkModal(true);
+      setMainYn(0);
+      setMainYnModal(true);
       console.log(mainCheck);
-    } else if (!checked) {
-      setMainCheck([]);
+    } else {
+      setMainCheck([ifile]);
+      setMainYn(1);
+      setMainYnModal(true);
       console.log(mainCheck);
     }
+    fetchData();
   };
 
+  const handleDeleteOk = async () => {
+    const istudent = std.istudent;
+    await deleteFile(istudent, ifile);
+    setDeleteOkModal(false);
+    fetchData();
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteOkModal(false);
+  };
+
+  const handleHomeMove = () => {
+    navigate("/student/myportfolio");
+  };
   return (
     <AddPortfolioWrap>
       {modalOpen && (
@@ -108,26 +176,43 @@ const AddPortFolio = () => {
         />
       )}
       {acceptOkModal && (
-        <PostModal acceptOkModal={acceptOkModal} handleOk={handleOk} />
+        <AcceptModal
+          acceptOkModal={acceptOkModal}
+          uploadResult={uploadResult}
+          handleOk={handleOk}
+        />
+      )}
+      {mainYnModal && (
+        <MainYnModal
+          mainYnModal={mainYnModal}
+          handleMainPofolOk={handleMainPofolOk}
+          handleMainCancel={handleMainCancel}
+          mainYn={mainYn}
+        />
+      )}
+      {deleteOkModal && (
+        <DeleteModal
+          deleteOkModal={deleteOkModal}
+          handleDeleteOk={handleDeleteOk}
+          handleDeleteCancel={handleDeleteCancel}
+        />
       )}
       <div className="addpofol-title">
         <h2>포트폴리오 등록</h2>
       </div>
       <div className="addpofol-content">
         <AddPofolPofol
+          file={file}
           handleAddModalOpen={handleAddModalOpen}
           imgFile={imgFile}
           handleImgFileChange={handleImgFileChange}
-          fileData={fileData}
           handleThumbNailUpload={handleThumbNailUpload}
           handleDeleteFile={handleDeleteFile}
-          mainCheck={mainCheck}
           handleCheckboxChange={handleCheckboxChange}
         />
       </div>
       <div className="addpofol-buttons">
-        <button>취소</button>
-        <button>등록</button>
+        <button onClick={handleHomeMove}>메인으로 돌아가기</button>
       </div>
     </AddPortfolioWrap>
   );
