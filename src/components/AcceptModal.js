@@ -28,15 +28,15 @@ export const AcceptModal = ({ acceptOkModal, uploadResult, handleOk }) => {
   );
 };
 
-export const PostModal = ({
-  acceptOkModal,
-  handleOk,
-  handleCancel,
+export const MainYnModal = ({
+  mainYnModal,
+  handleMainPofolOk,
+  handleMainCancel,
   mainYn,
 }) => {
   return (
     <>
-      {acceptOkModal && (
+      {mainYnModal && (
         <AcceptModalWrap>
           <div className="dim">
             <div className="content-wrap">
@@ -54,8 +54,8 @@ export const PostModal = ({
               )}
 
               <div className="btns">
-                <button onClick={handleOk}>확인</button>
-                <button onClick={handleCancel}>취소</button>
+                <button onClick={handleMainPofolOk}>확인</button>
+                <button onClick={handleMainCancel}>취소</button>
               </div>
             </div>
           </div>
@@ -65,38 +65,26 @@ export const PostModal = ({
   );
 };
 
-export const CancelModal = ({
-  deleteOkModalOpen,
-  setDeleteOkModalOpen,
-  handleDeleteCategory,
-  categoryId,
-  setEnrollModalOpen,
+export const DeleteModal = ({
+  deleteOkModal,
+  handleDeleteOk,
+  handleDeleteCancel,
 }) => {
-  const handleOk = async () => {
-    await handleDeleteCategory(categoryId);
-    setDeleteOkModalOpen(false);
-    setEnrollModalOpen(false);
-  };
-
-  const closeModal = () => {
-    setDeleteOkModalOpen(false);
-  };
-
   return (
     <>
-      {deleteOkModalOpen && (
+      {deleteOkModal && (
         <CancelModalWrap>
           <div className="dim">
             <div className="content-wrap">
               <div className="header">
-                <span onClick={closeModal}>✖</span>
+                <span onClick={handleDeleteCancel}>✖</span>
               </div>
               <div className="content">
                 <span>해당 항목을 삭제 하시겠습니까?</span>
               </div>
               <div className="btns">
-                <button onClick={closeModal}>취소</button>
-                <button onClick={handleOk}>확인</button>
+                <button onClick={handleDeleteCancel}>취소</button>
+                <button onClick={handleDeleteOk}>확인</button>
               </div>
             </div>
           </div>

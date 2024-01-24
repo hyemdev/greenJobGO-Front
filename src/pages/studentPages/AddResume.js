@@ -10,7 +10,7 @@ import {
   postcertificate,
 } from "../../api/addFileAxios";
 import { useNavigate } from "react-router";
-import { AcceptModal } from "../../components/AcceptModal";
+import { AcceptModal, DeleteModal } from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
 
 const AddResume = () => {
@@ -20,6 +20,7 @@ const AddResume = () => {
   const [resumeFile, setResumeFile] = useState("");
   const [resumeOneWord, setResumeOneWord] = useState("");
   const [acceptOkModal, setAcceptOkModal] = useState(false);
+  const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [uploadResult, setUploadResult] = useState("");
   const navigate = useNavigate();
 
@@ -76,9 +77,7 @@ const AddResume = () => {
   };
 
   const handleDeleteFile = () => {
-    const istudent = std.istudent;
-    const ifile = file.resume.ifile;
-    deleteFile(istudent, ifile);
+    setDeleteOkModal(true);
   };
 
   const handleCancle = () => {
@@ -89,6 +88,18 @@ const AddResume = () => {
     setAcceptOkModal(false);
     navigate("/student/myportfolio");
   };
+
+  const handleDeleteOk = async () => {
+    const istudent = std.istudent;
+    const ifile = file.resume.ifile;
+    await deleteFile(istudent, ifile);
+    setDeleteOkModal(false);
+    fetchData();
+  };
+  
+  const handleDeleteCancel = () => {
+    setDeleteOkModal(false);
+  };
   return (
     <AddResumeWrap>
       {acceptOkModal && (
@@ -96,6 +107,13 @@ const AddResume = () => {
           acceptOkModal={acceptOkModal}
           uploadResult={uploadResult}
           handleOk={handleOk}
+        />
+      )}
+      {deleteOkModal && (
+        <DeleteModal
+          deleteOkModal={deleteOkModal}
+          handleDeleteOk={handleDeleteOk}
+          handleDeleteCancel={handleDeleteCancel}
         />
       )}
       <div className="resume-title">
@@ -179,7 +197,9 @@ const AddResume = () => {
             <div className="oneword">
               <input
                 type="text"
-                value={resumeOneWord}
+                value={
+                  file?.resume?.ifile ? std?.introducedLine : resumeOneWord
+                }
                 onChange={e => {
                   setResumeOneWord(e.target.value);
                 }}

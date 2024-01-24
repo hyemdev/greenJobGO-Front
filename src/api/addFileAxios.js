@@ -24,6 +24,12 @@ export const postFileUpload = async (
     const res = await client.post(apiUrl, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+    const result = res.status;
+    if (result === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
   } catch (error) {
     console.log(error);
   }
@@ -38,7 +44,12 @@ export const postThumbNailUpload = async (istudent, formData) => {
         headers: { "Content-Type": "multipart/form-data" },
       },
     );
-    console.log("전송성공?", res.data);
+    const result = res.status;
+    if (result === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
   } catch (error) {
     console.log(error);
   }

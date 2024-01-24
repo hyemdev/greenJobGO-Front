@@ -14,7 +14,7 @@ const AddPofolPofol = ({
   handleCheckboxChange,
 }) => {
   const userData = useRecoilValue(userInfo);
-  const std = userData?.std?.istudent;
+  const istudent = userData?.std?.istudent;
 
   return (
     <AddPofolPofolWrap>
@@ -47,7 +47,7 @@ const AddPofolPofol = ({
               <button onClick={handleThumbNailUpload}>등록</button>
               <button
                 onClick={() => {
-                  handleDeleteFile(file?.img.ifile);
+                  handleDeleteFile(file?.img?.ifile);
                 }}
               >
                 삭제
@@ -80,7 +80,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`http://112.222.157.156/img/student/${std}/${item.file}`}
+                          href={`http://112.222.157.156/img/student/${istudent}/${item.file}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -124,7 +124,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`http://112.222.157.156/img/student/${std}/${item.fileLink}`}
+                          href={`http://112.222.157.156/img/student/${istudent}/${item.fileLink}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

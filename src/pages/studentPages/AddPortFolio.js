@@ -8,26 +8,36 @@ import {
 import { AddPortfolioWrap } from "../../styles/AddPortfolioStyle";
 import AddPofolPofol from "../../components/student/MyPortfolio/AddPofolPofol";
 import AddPofolModal from "../../components/student/MyPortfolio/AddPofolModal";
-import { useRecoilValueLoadable } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
-import { PostModal } from "../../components/AcceptModal";
-import { FadeLoader } from "react-spinners";
+import {
+  AcceptModal,
+  DeleteModal,
+  MainYnModal,
+} from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
+import { useNavigate } from "react-router";
+
 const AddPortFolio = () => {
   const [fileType, setFileType] = useState(2);
-  const [selectFile, setSelectFile] = useState(null);
-  const [imgFile, setImgFile] = useState(null);
+  const [selectFile, setSelectFile] = useState("");
+  const [imgFile, setImgFile] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
   const [fileOneWord, setFileOneWord] = useState("");
   const [linkOneWord, setLinkOneWord] = useState("");
+  const [uploadResult, setUploadResult] = useState("");
   const [mainYn, setMainYn] = useState(0);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [acceptOkModal, setAcceptOkModal] = useState(false);
   const [file, setFile] = useState([]);
   const [std, setStd] = useState([]);
-  const userData = useRecoilValueLoadable(userInfo);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [acceptOkModal, setAcceptOkModal] = useState(false);
+  const [mainYnModal, setMainYnModal] = useState(false);
+  const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [mainCheck, setMainCheck] = useState("");
-
+  const [ifile, setIfile] = useState("");
+  const userData = useRecoilValue(userInfo);
+  const istudent = userData?.std?.istudent;
+  const navigate = useNavigate();
   const fetchData = () => {
     getStudentInfo(setFile, setStd);
   };
@@ -43,35 +53,57 @@ const AddPortFolio = () => {
     }
   };
 
-  const handleFileUpload = () => {
-    const istudent = std;
+  const handleFileUpload = async () => {
     let formData = new FormData();
     formData.append("file", selectFile);
-    postFileUpload(
-      istudent,
-      fileType,
-      linkUrl,
-      fileOneWord,
-      linkOneWord,
-      formData,
-    );
-    setModalOpen(false);
-    fetchData();
+    try {
+      const result = await postFileUpload(
+        istudent,
+        fileType,
+        linkUrl,
+        fileOneWord,
+        linkOneWord,
+        formData,
+      );
+
+      setUploadResult(result);
+
+      if (result.success === true) {
+        setModalOpen(false);
+        setAcceptOkModal(true);
+      }
+    } catch (error) {
+      setAcceptOkModal(true);
+    }
   };
 
-  const handleThumbNailUpload = () => {
-    const istudent = std;
+  const handleThumbNailUpload = async () => {
     let formData = new FormData();
     formData.append("file", imgFile);
-    postThumbNailUpload(istudent, formData);
-    fetchData();
+    try {
+      const result = await postThumbNailUpload(istudent, formData);
+
+      setUploadResult(result);
+
+      if (result.success === true) {
+        setModalOpen(false);
+        setAcceptOkModal(true);
+      }
+    } catch (error) {
+      setAcceptOkModal(true);
+    }
   };
 
   const handleDeleteFile = ifile => {
-    const istudent = std;
-    deleteFile(istudent, ifile);
-    fetchData();
+    if (ifile) {
+      setIfile(ifile);
+      setDeleteOkModal(true);
+      fetchData();
+    } else {
+      alert("삭제 할 파일이 없습니다!!!");
+    }
   };
+
   const handleAddModalOpen = () => {
     setModalOpen(true);
   };
@@ -81,29 +113,49 @@ const AddPortFolio = () => {
   };
 
   const handleOk = () => {
-    const istudent = std;
-    patchMainPortfolioSeleted(istudent, mainCheck, mainYn);
     setAcceptOkModal(false);
     fetchData();
   };
-  const handleCancel = () => {
-    setAcceptOkModal(false);
+
+  const handleMainPofolOk = () => {
+    patchMainPortfolioSeleted(istudent, mainCheck, mainYn);
+    setMainYnModal(false);
+    fetchData();
   };
+
+  const handleMainCancel = () => {
+    setMainYnModal(false);
+  };
+
   const handleCheckboxChange = (e, ifile) => {
     if (e.target.checked) {
       setMainCheck([ifile]);
       setMainYn(0);
-      setAcceptOkModal(true);
+      setMainYnModal(true);
       console.log(mainCheck);
     } else {
       setMainCheck([ifile]);
       setMainYn(1);
-      setAcceptOkModal(true);
+      setMainYnModal(true);
       console.log(mainCheck);
     }
     fetchData();
   };
 
+  const handleDeleteOk = async () => {
+    const istudent = std.istudent;
+    await deleteFile(istudent, ifile);
+    setDeleteOkModal(false);
+    fetchData();
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteOkModal(false);
+  };
+
+  const handleHomeMove = () => {
+    navigate("/student/myportfolio");
+  };
   return (
     <AddPortfolioWrap>
       {modalOpen && (
@@ -124,11 +176,25 @@ const AddPortFolio = () => {
         />
       )}
       {acceptOkModal && (
-        <PostModal
+        <AcceptModal
           acceptOkModal={acceptOkModal}
+          uploadResult={uploadResult}
           handleOk={handleOk}
-          handleCancel={handleCancel}
+        />
+      )}
+      {mainYnModal && (
+        <MainYnModal
+          mainYnModal={mainYnModal}
+          handleMainPofolOk={handleMainPofolOk}
+          handleMainCancel={handleMainCancel}
           mainYn={mainYn}
+        />
+      )}
+      {deleteOkModal && (
+        <DeleteModal
+          deleteOkModal={deleteOkModal}
+          handleDeleteOk={handleDeleteOk}
+          handleDeleteCancel={handleDeleteCancel}
         />
       )}
       <div className="addpofol-title">
@@ -146,8 +212,7 @@ const AddPortFolio = () => {
         />
       </div>
       <div className="addpofol-buttons">
-        <button>취소</button>
-        <button>등록</button>
+        <button onClick={handleHomeMove}>메인으로 돌아가기</button>
       </div>
     </AddPortfolioWrap>
   );

@@ -29,12 +29,7 @@ export const AddPortfolioWrap = styled.div`
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      :first-of-type {
         background: ${Maincolor.btn};
-      }
-      :last-of-type {
-        background: ${Maincolor.admintxt};
-      }
     }
   }
 `;
