@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddResumeBaseInfo,
   AddResumeItem,
   AddResumeWrap,
 } from "../../styles/AddResumeStyle";
-import { useRecoilValueLoadable } from "recoil";
-import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 import {
   deleteFile,
   postResumeUpload,
@@ -13,19 +11,26 @@ import {
 } from "../../api/addFileAxios";
 import { useNavigate } from "react-router";
 import { AcceptModal } from "../../components/AcceptModal";
+import { getStudentInfo } from "../../api/studentAxios";
 
 const AddResume = () => {
+  const [std, setStd] = useState([]);
+  const [file, setFile] = useState([]);
   const [certificate, setCertificate] = useState("");
   const [resumeFile, setResumeFile] = useState("");
   const [resumeOneWord, setResumeOneWord] = useState("");
   const [acceptOkModal, setAcceptOkModal] = useState(false);
   const [uploadResult, setUploadResult] = useState("");
-  const userInfoData = useRecoilValueLoadable(userInfo);
   const navigate = useNavigate();
-  const std =
-    userInfoData.state === "hasValue" && userInfoData.contents
-      ? userInfoData.contents.std
-      : null;
+
+  const fetchData = () => {
+    getStudentInfo(setFile, setStd);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const certificateData = std.certificates;
   const certificateValue = std.certificate;
   const handleResumeFileChange = e => {
@@ -53,6 +58,7 @@ const AddResume = () => {
       setAcceptOkModal(true);
     }
   };
+
   const handleCertificateUpload = async () => {
     const istudent = std.istudent;
 
@@ -69,8 +75,9 @@ const AddResume = () => {
     }
   };
 
-  const handleDeleteFile = ifile => {
-    const istudent = std;
+  const handleDeleteFile = () => {
+    const istudent = std.istudent;
+    const ifile = file.resume.ifile;
     deleteFile(istudent, ifile);
   };
 
@@ -193,10 +200,19 @@ const AddResume = () => {
               <label htmlFor="resumefile">파일첨부</label>
               <input
                 className="upload-name"
-                value={resumeFile ? resumeFile.name : "첨부파일"}
-                placeholder="첨부파일"
+                value={
+                  file?.resume?.ifile
+                    ? file?.resume?.resume
+                    : resumeFile
+                      ? resumeFile.name
+                      : "첨부파일"
+                }
                 readOnly
               />
+              <div>
+                <button onClick={handleResumeUpload}>저장</button>
+                <button onClick={handleDeleteFile}>삭제</button>
+              </div>
             </div>
             <p>
               *이력서 및 자기소개서를 하나의 PDF 파일로 통합하여 첨부해 주세요.
@@ -207,7 +223,6 @@ const AddResume = () => {
       </AddResumeItem>
       <div className="resume-buttons">
         <button onClick={handleCancle}>취소</button>
-        <button onClick={handleResumeUpload}>등록</button>
       </div>
     </AddResumeWrap>
   );

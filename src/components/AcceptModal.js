@@ -28,7 +28,12 @@ export const AcceptModal = ({ acceptOkModal, uploadResult, handleOk }) => {
   );
 };
 
-export const PostModal = ({ acceptOkModal, handleOk }) => {
+export const PostModal = ({
+  acceptOkModal,
+  handleOk,
+  handleCancel,
+  mainYn,
+}) => {
   return (
     <>
       {acceptOkModal && (
@@ -38,12 +43,19 @@ export const PostModal = ({ acceptOkModal, handleOk }) => {
               <div className="header">
                 <span>✖</span>
               </div>
-              <div className="content">
-                <span>대표 포트폴리오로 등록하시겠습니까?</span>
-              </div>
+              {mainYn === 0 ? (
+                <div className="content">
+                  <span>대표 포트폴리오로 등록하시겠습니까?</span>
+                </div>
+              ) : (
+                <div className="content">
+                  <span>대표 포트폴리오 등록을 취소하시겠습니까?</span>
+                </div>
+              )}
+
               <div className="btns">
                 <button onClick={handleOk}>확인</button>
-                <button onClick={handleOk}>취소</button>
+                <button onClick={handleCancel}>취소</button>
               </div>
             </div>
           </div>

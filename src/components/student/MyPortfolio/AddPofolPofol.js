@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
-import { useRecoilValueLoadable } from "recoil";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
+import { FadeLoader } from "react-spinners";
 
 const AddPofolPofol = ({
+  file,
   handleAddModalOpen,
   imgFile,
   handleImgFileChange,
   handleThumbNailUpload,
   handleDeleteFile,
-  mainCheck,
   handleCheckboxChange,
 }) => {
-  const userData = useRecoilValueLoadable(userInfo);
-  const std =
-    userData.state === "hasValue" ? userData.contents.std.istudent : null;
-  const file =
-    userData.state === "hasValue"
-      ? userData.contents.file
-      : { portfolio: [], fileLinks: [] };
+  const userData = useRecoilValue(userInfo);
+  const std = userData?.std?.istudent;
 
   return (
     <AddPofolPofolWrap>
@@ -38,11 +34,25 @@ const AddPofolPofol = ({
             <label htmlFor="imgfile">파일첨부</label>
             <input
               className="upload-name"
-              value={imgFile ? imgFile.name : "첨부파일"}
-              placeholder="첨부파일"
+              value={
+                file?.img?.ifile
+                  ? file?.img?.img
+                  : imgFile
+                    ? imgFile.name
+                    : "첨부파일"
+              }
               readOnly
             />
-            <button onClick={handleThumbNailUpload}>등록</button>
+            <div>
+              <button onClick={handleThumbNailUpload}>등록</button>
+              <button
+                onClick={() => {
+                  handleDeleteFile(file?.img.ifile);
+                }}
+              >
+                삭제
+              </button>
+            </div>
           </div>
           <p>*본 이력서의 썸네일로 사용할 이미지를 첨부해 주세요.</p>
         </div>
@@ -92,12 +102,8 @@ const AddPofolPofol = ({
                       <input
                         type="checkbox"
                         value={item.ifile}
-                        checked={
-                          item.mainYn === 1 || mainCheck.includes(item.ifile)
-                        }
-                        onChange={e =>
-                          handleCheckboxChange(e.target.checked, item.ifile)
-                        }
+                        checked={item.mainYn === 1}
+                        onChange={e => handleCheckboxChange(e, item.ifile)}
                       />
                       <label htmlFor="">대표 포트폴리오로 설정</label>
                     </div>
@@ -140,12 +146,8 @@ const AddPofolPofol = ({
                       <input
                         type="checkbox"
                         value={item.ifile}
-                        checked={
-                          item.mainYn === 1 || mainCheck.includes(item.ifile)
-                        }
-                        onChange={e =>
-                          handleCheckboxChange(e.target.checked, item.ifile)
-                        }
+                        checked={item.mainYn === 1}
+                        onChange={e => handleCheckboxChange(e, item.ifile)}
                       />
                       <label htmlFor="">대표 포트폴리오로 설정</label>
                     </div>

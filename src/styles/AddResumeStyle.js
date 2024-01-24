@@ -25,12 +25,7 @@ export const AddResumeWrap = styled.div`
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      :first-of-type {
-        background: ${Maincolor.btn};
-      }
-      :last-of-type {
-        background: ${Maincolor.admintxt};
-      }
+      background: ${Maincolor.btn};
     }
   }
 `;
@@ -249,6 +244,27 @@ export const AddResumeItem = styled.div`
             padding: 0;
             overflow: hidden;
             border: 0;
+          }
+          > div {
+            display: flex;
+            gap: 5px;
+            padding-left: 10px;
+            button {
+              width: 85px;
+              height: 40px;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              :first-of-type {
+                color: ${Maincolor.white};
+                background: ${Maincolor.sectiontitle};
+              }
+              :last-of-type {
+                color: ${Maincolor.sectiontitle};
+                background: ${Maincolor.white};
+                border: 1px solid ${Maincolor.sectiontitle};
+              }
+            }
           }
         }
         > p {

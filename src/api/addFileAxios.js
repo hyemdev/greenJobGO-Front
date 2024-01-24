@@ -84,10 +84,14 @@ export const postcertificate = async (istudent, certificate) => {
   }
 };
 
-export const patchMainPortfolioSeleted = async (istudent, mainCheck) => {
+export const patchMainPortfolioSeleted = async (
+  istudent,
+  mainCheck,
+  mainYn,
+) => {
   try {
     const res = await client.patch(
-      `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}&mainYn=1`,
+      `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}`,
     );
   } catch (error) {
     console.log(error);

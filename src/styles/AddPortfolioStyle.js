@@ -103,6 +103,27 @@ export const AddPofolPofolWrap = styled.div`
             overflow: hidden;
             border: 0;
           }
+          > div {
+            display: flex;
+            padding-left: 10px;
+            gap: 5px;
+            button {
+              width: 85px;
+              height: 40px;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              :first-of-type {
+                color: ${Maincolor.white};
+                background: ${Maincolor.sectiontitle};
+              }
+              :last-of-type {
+                color: ${Maincolor.sectiontitle};
+                background: ${Maincolor.white};
+                border: 1px solid ${Maincolor.sectiontitle};
+              }
+            }
+          }
         }
         > p {
           color: ${Maincolor.red};
