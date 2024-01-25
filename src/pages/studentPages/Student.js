@@ -12,12 +12,11 @@ import { v4 } from "uuid";
 const { persistAtom } = recoilPersist();
 
 export const AgreeStudentModalAtom = atom({
-  key: `AgreeStudentModalAtom/${v4()}`,
-  // key: `AgreeStudentModalAtom`,
+  // key: `AgreeStudentModalAtom/${v4()}`,
+  key: `AgreeStudentModalAtom`,
   default: { isAgree: false },
   effects_UNSTABLE: [persistAtom],
 });
-
 
 const Student = () => {
   const [agreeModalOpen, setAgreeModalOpen] = useState(true);
@@ -29,16 +28,20 @@ const Student = () => {
   const navigate = useNavigate();
 
   // 비동의 클릭
-  const handleDisagree = () => {
+  const handleDisagree = async () => {
     setCautionModalOpen(true);
   };
 
   // 비동의 유무 재확인
-  const handleDisagreeConfirm = () => {
+  const handleDisagreeConfirm = async () => {
     setCautionModalOpen(false);
     setClickStudentAgree({ isAgree: false });
-    postLogout();
-    navigate("/");
+    try {
+      await postLogout();
+      navigate("/");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   };
   return (
     <div>
@@ -49,7 +52,7 @@ const Student = () => {
         <Outlet />
       </ContentWrap>
       {/* 개인정보동의 모달 */}
-      {!clickStudentAgree.isgree && (
+      {!clickStudentAgree.isAgree && (
         <IndexModal
           close={handleDisagree}
           open={agreeModalOpen}

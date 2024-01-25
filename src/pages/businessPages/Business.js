@@ -26,16 +26,20 @@ const Business = () => {
   const navigate = useNavigate();
 
   // 비동의 클릭
-  const handleDisagree = () => {
+  const handleDisagree = async () => {
     setCautionModalOpen(true);
   };
 
   // 비동의 유무 재확인
-  const handleDisagreeConfirm = () => {
+  const handleDisagreeConfirm = async () => {
     setCautionModalOpen(false);
     setClickAgree({ isAgree: false });
-    postLogout();
-    navigate("/");
+    try {
+      await postLogout();
+      navigate("/");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   };
 
   return (
