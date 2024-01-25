@@ -96,7 +96,7 @@ const AddResume = () => {
     setDeleteOkModal(false);
     fetchData();
   };
-  
+
   const handleDeleteCancel = () => {
     setDeleteOkModal(false);
   };
