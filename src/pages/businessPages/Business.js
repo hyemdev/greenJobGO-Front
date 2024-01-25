@@ -12,8 +12,8 @@ import ConfirmModal from "../../components/ConfirmModal";
 const { persistAtom } = recoilPersist();
 
 export const AgreeModalAtom = atom({
-  key: `AgreeModalAtom/${v4()}`,
-  // key: `AgreeModalAtom`,
+  // key: `AgreeModalAtom/${v4()}`,
+  key: `AgreeModalAtom`,
   default: { isAgree: false },
   effects_UNSTABLE: [persistAtom],
 });

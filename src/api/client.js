@@ -83,8 +83,17 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
       throw new Error("잘못된 응답 형식");
     }
   } catch (error) {
+    if (error.response.status === 432) {
+      setErrorCancelInfo("아이디를 다시 확인 해 주세요");
+    }
+    if (error.response.status === 434) {
+      setErrorCancelInfo("비밀번호를 다시 확인 해 주세요");
+    }
+    if (error.response.status === 435) {
+      setErrorCancelInfo("권한이 없습니다. 담당자에게 문의 바랍니다.");
+    }
     if (error.response.status === 500) {
-      setErrorCancelInfo("로그인 실패");
+      setErrorCancelInfo("서버 오류 입니다.");
     }
     throw new Error("로그인에 실패했습니다.");
   }
@@ -92,7 +101,6 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
 // 로그아웃 함수
 export const postLogout = async (accessToken, refreshToken) => {
-
   try {
     const res = await client.post("/sign/logout");
     removeCookie(accessToken);
