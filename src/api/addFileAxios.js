@@ -78,10 +78,10 @@ export const postResumeUpload = async (formData, istudent, resumeOneWord) => {
   }
 };
 
-export const postcertificate = async (istudent, certificate) => {
+export const postcertificate = async (istudent, hashSave) => {
   try {
     const res = await client.post(
-      `/student/certificate?istudent=${istudent}&certificates=${certificate}`,
+      `/student/certificate?istudent=${istudent}&certificates=${hashSave}`,
     );
     const result = res.status;
 
@@ -119,10 +119,10 @@ export const deleteFile = async (istudent, ifile) => {
   }
 };
 
-export const certificate = async (istudent, ifile) => {
+export const deleteCertificate = async (istudent, icertificate) => {
   try {
     const res = await client.delete(
-      `/student/file?istudent=${istudent}&icertificate=${ifile}`,
+      `/student/certificate?istudent=${istudent}&icertificate=${icertificate}`,
     );
   } catch (error) {
     console.log(error);
