@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import NoImage from "../../assets/NoImage.jpg";
 import {
@@ -14,7 +14,9 @@ import { v4 } from "uuid";
 const Mypage = () => {
   const userInfoData = useRecoilValue(userInfo);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    userInfoData;
+  }, []);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -62,11 +64,11 @@ const Mypage = () => {
             </li>
             <li>
               <span>자격증</span>
-                {userInfoData?.std?.certificates.map(item => (
-                  <div key={item.icertificate}>
-                    <span>{item.certificate}</span>
-                  </div>
-                ))}
+              {userInfoData?.std?.certificates.map(item => (
+                <div key={item.icertificate}>
+                  <span>{item.certificate}</span>
+                </div>
+              ))}
             </li>
             <li>
               <span>수강기간</span>

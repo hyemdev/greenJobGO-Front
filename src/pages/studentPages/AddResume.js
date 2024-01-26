@@ -85,22 +85,13 @@ const AddResume = () => {
     fetchData();
   };
 
-  const handleDeleteCancel = () => {
-    setDeleteOkModal(false);
+  const handleRemoveHashTag = async icertificate => {
+    await deleteCertificate(istudent, icertificate);
+    fetchData();
   };
 
-  const handleCertificateUpload = async () => {
-    try {
-      const result = await postcertificate(istudent, certificate);
-
-      setUploadResult(result);
-
-      if (result.success === true) {
-        setAcceptOkModal(true);
-      }
-    } catch (error) {
-      setAcceptOkModal(true);
-    }
+  const handleDeleteCancel = () => {
+    setDeleteOkModal(false);
   };
 
   const handleAddHashTag = async e => {
@@ -162,9 +153,6 @@ const AddResume = () => {
     setHashTag(e.target.value);
   };
 
-  const handleRemoveHashTag = async icertificate => {
-    await deleteCertificate(istudent, icertificate);
-  };
   return (
     <AddResumeWrap>
       {acceptOkModal && (
