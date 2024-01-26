@@ -99,6 +99,20 @@ export const DefaultInfo = styled.div`
         display: inline-block;
         width: 414px;
       }
+      & > li:nth-of-type(4) {
+        display: flex;
+        > div {
+          color: ${Maincolor.black};
+          background: ${Maincolor.search};
+          border-radius: 6px;
+          padding: 5px 10px;
+          margin-right: 5px;
+          > span {
+            font-size: 16px;
+            font-weight: 400;
+          }
+        }
+      }
     }
   }
 `;

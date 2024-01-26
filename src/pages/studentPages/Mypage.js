@@ -62,7 +62,11 @@ const Mypage = () => {
             </li>
             <li>
               <span>자격증</span>
-              <span> {userInfoData?.std?.certificateValue}</span>
+                {userInfoData?.std?.certificates.map(item => (
+                  <div key={item.icertificate}>
+                    <span>{item.certificate}</span>
+                  </div>
+                ))}
             </li>
             <li>
               <span>수강기간</span>

@@ -5,6 +5,7 @@ import {
   AddResumeWrap,
 } from "../../styles/AddResumeStyle";
 import {
+  deleteCertificate,
   deleteFile,
   postResumeUpload,
   postcertificate,
@@ -12,10 +13,13 @@ import {
 import { useNavigate } from "react-router";
 import { AcceptModal, DeleteModal } from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
+import HashTag from "../../components/student/MyPortfolio/HashTag";
 
 const AddResume = () => {
   const [std, setStd] = useState([]);
   const [file, setFile] = useState([]);
+  const [hashTag, setHashTag] = useState("");
+  const [hashSave, setHashSave] = useState([]);
   const [certificate, setCertificate] = useState("");
   const [resumeFile, setResumeFile] = useState("");
   const [resumeOneWord, setResumeOneWord] = useState("");
@@ -25,12 +29,14 @@ const AddResume = () => {
   const navigate = useNavigate();
 
   const fetchData = () => {
-    getStudentInfo(setFile, setStd);
+    getStudentInfo(setFile, setStd, setHashSave);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const istudent = std.istudent;
 
   const certificateData = std.certificates;
   const certificateValue = std.certificate;
@@ -43,28 +49,11 @@ const AddResume = () => {
   };
 
   const handleResumeUpload = async () => {
-    const istudent = std.istudent;
     const formData = new FormData();
     formData.append("file", resumeFile);
 
     try {
       const result = await postResumeUpload(formData, istudent, resumeOneWord);
-
-      setUploadResult(result);
-
-      if (result.success === true) {
-        setAcceptOkModal(true);
-      }
-    } catch (error) {
-      setAcceptOkModal(true);
-    }
-  };
-
-  const handleCertificateUpload = async () => {
-    const istudent = std.istudent;
-
-    try {
-      const result = await postcertificate(istudent, certificate);
 
       setUploadResult(result);
 
@@ -90,7 +79,6 @@ const AddResume = () => {
   };
 
   const handleDeleteOk = async () => {
-    const istudent = std.istudent;
     const ifile = file.resume.ifile;
     await deleteFile(istudent, ifile);
     setDeleteOkModal(false);
@@ -99,6 +87,83 @@ const AddResume = () => {
 
   const handleDeleteCancel = () => {
     setDeleteOkModal(false);
+  };
+
+  const handleCertificateUpload = async () => {
+    try {
+      const result = await postcertificate(istudent, certificate);
+
+      setUploadResult(result);
+
+      if (result.success === true) {
+        setAcceptOkModal(true);
+      }
+    } catch (error) {
+      setAcceptOkModal(true);
+    }
+  };
+
+  const handleAddHashTag = async e => {
+    const command = ["Comma", "Enter", "NumpadEnter"];
+    if (!command.includes(e.code)) return;
+
+    const inputValue = e.target.value?.trim();
+
+    if (!inputValue || inputValue === "") {
+      setHashTag("");
+      return;
+    }
+
+    let newHashTag = inputValue;
+
+    const regExp = /[{}[\].;:|)*~`!^_+<>@#$%&\\=('"]/g;
+
+    if (regExp.test(newHashTag)) {
+      newHashTag = newHashTag.replace(regExp, "");
+    }
+
+    if (newHashTag.includes(",")) {
+      newHashTag = newHashTag.split(",").join("");
+    }
+
+    if (newHashTag === "") return;
+
+    if (hashSave.length >= 6) {
+      setHashTag("");
+      return;
+    }
+
+    if (!hashSave.includes(newHashTag)) {
+      try {
+        setHashSave(prevHashTags => [...prevHashTags, newHashTag]);
+        await postcertificate(istudent, newHashTag);
+        fetchData();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    console.log(hashSave);
+
+    setHashTag("");
+  };
+
+  const handleKeyDown = e => {
+    if (e.code !== "Enter" && e.code !== "NumpadEnter") return;
+    e.preventDefault();
+
+    const regExp = /^[a-z|A-Z|가-힣|ㄱ-ㅎ|ㅏ-ㅣ|0-9| \t|]+$/g;
+    if (!regExp.test(e.currentTarget.value)) {
+      setHashTag("");
+    }
+  };
+
+  const handleHashChange = e => {
+    setHashTag(e.target.value);
+  };
+
+  const handleRemoveHashTag = async icertificate => {
+    await deleteCertificate(istudent, icertificate);
   };
   return (
     <AddResumeWrap>
@@ -150,8 +215,16 @@ const AddResume = () => {
               </div>
               <div>
                 <div>
-                  <span>자격증 </span>
-                  <input
+                  <span>자격증</span>
+                  <HashTag
+                    hashTag={hashTag}
+                    hashSave={hashSave}
+                    handleAddHashTag={handleAddHashTag}
+                    handleRemoveHashTag={handleRemoveHashTag}
+                    handleHashChange={handleHashChange}
+                    handleKeyDown={handleKeyDown}
+                  />
+                  {/* <input
                     type="text"
                     value={certificate}
                     onChange={e => {
@@ -159,12 +232,12 @@ const AddResume = () => {
                     }}
                     placeholder="자격증을 입력해주세요. ex)정보처리기사, 운전면허 2종 보통"
                   />
-                  <p>내용을 입력해 주세요.</p>
+                  <p>내용을 입력해 주세요.</p> */}
                 </div>
-                <div>
+                {/* <div>
                   <button onClick={handleCertificateUpload}>저장</button>
                   <button>삭제</button>
-                </div>
+                </div> */}
               </div>
             </li>
             <li>
