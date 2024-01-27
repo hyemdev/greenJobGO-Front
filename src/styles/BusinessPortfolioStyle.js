@@ -238,7 +238,6 @@ export const ContentListViewer = styled.div`
     flex-wrap: wrap;
     gap: 40px;
     padding: 30px 0;
-
     .gallerybox {
       width: 440px;
       height: 382px;
@@ -434,6 +433,52 @@ export const ContentListViewer = styled.div`
             border-radius: 2px;
             background: ${Maincolor.admintxt};
           }
+        }
+      }
+    }
+  }
+  @media all and (max-width: 767px) {
+    .galleryStyle {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 10px 0;
+
+      .gallerybox {
+        width: 335px;
+        height: 250px;
+        border-radius: 10px;
+        border: 1px solid ${Maincolor.maingray};
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .thumb-img {
+          width: 300px;
+          height: 150px;
+          & > img {
+            width: 300px;
+            height: 150px;
+            object-fit: fill;
+          }
+        }
+        .student-name {
+          margin-top: 15px;
+          font-size: 12px;
+          font-weight: 500;
+          color: ${Maincolor.black};
+          letter-spacing: -0.24px;
+        }
+        .subject-name {
+          margin-top: 8px;
+          font-size: 11px;
+          font-weight: 400;
+          color: ${Maincolor.btn};
+          letter-spacing: -0.24px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
       }
     }

@@ -88,7 +88,7 @@ export const LoginInner = styled.ul`
         justify-content: flex-end;
         align-items: center;
         flex-direction: column;
-        gap: 70px;
+        gap: 40px;
         margin-right: 0;
         .login-title {
           padding-left: 0;
