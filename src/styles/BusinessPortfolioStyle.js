@@ -13,7 +13,7 @@ export const BusinessPortfolioWrap = styled.div`
   }
   @media all and (max-width: 767px) {
     width: 360px;
-    height: 150px;
+    height: 170px;
     & > h2 {
       color: ${Maincolor.black};
       font-size: 16px;
@@ -92,7 +92,7 @@ export const PfSearchWrap = styled.div`
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 150px;
+    height: 170px;
     background: ${Maincolor.search};
     margin-top: 20px;
     .student-portfolio-search {
@@ -100,9 +100,9 @@ export const PfSearchWrap = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 10px 20px;
+      padding: 20px 20px;
       gap: 10px;
-      margin: 10px 0;
+      margin: 10px 0 15px 0;
       height: 150px;
       > li {
         display: flex;
@@ -132,6 +132,7 @@ export const PfSearchWrap = styled.div`
       }
       & li > select {
         border: 1px solid ${Maincolor.input};
+        border-radius: 4px;
         width: 250px;
         height: 25px;
         padding: 8px 12px;
@@ -345,6 +346,8 @@ export const ContentListViewer = styled.div`
         margin-left: 167px;
         & button {
           width: 220px;
+          background: ${Maincolor.admintxt};
+          border-radius: 6px;
         }
       }
     }
@@ -423,12 +426,12 @@ export const ContentListViewer = styled.div`
           }
         }
         .detail-view-btn {
-          width: 76px;
+          width: 85px;
           margin-left: 7px;
           & button {
-            font-size: 6px;
-            width: 76px;
-            height: 18px;
+            font-size: 8px;
+            width: 85px;
+            height: 21px;
             border: none;
             border-radius: 2px;
             background: ${Maincolor.admintxt};

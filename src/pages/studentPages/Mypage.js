@@ -51,38 +51,44 @@ const Mypage = () => {
           </ul>
           <ul className="text-info">
             <li>
-              <span>과정명</span>
-              <span> {userInfoData?.std?.subject?.subjectName}</span>
-            </li>
-            <li>
-              <span>주소</span>
-              <span> {userInfoData?.std?.address}</span>
-            </li>
-            <li>
-              <span>Email</span>
-              <span> {userInfoData?.std?.email}</span>
-            </li>
-            <li>
-              <span>자격증</span>
-              {userInfoData?.std?.certificates.map(item => (
-                <div key={item.icertificate}>
-                  <span>{item.certificate}</span>
+              <div>
+                <span>과정명</span>
+                <span> {userInfoData?.std?.subject?.subjectName}</span>
+              </div>
+              <div>
+                <span>주소</span>
+                <span> {userInfoData?.std?.address}</span>
+              </div>
+              <div>
+                <span>Email</span>
+                <span> {userInfoData?.std?.email}</span>
+              </div>
+              <div>
+                <span>자격증</span>
+                <div>
+                  {userInfoData?.std?.certificates.map(item => (
+                    <div key={item.icertificate}>
+                      <span>{item.certificate}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </li>
             <li>
-              <span>수강기간</span>
-              <span>
-                {userInfoData?.std?.startedAt} ~ {userInfoData?.std?.endedAt}
-              </span>
-            </li>
-            <li>
-              <span> 휴대폰</span>
-              <span> {userInfoData?.std?.mobileNumber}</span>
-            </li>
-            <li>
-              <span>학력</span>
-              <span> {userInfoData?.std?.education}</span>
+              <div>
+                <span>수강기간</span>
+                <span>
+                  {userInfoData?.std?.startedAt} ~ {userInfoData?.std?.endedAt}
+                </span>
+              </div>
+              <div>
+                <span> 휴대폰</span>
+                <span> {userInfoData?.std?.mobileNumber}</span>
+              </div>
+              <div>
+                <span>학력</span>
+                <span> {userInfoData?.std?.education}</span>
+              </div>
             </li>
           </ul>
         </div>

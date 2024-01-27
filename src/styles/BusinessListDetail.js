@@ -7,6 +7,7 @@ export const ListDetailWrapSty = styled.div`
     color: ${Maincolor.black};
     font-size: 24px;
     font-weight: 700;
+    margin-top: 20px;
     margin-bottom: 40px;
   }
   .sub-title {
@@ -41,7 +42,7 @@ export const ListDetailWrapSty = styled.div`
 export const DefaultInfo = styled.div`
   margin: 0 auto;
   height: 320px;
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 10px;
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;
@@ -75,7 +76,7 @@ export const DefaultInfo = styled.div`
         line-height: 1.6;
       }
       .age {
-        color: ${Maincolor.maingray};
+        color: ${Maincolor.grayDeep};
         font-size: 16px;
         font-weight: 500;
         letter-spacing: -0.24px;
@@ -106,7 +107,7 @@ export const DefaultInfo = styled.div`
 export const ResumeInfo = styled.div`
   margin: 0 auto;
   height: 263px;
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 10px;
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;
@@ -154,7 +155,7 @@ export const ResumeInfo = styled.div`
 export const PortfolioInfo = styled.div`
   margin: 0 auto;
   max-height: 408px;
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 10px;
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;
@@ -248,7 +249,7 @@ export const MobileDefaultInfo = styled.div`
         line-height: 1.6;
       }
       .age {
-        color: ${Maincolor.maingray};
+        color: ${Maincolor.grayDeep};
         font-size: 12px;
         font-weight: 500;
         letter-spacing: -0.24px;
