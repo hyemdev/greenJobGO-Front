@@ -14,7 +14,7 @@ const BusinessHeader = () => {
   const navigate = useNavigate();
 
   // 반응형 state
-  const [isMobile, setIsMobile] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   const menus = [
     {
@@ -57,6 +57,9 @@ const BusinessHeader = () => {
   };
 
   // 헤더 반응형
+  useEffect(() => {
+    handleResize();
+  }, []);
   const handleResize = () => {
     if (window.innerWidth < 800) {
       setIsMobile(true);
@@ -86,9 +89,9 @@ const BusinessHeader = () => {
               </Link>
             </div>
             <div className="header-menu">
-            <Link to={`./${menus[1].type}`}>
-                    {menus[1].icon} {menus[1].title}
-                  </Link>
+              <Link to={`./${menus[1].type}`}>
+                {menus[1].icon} {menus[1].title}
+              </Link>
             </div>
             {/* <div className="loguout-btn" onClick={handleLogout}>
               로그아웃

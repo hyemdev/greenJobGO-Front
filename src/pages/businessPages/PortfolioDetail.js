@@ -44,7 +44,9 @@ const PortfolioDetail = () => {
   const handleBack = () => {
     navigate(-1);
   };
-
+  useEffect(() => {
+    handleResize();
+  }, []);
   // 반응형 적용
   const handleResize = () => {
     if (window.innerWidth < 1400) {
