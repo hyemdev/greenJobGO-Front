@@ -21,6 +21,7 @@ export const BusinessStyWrap = styled.div`
         border-radius: 20px;
         border: 1px solid ${Maincolor.grayLight2};
         padding: 9px 26px;
+        cursor: pointer;
         .cate-btn {
           cursor: pointer;
           border: none;
@@ -31,7 +32,6 @@ export const BusinessStyWrap = styled.div`
           letter-spacing: -0.24px;
           font-family: "Noto Sans KR";
           /* line-height: 1.2; */
-          
         }
       }
     }

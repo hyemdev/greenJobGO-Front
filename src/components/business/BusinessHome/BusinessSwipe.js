@@ -11,6 +11,7 @@ import { SwiperWrapStyle } from "../../../styles/BusinessIntroStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import NoitemBox from "./NoitemBox";
+import { Link } from "react-router-dom";
 
 const BusinessSwipe = ({ swiperData, noItem }) => {
   const [swipe, setSwipe] = useState();
@@ -35,7 +36,7 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
       >
         {swiperData?.map((item, index) => (
           <SwiperSlide key={item.istudent} className="swiper-slide">
-            {/* <NavLink to={`/${item.productId}`}> */}
+            <Link to={`/business/portfoliodetail/${item.istudent}`}>
             <div className="img">
               <img
                 src={`http://112.222.157.156${item.img}`}
@@ -47,6 +48,7 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
               <p className="name">{item.name} 수강생</p>
               <p className="subject">{item.subjectName}</p>
             </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>{" "}
