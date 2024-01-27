@@ -85,7 +85,7 @@ const BusinessHeader = () => {
                 />
               </Link>
             </div>
-            <div>
+            <div className="header-menu">
             <Link to={`./${menus[1].type}`}>
                     {menus[1].icon} {menus[1].title}
                   </Link>
