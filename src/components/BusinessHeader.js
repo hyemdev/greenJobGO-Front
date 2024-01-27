@@ -85,6 +85,11 @@ const BusinessHeader = () => {
                 />
               </Link>
             </div>
+            <div>
+            <Link to={`./${menus[1].type}`}>
+                    {menus[1].icon} {menus[1].title}
+                  </Link>
+            </div>
             {/* <div className="loguout-btn" onClick={handleLogout}>
               로그아웃
               <img

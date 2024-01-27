@@ -15,6 +15,9 @@ export const ContentWrap = styled.div`
   & > div {
     /* width: 1660px; */
   }
+  @media all and (max-width: 767px) {
+  margin-top: 40px;
+  }
 `;
 
 export const NoitemList = styled.div`

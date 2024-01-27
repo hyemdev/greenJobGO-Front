@@ -124,6 +124,12 @@ export const deleteCertificate = async (istudent, icertificate) => {
     const res = await client.delete(
       `/student/certificate?istudent=${istudent}&icertificate=${icertificate}`,
     );
+    const result = res;
+    if (result.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
   } catch (error) {
     console.log(error);
   }

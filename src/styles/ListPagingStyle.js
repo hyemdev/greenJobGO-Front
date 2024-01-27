@@ -39,4 +39,10 @@ export const ListPagingSty = styled.div`
       /* background-color: ${Maincolor.admintxt}; */
     }
   }
+  @media all and (max-width: 767px) {
+    ul {
+      margin-top: 0;
+      padding-bottom: 20px !important;
+    }
+  }
 `;
