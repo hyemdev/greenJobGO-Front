@@ -14,7 +14,7 @@ const { persistAtom } = recoilPersist();
 export const AgreeModalAtom = atom({
   // key: `AgreeModalAtom/${v4()}`,
   key: `AgreeModalAtom`,
-  default: { isAgree: false },
+  default: { isBizAgree: false },
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -33,7 +33,7 @@ const Business = () => {
   // 비동의 유무 재확인
   const handleDisagreeConfirm = async () => {
     setCautionModalOpen(false);
-    setClickAgree({ isAgree: false });
+    setClickAgree({ isBizAgree: false });
     try {
       await postLogout();
       navigate("/");
@@ -51,12 +51,12 @@ const Business = () => {
         <Outlet />
       </ContentWrap>
       {/* 개인정보동의 모달 */}
-      {!clickAgree.isAgree && (
+      {!clickAgree.isBizAgree && (
         <IndexModal
           close={handleDisagree}
           open={agreeModalOpen}
           onConfirm={() => {
-            setClickAgree({ isAgree: true }), setAgreeModalOpen(false);
+            setClickAgree({ isBizAgree: true }), setAgreeModalOpen(false);
           }}
           onCancel={handleDisagree}
         >

@@ -14,7 +14,7 @@ const { persistAtom } = recoilPersist();
 export const AgreeStudentModalAtom = atom({
   // key: `AgreeStudentModalAtom/${v4()}`,
   key: `AgreeStudentModalAtom`,
-  default: { isAgree: false },
+  default: { isStdAgree: false },
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -35,7 +35,7 @@ const Student = () => {
   // 비동의 유무 재확인
   const handleDisagreeConfirm = async () => {
     setCautionModalOpen(false);
-    setClickStudentAgree({ isAgree: false });
+    setClickStudentAgree({ isStdAgree: false });
     try {
       await postLogout();
       navigate("/");
@@ -52,12 +52,12 @@ const Student = () => {
         <Outlet />
       </ContentWrap>
       {/* 개인정보동의 모달 */}
-      {!clickStudentAgree.isAgree && (
+      {!clickStudentAgree.isStdAgree && (
         <IndexModal
           close={handleDisagree}
           open={agreeModalOpen}
           onConfirm={() => {
-            setClickStudentAgree({ isAgree: true }), setAgreeModalOpen(false);
+            setClickStudentAgree({ isStdAgree: true }), setAgreeModalOpen(false);
           }}
           onCancel={handleDisagree}
         >
