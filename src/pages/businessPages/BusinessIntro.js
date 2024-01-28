@@ -35,25 +35,20 @@ const BusinessIntro = () => {
       <div className="main-tab-menu">
         <ul>
           {category?.map(item => (
-            <li key={`cate${item.iclassification}`}>
+            <li
+              key={`cate${item.iclassification}`}
+              onClick={() => handleTabBtnClick(item.iclassification)}
+            >
               <button
                 value={item.iclassification}
                 className="cate-btn"
-                onClick={() => handleTabBtnClick(item.iclassification)}
+                // onClick={() => handleTabBtnClick(item.iclassification)}
               >
                 {item.classification}
               </button>
             </li>
           ))}
         </ul>
-        {/* <ul>
-          <li value="1">IT 분야</li>
-          <li value="2">건축 기계 분야</li>
-          <li value="3">UIUX 분야</li>
-          <li value="4">빅데이터 분야</li>
-          <li value="5">영상분야</li>
-          <li value="6">편집디자인 분야</li>
-        </ul> */}
       </div>
       <BusinessSwipe swiperData={swiperData} noItem={noItem} />
       <div className="main-portfolio-linkBtn">
@@ -61,16 +56,6 @@ const BusinessIntro = () => {
           <span> 포트폴리오 전체보기 </span>
         </Link>
       </div>
-      {/* 개인정보동의 모달
-      {agreeModalOpen && (
-        <IndexModal
-          open={agreeModalOpen}
-          onConfirm={() => setAgreeModalOpen(false)}
-          onCancel={handleDisagree}
-        >
-          <BusinessPrivacyProtect />
-        </IndexModal>
-      )} */}
     </BusinessStyWrap>
   );
 };

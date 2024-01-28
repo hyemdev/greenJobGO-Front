@@ -17,8 +17,13 @@ import {
 } from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
 import { useNavigate } from "react-router";
+import OkModal from "../../components/OkModal";
 
 const AddPortFolio = () => {
+  // 로그인 오류 메세지 받아오는 state.
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [errorCancelInfo, setErrorCancelInfo] = useState("");
+
   const [fileType, setFileType] = useState(2);
   const [selectFile, setSelectFile] = useState("");
   const [imgFile, setImgFile] = useState("");
@@ -100,7 +105,7 @@ const AddPortFolio = () => {
       setDeleteOkModal(true);
       fetchData();
     } else {
-      alert("삭제 할 파일이 없습니다!!!");
+      setErrorCancelInfo("삭제할 파일이 없습니다.");
     }
   };
 
@@ -156,6 +161,14 @@ const AddPortFolio = () => {
   const handleHomeMove = () => {
     navigate("/student/myportfolio");
   };
+
+  useEffect(() => {
+    if (errorCancelInfo) {
+      setErrorModalOpen(true);
+    } else {
+      setErrorModalOpen(false);
+    }
+  }, [errorCancelInfo]);
   return (
     <AddPortfolioWrap>
       {modalOpen && (
@@ -214,6 +227,21 @@ const AddPortFolio = () => {
       <div className="addpofol-buttons">
         <button onClick={handleHomeMove}>메인으로 돌아가기</button>
       </div>
+      {/* api 에러 확인모달 */}
+      {errorModalOpen && (
+        <OkModal
+          header={""}
+          open={errorModalOpen}
+          close={() => {
+            setErrorModalOpen(false), setErrorCancelInfo("");
+          }}
+          onConfirm={() => {
+            setErrorModalOpen(false), setErrorCancelInfo("");
+          }}
+        >
+          <span>{errorCancelInfo}</span>
+        </OkModal>
+      )}
     </AddPortfolioWrap>
   );
 };

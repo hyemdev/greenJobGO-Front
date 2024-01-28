@@ -78,6 +78,7 @@ export const PfSearchWrap = styled.div`
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        border-radius: 0;
         background: url(${process.env.PUBLIC_URL}/assets/Arrowdown.png)
           no-repeat calc(100% - 12px) 50%/11px auto;
         padding: 0 28px 0 10px;
@@ -166,6 +167,7 @@ export const PfSearchWrap = styled.div`
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
+          border-radius: 0;
           background: url(${process.env.PUBLIC_URL}/assets/Arrowdown.png)
             no-repeat calc(100% - 12px) 50%/-1px auto;
           padding: 0 28px 0 10px;

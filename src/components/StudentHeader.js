@@ -2,16 +2,19 @@ import React, { useEffect, useState } from "react";
 import { HeaderSty, MobileHeaderSty } from "../styles/HeaderStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
 import { ReactComponent as StudentPortFolioIcon } from "../assets/StudentPortFolioIcon.svg";
 import { ReactComponent as JobmangerIcon } from "../assets/JobmangerIcon.svg";
 import { ReactComponent as EnterpriseIcon } from "../assets/EnterpriseIcon.svg";
+import { AgreeStudentModalAtom } from "../pages/studentPages/Student";
 
 const StudentHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
   const [select, setSelect] = useState("myportfolio");
   const navigate = useNavigate();
+
+  const ResetStdAgreeRecoil = useResetRecoilState(AgreeStudentModalAtom);
 
   // 반응형 state
   const [isMobile, setIsMobile] = useState("");
@@ -38,6 +41,7 @@ const StudentHeader = () => {
   ];
 
   const handleLogout = () => {
+    ResetStdAgreeRecoil()
     postLogout();
 
     setAuthState(prevAuthState => ({
@@ -57,45 +61,11 @@ const StudentHeader = () => {
     setSelect(e);
   };
 
-  const handleResize = () => {
-    if (window.innerWidth < 800) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-
-    // unmount 시 실행되는 cleanup 함수
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  });
+  
 
   return (
     <>
-      {isMobile ? (
-        <MobileHeaderSty>
-          <div className="business-header">
-            <div className="upper-logo-div" onClick={handleLogoClick}>
-              <Link to="/business">
-                <img
-                  src={`${process.env.PUBLIC_URL}/assets/LoginTitle.png`}
-                  alt="greenlogo"
-                />
-              </Link>
-            </div>
-            {/* <div className="loguout-btn" onClick={handleLogout}>
-            로그아웃
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}
-              alt="logout"
-            />
-          </div> */}
-          </div>
-        </MobileHeaderSty>
-      ) : (
+   
         <HeaderSty>
           <div className="student-header">
             <div className="upper-logo-div" onClick={handleLogoClick}>
@@ -128,7 +98,6 @@ const StudentHeader = () => {
             </div>
           </div>
         </HeaderSty>
-      )}
     </>
   );
 };
