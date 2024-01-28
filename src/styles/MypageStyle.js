@@ -53,8 +53,8 @@ export const DefaultInfo = styled.div`
     height: 240px;
     margin-right: 40px;
     & > img {
-      width: 100%;
-      height: 100%;
+      width: 295px;
+      height: 240px;
       object-fit: contain;
     }
   }
@@ -76,7 +76,7 @@ export const DefaultInfo = styled.div`
         line-height: 1.6;
       }
       .age {
-        color: ${Maincolor.maingray};
+        color: ${Maincolor.grayDeep};
         font-size: 16px;
         font-weight: 500;
         letter-spacing: -0.24px;
@@ -84,6 +84,89 @@ export const DefaultInfo = styled.div`
       }
     }
     .text-info {
+      height: 164px;
+      display: flex;
+      gap: 24px;
+      > li {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        :first-of-type {
+          width: 550px;
+          > div {
+            display: flex;
+            gap: 18px;
+            :nth-of-type(1) {
+              display: inline-block;
+              width: 550px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              > span {
+                :last-of-type {
+                  padding-left: 18px;
+                }
+              }
+            }
+            :nth-of-type(2) {
+              > span {
+                :last-of-type {
+                  padding-left: 16px;
+                }
+              }
+            }
+            :nth-of-type(4) {
+              width: 1022px;
+              height: 26px;
+              > span {
+                line-height: 26px;
+              }
+              > div {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                > div {
+                  display: flex;
+                  align-items: center;
+                  color: ${Maincolor.black};
+                  background: ${Maincolor.search};
+                  border-radius: 6px;
+                  padding: 5px 10px;
+                  > span {
+                    font-size: 16px;
+                    font-weight: 400;
+                  }
+                }
+              }
+            }
+            > span {
+              font-size: 16px;
+              font-weight: 400;
+              :first-of-type {
+                font-weight: 700;
+              }
+            }
+          }
+        }
+        :last-of-type {
+          width: 50%;
+          height: 110px;
+          > div {
+            display: flex;
+            gap: 10px;
+            > span {
+              font-size: 16px;
+              font-weight: 400;
+              :first-of-type {
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+    }
+    /* .text-info {
       height: 164px;
       display: flex;
       flex-direction: column;
@@ -101,6 +184,7 @@ export const DefaultInfo = styled.div`
       }
       & > li:nth-of-type(4) {
         display: flex;
+        align-items: center;
         > div {
           color: ${Maincolor.black};
           background: ${Maincolor.search};
@@ -113,7 +197,7 @@ export const DefaultInfo = styled.div`
           }
         }
       }
-    }
+    } */
   }
 `;
 
