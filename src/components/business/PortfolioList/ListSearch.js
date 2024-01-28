@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { PfSearchWrap } from "../../../styles/BusinessPortfolioStyle";
 import { v4 } from "uuid";
 import { BtnGlobal } from "../../../styles/GlobalStyle";
+import { useRecoilState } from "recoil";
+import { BusinessPageAtom } from "../../../pages/businessPages/PortfolioList";
 
 const ListSearch = ({
   handleCategoryFilter,
@@ -13,6 +15,8 @@ const ListSearch = ({
   categoryData,
   category,
 }) => {
+  const [pageState, setPageState] = useRecoilState(BusinessPageAtom);
+
   return (
     <PfSearchWrap>
       <ul className="student-portfolio-search">
@@ -38,7 +42,10 @@ const ListSearch = ({
               type="text"
               id="subject-state"
               value={searchsubj}
-              onChange={e => setSearchSubj(e.target.value)}
+              onChange={e =>
+                // setSearchSubj(e.target.value)
+                setPageState(prev => ({ ...prev, searchsubj: e.target.value }))
+              }
               onKeyDown={e => {
                 if (e.key === "Enter") {
                   handleSearch();
@@ -54,7 +61,10 @@ const ListSearch = ({
               type="text"
               id="student-state"
               value={searchname}
-              onChange={e => setSearchname(e.target.value)}
+              onChange={e =>
+                // setSearchname(e.target.value)
+                setPageState(prev => ({ ...prev, searchname: e.target.value }))
+              }
               onKeyDown={e => {
                 if (e.key === "Enter") {
                   handleSearch();

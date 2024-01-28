@@ -16,7 +16,7 @@ export const ContentWrap = styled.div`
     /* width: 1660px; */
   }
   @media all and (max-width: 767px) {
-  margin-top: 40px;
+    margin-top: 40px;
   }
 `;
 
@@ -37,6 +37,27 @@ export const NoitemList = styled.div`
   }
   & > P {
     font-size: 16px;
+    font-weight: 500;
+  }
+  @media all and (max-width: 767px) {
+  }
+
+  margin: 0 auto;
+  width: 360px;
+  height: 295px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
+  & > img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+  & > P {
+    font-size: 12px;
     font-weight: 500;
   }
 `;

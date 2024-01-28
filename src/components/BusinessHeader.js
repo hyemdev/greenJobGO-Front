@@ -9,6 +9,7 @@ import { ReactComponent as JobmangerIcon } from "../assets/JobmangerIcon.svg";
 import { ReactComponent as HomeBtn } from "../assets/HomeBtn.svg";
 import { AgreeModalAtom } from "../pages/businessPages/Business";
 import { useMediaQuery } from "react-responsive";
+import { BusinessPageAtom } from "../pages/businessPages/PortfolioList";
 
 const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
@@ -19,6 +20,7 @@ const BusinessHeader = () => {
   const isMobileDevice = useMediaQuery({ query: "(max-width: 767px)" });
 
   const ResetBizAgreeRecoil = useResetRecoilState(AgreeModalAtom);
+  const ResetStudentPageRecoil = useResetRecoilState(BusinessPageAtom);
 
   const menus = [
     {
@@ -59,6 +61,7 @@ const BusinessHeader = () => {
   };
   const handleColor = e => {
     setSelect(e);
+    ResetStudentPageRecoil();
   };
 
   return (

@@ -8,6 +8,7 @@ import {
 import Pagination from "react-js-pagination";
 
 const ListPaging = ({ setPage, page, count,handlePageClick }) => {
+
   return (
     <div>
       <ListPagingSty>

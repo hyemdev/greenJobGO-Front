@@ -48,7 +48,8 @@ export const getStudentGalleryList = async (
 
 export const getStudentList = async (
   setListData,
-  setCount,
+  // setCount,
+  setPageState,
   page,
   category,
   searchsubj,
@@ -71,7 +72,9 @@ export const getStudentList = async (
     const res = await client.get(apiUrl);
 
     setListData(res.data.vo);
-    setCount(res.data.totalcount);
+    // setCount(res.data.totalcount);
+    setPageState(prev => ({ ...prev, count: res.data.totalcount }));
+
     setNothing(false);
     if (res.data.vo.length === 0) {
       setNothing(true);
