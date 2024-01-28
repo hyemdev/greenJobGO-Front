@@ -48,7 +48,7 @@ export const PfSearchWrap = styled.div`
     }
     & li > select {
       border: 1px solid ${Maincolor.input};
-      width: 154px;
+      width: 150px;
       height: 40px;
       padding: 8px 12px;
       align-items: center;

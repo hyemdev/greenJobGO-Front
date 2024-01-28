@@ -22,23 +22,25 @@ export const BusinessPageAtom = atom({
     searchname: "",
     category: 0,
     render: true,
+    viewState: true,
   },
   // effects_UNSTABLE: [persistAtom],
 });
 const PortfolioList = () => {
-  const [galleryData, setGalleryData] = useState([]);
+  // const [galleryData, setGalleryData] = useState([]);
   const [listData, setListData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   // const [searchsubj, setSearchSubj] = useState("");
   // const [searchname, setSearchname] = useState("");
-  const [viewState, setViewState] = useState(true);
-  const [userId, setUserId] = useState(0);
+  // const [viewState, setViewState] = useState(true);
+  // const [userId, setUserId] = useState(0);
   // const [page, setPage] = useState(1);
   // const [count, setCount] = useState(0);
   // const [category, setCategory] = useState(0);
 
   const [pageState, setPageState] = useRecoilState(BusinessPageAtom);
-  const { page, count, searchsubj, searchname, category, render } = pageState;
+  const { page, count, searchsubj, searchname, category, render, viewState } =
+    pageState;
 
   // 결과값 없을때 보이는 컴포넌트
   const [nothing, setNothing] = useState(false);
@@ -150,9 +152,9 @@ const PortfolioList = () => {
       <ListPortfolioContent
         listData={listData}
         count={count}
-        galleryData={galleryData}
-        viewState={viewState}
-        setViewState={setViewState}
+        // galleryData={galleryData}
+        // viewState={viewState}
+        // setViewState={setViewState}
         onImgError={onImgError}
         nothing={nothing}
       />

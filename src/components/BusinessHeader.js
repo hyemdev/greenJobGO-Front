@@ -20,7 +20,7 @@ const BusinessHeader = () => {
   const isMobileDevice = useMediaQuery({ query: "(max-width: 767px)" });
 
   const ResetBizAgreeRecoil = useResetRecoilState(AgreeModalAtom);
-  const ResetStudentPageRecoil = useResetRecoilState(BusinessPageAtom);
+  const ResetBusinessPageRecoil = useResetRecoilState(BusinessPageAtom);
 
   const menus = [
     {
@@ -45,6 +45,7 @@ const BusinessHeader = () => {
 
   const handleLogout = () => {
     ResetBizAgreeRecoil();
+    ResetBusinessPageRecoil();
     postLogout();
 
     setAuthState(prevAuthState => ({
@@ -61,7 +62,7 @@ const BusinessHeader = () => {
   };
   const handleColor = e => {
     setSelect(e);
-    ResetStudentPageRecoil();
+    ResetBusinessPageRecoil();
   };
 
   return (
