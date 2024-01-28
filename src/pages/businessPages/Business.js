@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import BusinessHeader from "../../components/BusinessHeader";
 import { ContentWrap, LayoutStyle } from "../../styles/LayoutStyle";
@@ -9,6 +9,7 @@ import { recoilPersist } from "recoil-persist";
 import { postLogout } from "../../api/client";
 import { v4 } from "uuid";
 import ConfirmModal from "../../components/ConfirmModal";
+import { useMediaQuery } from "react-responsive";
 const { persistAtom } = recoilPersist();
 
 export const AgreeModalAtom = atom({
@@ -22,6 +23,8 @@ const Business = () => {
   const [agreeModalOpen, setAgreeModalOpen] = useState(true);
   const [cautionModalOpen, setCautionModalOpen] = useState(false);
   const [clickAgree, setClickAgree] = useRecoilState(AgreeModalAtom);
+
+  const isMobileDevice = useMediaQuery( {query: "(max-width: 767px)"});
 
   const navigate = useNavigate();
 
@@ -41,6 +44,15 @@ const Business = () => {
       console.error("Error during logout:", error);
     }
   };
+
+  useEffect(() => {
+    if (isMobileDevice) {
+      navigate("/business/portpoliolist");
+      setClickAgree({ isBizAgree: true });
+    } else {
+      navigate("/business");
+    }
+  }, [isMobileDevice]);
 
   return (
     <LayoutStyle>

@@ -59,7 +59,7 @@ const Login = () => {
             accessToken: accessToken,
             role: role,
           });
-          navigate("/business");
+        navigate("/business");
         }
       } catch (error) {
         console.log("errorrrrrrrr", error);

@@ -19,6 +19,7 @@
     "react-cookie": "^7.0.1",
     "react-dom": "^18.2.0",
     "react-js-pagination": "^3.0.3",
+    "react-responsive": "^9.0.2",
     "react-router": "^6.21.1",
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",

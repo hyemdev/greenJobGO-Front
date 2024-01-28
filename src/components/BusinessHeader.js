@@ -8,6 +8,7 @@ import { ReactComponent as StudentPortFolioIcon } from "../assets/StudentPortFol
 import { ReactComponent as JobmangerIcon } from "../assets/JobmangerIcon.svg";
 import { ReactComponent as HomeBtn } from "../assets/HomeBtn.svg";
 import { AgreeModalAtom } from "../pages/businessPages/Business";
+import { useMediaQuery } from "react-responsive";
 
 const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
@@ -15,7 +16,7 @@ const BusinessHeader = () => {
   const navigate = useNavigate();
 
   // 반응형 state
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobileDevice = useMediaQuery({ query: "(max-width: 767px)" });
 
   const ResetBizAgreeRecoil = useResetRecoilState(AgreeModalAtom);
 
@@ -60,41 +61,47 @@ const BusinessHeader = () => {
     setSelect(e);
   };
 
-
   return (
     <>
-        <HeaderSty>
-          <div className="business-header">
-            <div className="upper-logo-div" onClick={handleLogoClick}>
+      <HeaderSty>
+        <div className="business-header">
+          <div className="upper-logo-div" onClick={handleLogoClick}>
+            {isMobileDevice ? (
+              <img
+                src={`${process.env.PUBLIC_URL}/assets/LoginTitle.png`}
+                alt="greenlogo"
+              />
+            ) : (
               <Link to="/business">
                 <img
                   src={`${process.env.PUBLIC_URL}/assets/LoginTitle.png`}
                   alt="greenlogo"
                 />
               </Link>
-            </div>
-            <ul className="header-menu">
-              {menus.map(item => (
-                <li
-                  key={item.ibt}
-                  onClick={() => handleColor(item.type)}
-                  className={`${select === item.type ? "select" : ""}`}
-                >
-                  <Link to={`./${item.type}`}>
-                    {item.icon} {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="loguout-btn" onClick={handleLogout}>
-              로그아웃
-              <img
-                src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}
-                alt="logout"
-              />
-            </div>
+            )}
           </div>
-        </HeaderSty>
+          <ul className="header-menu">
+            {menus.map(item => (
+              <li
+                key={item.ibt}
+                onClick={() => handleColor(item.type)}
+                className={`${select === item.type ? "select" : ""}`}
+              >
+                <Link to={`./${item.type}`}>
+                  {item.icon} {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="loguout-btn" onClick={handleLogout}>
+            로그아웃
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/LogoutIcon.svg`}
+              alt="logout"
+            />
+          </div>
+        </div>
+      </HeaderSty>
     </>
   );
 };

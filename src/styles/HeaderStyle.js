@@ -91,7 +91,7 @@ export const HeaderSty = styled.div`
       display: flex;
       justify-content: space-around;
       align-items: center;
-      cursor: pointer;
+      cursor: default;
       /* gap: 40px; */
       /* 상단로고style */
       .upper-logo-div {

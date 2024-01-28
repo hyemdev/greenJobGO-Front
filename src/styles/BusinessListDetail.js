@@ -42,8 +42,9 @@ export const ListDetailWrapSty = styled.div`
     margin: 0 auto;
     /* width: 100vw; */
     width: 360px;
-    min-width: 320px;
-    padding: 20px;
+    /* min-width: 340px; */
+    min-width: 350px;
+    padding: 20px 5px;
     & > h2 {
       color: ${Maincolor.black};
       font-size: 16px;
@@ -51,7 +52,7 @@ export const ListDetailWrapSty = styled.div`
       margin-bottom: 20px;
     }
     .sub-title {
-      width: 320px;
+      width: 350px;
       height: 42px;
       flex-shrink: 0;
       border-radius: 12px 12px 0px 0px;
@@ -130,7 +131,7 @@ export const DefaultInfo = styled.div`
     }
   }
   @media all and (max-width: 767px) {
-    min-width: 320px;
+    min-width: 350px;
     height: 620px;
     margin: 0 auto;
     border-radius: 0 0 10px 10px;
@@ -141,8 +142,8 @@ export const DefaultInfo = styled.div`
     flex-direction: column;
     .thumb-img {
       > img {
-        width: 280px;
-        height: 220px;
+        width: 310px;
+        height: 250px;
         object-fit: contain;
       }
     }
@@ -186,7 +187,7 @@ export const DefaultInfo = styled.div`
           }
           span:nth-of-type(2) {
             display: inline-block;
-            width: 190px;
+            width: 240px;
             word-break: normal;
             letter-spacing: -0.18px;
           }
@@ -243,7 +244,7 @@ export const ResumeInfo = styled.div`
     }
   }
   @media all and (max-width: 767px) {
-    min-width: 320px;
+    min-width: 350px;
     margin: 0 auto;
     height: 190px;
     border-radius: 0 0 10px 10px;
@@ -277,7 +278,7 @@ export const ResumeInfo = styled.div`
         margin-bottom: 10px;
       }
       & > ul > li:nth-of-type(2) {
-        width: 280px;
+        width: 305px;
         height: 27px;
         font-weight: 400;
         font-size: 12px;
@@ -334,7 +335,7 @@ export const PortfolioInfo = styled.div`
   }
 
   @media all and (max-width: 767px) {
-    min-width: 320px;
+    min-width: 350px;
     max-height: 100%;
     margin: 0 auto;
     border-radius: 0 0 10px 10px;
@@ -350,7 +351,7 @@ export const PortfolioInfo = styled.div`
       line-height: 1.5;
       margin-bottom: 12px;
       & > li:first-of-type {
-        width: 280px;
+        width: 305px;
         height: 27px;
         border-radius: 6px 6px 0px 0px;
         background: ${Maincolor.maingray};
@@ -367,7 +368,7 @@ export const PortfolioInfo = styled.div`
       }
       & > li:nth-of-type(2) {
         ${ellipsis.one}
-        width: 280px;
+        width: 305px;
         height: 60px;
         border-radius: 0px 0px 6px 6px;
         border: 1px solid ${Maincolor.maingray};
