@@ -78,7 +78,7 @@ export const HeaderSty = styled.div`
     left: 0;
     z-index: 999;
     width: 100vw;
-    min-width: 320px;
+    min-width: 360px;
     height: 52px;
     display: flex;
     align-items: center;

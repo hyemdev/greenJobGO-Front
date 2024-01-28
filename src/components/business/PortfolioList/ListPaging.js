@@ -13,7 +13,7 @@ const ListPaging = ({ setPage, page, count,handlePageClick }) => {
       <ListPagingSty>
         <Pagination
           activePage={page}
-          itemsCountPerPage={9}
+          itemsCountPerPage={6}
           totalItemsCount={count}
           pageRangeDisplayed={5}
           marginPagesDisplayed={0}

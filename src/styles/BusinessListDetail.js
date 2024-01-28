@@ -8,7 +8,7 @@ export const ListDetailWrapSty = styled.div`
     color: ${Maincolor.black};
     font-size: 24px;
     font-weight: 700;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-bottom: 40px;
   }
   .sub-title {
@@ -41,7 +41,7 @@ export const ListDetailWrapSty = styled.div`
   @media all and (max-width: 767px) {
     margin: 0 auto;
     /* width: 100vw; */
-    width: 320px;
+    width: 360px;
     min-width: 320px;
     padding: 20px;
     & > h2 {
@@ -51,7 +51,7 @@ export const ListDetailWrapSty = styled.div`
       margin-bottom: 20px;
     }
     .sub-title {
-      width: 280px;
+      width: 320px;
       height: 42px;
       flex-shrink: 0;
       border-radius: 12px 12px 0px 0px;
@@ -130,8 +130,8 @@ export const DefaultInfo = styled.div`
     }
   }
   @media all and (max-width: 767px) {
-    min-width: 280px;
-    height: 560px;
+    min-width: 320px;
+    height: 620px;
     margin: 0 auto;
     border-radius: 0 0 10px 10px;
     border: 1px solid ${Maincolor.maingray};
@@ -141,8 +141,8 @@ export const DefaultInfo = styled.div`
     flex-direction: column;
     .thumb-img {
       > img {
-        width: 240px;
-        height: 198px;
+        width: 280px;
+        height: 220px;
         object-fit: contain;
       }
     }
@@ -243,7 +243,7 @@ export const ResumeInfo = styled.div`
     }
   }
   @media all and (max-width: 767px) {
-    min-width: 280px;
+    min-width: 320px;
     margin: 0 auto;
     height: 190px;
     border-radius: 0 0 10px 10px;
@@ -277,7 +277,7 @@ export const ResumeInfo = styled.div`
         margin-bottom: 10px;
       }
       & > ul > li:nth-of-type(2) {
-        width: 240px;
+        width: 280px;
         height: 27px;
         font-weight: 400;
         font-size: 12px;
@@ -334,7 +334,7 @@ export const PortfolioInfo = styled.div`
   }
 
   @media all and (max-width: 767px) {
-    min-width: 280px;
+    min-width: 320px;
     max-height: 100%;
     margin: 0 auto;
     border-radius: 0 0 10px 10px;
@@ -344,14 +344,13 @@ export const PortfolioInfo = styled.div`
     color: ${Maincolor.black};
     /* overflow-y: auto; */
 
-
     .portfolio-list {
       font-size: 12px;
       font-weight: 400;
       line-height: 1.5;
       margin-bottom: 12px;
       & > li:first-of-type {
-        width: 240px;
+        width: 280px;
         height: 27px;
         border-radius: 6px 6px 0px 0px;
         background: ${Maincolor.maingray};
@@ -368,7 +367,7 @@ export const PortfolioInfo = styled.div`
       }
       & > li:nth-of-type(2) {
         ${ellipsis.one}
-        width: 240px;
+        width: 280px;
         height: 60px;
         border-radius: 0px 0px 6px 6px;
         border: 1px solid ${Maincolor.maingray};
