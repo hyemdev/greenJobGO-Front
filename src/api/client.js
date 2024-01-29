@@ -36,7 +36,7 @@ client.interceptors.response.use(
     const refreshToken = getCookie("refreshToken");
     if (response && response.status === 401 && refreshToken) {
       try {
-        const { data } = await client.post(`/company/refresh-token`, {
+        const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
 

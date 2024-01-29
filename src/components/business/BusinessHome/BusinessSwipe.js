@@ -23,7 +23,7 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.matchMedia("(max-width: 767px)").matches);
+      setIsMobile(window.matchMedia("(max-width: 1600px)").matches);
     };
     window.addEventListener("resize", handleResize);
     handleResize();
