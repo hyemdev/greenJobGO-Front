@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import NoImage from "../../../assets/NoImage.jpg";
@@ -15,10 +15,23 @@ import { Link } from "react-router-dom";
 
 const BusinessSwipe = ({ swiperData, noItem }) => {
   const [swipe, setSwipe] = useState();
+  const [isMobile, setIsMobile] = useState(false);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.matchMedia("(max-width: 767px)").matches);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobile]);
+
   return (
     <SwiperWrapStyle>
       <button onClick={() => swipe?.slidePrev()} className="prev-btn">
@@ -27,7 +40,7 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
       <Swiper
         onBeforeInit={swipper => setSwipe(swipper)}
         modules={[Navigation, Autoplay]}
-        slidesPerView={"auto"}
+        slidesPerView={isMobile ? 3 : "auto"}
         navigation
         autoplay
         // loop={true}
@@ -37,17 +50,17 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
         {swiperData?.map((item, index) => (
           <SwiperSlide key={item.istudent} className="swiper-slide">
             <Link to={`/business/portfoliodetail/${item.istudent}`}>
-            <div className="img">
-              <img
-                src={`http://112.222.157.156${item.img}`}
-                alt={item.name}
-                onError={onImgError}
-              />
-            </div>
-            <div className="txt">
-              <p className="name">{item.name} 수강생</p>
-              <p className="subject">{item.subjectName}</p>
-            </div>
+              <div className="img">
+                <img
+                  src={`http://112.222.157.156${item.img}`}
+                  alt={item.name}
+                  onError={onImgError}
+                />
+              </div>
+              <div className="txt">
+                <p className="name">{item.name} 수강생</p>
+                <p className="subject">{item.subjectName}</p>
+              </div>
             </Link>
           </SwiperSlide>
         ))}
