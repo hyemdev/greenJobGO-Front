@@ -2,10 +2,10 @@ import styled from "@emotion/styled";
 
 export const LoginWrap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
   @media all and (max-width: 767px) {
     width: 100%;
-    height: 100%;
+    height: 100vh;
   }
 `;
 
@@ -18,8 +18,10 @@ export const LoginInner = styled.ul`
   li {
     :first-of-type {
       width: 50%;
+      height: 100vh;
       img {
         width: 100%;
+        height: 100vh;
       }
     }
     :last-of-type {
