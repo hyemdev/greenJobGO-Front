@@ -20,6 +20,8 @@ export const HashTagInner = styled.div`
     background: ${Maincolor.search};
     border-radius: 6px;
     padding: 5px 5px 5px 10px;
+    word-break: normal;
+    white-space: nowrap;
     > img {
       width: 11px;
       height: 11px;
