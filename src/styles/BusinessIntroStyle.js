@@ -53,7 +53,7 @@ export const BusinessStyWrap = styled.div`
     }
   }
 
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 1600px) {
     margin-top: 50px;
     width: 360px;
     h2 {
@@ -174,7 +174,7 @@ export const SwiperWrapStyle = styled.div`
       }
     }
   }
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 1600px) {
     width: 360px;
     margin-top: 30px;
     margin-bottom: 60px;
