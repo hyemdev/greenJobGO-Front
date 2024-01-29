@@ -134,19 +134,20 @@ export const PfSearchWrap = styled.div`
       & li > select {
         border: 1px solid ${Maincolor.input};
         border-radius: 4px;
-        width: 250px;
+        width: 240px;
         height: 25px;
         padding: 8px 12px;
         align-items: center;
         gap: 10px;
       }
       & li > div > input {
-        width: 250px;
+        width: 240px;
         height: 25px;
         border: 1px solid ${Maincolor.input};
         border-radius: 4px;
         padding: 8px 10px;
       }
+
       & li > button {
         font-size: 10px;
         margin-left: 270px;
@@ -162,6 +163,7 @@ export const PfSearchWrap = styled.div`
           ${Maincolor.search} 20%,
           ${Maincolor.white} 20%
         );
+
         select {
           -o-appearance: none;
           -webkit-appearance: none;

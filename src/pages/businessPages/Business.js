@@ -23,8 +23,7 @@ const Business = () => {
   const [agreeModalOpen, setAgreeModalOpen] = useState(true);
   const [cautionModalOpen, setCautionModalOpen] = useState(false);
   const [clickAgree, setClickAgree] = useRecoilState(AgreeModalAtom);
-
-  const isMobileDevice = useMediaQuery( {query: "(max-width: 767px)"});
+  const isMobileDevice = useMediaQuery({ query: "(max-width: 767px)" });
 
   const navigate = useNavigate();
 

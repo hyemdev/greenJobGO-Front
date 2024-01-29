@@ -61,6 +61,7 @@ const BusinessHeader = () => {
     setSelect("businessintro");
   };
   const handleColor = e => {
+    console.log("eeee", e);
     setSelect(e);
     ResetBusinessPageRecoil();
   };

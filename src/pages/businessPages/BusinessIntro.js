@@ -11,12 +11,14 @@ const BusinessIntro = () => {
   const [noItem, setNoItem] = useState(false);
 
   // const [agreeModalOpen, setAgreeModalOpen] = useState(true);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleTabBtnClick = item => {
     setClickCate(item);
   };
-
+  const handleTotalListClick = () => {
+    navigate("/business/portpoliolist");
+  };
   // // 비동의 클릭
   // const handleDisagree = () => {
   //   navigate("/");
@@ -42,7 +44,7 @@ const BusinessIntro = () => {
               <button
                 value={item.iclassification}
                 className="cate-btn"
-                // onClick={() => handleTabBtnClick(item.iclassification)}
+                onClick={() => handleTabBtnClick(item.iclassification)}
               >
                 {item.classification}
               </button>
@@ -51,10 +53,8 @@ const BusinessIntro = () => {
         </ul>
       </div>
       <BusinessSwipe swiperData={swiperData} noItem={noItem} />
-      <div className="main-portfolio-linkBtn">
-        <Link to="/business/portpoliolist">
-          <span> 포트폴리오 전체보기 </span>
-        </Link>
+      <div className="main-portfolio-linkBtn" onClick={handleTotalListClick}>
+        <span> 포트폴리오 전체보기 </span>
       </div>
     </BusinessStyWrap>
   );
