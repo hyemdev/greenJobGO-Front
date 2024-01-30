@@ -1,6 +1,10 @@
 import { client } from "./client";
 
-export const getJobManagerInfo = async ({ setmngProflieData, setNothing }) => {
+export const getJobManagerInfo = async ({
+  setmngProflieData,
+  setNothing,
+  setErrorApiInfo,
+}) => {
   try {
     const res = await client.get(`/company/employee`);
     const result = await res.data;
@@ -14,6 +18,6 @@ export const getJobManagerInfo = async ({ setmngProflieData, setNothing }) => {
     }
     return result;
   } catch (error) {
-    console.log(error);
+    setErrorApiInfo(`JobManager Info: ${error.message}`);
   }
 };

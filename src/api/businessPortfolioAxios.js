@@ -1,50 +1,50 @@
 import { client } from "./client";
 
-export const getCategory = async setCategoryData => {
+export const getCategory = async (setCategoryData, setErrorApiInfo) => {
   try {
     const res = await client.get(`/admin/category`);
     setCategoryData(res.data);
   } catch (error) {
-    console.log(error);
+    setErrorApiInfo(`Category: ${error.message}`);
   }
 };
 
-export const getStudentGalleryList = async (
-  setGalleryData,
-  setCount,
-  page,
-  category,
-  searchsubj,
-  searchname,
-  setNothing,
-) => {
-  try {
-    let apiUrl = `/company/student?page=${page}&size=6&sort=istudent%2CASC`;
-    if (category) {
-      apiUrl += `&icategory=${category}`;
-    }
+// export const getStudentGalleryList = async (
+//   setGalleryData,
+//   setCount,
+//   page,
+//   category,
+//   searchsubj,
+//   searchname,
+//   setNothing,
+// ) => {
+//   try {
+//     let apiUrl = `/company/student?page=${page}&size=6&sort=istudent%2CASC`;
+//     if (category) {
+//       apiUrl += `&icategory=${category}`;
+//     }
 
-    if (searchsubj) {
-      apiUrl += `&subjectName=${searchsubj}`;
-    }
+//     if (searchsubj) {
+//       apiUrl += `&subjectName=${searchsubj}`;
+//     }
 
-    if (searchname) {
-      apiUrl += `&studentName=${searchname}`;
-    }
+//     if (searchname) {
+//       apiUrl += `&studentName=${searchname}`;
+//     }
 
-    const res = await client.get(apiUrl);
+//     const res = await client.get(apiUrl);
 
-    setCount(res.data.totalcount);
-    setGalleryData(res.data.vo);
-    setNothing(false);
-    if (res.data.vo.length === 0) {
-      setNothing(true);
-      console.log("결과 없어요");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     setCount(res.data.totalcount);
+//     setGalleryData(res.data.vo);
+//     setNothing(false);
+//     if (res.data.vo.length === 0) {
+//       setNothing(true);
+//       console.log("결과 없어요");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const getStudentList = async (
   setListData,
@@ -55,9 +55,11 @@ export const getStudentList = async (
   searchsubj,
   searchname,
   setNothing,
+  setErrorApiInfo,
 ) => {
   try {
-    let apiUrl = `/company/student/list?page=${page}&size=6&sort=istudent%2CASC`;    if (category) {
+    let apiUrl = `/company/student/list?page=${page}&size=6&sort=istudent%2CASC`;
+    if (category) {
       apiUrl += `&icategory=${category}`;
     }
 
@@ -78,14 +80,13 @@ export const getStudentList = async (
     setNothing(false);
     if (res.data.vo.length === 0) {
       setNothing(true);
-      console.log("결과 없어요");
     }
   } catch (error) {
-    console.log(error);
+    setErrorApiInfo(`Student Portfoilo info: ${error.message}`);
   }
 };
 
-export const getStdentInfo = async (userId, setPayload) => {
+export const getStdentInfo = async (userId, setPayload, setErrorApiInfo) => {
   try {
     const res = await client.get(`/company/student/${userId}`);
 
@@ -107,6 +108,6 @@ export const getStdentInfo = async (userId, setPayload) => {
       fileLinks: fileLink || [],
     });
   } catch (error) {
-    console.log(error);
+    setErrorApiInfo(`Student Info: ${error.message}`);
   }
 };

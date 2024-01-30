@@ -7,7 +7,6 @@ import IndexModal from "../../components/IndexModal";
 import { atom, useRecoilState, RecoilEnv } from "recoil";
 import { recoilPersist } from "recoil-persist";
 import { postLogout } from "../../api/client";
-import { v4 } from "uuid";
 import ConfirmModal from "../../components/ConfirmModal";
 import { useMediaQuery } from "react-responsive";
 const { persistAtom } = recoilPersist();

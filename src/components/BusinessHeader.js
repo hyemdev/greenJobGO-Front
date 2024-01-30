@@ -13,6 +13,8 @@ import { faFileLines, faUser } from "@fortawesome/free-regular-svg-icons";
 const { persistAtom } = recoilPersist();
 
 import { recoilPersist } from "recoil-persist";
+import ConfirmModal from "./ConfirmModal";
+import OkModal from "./OkModal";
 
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
@@ -25,6 +27,11 @@ export const HeaderFocusAtom = atom({
 const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
   const [select, setSelect] = useRecoilState(HeaderFocusAtom);
+
+  // api 오류 메세지 받아오는 state.
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -58,19 +65,27 @@ const BusinessHeader = () => {
   ];
 
   const handleLogout = () => {
-    ResetBizAgreeRecoil();
-    ResetBusinessPageRecoil();
-    postLogout();
-
-    setAuthState(prevAuthState => ({
-      ...prevAuthState,
-      isLogin: false,
-      accessToken: null,
-      role: "",
-      id: "",
-    }));
-    navigate("/");
+    setLogoutModalOpen(true);
   };
+  const handleLogoutConfirm = () => {
+    try {
+      ResetBizAgreeRecoil();
+      ResetBusinessPageRecoil();
+      postLogout();
+
+      setAuthState(prevAuthState => ({
+        ...prevAuthState,
+        isLogin: false,
+        accessToken: null,
+        role: "",
+        id: "",
+      }));
+      navigate("/");
+    } catch (error) {
+      setErrorApiInfo("로그아웃이 정상적으로 처리되지 않았습니다.");
+    }
+  };
+
   const handleLogoClick = () => {
     setSelect("businessintro");
   };
@@ -79,6 +94,13 @@ const BusinessHeader = () => {
     ResetBusinessPageRecoil();
   };
 
+  useEffect(() => {
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [errorApiInfo]);
   return (
     <>
       <HeaderSty>
@@ -120,6 +142,38 @@ const BusinessHeader = () => {
           </div>
         </div>
       </HeaderSty>
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
+      {/* 로그아웃모달 */}
+      {logoutModalOpen && (
+        <ConfirmModal
+          open={logoutModalOpen}
+          close={() => {
+            setLogoutModalOpen(false);
+          }}
+          onConfirm={handleLogoutConfirm}
+          onCancel={() => {
+            setLogoutModalOpen(false);
+          }}
+        >
+          <span>로그아웃 하시겠습니까?</span>
+        </ConfirmModal>
+      )}
     </>
   );
 };

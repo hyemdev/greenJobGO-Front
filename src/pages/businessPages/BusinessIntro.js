@@ -7,6 +7,7 @@ import BusinessPrivacyProtect from "./BusinessPrivacyProtect";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { HeaderFocusAtom } from "../../components/BusinessHeader";
 import styled from "@emotion/styled";
+import OkModal from "../../components/OkModal";
 
 const BusinessIntro = () => {
   const [category, setCategory] = useState([]);
@@ -14,24 +15,34 @@ const BusinessIntro = () => {
   const [clickCate, setClickCate] = useState("1");
   const [noItem, setNoItem] = useState(false);
 
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
+
   const setSelect = useSetRecoilState(HeaderFocusAtom);
 
   const navigate = useNavigate();
 
   const handleTabBtnClick = item => {
     setClickCate(item);
-   };
+  };
 
   const handleTotalListClick = () => {
     setSelect("portpoliolist");
     navigate("/business/portpoliolist");
   };
   useEffect(() => {
-    getMainImgList({ setSwiperData, clickCate, setNoItem });
-  }, [clickCate]);
+    if (clickCate) {
+      getMainImgList({ setSwiperData, clickCate, setNoItem, setErrorApiInfo });
+    }
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [clickCate, errorApiInfo]);
 
   useEffect(() => {
-    getBigcate(setCategory);
+    getBigcate(setCategory, setErrorApiInfo);
   }, []);
 
   return (
@@ -55,6 +66,23 @@ const BusinessIntro = () => {
       <div className="main-portfolio-linkBtn" onClick={handleTotalListClick}>
         <span> 포트폴리오 전체보기 </span>
       </div>
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
     </BusinessStyWrap>
   );
 };

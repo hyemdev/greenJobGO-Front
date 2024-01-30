@@ -2,18 +2,31 @@ import React, { useEffect, useState } from "react";
 import { JobManagerBoxWrap } from "../../styles/BusinessJobmanager";
 import NoImage from "../../assets/NoImage.jpg";
 import { getJobManagerInfo } from "../../api/jobmanagerAxios";
+import OkModal from "../../components/OkModal";
 
 const JobManagerList = () => {
   const [mngProfiledata, setmngProflieData] = useState([]);
   const [nothing, setNothing] = useState(false);
+
+  // api 오류 메세지 받아오는 state.
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
+
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
   };
 
   useEffect(() => {
-    getJobManagerInfo({ setmngProflieData, setNothing });
+    getJobManagerInfo({ setmngProflieData, setNothing, setErrorApiInfo });
   }, []);
+  useEffect(() => {
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [errorApiInfo]);
   return (
     <JobManagerBoxWrap>
       <h2>취업담당자 안내</h2>
@@ -49,6 +62,24 @@ const JobManagerList = () => {
         ))}
       </div>
       {nothing && <div>취업담당자의 정보가 없습니다.</div>}
+
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
     </JobManagerBoxWrap>
   );
 };

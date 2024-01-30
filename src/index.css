@@ -34,7 +34,7 @@ ul {
 }
 
 a {
-  color: #000000;
+  color: #222;
   /* 클릭했을때 컬러/밑줄 설정 */
   text-decoration: none;
 }
@@ -46,7 +46,7 @@ img {
 html,
 body {
   font-size: 14px;
-  color: #000000;
+  color: #222;
   word-break: keep-all;
   font-family:
     "Noto Sans KR",

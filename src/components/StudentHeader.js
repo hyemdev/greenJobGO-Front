@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HeaderSty, MobileHeaderSty } from "../styles/HeaderStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
-import { useRecoilState, useResetRecoilState, RecoilEnv, atom } from "recoil";
+import { useRecoilState, useResetRecoilState } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
 import { AgreeStudentModalAtom } from "../pages/studentPages/Student";
 import {
@@ -11,8 +11,8 @@ import {
   faUser,
 } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { recoilPersist } from "recoil-persist";
-RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+import OkModal from "./OkModal";
+import ConfirmModal from "./ConfirmModal";
 
 const StudentHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
@@ -20,6 +20,11 @@ const StudentHeader = () => {
   const navigate = useNavigate();
 
   const ResetStdAgreeRecoil = useResetRecoilState(AgreeStudentModalAtom);
+
+  // api 오류 메세지 받아오는 state.
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
 
   const menus = [
     {
@@ -41,19 +46,25 @@ const StudentHeader = () => {
       icon: <FontAwesomeIcon icon={faBuilding} />,
     },
   ];
-
   const handleLogout = () => {
-    ResetStdAgreeRecoil();
-    postLogout();
+    setLogoutModalOpen(true);
+  };
+  const handleLogoutConfirm = () => {
+    try {
+      ResetStdAgreeRecoil();
+      postLogout();
 
-    setAuthState(prevAuthState => ({
-      ...prevAuthState,
-      isLogin: false,
-      accessToken: null,
-      role: "",
-      id: "",
-    }));
-    navigate("/");
+      setAuthState(prevAuthState => ({
+        ...prevAuthState,
+        isLogin: false,
+        accessToken: null,
+        role: "",
+        id: "",
+      }));
+      navigate("/");
+    } catch (error) {
+      setErrorApiInfo("로그아웃이 정상적으로 처리되지 않았습니다.");
+    }
   };
 
   const handleLogoClick = () => {
@@ -62,6 +73,13 @@ const StudentHeader = () => {
   const handleColor = e => {
     setSelect(e);
   };
+  useEffect(() => {
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [errorApiInfo]);
 
   return (
     <>
@@ -97,6 +115,38 @@ const StudentHeader = () => {
           </div>
         </div>
       </HeaderSty>
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
+      {/* 로그아웃모달 */}
+      {logoutModalOpen && (
+        <ConfirmModal
+          open={logoutModalOpen}
+          close={() => {
+            setLogoutModalOpen(false);
+          }}
+          onConfirm={handleLogoutConfirm}
+          onCancel={() => {
+            setLogoutModalOpen(false);
+          }}
+        >
+          <span>로그아웃 하시겠습니까?</span>
+        </ConfirmModal>
+      )}
     </>
   );
 };
