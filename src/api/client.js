@@ -84,10 +84,10 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
     }
   } catch (error) {
     if (error.response.status === 432) {
-      setErrorCancelInfo("아이디를 다시 확인 해 주세요");
+      setErrorCancelInfo("아이디를 확인 해 주세요");
     }
     if (error.response.status === 434) {
-      setErrorCancelInfo("비밀번호를 다시 확인 해 주세요");
+      setErrorCancelInfo("비밀번호를 확인 해 주세요");
     }
     if (error.response.status === 435) {
       setErrorCancelInfo("권한이 없습니다. 담당자에게 문의 바랍니다.");

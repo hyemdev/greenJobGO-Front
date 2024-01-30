@@ -42,7 +42,8 @@ export const MypageWrap = styled.div`
 export const DefaultInfo = styled.div`
   margin: 0 auto;
   height: 320px;
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 10px;
+  /* border-radius: 10px; */
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;
@@ -204,7 +205,7 @@ export const DefaultInfo = styled.div`
 export const ResumeInfo = styled.div`
   margin: 0 auto;
   height: 263px;
-  border-radius: 0 0 10px 0;
+  border-radius: 0 0 10px 10px;
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;
@@ -252,7 +253,7 @@ export const ResumeInfo = styled.div`
 export const PortfolioInfo = styled.div`
   margin: 0 auto;
   max-height: 408px;
-  border-radius: 0 0 10px 0;
+  /* border-radius: 0 0 10px 0; */
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;

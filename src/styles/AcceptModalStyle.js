@@ -50,7 +50,7 @@ export const AcceptModalWrap = styled.div`
     .content {
       display: flex;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 400;
     }
     .btns {
       display: flex;
@@ -121,7 +121,7 @@ export const CancelModalWrap = styled.div`
     .content {
       display: flex;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 400;
     }
     .btns {
       display: flex;
