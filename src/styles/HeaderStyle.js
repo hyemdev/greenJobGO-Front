@@ -33,7 +33,7 @@ export const HeaderSty = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 80px;
+      gap: 90px;
       li {
         > a {
           position: relative;
@@ -42,10 +42,10 @@ export const HeaderSty = styled.div`
           color: ${Maincolor.header};
           > svg {
             position: absolute;
-            top: 2px;
-            left: -27px;
-            width: 20px;
-            height: 20px;
+            top: 3px;
+            left: -25px;
+            width: 17px;
+            height: 17px;
             filter: invert(48%) sepia(6%) saturate(7%) hue-rotate(323deg)
               brightness(98%) contrast(80%);
           }
@@ -72,12 +72,13 @@ export const HeaderSty = styled.div`
     }
   }
   /* 반응형 헤더 */
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 840px) {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
-    width: 100vw;
+    /* width: 100vw; */
+    width: 100%;
     min-width: 360px;
     height: 52px;
     display: flex;
@@ -86,7 +87,6 @@ export const HeaderSty = styled.div`
     background: ${Maincolor.white};
     box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.12);
     & > div {
-      padding: 15px;
       width: 100%;
       display: flex;
       justify-content: space-around;

@@ -1,20 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderSty } from "../styles/HeaderStyle";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState, RecoilEnv, atom } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
-import { ReactComponent as StudentPortFolioIcon } from "../assets/StudentPortFolioIcon.svg";
-import { ReactComponent as JobmangerIcon } from "../assets/JobmangerIcon.svg";
 import { ReactComponent as HomeBtn } from "../assets/HomeBtn.svg";
 import { AgreeModalAtom } from "../pages/businessPages/Business";
 import { useMediaQuery } from "react-responsive";
 import { BusinessPageAtom } from "../pages/businessPages/PortfolioList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileLines, faUser } from "@fortawesome/free-regular-svg-icons";
+const { persistAtom } = recoilPersist();
+
+import { recoilPersist } from "recoil-persist";
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+
+export const HeaderFocusAtom = atom({
+  key: `HeaderFocusAtom`,
+  default: "myportfolio",
+  effects_UNSTABLE: [persistAtom],
+});
 
 const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
-  const [select, setSelect] = useState("businessintro");
+  const [select, setSelect] = useRecoilState(HeaderFocusAtom);
+
   const navigate = useNavigate();
+
+  const location = useLocation();
 
   // 반응형 state
   const isMobileDevice = useMediaQuery({ query: "(max-width: 767px)" });
@@ -33,13 +47,13 @@ const BusinessHeader = () => {
       ibt: "b2",
       type: "portpoliolist",
       title: "수강생 포트폴리오",
-      icon: <StudentPortFolioIcon />,
+      icon: <FontAwesomeIcon icon={faFileLines} />,
     },
     {
       ibt: "b3",
       type: "jobmanagerlist",
       title: "취업 담당자 안내",
-      icon: <JobmangerIcon />,
+      icon: <FontAwesomeIcon icon={faUser} />,
     },
   ];
 
@@ -61,7 +75,6 @@ const BusinessHeader = () => {
     setSelect("businessintro");
   };
   const handleColor = e => {
-    console.log("eeee", e);
     setSelect(e);
     ResetBusinessPageRecoil();
   };

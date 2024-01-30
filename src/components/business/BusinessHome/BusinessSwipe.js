@@ -11,14 +11,25 @@ import { SwiperWrapStyle } from "../../../styles/BusinessIntroStyle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import NoitemBox from "./NoitemBox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { HeaderFocusAtom } from "../../BusinessHeader";
+import { useSetRecoilState } from "recoil";
 
 const BusinessSwipe = ({ swiperData, noItem }) => {
+  const navigate = useNavigate();
+  const setSelect = useSetRecoilState(HeaderFocusAtom);
+
   const [swipe, setSwipe] = useState();
   const [isMobile, setIsMobile] = useState(false);
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
+  };
+
+  const handelClickPf = e => {
+    console.log("e", e);
+    setSelect("portpoliolist");
+    navigate(`/business/portfoliodetail/${e}`);
   };
 
   useEffect(() => {
@@ -48,20 +59,18 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
         className={swiperData.length > 0 ? null : "active"}
       >
         {swiperData?.map((item, index) => (
-          <SwiperSlide key={item.istudent} className="swiper-slide">
-            <Link to={`/business/portfoliodetail/${item.istudent}`}>
-              <div className="img">
-                <img
-                  src={`http://112.222.157.156${item.img}`}
-                  alt={item.name}
-                  onError={onImgError}
-                />
-              </div>
-              <div className="txt">
-                <p className="name">{item.name} 수강생</p>
-                <p className="subject">{item.subjectName}</p>
-              </div>
-            </Link>
+          <SwiperSlide
+            key={item.istudent}
+            className="swiper-slide"
+            onClick={() => handelClickPf(item.istudent)}
+          >
+            <div className="img">
+              <img src={`${item.img}`} alt={item.name} onError={onImgError} />
+            </div>
+            <div className="txt">
+              <p className="name">{item.name} 수강생</p>
+              <p className="subject">{item.subjectName}</p>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>{" "}

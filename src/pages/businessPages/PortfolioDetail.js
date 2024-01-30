@@ -51,7 +51,7 @@ const PortfolioDetail = () => {
             <div className="thumb-img">
               {payload.thumbNail && (
                 <img
-                  src={`http://112.222.157.156/img/student/${userId}/${payload.thumbNail}`}
+                  src={`/img/student/${userId}/${payload.thumbNail}`}
                   alt="thumb-img"
                   onError={onImgError}
                 />
