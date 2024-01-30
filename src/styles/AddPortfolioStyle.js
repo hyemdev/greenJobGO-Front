@@ -29,7 +29,7 @@ export const AddPortfolioWrap = styled.div`
       border: none;
       border-radius: 6px;
       cursor: pointer;
-        background: ${Maincolor.btn};
+      background: ${Maincolor.btn};
     }
   }
 `;
@@ -178,7 +178,8 @@ export const AddPofolPofolWrap = styled.div`
                       background: ${Maincolor.search};
                       > div {
                         display: flex;
-                        gap: 5px;
+                        align-items: center;
+                        gap: 10px;
                         padding: 0 13px 0 13px;
                         :last-of-type {
                           img {
@@ -189,6 +190,20 @@ export const AddPofolPofolWrap = styled.div`
                           font-size: 14px;
                           font-weight: 400;
                           color: ${Maincolor.black};
+                        }
+                      }
+                      .main-pofol {
+                        font-size: 14px;
+                        background: ${Maincolor.admintxt};
+                        border-radius: 4px;
+                        > span {
+                          width: 70px;
+                          height: 28px;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          gap: 5px;
+                          color: ${Maincolor.white};
                         }
                       }
                     }

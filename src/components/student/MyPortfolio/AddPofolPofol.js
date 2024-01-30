@@ -3,6 +3,8 @@ import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
 import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 import { FadeLoader } from "react-spinners";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 const AddPofolPofol = ({
   file,
@@ -87,15 +89,31 @@ const AddPofolPofol = ({
                           {item.file}
                         </a>
                       </div>
-                      <div
-                        onClick={() => {
-                          handleDeleteFile(item.ifile);
-                        }}
-                      >
-                        <img
-                          src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
-                          alt="portfolio"
-                        />
+                      <div>
+                        {item?.mainYn === 1 ? (
+                          <div className="main-pofol">
+                            <span>
+                              <FontAwesomeIcon
+                                icon={faCrown}
+                                style={{ display: "block", color: "#fff" }}
+                              />
+                              대표
+                            </span>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        <div
+                          className="delete-file"
+                          onClick={() => {
+                            handleDeleteFile(item.ifile);
+                          }}
+                        >
+                          <img
+                            src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
+                            alt="portfolio"
+                          />
+                        </div>
                       </div>
                     </div>
                     <div>
@@ -131,15 +149,31 @@ const AddPofolPofol = ({
                           {item.fileLink}
                         </a>
                       </div>
-                      <div
-                        onClick={() => {
-                          handleDeleteFile(item.ifile);
-                        }}
-                      >
-                        <img
-                          src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
-                          alt="portfolio"
-                        />
+                      <div>
+                        {item?.mainYn === 1 ? (
+                          <div className="main-pofol">
+                            <span>
+                              <FontAwesomeIcon
+                                icon={faCrown}
+                                style={{ display: "block", color: "#fff" }}
+                              />
+                              대표
+                            </span>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        <div
+                          className="delete-file"
+                          onClick={() => {
+                            handleDeleteFile(item.ifile);
+                          }}
+                        >
+                          <img
+                            src={`${process.env.PUBLIC_URL}/assets/ph_x-bold.png`}
+                            alt="portfolio"
+                          />
+                        </div>
                       </div>
                     </div>
                     <div>
