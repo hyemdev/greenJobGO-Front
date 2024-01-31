@@ -181,11 +181,6 @@ export const AddPofolPofolWrap = styled.div`
                         align-items: center;
                         gap: 10px;
                         padding: 0 13px 0 13px;
-                        :last-of-type {
-                          img {
-                            cursor: pointer;
-                          }
-                        }
                         a {
                           font-size: 14px;
                           font-weight: 400;
@@ -204,6 +199,14 @@ export const AddPofolPofolWrap = styled.div`
                           align-items: center;
                           gap: 5px;
                           color: ${Maincolor.white};
+                        }
+                      }
+                      .delete-file {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        img {
+                          cursor: pointer;
                         }
                       }
                     }

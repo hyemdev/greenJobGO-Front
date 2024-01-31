@@ -10,6 +10,8 @@ import {
 import { useRecoilValue } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 import { v4 } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 const Mypage = () => {
   const userInfoData = useRecoilValue(userInfo);
@@ -139,17 +141,35 @@ const Mypage = () => {
               userInfoData.file.portfolio.map(item => (
                 <ul key={v4()} className="portfolio-list">
                   <li>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
-                      alt="portfolio"
-                    />
-                    <a
-                      href={`/img/student/${userInfoData.std.istudent}/${item.file}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.file}
-                    </a>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
+                        alt="portfolio"
+                      />
+                      <a
+                        href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${item.file}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.file}
+                      </a>
+                    </div>
+                    <div>
+                      {item?.mainYn === 1 ? (
+                        <div className="main-pofol">
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faCrown}
+                              style={{ color: "#fff" }}
+                            />
+                            대표
+                          </span>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+
                   </li>
                   <li>{item.oneWord}</li>
                 </ul>
@@ -158,17 +178,34 @@ const Mypage = () => {
               userInfoData?.file?.fileLinks.map(item => (
                 <ul key={v4()} className="portfolio-list">
                   <li>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/assets/ph_link.png`}
-                      alt="portfolio"
-                    />
-                    <a
-                      href={`/img/student/${userInfoData.std.istudent}/${item.fileLink}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {item.fileLink}
-                    </a>
+                    <div>
+                      <img
+                        src={`${process.env.PUBLIC_URL}/assets/ph_link.png`}
+                        alt="portfolio"
+                      />
+                      <a
+                        href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${item.fileLink}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {item.fileLink}
+                      </a>
+                    </div>
+                    <div>
+                      {item?.mainYn === 1 ? (
+                        <div className="main-pofol">
+                          <span>
+                            <FontAwesomeIcon
+                              icon={faCrown}
+                              style={{ color: "#fff" }}
+                            />
+                            대표
+                          </span>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </li>
                   <li>{item.oneWord}</li>
                 </ul>
