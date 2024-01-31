@@ -82,7 +82,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`http://112.222.157.156/img/student/${istudent}/${item.file}`}
+                          href={`/img/student/${istudent}/${item.file}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -142,7 +142,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`http://112.222.157.156/img/student/${istudent}/${item.fileLink}`}
+                          href={`/img/student/${istudent}/${item.fileLink}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

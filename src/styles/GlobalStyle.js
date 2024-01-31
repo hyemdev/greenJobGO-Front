@@ -91,6 +91,7 @@ export const ConfirmModalWarp = styled.div`
     left: 0;
     z-index: 99999;
     background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
   }
   .modalConfirm-wrapper {
     position: relative;
@@ -134,14 +135,18 @@ export const ConfirmModalWarp = styled.div`
   }
   /* 모달 내용 */
   .modalConfirm-content {
-    /* position: absolute; */
+    position: relative;
     /* top: 50px;
     left: 20px; */
-    height: 100%;
+    /* height: 100%; */
+    height: 50px;
     padding: 0px 20px 0px 30px;
     font-size: 14px;
-    color: #515151;
+    color: ${Maincolor.black};
     & > div {
+      position: absolute;
+      right: 15px;
+      bottom: -25px;
       margin-top: 25px;
       text-align: right;
       & button {
@@ -178,7 +183,7 @@ export const ConfirmModalWarp = styled.div`
 export const ConfirmModalContent = styled.div`
   font-size: 14px;
   line-height: 120%;
-  color: #515151;
+  color: ${Maincolor.black};
   & div {
     margin-top: 32px;
     text-align: right;

@@ -9,12 +9,16 @@ import {
   getStudentList,
 } from "../../api/businessPortfolioAxios";
 import NoImage from "../../assets/NoImage.jpg";
-import { atom, useRecoilState } from "recoil";
-import { v4 } from "uuid";
+import OkModal from "../../components/OkModal";
+
+import { atom, useRecoilState, RecoilEnv } from "recoil";
+import { recoilPersist } from "recoil-persist";
+const { persistAtom } = recoilPersist();
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export const BusinessPageAtom = atom({
-  // key: "authState",
-  key: `BusinessPageAtom/${v4()}`,
+  key: `BusinessPageAtom`,
   default: {
     page: 1,
     count: 0,
@@ -24,23 +28,18 @@ export const BusinessPageAtom = atom({
     render: true,
     viewState: true,
   },
-  // effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom],
 });
 const PortfolioList = () => {
-  // const [galleryData, setGalleryData] = useState([]);
   const [listData, setListData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
-  // const [searchsubj, setSearchSubj] = useState("");
-  // const [searchname, setSearchname] = useState("");
-  // const [viewState, setViewState] = useState(true);
-  // const [userId, setUserId] = useState(0);
-  // const [page, setPage] = useState(1);
-  // const [count, setCount] = useState(0);
-  // const [category, setCategory] = useState(0);
-
   const [pageState, setPageState] = useRecoilState(BusinessPageAtom);
   const { page, count, searchsubj, searchname, category, render, viewState } =
     pageState;
+
+  // api 오류 메세지 받아오는 state.
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
 
   // 결과값 없을때 보이는 컴포넌트
   const [nothing, setNothing] = useState(false);
@@ -74,6 +73,7 @@ const PortfolioList = () => {
       searchsubj,
       searchname,
       setNothing,
+      setErrorApiInfo
     );
   };
 
@@ -85,7 +85,7 @@ const PortfolioList = () => {
     // } else if (viewState === false) {
     //   studentList();
     // }
-    getCategory(setCategoryData);
+    getCategory(setCategoryData, setErrorApiInfo);
   }, [page, viewState]);
 
   // 검색버튼 클릭
@@ -132,6 +132,14 @@ const PortfolioList = () => {
   };
 
   useEffect(() => {
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [errorApiInfo]);
+
+  useEffect(() => {
     studentList();
   }, [page, render]);
 
@@ -164,6 +172,23 @@ const PortfolioList = () => {
         count={count}
         handlePageClick={handlePageClick}
       />
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
     </BusinessPortfolioWrap>
   );
 };

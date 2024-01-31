@@ -13,7 +13,7 @@ export const AcceptModalWrap = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 50;
+    z-index: 1000;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(2px);
   }
@@ -32,7 +32,7 @@ export const AcceptModalWrap = styled.div`
     background-color: ${Maincolor.white};
     transform: translate(-50%, -50%);
     animation: modal-show 0.3s;
-    z-index: 99;
+    z-index: 1000;
     > div {
       text-align: center;
     }
@@ -89,7 +89,7 @@ export const CancelModalWrap = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(2px);
   }
@@ -108,7 +108,7 @@ export const CancelModalWrap = styled.div`
     background-color: ${Maincolor.white};
     transform: translate(-50%, -50%);
     animation: modal-show 0.3s;
-    z-index: 999;
+    z-index: 1000;
     > div {
       text-align: center;
     }

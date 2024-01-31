@@ -37,7 +37,7 @@ const Mypage = () => {
         <div className="thumb-img">
           {userInfoData?.file?.img?.img && (
             <img
-              src={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${userInfoData.file.img.img}`}
+              src={`/img/student/${userInfoData.std.istudent}/${userInfoData.file.img.img}`}
               alt="thumb-img"
               onError={onImgError}
             />
@@ -118,7 +118,7 @@ const Mypage = () => {
                     alt="portfolio"
                   />
                   <a
-                    href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${userInfoData.file.resume.resume}`}
+                    href={`/img/student/${userInfoData.std.istudent}/${userInfoData.file.resume.resume}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -169,6 +169,7 @@ const Mypage = () => {
                         ""
                       )}
                     </div>
+
                   </li>
                   <li>{item.oneWord}</li>
                 </ul>

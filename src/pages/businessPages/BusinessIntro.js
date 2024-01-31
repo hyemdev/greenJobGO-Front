@@ -1,34 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BusinessSwipe from "../../components/business/BusinessHome/BusinessSwipe";
 import { BusinessStyWrap } from "../../styles/BusinessIntroStyle";
 import { getBigcate, getMainImgList } from "../../api/businessMainAxios";
 import { Link, useNavigate } from "react-router-dom";
 import BusinessPrivacyProtect from "./BusinessPrivacyProtect";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { HeaderFocusAtom } from "../../components/BusinessHeader";
+import styled from "@emotion/styled";
+import OkModal from "../../components/OkModal";
+
 const BusinessIntro = () => {
   const [category, setCategory] = useState([]);
   const [swiperData, setSwiperData] = useState([]);
   const [clickCate, setClickCate] = useState("1");
   const [noItem, setNoItem] = useState(false);
 
-  // const [agreeModalOpen, setAgreeModalOpen] = useState(true);
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
+
+  const setSelect = useSetRecoilState(HeaderFocusAtom);
+
   const navigate = useNavigate();
 
   const handleTabBtnClick = item => {
     setClickCate(item);
   };
+
   const handleTotalListClick = () => {
+    setSelect("portpoliolist");
     navigate("/business/portpoliolist");
   };
-  // // 비동의 클릭
-  // const handleDisagree = () => {
-  //   navigate("/");
-  // };
   useEffect(() => {
-    getMainImgList({ setSwiperData, clickCate, setNoItem });
-  }, [clickCate]);
+    if (clickCate) {
+      getMainImgList({ setSwiperData, clickCate, setNoItem, setErrorApiInfo });
+    }
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [clickCate, errorApiInfo]);
 
   useEffect(() => {
-    getBigcate(setCategory);
+    getBigcate(setCategory, setErrorApiInfo);
   }, []);
 
   return (
@@ -41,11 +55,7 @@ const BusinessIntro = () => {
               key={`cate${item.iclassification}`}
               onClick={() => handleTabBtnClick(item.iclassification)}
             >
-              <button
-                value={item.iclassification}
-                className="cate-btn"
-                onClick={() => handleTabBtnClick(item.iclassification)}
-              >
+              <button value={item.iclassification} className="cate-btn">
                 {item.classification}
               </button>
             </li>
@@ -56,6 +66,23 @@ const BusinessIntro = () => {
       <div className="main-portfolio-linkBtn" onClick={handleTotalListClick}>
         <span> 포트폴리오 전체보기 </span>
       </div>
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
     </BusinessStyWrap>
   );
 };

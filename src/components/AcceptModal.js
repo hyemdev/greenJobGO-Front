@@ -8,7 +8,7 @@ export const AcceptModal = ({ acceptOkModal, uploadResult, handleOk }) => {
           <div className="dim">
             <div className="content-wrap">
               <div className="header">
-                <span>✖</span>
+                <span onClick={handleOk}>✖</span>
               </div>
               <div className="content">
                 <span>

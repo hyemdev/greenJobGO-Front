@@ -5,6 +5,7 @@ export const BusinessPortfolioWrap = styled.div`
   margin: 0 auto;
   width: 1400px;
   height: 100%;
+  padding: 0 5px;
   & > h2 {
     color: ${Maincolor.black};
     font-size: 24px;
@@ -13,6 +14,7 @@ export const BusinessPortfolioWrap = styled.div`
   }
   @media all and (max-width: 767px) {
     width: 360px;
+    min-width: 360px;
     height: 170px;
     & > h2 {
       color: ${Maincolor.black};
@@ -92,10 +94,11 @@ export const PfSearchWrap = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
+    width: 350px;
     height: 170px;
     background: ${Maincolor.search};
-    margin-top: 20px;
+    margin: 20px 0px;
+
     .student-portfolio-search {
       display: flex;
       flex-direction: column;
@@ -149,8 +152,8 @@ export const PfSearchWrap = styled.div`
       }
 
       & li > button {
-        font-size: 10px;
-        margin-left: 270px;
+        font-size: 11px;
+        margin-left: 260px;
         width: 50px;
         height: 25px;
         border: none;
@@ -206,7 +209,8 @@ export const ContentListWrap = styled.div`
     }
   }
   @media all and (max-width: 767px) {
-    width: 360px;
+    width: 350px;
+    padding: 0 5px;
     margin: 0 auto;
     .content-top-line {
       display: flex;
@@ -236,6 +240,7 @@ export const ContentListViewer = styled.div`
   padding: 10px 0;
   width: 1400px;
   overflow: auto;
+
   /* 갤러리형 스타일 */
   .galleryStyle {
     display: flex;
@@ -358,16 +363,15 @@ export const ContentListViewer = styled.div`
   }
   @media all and (max-width: 767px) {
     margin: 0 auto;
-    padding: 10px 0;
+    padding: 10px 0px;
     width: 360px;
     overflow: auto;
     .boardStyle {
       display: flex;
       justify-content: flex-start;
       gap: 5px;
-      padding: 10px 0;
       .boardbox {
-        width: 360px;
+        width: 350px;
         height: 108px;
         border-radius: 10px;
         border: 1px solid ${Maincolor.maingray};
@@ -375,6 +379,8 @@ export const ContentListViewer = styled.div`
         display: flex;
         justify-content: left;
         align-items: center;
+        cursor: pointer;
+
         .thumb-img {
           width: 86px;
           height: 62px;
@@ -387,24 +393,24 @@ export const ContentListViewer = styled.div`
           display: flex;
           flex-direction: column;
           justify-content: center;
-          margin-left: 4px;
+          margin-left: 6px;
           color: ${Maincolor.black};
 
           .oneword {
-            font-size: 9px;
+            font-size: 12px;
             font-weight: 500;
           }
           .student-name {
             width: 100%;
             margin-top: 8px;
-            font-size: 8px;
+            font-size: 11px;
             font-weight: 500;
             letter-spacing: -0.24px;
           }
           .subject-name {
-            width: 150px;
+            width: 240px;
             margin-top: 10px;
-            font-size: 8px;
+            font-size: 10px;
             font-weight: 400;
             white-space: nowrap;
             overflow: hidden;
@@ -417,28 +423,16 @@ export const ContentListViewer = styled.div`
             }
           }
           .date {
-            width: 150px;
+            width: 200px;
             margin-top: 5px;
-            font-size: 8px;
+            font-size: 10px;
             font-weight: 400;
             & > span:first-of-type {
               display: inline-block;
               width: 34px;
               font-weight: 500;
-              margin-right: 1px;
+              margin-right: 5px;
             }
-          }
-        }
-        .detail-view-btn {
-          width: 85px;
-          margin-left: 7px;
-          & button {
-            font-size: 8px;
-            width: 85px;
-            height: 21px;
-            border: none;
-            border-radius: 2px;
-            background: ${Maincolor.admintxt};
           }
         }
       }
@@ -447,10 +441,10 @@ export const ContentListViewer = styled.div`
   @media all and (max-width: 767px) {
     .galleryStyle {
       display: flex;
-      justify-content: center;
+      /* justify-content: center; */
       flex-wrap: wrap;
       gap: 20px;
-      padding: 10px 0;
+      padding: 10px 0px;
 
       .gallerybox {
         width: 335px;
@@ -467,7 +461,7 @@ export const ContentListViewer = styled.div`
           & > img {
             width: 300px;
             height: 150px;
-            object-fit: fill;
+            object-fit: contain;
           }
         }
         .student-name {

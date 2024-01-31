@@ -30,7 +30,7 @@ const YesResume = () => {
       <div className="contain">
         <div>
           <img
-            src={`http://112.222.157.156/img/student/${std?.istudent}/${file?.img?.img}`}
+            src={`/img/student/${std?.istudent}/${file?.img?.img}`}
             alt="자료없음"
             onError={onImgError}
           />

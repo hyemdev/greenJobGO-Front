@@ -1,7 +1,7 @@
 import { client } from "./client";
 
 //  대분류 카테고리 불러오기
-export const getBigcate = async setCategory => {
+export const getBigcate = async (setCategory, setErrorApiInfo) => {
   console.log("카테정보 불러옵니다");
 
   try {
@@ -10,15 +10,16 @@ export const getBigcate = async setCategory => {
     setCategory(result);
     return result;
   } catch (error) {
-    console.log(error);
+    setErrorApiInfo(`Category: ${error.message}`);
   }
 };
 
-//  대분류 카테고리 불러오기
+//  메인 포트폴리오 불러오기
 export const getMainImgList = async ({
   setSwiperData,
   clickCate,
   setNoItem,
+  setErrorApiInfo,
 }) => {
   console.log("카테정보 불러옵니다");
 
@@ -32,6 +33,6 @@ export const getMainImgList = async ({
     }
     return result;
   } catch (error) {
-    console.log(error);
+    setErrorApiInfo(`MainPortfolio List: ${error.message}`);
   }
 };

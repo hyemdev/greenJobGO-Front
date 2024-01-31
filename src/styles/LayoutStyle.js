@@ -40,24 +40,23 @@ export const NoitemList = styled.div`
     font-weight: 500;
   }
   @media all and (max-width: 767px) {
-  }
+    margin: 0 auto;
+    width: 360px;
+    height: 295px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
 
-  margin: 0 auto;
-  width: 360px;
-  height: 295px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-
-  & > img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-  }
-  & > P {
-    font-size: 12px;
-    font-weight: 500;
+    & > img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+    & > P {
+      font-size: 12px;
+      font-weight: 500;
+    }
   }
 `;

@@ -1,20 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderSty } from "../styles/HeaderStyle";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState, RecoilEnv, atom } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
-import { ReactComponent as StudentPortFolioIcon } from "../assets/StudentPortFolioIcon.svg";
-import { ReactComponent as JobmangerIcon } from "../assets/JobmangerIcon.svg";
 import { ReactComponent as HomeBtn } from "../assets/HomeBtn.svg";
 import { AgreeModalAtom } from "../pages/businessPages/Business";
 import { useMediaQuery } from "react-responsive";
 import { BusinessPageAtom } from "../pages/businessPages/PortfolioList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileLines, faUser } from "@fortawesome/free-regular-svg-icons";
+const { persistAtom } = recoilPersist();
+
+import { recoilPersist } from "recoil-persist";
+import ConfirmModal from "./ConfirmModal";
+import OkModal from "./OkModal";
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+
+export const HeaderFocusAtom = atom({
+  key: `HeaderFocusAtom`,
+  default: "myportfolio",
+  effects_UNSTABLE: [persistAtom],
+});
 
 const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
-  const [select, setSelect] = useState("businessintro");
+  const [select, setSelect] = useRecoilState(HeaderFocusAtom);
+
+  // api 오류 메세지 받아오는 state.
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+
   const navigate = useNavigate();
+
+  const location = useLocation();
 
   // 반응형 state
   const isMobileDevice = useMediaQuery({ query: "(max-width: 767px)" });
@@ -33,39 +54,53 @@ const BusinessHeader = () => {
       ibt: "b2",
       type: "portpoliolist",
       title: "수강생 포트폴리오",
-      icon: <StudentPortFolioIcon />,
+      icon: <FontAwesomeIcon icon={faFileLines} />,
     },
     {
       ibt: "b3",
       type: "jobmanagerlist",
       title: "취업 담당자 안내",
-      icon: <JobmangerIcon />,
+      icon: <FontAwesomeIcon icon={faUser} />,
     },
   ];
 
   const handleLogout = () => {
-    ResetBizAgreeRecoil();
-    ResetBusinessPageRecoil();
-    postLogout();
-
-    setAuthState(prevAuthState => ({
-      ...prevAuthState,
-      isLogin: false,
-      accessToken: null,
-      role: "",
-      id: "",
-    }));
-    navigate("/");
+    setLogoutModalOpen(true);
   };
+  const handleLogoutConfirm = () => {
+    try {
+      ResetBizAgreeRecoil();
+      ResetBusinessPageRecoil();
+      postLogout();
+
+      setAuthState(prevAuthState => ({
+        ...prevAuthState,
+        isLogin: false,
+        accessToken: null,
+        role: "",
+        id: "",
+      }));
+      navigate("/");
+    } catch (error) {
+      setErrorApiInfo("로그아웃이 정상적으로 처리되지 않았습니다.");
+    }
+  };
+
   const handleLogoClick = () => {
     setSelect("businessintro");
   };
   const handleColor = e => {
-    console.log("eeee", e);
     setSelect(e);
     ResetBusinessPageRecoil();
   };
 
+  useEffect(() => {
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [errorApiInfo]);
   return (
     <>
       <HeaderSty>
@@ -107,6 +142,38 @@ const BusinessHeader = () => {
           </div>
         </div>
       </HeaderSty>
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
+      {/* 로그아웃모달 */}
+      {logoutModalOpen && (
+        <ConfirmModal
+          open={logoutModalOpen}
+          close={() => {
+            setLogoutModalOpen(false);
+          }}
+          onConfirm={handleLogoutConfirm}
+          onCancel={() => {
+            setLogoutModalOpen(false);
+          }}
+        >
+          <span>로그아웃 하시겠습니까?</span>
+        </ConfirmModal>
+      )}
     </>
   );
 };

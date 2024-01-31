@@ -15,7 +15,7 @@ const Listgallery = ({ listData, onImgError }) => {
             <ul className="gallerybox">
               <li className="thumb-img">
                 <img
-                  src={`http://112.222.157.156${item.img}`}
+                  src={`${item.img}`}
                   alt="thumb-img"
                   onError={onImgError}
                 />

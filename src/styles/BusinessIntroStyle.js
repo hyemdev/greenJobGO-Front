@@ -74,13 +74,13 @@ export const BusinessStyWrap = styled.div`
         & > li {
           border-radius: 20px;
           border: 1px solid ${Maincolor.grayLight2};
-          padding: 8px 18px;
+          padding: 5px 15px;
           cursor: pointer;
           .cate-btn {
             cursor: pointer;
             border: none;
             background: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
             text-align: center;
             letter-spacing: -0.24px;
@@ -218,6 +218,7 @@ export const SwiperWrapStyle = styled.div`
         width: 100%;
         height: 120px;
         display: block;
+        object-fit: contain;
       }
       .txt {
         width: 300px;
