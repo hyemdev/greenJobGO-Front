@@ -8,7 +8,7 @@ import {
 import { AddPortfolioWrap } from "../../styles/AddPortfolioStyle";
 import AddPofolPofol from "../../components/student/MyPortfolio/AddPofolPofol";
 import AddPofolModal from "../../components/student/MyPortfolio/AddPofolModal";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 import {
   AcceptModal,
@@ -18,6 +18,7 @@ import {
 import { getStudentInfo } from "../../api/studentAxios";
 import { useNavigate } from "react-router";
 import OkModal from "../../components/OkModal";
+import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 
 const AddPortFolio = () => {
   // 로그인 오류 메세지 받아오는 state.
@@ -40,11 +41,14 @@ const AddPortFolio = () => {
   const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [mainCheck, setMainCheck] = useState("");
   const [ifile, setIfile] = useState("");
-  const userData = useRecoilValue(userInfo);
-  const istudent = userData?.std?.istudent;
+  const userInfo = useRecoilValue(userInfoAtom);
+  const istudent = userInfo.std?.istudent;
   const navigate = useNavigate();
-  const fetchData = () => {
-    getStudentInfo(setFile, setStd);
+
+  const fetchData = async () => {
+    const { std, file } = await getStudentInfo();
+    setFile(file);
+    setStd(std);
   };
 
   useEffect(() => {
@@ -168,7 +172,6 @@ const AddPortFolio = () => {
     } else {
       setErrorModalOpen(false);
     }
-
   }, [errorCancelInfo]);
   return (
     <AddPortfolioWrap>

@@ -2,21 +2,15 @@ import React from "react";
 import { YesResumeWrap } from "../../../styles/YesResumStyle";
 import NoImage from "../../../assets/NoImage.jpg";
 import { useNavigate } from "react-router";
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { AuthStateAtom } from "../../../recoil/atoms/AuthState";
 import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
+import { userInfoAtom } from "../../../recoil/atoms/UserInfoState";
 
 const YesResume = () => {
   const authState = useRecoilValue(AuthStateAtom);
-  const userInfoData = useRecoilValueLoadable(userInfo);
-  const std =
-    userInfoData.state === "hasValue" && userInfoData.contents.std
-      ? userInfoData.contents.std
-      : null;
-  const file =
-    userInfoData.state === "hasValue" && userInfoData.contents.file
-      ? userInfoData.contents.file
-      : null;
+  const userInfo = useRecoilValue(userInfoAtom);
+
   const navigate = useNavigate();
   // 이미지 없을 때 error처리
   const onImgError = e => {
@@ -30,7 +24,7 @@ const YesResume = () => {
       <div className="contain">
         <div>
           <img
-            src={`/img/student/${std?.istudent}/${file?.img?.img}`}
+            src={`/img/student/${userInfo.std?.istudent}/${userInfo.file?.img?.img}`}
             alt="자료없음"
             onError={onImgError}
           />
@@ -38,13 +32,17 @@ const YesResume = () => {
         <div>
           <div className="content">
             <div>
-              <h3>{std?.introducedLine}</h3>
-              <span>{std?.subject.subjectName}</span>
+              <h3>{userInfo.std?.introducedLine}</h3>
+              <span>{userInfo.std?.name}</span>
+            </div>
+            <div>
+              <span>과정명</span>
+              <span>{userInfo.std?.subject?.subjectName}</span>
             </div>
             <div>
               <span>수강기간</span>
               <span>
-                {std?.startedAt} ~ {std?.endedAt}
+                {userInfo.std?.startedAt} ~ {userInfo.std?.endedAt}
               </span>
             </div>
           </div>
@@ -53,12 +51,6 @@ const YesResume = () => {
           </div>
         </div>
       </div>
-      {authState.editableYn === 0 ? (
-        <div className="buttons">
-          <button>삭제</button>
-          <button>수정</button>
-        </div>
-      ) : null}
     </YesResumeWrap>
   );
 };
