@@ -168,6 +168,7 @@ const AddPortFolio = () => {
     } else {
       setErrorModalOpen(false);
     }
+
   }, [errorCancelInfo]);
   return (
     <AddPortfolioWrap>

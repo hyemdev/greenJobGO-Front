@@ -1,7 +1,5 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
-import { useRecoilState } from "recoil";
-import { AgreeModalAtom } from "../pages/businessPages/Business";
 
 // axios 인스턴스 생성
 export const client = axios.create({

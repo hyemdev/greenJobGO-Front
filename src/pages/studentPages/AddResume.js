@@ -14,8 +14,13 @@ import { useNavigate } from "react-router";
 import { AcceptModal, DeleteModal } from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
 import HashTag from "../../components/student/MyPortfolio/HashTag";
+import OkModal from "../../components/OkModal";
 
 const AddResume = () => {
+  // api 오류 메세지 받아오는 state.
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorApiInfo, setErrorApiInfo] = useState("");
+
   const [std, setStd] = useState([]);
   const [file, setFile] = useState([]);
   const [hashTag, setHashTag] = useState("");
@@ -152,6 +157,14 @@ const AddResume = () => {
   const handleHashChange = e => {
     setHashTag(e.target.value);
   };
+  
+  useEffect(() => {
+    if (errorApiInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [errorApiInfo]);
 
   return (
     <AddResumeWrap>
@@ -305,6 +318,23 @@ const AddResume = () => {
       <div className="resume-buttons">
         <button onClick={handleCancle}>취소</button>
       </div>
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorApiInfo("");
+          }}
+        >
+          <span>{errorApiInfo}</span>
+        </OkModal>
+      )}
     </AddResumeWrap>
   );
 };
