@@ -95,7 +95,7 @@ const AddPofolPofol = ({
                             <span>
                               <FontAwesomeIcon
                                 icon={faCrown}
-                                style={{ display: "block", color: "#fff" }}
+                                style={{ color: "#fff" }}
                               />
                               대표
                             </span>

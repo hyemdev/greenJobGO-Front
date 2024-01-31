@@ -271,11 +271,38 @@ export const PortfolioInfo = styled.div`
       border-radius: 6px 6px 0px 0px;
       background: ${Maincolor.maingray};
       padding: 10px;
-      & > img {
-        width: 20px;
-        height: 20px;
-        object-fit: contain;
-        margin-right: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & > div {
+        :first-of-type {
+          img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            margin-right: 5px;
+            padding-bottom: 1px;
+          }
+          a {
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+          }
+        }
+      }
+      .main-pofol {
+        font-size: 14px;
+        background: ${Maincolor.admintxt};
+        border-radius: 4px;
+        > span {
+          width: 70px;
+          height: 28px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          color: ${Maincolor.white};
+        }
       }
     }
     & > li:nth-of-type(2) {
