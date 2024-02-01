@@ -76,6 +76,7 @@ const Login = () => {
               navigate("/");
             }
           }, accessTokenTime);
+          console.log(accessTokenTime);
         } else {
           navigate("/");
         }
