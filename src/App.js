@@ -1,27 +1,13 @@
 import { Route, Routes } from "react-router";
 import { Suspense, lazy } from "react";
-import { createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
 import { PrivateRoutes } from "./components/PrivateRoutes";
-import { FadeLoader } from "react-spinners";
 import Loading from "./components/Loading";
-// 기업페이지
-// import Business from "./pages/businessPages/Business";
-// import BusinessIntro from "./pages/businessPages/BusinessIntro";
-// import PortfolioList from "./pages/businessPages/PortfolioList";
-// import PortfolioDetail from "./pages/businessPages/PortfolioDetail";
-// import JobManagerList from "./pages/businessPages/JobManagerList";
-// 수강생 페이지
-// import Student from "./pages/studentPages/Student";
-// import MyPortfolioMg from "./pages/studentPages/MyPortfolioMg";
-// import Mypage from "./pages/studentPages/Mypage";
-// import ConnectCompany from "./pages/studentPages/ConnectCompany";
-// import AddPortFolio from "./pages/studentPages/AddPortFolio";
-// import AddResume from "./pages/studentPages/AddResume";
-// import { FadeLoader } from "react-spinners";
 
+// 로그인페이지
+const Login = lazy(() => import("./pages/Login"));
+// 기업페이지
 const Business = lazy(() => import("./pages/businessPages/Business"));
 const BusinessIntro = lazy(() => import("./pages/businessPages/BusinessIntro"));
 const PortfolioList = lazy(() => import("./pages/businessPages/PortfolioList"));
@@ -31,6 +17,8 @@ const PortfolioDetail = lazy(
 const JobManagerList = lazy(
   () => import("./pages/businessPages/JobManagerList"),
 );
+
+// 수강생 페이지
 const Student = lazy(() => import("./pages/studentPages/Student"));
 const MyPortfolioMg = lazy(() => import("./pages/studentPages/MyPortfolioMg"));
 const Mypage = lazy(() => import("./pages/studentPages/Mypage"));
