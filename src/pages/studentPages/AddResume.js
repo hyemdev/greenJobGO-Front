@@ -39,7 +39,7 @@ const AddResume = () => {
 
   const fetchData = async () => {
     try {
-      const { std } = await getStudentInfo();
+      const { std, file } = await getStudentInfo();
       setHashSave(std.certificates);
     } catch (error) {
       console.log(error);
@@ -50,10 +50,11 @@ const AddResume = () => {
     fetchData();
   }, []);
 
-  const istudent = userInfo.std.istudent;
+  console.log("get:", userInfo.std);
+  console.log("get:", userInfo.file);
 
-  // const certificateData = std.certificates;
-  // const certificateValue = std.certificate;
+  const istudent = userInfo.std?.istudent;
+
   const handleResumeFileChange = e => {
     const file = e.target.files[0];
 
@@ -96,7 +97,7 @@ const AddResume = () => {
     const ifile = userInfo.file?.resume?.ifile;
     await deleteFile(istudent, ifile);
     setDeleteOkModal(false);
-    fetchData();
+    // fetchData();
   };
 
   const handleRemoveHashTag = async icertificate => {
@@ -233,20 +234,7 @@ const AddResume = () => {
                     handleHashChange={handleHashChange}
                     handleKeyDown={handleKeyDown}
                   />
-                  {/* <input
-                    type="text"
-                    value={certificate}
-                    onChange={e => {
-                      setCertificate(e.target.value);
-                    }}
-                    placeholder="자격증을 입력해주세요. ex)정보처리기사, 운전면허 2종 보통"
-                  />
-                  <p>내용을 입력해 주세요.</p> */}
                 </div>
-                {/* <div>
-                  <button onClick={handleCertificateUpload}>저장</button>
-                  <button>삭제</button>
-                </div> */}
               </div>
             </li>
             <li>
