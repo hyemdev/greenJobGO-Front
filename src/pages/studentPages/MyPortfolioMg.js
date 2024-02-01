@@ -37,8 +37,7 @@ const MyPortfolioMg = () => {
   const handlePortfolioMove = () => {
     navigate("/student/addportfolio");
   };
-  console.log("get:", userInfo.std);
-  console.log("get:", userInfo.file);
+
   return (
     <MyPortfolioWrap>
       <ul>
