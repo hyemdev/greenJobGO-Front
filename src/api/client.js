@@ -65,13 +65,13 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
     const { role, refreshToken, accessToken, vo, accessTokenTime } =
       await res.data;
-
     if (role && refreshToken && accessToken) {
       const cookieOptions = {
         path: "/",
         secure: true,
         sameSite: "none",
-        httpOnly: true,
+        httpOnly: false,
+        maxAge: 180,
       };
 
       setCookie("refreshToken", refreshToken, cookieOptions);
