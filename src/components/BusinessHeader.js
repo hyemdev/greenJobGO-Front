@@ -20,7 +20,7 @@ import OkModal from "./OkModal";
 
 export const HeaderFocusAtom = atom({
   key: `HeaderFocusAtom`,
-  default: "myportfolio",
+  default: "businessintro",
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -42,6 +42,7 @@ const BusinessHeader = () => {
 
   const ResetBizAgreeRecoil = useResetRecoilState(AgreeModalAtom);
   const ResetBusinessPageRecoil = useResetRecoilState(BusinessPageAtom);
+  const ResetHeaderFocusRecoil = useResetRecoilState(HeaderFocusAtom);
 
   const menus = [
     {
@@ -71,6 +72,7 @@ const BusinessHeader = () => {
     try {
       ResetBizAgreeRecoil();
       ResetBusinessPageRecoil();
+      ResetHeaderFocusRecoil();
       postLogout();
 
       setAuthState(prevAuthState => ({

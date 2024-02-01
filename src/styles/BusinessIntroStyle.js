@@ -150,6 +150,8 @@ export const SwiperWrapStyle = styled.div`
   .swiper-slide {
     width: 300px;
     text-align: center;
+    cursor: pointer;
+
     img {
       width: 300px;
       height: 204px;
