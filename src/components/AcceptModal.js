@@ -54,8 +54,8 @@ export const MainYnModal = ({
               )}
 
               <div className="btns">
-                <button onClick={handleMainPofolOk}>확인</button>
                 <button onClick={handleMainCancel}>취소</button>
+                <button onClick={handleMainPofolOk}>확인</button>
               </div>
             </div>
           </div>

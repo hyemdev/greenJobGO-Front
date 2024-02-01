@@ -189,8 +189,37 @@ export const patchMainPortfolioSeleted = async (
     const res = await client.patch(
       `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}`,
     );
+    console.log("main", res);
+
   } catch (error) {
-    setErrorInfo(`Main Portfolio Select: ${error.message}`);
+    console.log("main", error);
+    const { status } = error.response;
+    if (error.response) {
+      switch (status) {
+        case 452:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 453:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 454:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 456:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 457:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 458:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        default:
+          setErrorInfo(`Main Portfolio Select: ${error.message}`);
+      }
+    } else {
+      setErrorInfo(`Main Portfolio Select: ${error.message}`);
+    }
   }
 };
 

@@ -131,8 +131,8 @@ const AddPortFolio = () => {
     fetchData();
   };
 
-  const handleMainPofolOk = () => {
-    patchMainPortfolioSeleted(istudent, mainCheck, mainYn, setErrorInfo);
+  const handleMainPofolOk = async () => {
+    await patchMainPortfolioSeleted(istudent, mainCheck, mainYn, setErrorInfo);
     setMainYnModal(false);
     fetchData();
   };
