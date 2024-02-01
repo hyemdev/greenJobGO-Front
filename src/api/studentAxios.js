@@ -6,6 +6,9 @@ export const getStudentInfo = async setUserInfo => {
 
     const { std, file } = res.data;
 
+    console.log(res.data);
+    console.log(res.data);
+    
     return { std, file };
   } catch (error) {
     console.log(error);

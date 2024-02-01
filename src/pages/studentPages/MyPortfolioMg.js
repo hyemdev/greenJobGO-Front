@@ -17,10 +17,15 @@ const MyPortfolioMg = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const navigate = useNavigate();
 
-  const fetchData = () => {
-    getStudentInfo(setUserInfo);
+  const fetchData = async () => {
+    try {
+      const { std, file } = await getStudentInfo();
+      setUserInfo({ std, file });
+    } catch (error) {
+      console.log(error);
+    }
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -32,7 +37,8 @@ const MyPortfolioMg = () => {
   const handlePortfolioMove = () => {
     navigate("/student/addportfolio");
   };
-  console.log(authState.portfolioYn);
+  console.log("get:", userInfo.std);
+  console.log("get:", userInfo.file);
   return (
     <MyPortfolioWrap>
       <ul>
@@ -63,7 +69,11 @@ const MyPortfolioMg = () => {
           </div>
         </MyPortfolioButton>
         <MyPortfolioContent>
-          {authState.portfolioYn === 1 ? <YesResume /> : <NoResume />}
+          {authState?.portfolioYn === 1 && authState?.aboutMeYn === 1 ? (
+            <YesResume />
+          ) : (
+            <NoResume />
+          )}
         </MyPortfolioContent>
         <div className="btm-buttons">
           {authState.editableYn === 1 &&
