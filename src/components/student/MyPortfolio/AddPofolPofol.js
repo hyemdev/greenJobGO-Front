@@ -5,6 +5,7 @@ import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 import { FadeLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { userInfoAtom } from "../../../recoil/atoms/UserInfoState";
 
 const AddPofolPofol = ({
   file,
@@ -15,8 +16,8 @@ const AddPofolPofol = ({
   handleDeleteFile,
   handleCheckboxChange,
 }) => {
-  const userData = useRecoilValue(userInfo);
-  const istudent = userData?.std?.istudent;
+  const userInfo = useRecoilValue(userInfoAtom);
+  const istudent = userInfo.std?.istudent;
 
   return (
     <AddPofolPofolWrap>
@@ -49,7 +50,7 @@ const AddPofolPofol = ({
               <button onClick={handleThumbNailUpload}>등록</button>
               <button
                 onClick={() => {
-                  handleDeleteFile(file?.img?.ifile);
+                  handleDeleteFile(userInfo.file?.img?.ifile);
                 }}
               >
                 삭제
@@ -71,8 +72,8 @@ const AddPofolPofol = ({
             </button>
           </div>
           <div>
-            {file.portfolio?.length > 0 &&
-              file.portfolio.map(item => (
+            {file?.portfolio?.length > 0 &&
+              file.portfolio?.map(item => (
                 <ul key={item.ifile}>
                   <li>
                     <div>
@@ -131,7 +132,7 @@ const AddPofolPofol = ({
                   </li>
                 </ul>
               ))}
-            {file.fileLinks?.length > 0 &&
+            {file?.fileLinks?.length > 0 &&
               file.fileLinks.map(item => (
                 <ul key={item.ifile}>
                   <li>

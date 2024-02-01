@@ -29,36 +29,47 @@ export const YesResumeWrap = styled.div`
         .content {
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          justify-content: space-between;
+          /* justify-content: center; */
+          /* justify-content: space-between; */
           width: 100%;
           height: 100%;
-          padding: 15px 0 25px 60px;
+          padding: 15px 0 0 60px;
           > div {
             width: 100%;
             :nth-of-type(1) {
+              margin-bottom: 52px;
               > h3 {
                 font-size: 20px;
                 font-weight: 500;
                 color: ${Maincolor.black};
-                padding-bottom: 14px;
+                margin-bottom: 14px;
               }
               > span {
                 font-size: 16px;
-                font-weight: 400;
-                color: ${Maincolor.btn};
+                font-weight: 500;
+                color: ${Maincolor.black};
               }
             }
             :nth-of-type(2) {
+              padding-bottom: 16px;
+              > span {
+                margin-right: 34px;
+              }
+            }
+            :nth-of-type(3) {
+              > span {
+                margin-right: 21px;
+              }
+            }
+            :not(:first-of-type) {
               > span {
                 :first-of-type {
                   font-size: 16px;
                   font-weight: 500;
                   color: ${Maincolor.black};
-                  padding-right: 11px;
                 }
                 :last-of-type {
-                  font-size: 16px;
+                  font-size: 14px;
                   font-weight: 400;
                   color: ${Maincolor.btn};
                 }

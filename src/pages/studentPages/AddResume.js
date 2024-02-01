@@ -15,6 +15,8 @@ import { AcceptModal, DeleteModal } from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
 import HashTag from "../../components/student/MyPortfolio/HashTag";
 import OkModal from "../../components/OkModal";
+import { useRecoilState } from "recoil";
+import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 
 const AddResume = () => {
   // api 오류 메세지 받아오는 state.
@@ -25,26 +27,33 @@ const AddResume = () => {
   const [file, setFile] = useState([]);
   const [hashTag, setHashTag] = useState("");
   const [hashSave, setHashSave] = useState([]);
-  const [certificate, setCertificate] = useState("");
+  // const [certificate, setCertificate] = useState("");
   const [resumeFile, setResumeFile] = useState("");
   const [resumeOneWord, setResumeOneWord] = useState("");
   const [acceptOkModal, setAcceptOkModal] = useState(false);
   const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [uploadResult, setUploadResult] = useState("");
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+
   const navigate = useNavigate();
 
-  const fetchData = () => {
-    getStudentInfo(setFile, setStd, setHashSave);
+  const fetchData = async () => {
+    try {
+      const { std } = await getStudentInfo();
+      setHashSave(std.certificates);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const istudent = std.istudent;
+  const istudent = userInfo.std.istudent;
 
-  const certificateData = std.certificates;
-  const certificateValue = std.certificate;
+  // const certificateData = std.certificates;
+  // const certificateValue = std.certificate;
   const handleResumeFileChange = e => {
     const file = e.target.files[0];
 
@@ -84,7 +93,7 @@ const AddResume = () => {
   };
 
   const handleDeleteOk = async () => {
-    const ifile = file.resume.ifile;
+    const ifile = userInfo.file?.resume?.ifile;
     await deleteFile(istudent, ifile);
     setDeleteOkModal(false);
     fetchData();
@@ -124,7 +133,7 @@ const AddResume = () => {
 
     if (newHashTag === "") return;
 
-    if (hashSave.length >= 6) {
+    if (hashSave.length >= 9) {
       setHashTag("");
       return;
     }
@@ -138,8 +147,6 @@ const AddResume = () => {
         console.log(error);
       }
     }
-
-    console.log(hashSave);
 
     setHashTag("");
   };
@@ -157,7 +164,7 @@ const AddResume = () => {
   const handleHashChange = e => {
     setHashTag(e.target.value);
   };
-  
+
   useEffect(() => {
     if (errorApiInfo) {
       setApiErrorModalOpen(true);
@@ -191,11 +198,12 @@ const AddResume = () => {
             <h3>기본 정보</h3>
           </div>
           <div>
-            {std && (
+            {userInfo.std && (
               <>
-                <span className="name">{std.name}</span>
+                <span className="name">{userInfo.std?.name}</span>
                 <span className="age">
-                  {std.gender} {std.birthday} (만 {std.age}세)
+                  {userInfo.std?.gender} {userInfo.std?.birthday} (만{" "}
+                  {userInfo.std?.age}세)
                 </span>
               </>
             )}
@@ -204,15 +212,15 @@ const AddResume = () => {
             <li>
               <div>
                 <span>과정명</span>
-                <span> {std?.subject?.subjectName}</span>
+                <span> {userInfo.std?.subject?.subjectName}</span>
               </div>
               <div>
                 <span>주소</span>
-                <span> {std?.address}</span>
+                <span> {userInfo.std?.address}</span>
               </div>
               <div>
                 <span>Email</span>
-                <span> {std?.email}</span>
+                <span> {userInfo.std?.email}</span>
               </div>
               <div>
                 <div>
@@ -246,16 +254,16 @@ const AddResume = () => {
                 <span>수강기간</span>
                 <span>
                   {" "}
-                  {std?.startedAt} ~ {std?.endedAt}
+                  {userInfo.std?.startedAt} ~ {userInfo.std?.endedAt}
                 </span>
               </div>
               <div>
                 <span> 전화번호</span>
-                <span> {std?.mobileNumber}</span>
+                <span> {userInfo.std?.mobileNumber}</span>
               </div>
               <div>
                 <span>학력</span>
-                <span> {std?.education}</span>
+                <span> {userInfo.std?.education}</span>
               </div>
             </li>
           </ul>
@@ -272,7 +280,9 @@ const AddResume = () => {
               <input
                 type="text"
                 value={
-                  file?.resume?.ifile ? std?.introducedLine : resumeOneWord
+                  userInfo.file?.resume?.ifile
+                    ? userInfo.std?.introducedLine
+                    : resumeOneWord
                 }
                 onChange={e => {
                   setResumeOneWord(e.target.value);
@@ -295,8 +305,8 @@ const AddResume = () => {
               <input
                 className="upload-name"
                 value={
-                  file?.resume?.ifile
-                    ? file?.resume?.resume
+                  userInfo.file?.resume?.ifile
+                    ? userInfo.file?.resume?.resume
                     : resumeFile
                       ? resumeFile.name
                       : "첨부파일"

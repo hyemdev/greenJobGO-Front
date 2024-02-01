@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import NoImage from "../../assets/NoImage.jpg";
 import {
@@ -7,18 +7,30 @@ import {
   PortfolioInfo,
   ResumeInfo,
 } from "../../styles/MypageStyle";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 import { v4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
+import { getStudentInfo } from "../../api/studentAxios";
 
 const Mypage = () => {
-  const userInfoData = useRecoilValue(userInfo);
+  // const userInfo = useRecoilValue(userInfoAtom);
+  const [std, setStd] = useState("");
+  const [file, setFile] = useState([]);
   const navigate = useNavigate();
+
+  const fetchData = async () => {
+    const { std, file } = await getStudentInfo();
+    setStd(std);
+    setFile(file);
+  };
+
   useEffect(() => {
-    userInfoData;
+    fetchData();
   }, []);
+
   // 이미지 없을 때 error처리
   const onImgError = e => {
     e.target.src = NoImage;
@@ -26,7 +38,7 @@ const Mypage = () => {
 
   // 돌아가기 버튼
   const handleBack = () => {
-    navigate(-1);
+    navigate("/student/myportfolio");
   };
 
   return (
@@ -35,9 +47,9 @@ const Mypage = () => {
       <div className="sub-title">기본정보</div>
       <DefaultInfo>
         <div className="thumb-img">
-          {userInfoData?.file?.img?.img && (
+          {file.img?.img && (
             <img
-              src={`/img/student/${userInfoData.std.istudent}/${userInfoData.file.img.img}`}
+              src={`/img/student/${std?.istudent}/${file.img?.img}`}
               alt="thumb-img"
               onError={onImgError}
             />
@@ -45,30 +57,30 @@ const Mypage = () => {
         </div>
         <div className="info">
           <ul className="text-upper">
-            <li className="name">{userInfoData?.std?.name}</li>
+            <li className="name">{std?.name}</li>
             <li className="age">
-              {userInfoData?.std?.gender} {userInfoData?.std?.birthday} (만
-              {userInfoData?.std?.age}세)
+              {std?.gender} {std?.birthday} (만
+              {std?.age}세)
             </li>
           </ul>
           <ul className="text-info">
             <li>
               <div>
                 <span>과정명</span>
-                <span> {userInfoData?.std?.subject?.subjectName}</span>
+                <span> {std.subject?.subjectName}</span>
               </div>
               <div>
                 <span>주소</span>
-                <span> {userInfoData?.std?.address}</span>
+                <span> {std.address}</span>
               </div>
               <div>
                 <span>Email</span>
-                <span> {userInfoData?.std?.email}</span>
+                <span> {std?.email}</span>
               </div>
               <div>
                 <span>자격증</span>
                 <div>
-                  {userInfoData?.std?.certificates.map(item => (
+                  {std.certificates?.map(item => (
                     <div key={item.icertificate}>
                       <span>{item.certificate}</span>
                     </div>
@@ -80,16 +92,16 @@ const Mypage = () => {
               <div>
                 <span>수강기간</span>
                 <span>
-                  {userInfoData?.std?.startedAt} ~ {userInfoData?.std?.endedAt}
+                  {std?.startedAt} ~ {std?.endedAt}
                 </span>
               </div>
               <div>
                 <span> 휴대폰</span>
-                <span> {userInfoData?.std?.mobileNumber}</span>
+                <span> {std?.mobileNumber}</span>
               </div>
               <div>
                 <span>학력</span>
-                <span> {userInfoData?.std?.education}</span>
+                <span> {std?.education}</span>
               </div>
             </li>
           </ul>
@@ -100,8 +112,8 @@ const Mypage = () => {
         <div className="oneword">
           <ul>
             <li>한 줄 소개</li>
-            {userInfoData.std && userInfoData?.std?.introducedLine ? (
-              <li>{userInfoData?.std?.introducedLine}</li>
+            {std && std?.introducedLine ? (
+              <li>{std?.introducedLine}</li>
             ) : (
               <li>등록 된 한줄소개가 없습니다.</li>
             )}
@@ -111,18 +123,18 @@ const Mypage = () => {
           <ul>
             <li>이력서 및 자기소개서</li>
             <li>
-              {userInfoData?.file && userInfoData?.file?.resume?.resume ? (
+              {file && file.resume?.resume ? (
                 <div>
                   <img
                     src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
                     alt="portfolio"
                   />
                   <a
-                    href={`/img/student/${userInfoData.std.istudent}/${userInfoData.file.resume.resume}`}
+                    href={`/img/student/${std?.istudent}/${file.resume?.resume}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {userInfoData?.file?.resume?.resume}
+                    {file.resume?.resume}
                   </a>
                 </div>
               ) : (
@@ -134,11 +146,10 @@ const Mypage = () => {
       </ResumeInfo>
       <div className="sub-title">포트폴리오</div>
       <PortfolioInfo>
-        {userInfoData?.file?.portfolio.length > 0 ||
-        userInfoData?.file?.fileLinks.length > 0 ? (
+        {file.portfolio?.length > 0 || file.fileLinks?.length > 0 ? (
           <>
-            {userInfoData.file.portfolio?.length > 0 &&
-              userInfoData.file.portfolio.map(item => (
+            {file.portfolio?.length > 0 &&
+              file.portfolio?.map(item => (
                 <ul key={v4()} className="portfolio-list">
                   <li>
                     <div>
@@ -147,7 +158,7 @@ const Mypage = () => {
                         alt="portfolio"
                       />
                       <a
-                        href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${item.file}`}
+                        href={`http://112.222.157.156/img/student/${std?.istudent}/${item.file}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -155,7 +166,7 @@ const Mypage = () => {
                       </a>
                     </div>
                     <div>
-                      {item?.mainYn === 1 ? (
+                      {item.mainYn === 1 ? (
                         <div className="main-pofol">
                           <span>
                             <FontAwesomeIcon
@@ -169,13 +180,12 @@ const Mypage = () => {
                         ""
                       )}
                     </div>
-
                   </li>
                   <li>{item.oneWord}</li>
                 </ul>
               ))}
-            {userInfoData?.file?.fileLinks?.length > 0 &&
-              userInfoData?.file?.fileLinks.map(item => (
+            {file.fileLinks?.length > 0 &&
+              file.fileLinks?.map(item => (
                 <ul key={v4()} className="portfolio-list">
                   <li>
                     <div>
@@ -184,7 +194,7 @@ const Mypage = () => {
                         alt="portfolio"
                       />
                       <a
-                        href={`http://112.222.157.156/img/student/${userInfoData.std.istudent}/${item.fileLink}`}
+                        href={`http://112.222.157.156/img/student/${std?.istudent}/${item.fileLink}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -192,7 +202,7 @@ const Mypage = () => {
                       </a>
                     </div>
                     <div>
-                      {item?.mainYn === 1 ? (
+                      {item.mainYn === 1 ? (
                         <div className="main-pofol">
                           <span>
                             <FontAwesomeIcon

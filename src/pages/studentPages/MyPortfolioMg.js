@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NoResume from "../../components/student/MyPortfolio/NoResume";
 import YesResume from "../../components/student/MyPortfolio/YesResume";
 import {
@@ -7,18 +7,23 @@ import {
   MyPortfolioTitle,
   MyPortfolioWrap,
 } from "../../styles/MyPofolMgStyle";
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { AuthStateAtom } from "../../recoil/atoms/AuthState";
-import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 import { useNavigate } from "react-router";
+import { getStudentInfo } from "../../api/studentAxios";
+import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 const MyPortfolioMg = () => {
-  const navigate = useNavigate();
   const authState = useRecoilValue(AuthStateAtom);
-  const subjectData = useRecoilValueLoadable(userInfo);
-  const subject =
-    subjectData.state === "hasValue" && subjectData.contents.std.subject
-      ? subjectData.contents.std.subject
-      : null;
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const navigate = useNavigate();
+
+  const fetchData = () => {
+    getStudentInfo(setUserInfo);
+  };
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleResumeMove = () => {
     navigate("/student/addresume");
@@ -37,7 +42,7 @@ const MyPortfolioMg = () => {
         <MyPortfolioButton>
           <div>
             <span>수강하신&ensp;</span>
-            <span>{subject?.subjectName}</span>
+            <span>{userInfo.std?.subject?.subjectName}</span>
             <span>
               의&ensp;포트폴리오를 등록하고 취업의 기회를 넓혀 보세요!
             </span>
