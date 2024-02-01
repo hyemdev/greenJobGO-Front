@@ -20,8 +20,8 @@ import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 
 const AddResume = () => {
   // api 오류 메세지 받아오는 state.
-  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
-  const [errorApiInfo, setErrorApiInfo] = useState("");
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [errorInfo, setErrorInfo] = useState("");
 
   const [std, setStd] = useState([]);
   const [file, setFile] = useState([]);
@@ -39,7 +39,7 @@ const AddResume = () => {
 
   const fetchData = async () => {
     try {
-      const { std, file } = await getStudentInfo();
+      const { std, file } = await getStudentInfo(setErrorInfo);
       setHashSave(std.certificates);
     } catch (error) {
       console.log(error);
@@ -68,7 +68,12 @@ const AddResume = () => {
     formData.append("file", resumeFile);
 
     try {
-      const result = await postResumeUpload(formData, istudent, resumeOneWord);
+      const result = await postResumeUpload(
+        formData,
+        istudent,
+        resumeOneWord,
+        setErrorInfo,
+      );
 
       setUploadResult(result);
 
@@ -76,7 +81,7 @@ const AddResume = () => {
         setAcceptOkModal(true);
       }
     } catch (error) {
-      setAcceptOkModal(true);
+      // setAcceptOkModal(true);
     }
   };
 
@@ -95,7 +100,7 @@ const AddResume = () => {
 
   const handleDeleteOk = async () => {
     const ifile = userInfo.file?.resume?.ifile;
-    await deleteFile(istudent, ifile);
+    await deleteFile(istudent, ifile, setErrorInfo);
     setDeleteOkModal(false);
     // fetchData();
   };
@@ -167,12 +172,12 @@ const AddResume = () => {
   };
 
   useEffect(() => {
-    if (errorApiInfo) {
-      setApiErrorModalOpen(true);
+    if (errorInfo) {
+      setErrorModalOpen(true);
     } else {
-      setApiErrorModalOpen(false);
+      setErrorModalOpen(false);
     }
-  }, [errorApiInfo]);
+  }, [errorInfo]);
 
   return (
     <AddResumeWrap>
@@ -317,20 +322,20 @@ const AddResume = () => {
         <button onClick={handleCancle}>취소</button>
       </div>
       {/* api 에러 확인모달 */}
-      {apiErrorModalOpen && (
+      {errorModalOpen && (
         <OkModal
           header={""}
-          open={apiErrorModalOpen}
+          open={errorModalOpen}
           close={() => {
-            setApiErrorModalOpen(false);
-            setErrorApiInfo("");
+            setErrorModalOpen(false);
+            setErrorInfo("");
           }}
           onConfirm={() => {
-            setApiErrorModalOpen(false);
-            setErrorApiInfo("");
+            setErrorModalOpen(false);
+            setErrorInfo("");
           }}
         >
-          <span>{errorApiInfo}</span>
+          <span>{errorInfo}</span>
         </OkModal>
       )}
     </AddResumeWrap>

@@ -14,8 +14,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 import { getStudentInfo } from "../../api/studentAxios";
+import OkModal from "../../components/OkModal";
 
 const Mypage = () => {
+  // api 오류 메세지 받아오는 state.
+  const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
+  const [errorInfo, setErrorInfo] = useState("");
+
   // const userInfo = useRecoilValue(userInfoAtom);
   const [std, setStd] = useState("");
   const [file, setFile] = useState([]);
@@ -41,6 +46,13 @@ const Mypage = () => {
     navigate("/student/myportfolio");
   };
 
+  useEffect(() => {
+    if (errorInfo) {
+      setApiErrorModalOpen(true);
+    } else {
+      setApiErrorModalOpen(false);
+    }
+  }, [errorInfo]);
   return (
     <MypageWrap>
       <h2>수강생 정보</h2>
@@ -230,6 +242,23 @@ const Mypage = () => {
       <div className="buttons">
         <button onClick={handleBack}>돌아가기</button>
       </div>
+      {/* api 에러 확인모달 */}
+      {apiErrorModalOpen && (
+        <OkModal
+          header={""}
+          open={apiErrorModalOpen}
+          close={() => {
+            setApiErrorModalOpen(false);
+            setErrorInfo("");
+          }}
+          onConfirm={() => {
+            setApiErrorModalOpen(false);
+            setErrorInfo("");
+          }}
+        >
+          <span>{errorInfo}</span>
+        </OkModal>
+      )}
     </MypageWrap>
   );
 };

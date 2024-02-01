@@ -4,14 +4,14 @@ import BusinessHeader from "../../components/BusinessHeader";
 import { ContentWrap, LayoutStyle } from "../../styles/LayoutStyle";
 import BusinessPrivacyProtect from "./BusinessPrivacyProtect";
 import IndexModal from "../../components/IndexModal";
-import { atom, useRecoilState, RecoilEnv } from "recoil";
+import { atom, useRecoilState } from "recoil";
 import { recoilPersist } from "recoil-persist";
 import { postLogout } from "../../api/client";
 import ConfirmModal from "../../components/ConfirmModal";
 import { useMediaQuery } from "react-responsive";
 const { persistAtom } = recoilPersist();
 
-RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+// RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export const AgreeModalAtom = atom({
   // key: `AgreeModalAtom/${v4()}`,

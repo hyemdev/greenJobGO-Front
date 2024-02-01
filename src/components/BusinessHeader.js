@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { HeaderSty } from "../styles/HeaderStyle";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
-import { useRecoilState, useResetRecoilState, RecoilEnv, atom } from "recoil";
+import { useRecoilState, useResetRecoilState, atom } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
 import { ReactComponent as HomeBtn } from "../assets/HomeBtn.svg";
 import { AgreeModalAtom } from "../pages/businessPages/Business";
@@ -16,7 +16,7 @@ import { recoilPersist } from "recoil-persist";
 import ConfirmModal from "./ConfirmModal";
 import OkModal from "./OkModal";
 
-RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+// RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export const HeaderFocusAtom = atom({
   key: `HeaderFocusAtom`,

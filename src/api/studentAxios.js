@@ -1,6 +1,6 @@
 import { client } from "../api/client";
 
-export const getStudentInfo = async setUserInfo => {
+export const getStudentInfo = async (setUserInfo, setErrorInfo) => {
   try {
     const res = await client.get(`/student`);
 
@@ -8,9 +8,9 @@ export const getStudentInfo = async setUserInfo => {
 
     console.log(res.data);
     console.log(res.data);
-    
+
     return { std, file };
   } catch (error) {
-    console.log(error);
-  }
+    setErrorInfo(`Student Info: ${error.message}`);
+    }
 };

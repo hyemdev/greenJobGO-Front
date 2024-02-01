@@ -7,6 +7,7 @@ export const postFileUpload = async (
   fileOneWord,
   linkOneWord,
   formData,
+  setErrorInfo,
 ) => {
   try {
     const baseUrl = `/student/file?istudent=${istudent}&iFileCategory=${fileType}`;
@@ -31,11 +32,37 @@ export const postFileUpload = async (
       return { success: false };
     }
   } catch (error) {
-    console.log(error);
+    const { status } = error.response;
+    if (error.response) {
+      switch (status) {
+        case 452:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 453:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 454:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 456:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 457:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 458:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        default:
+          setErrorInfo("등록에 실패했습니다.");
+      }
+    } else {
+      setErrorInfo("네트워크 오류 또는 서버 응답이 없습니다.");
+    }
   }
 };
 
-export const postThumbNailUpload = async (istudent, formData) => {
+export const postThumbNailUpload = async (istudent, formData, setErrorInfo) => {
   try {
     const res = await client.post(
       `/student/file?istudent=${istudent}&iFileCategory=4`,
@@ -51,11 +78,42 @@ export const postThumbNailUpload = async (istudent, formData) => {
       return { success: false };
     }
   } catch (error) {
-    console.log(error);
+    const { status } = error.response;
+    if (error.response) {
+      switch (status) {
+        case 452:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 453:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 454:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 456:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 457:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 458:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        default:
+          setErrorInfo("등록에 실패했습니다.");
+      }
+    } else {
+      setErrorInfo("네트워크 오류 또는 서버 응답이 없습니다.");
+    }
   }
 };
 
-export const postResumeUpload = async (formData, istudent, resumeOneWord) => {
+export const postResumeUpload = async (
+  formData,
+  istudent,
+  resumeOneWord,
+  setErrorInfo,
+) => {
   try {
     const res = await client.post(
       `/student/file?istudent=${istudent}&iFileCategory=1&introducedLine=${resumeOneWord}`,
@@ -74,7 +132,33 @@ export const postResumeUpload = async (formData, istudent, resumeOneWord) => {
       return { success: false };
     }
   } catch (error) {
-    console.log(error);
+    const { status } = error.response;
+    if (error.response) {
+      switch (status) {
+        case 452:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 453:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 454:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 456:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 457:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 458:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        default:
+          setErrorInfo("등록에 실패했습니다.");
+      }
+    } else {
+      setErrorInfo("네트워크 오류 또는 서버 응답이 없습니다.");
+    }
   }
 };
 
@@ -99,23 +183,25 @@ export const patchMainPortfolioSeleted = async (
   istudent,
   mainCheck,
   mainYn,
+  setErrorInfo,
 ) => {
   try {
     const res = await client.patch(
       `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}`,
     );
   } catch (error) {
-    console.log(error);
+    setErrorInfo(`Main Portfolio Select: ${error.message}`);
   }
 };
 
-export const deleteFile = async (istudent, ifile) => {
+export const deleteFile = async (istudent, ifile, setErrorInfo) => {
   try {
     const res = await client.delete(
       `/student/file?istudent=${istudent}&ifile=${ifile}`,
     );
+    setErrorInfo("삭제가 완료되었습니다.");
   } catch (error) {
-    console.log(error);
+    setErrorInfo(`file delete: ${error.message}`);
   }
 };
 

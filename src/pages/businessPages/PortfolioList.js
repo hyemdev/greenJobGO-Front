@@ -11,11 +11,11 @@ import {
 import NoImage from "../../assets/NoImage.jpg";
 import OkModal from "../../components/OkModal";
 
-import { atom, useRecoilState, RecoilEnv } from "recoil";
+import { atom, useRecoilState } from "recoil";
 import { recoilPersist } from "recoil-persist";
 const { persistAtom } = recoilPersist();
 
-RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+// RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export const BusinessPageAtom = atom({
   key: `BusinessPageAtom`,

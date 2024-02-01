@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NoResume from "../../components/student/MyPortfolio/NoResume";
 import YesResume from "../../components/student/MyPortfolio/YesResume";
 import {
@@ -12,23 +12,24 @@ import { AuthStateAtom } from "../../recoil/atoms/AuthState";
 import { useNavigate } from "react-router";
 import { getStudentInfo } from "../../api/studentAxios";
 import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
+import OkModal from "../../components/OkModal";
 const MyPortfolioMg = () => {
+  // 오류 메세지 받아오는 state.
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [errorInfo, setErrorInfo] = useState("");
+
   const authState = useRecoilValue(AuthStateAtom);
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const { std, file } = await getStudentInfo();
+      const { std, file } = await getStudentInfo(setErrorInfo);
       setUserInfo({ std, file });
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const handleResumeMove = () => {
     navigate("/student/addresume");
@@ -39,6 +40,17 @@ const MyPortfolioMg = () => {
   };
   console.log("get:", userInfo.std);
   console.log("get:", userInfo.file);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  useEffect(() => {
+    if (errorInfo) {
+      setErrorModalOpen(true);
+    } else {
+      setErrorModalOpen(false);
+    }
+  }, [errorInfo]);
   return (
     <MyPortfolioWrap>
       <ul>
@@ -88,6 +100,23 @@ const MyPortfolioMg = () => {
           )}
         </div>
       </ul>
+      {/* api 에러 확인모달 */}
+      {errorModalOpen && (
+        <OkModal
+          header={""}
+          open={errorModalOpen}
+          close={() => {
+            setErrorModalOpen(false);
+            setErrorInfo("");
+          }}
+          onConfirm={() => {
+            setErrorModalOpen(false);
+            setErrorInfo("");
+          }}
+        >
+          <span>{errorInfo}</span>
+        </OkModal>
+      )}
     </MyPortfolioWrap>
   );
 };

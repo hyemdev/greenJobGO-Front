@@ -21,9 +21,9 @@ import OkModal from "../../components/OkModal";
 import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 
 const AddPortFolio = () => {
-  // 로그인 오류 메세지 받아오는 state.
+  // 오류 메세지 받아오는 state.
   const [errorModalOpen, setErrorModalOpen] = useState(false);
-  const [errorCancelInfo, setErrorCancelInfo] = useState("");
+  const [errorInfo, setErrorInfo] = useState("");
 
   const [fileType, setFileType] = useState(2);
   const [selectFile, setSelectFile] = useState("");
@@ -46,7 +46,7 @@ const AddPortFolio = () => {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    const { std, file } = await getStudentInfo();
+    const { std, file } = await getStudentInfo(setErrorInfo);
     setFile(file);
     setStd(std);
   };
@@ -73,6 +73,7 @@ const AddPortFolio = () => {
         fileOneWord,
         linkOneWord,
         formData,
+        setErrorInfo,
       );
 
       setUploadResult(result);
@@ -90,7 +91,11 @@ const AddPortFolio = () => {
     let formData = new FormData();
     formData.append("file", imgFile);
     try {
-      const result = await postThumbNailUpload(istudent, formData);
+      const result = await postThumbNailUpload(
+        istudent,
+        formData,
+        setErrorInfo,
+      );
 
       setUploadResult(result);
 
@@ -99,7 +104,7 @@ const AddPortFolio = () => {
         setAcceptOkModal(true);
       }
     } catch (error) {
-      setAcceptOkModal(true);
+      // setAcceptOkModal(true);
     }
   };
 
@@ -109,7 +114,7 @@ const AddPortFolio = () => {
       setDeleteOkModal(true);
       fetchData();
     } else {
-      setErrorCancelInfo("삭제할 파일이 없습니다.");
+      setErrorInfo("삭제할 파일이 없습니다.");
     }
   };
 
@@ -127,7 +132,7 @@ const AddPortFolio = () => {
   };
 
   const handleMainPofolOk = () => {
-    patchMainPortfolioSeleted(istudent, mainCheck, mainYn);
+    patchMainPortfolioSeleted(istudent, mainCheck, mainYn, setErrorInfo);
     setMainYnModal(false);
     fetchData();
   };
@@ -153,7 +158,7 @@ const AddPortFolio = () => {
 
   const handleDeleteOk = async () => {
     const istudent = std.istudent;
-    await deleteFile(istudent, ifile);
+    await deleteFile(istudent, ifile, setErrorInfo);
     setDeleteOkModal(false);
     fetchData();
   };
@@ -167,12 +172,12 @@ const AddPortFolio = () => {
   };
 
   useEffect(() => {
-    if (errorCancelInfo) {
+    if (errorInfo) {
       setErrorModalOpen(true);
     } else {
       setErrorModalOpen(false);
     }
-  }, [errorCancelInfo]);
+  }, [errorInfo]);
   return (
     <AddPortfolioWrap>
       {modalOpen && (
@@ -237,13 +242,13 @@ const AddPortFolio = () => {
           header={""}
           open={errorModalOpen}
           close={() => {
-            setErrorModalOpen(false), setErrorCancelInfo("");
+            setErrorModalOpen(false), setErrorInfo("");
           }}
           onConfirm={() => {
-            setErrorModalOpen(false), setErrorCancelInfo("");
+            setErrorModalOpen(false), setErrorInfo("");
           }}
         >
-          <span>{errorCancelInfo}</span>
+          <span>{errorInfo}</span>
         </OkModal>
       )}
     </AddPortfolioWrap>
