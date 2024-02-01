@@ -1,9 +1,10 @@
-import { Route, Routes } from "react-router";
-import { Suspense, lazy } from "react";
+import { Route, Routes, useLocation } from "react-router";
+import { Suspense, lazy, useEffect } from "react";
 import "./App.css";
 import NotFound from "./pages/NotFound";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import Loading from "./components/Loading";
+import { getCookie, removeCookie } from "./api/cookie";
 
 // 로그인페이지
 const Login = lazy(() => import("./pages/Login"));
@@ -28,7 +29,19 @@ const ConnectCompany = lazy(
 const AddPortFolio = lazy(() => import("./pages/studentPages/AddPortFolio"));
 const AddResume = lazy(() => import("./pages/studentPages/AddResume"));
 
-function App() {
+const App = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const accessToken = getCookie("accessToken");
+    const refreshToken = getCookie("refreshToken");
+    console.log("refreshToken", refreshToken);
+    console.log("accessToken", accessToken);
+    if (pathname === "/" && (accessToken || refreshToken)) {
+      removeCookie("accessToken");
+      removeCookie("refreshToken");
+    }
+  }, []);
   return (
     <>
       <Suspense fallback={<Loading />}>
@@ -76,6 +89,6 @@ function App() {
       </Suspense>
     </>
   );
-}
+};
 
 export default App;

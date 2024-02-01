@@ -65,14 +65,13 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
     const { role, refreshToken, accessToken, vo, accessTokenTime } =
       await res.data;
-    const expiredTime = accessTokenTime / 1000;
     if (role && refreshToken && accessToken) {
       const cookieOptions = {
         path: "/",
         secure: true,
         sameSite: "none",
-        httpOnly: true,
-        maxAge: expiredTime,
+        httpOnly: false,
+        maxAge: 180,
       };
 
       setCookie("refreshToken", refreshToken, cookieOptions);
