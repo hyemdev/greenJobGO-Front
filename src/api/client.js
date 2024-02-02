@@ -88,14 +88,15 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
       setRefresCookie("refreshToken", refreshToken, {
         path: "/",
-        secure: true,
+        secure: false,
         sameSite: "none",
         httpOnly: false,
         maxAge: 180,
       });
+
       setAcessCookie("accessToken", accessToken, {
         path: "/",
-        secure: true,
+        secure: false,
         sameSite: "none",
         httpOnly: true,
         maxAge: 180,
