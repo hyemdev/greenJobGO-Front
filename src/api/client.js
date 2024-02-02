@@ -3,7 +3,6 @@ import {
   getCookie,
   removeCookie,
   setAcessCookie,
-  setCookie,
   setRefresCookie,
 } from "./cookie";
 
@@ -49,7 +48,13 @@ client.interceptors.response.use(
         console.log("리프레시토큰:", data);
 
         const accessToken = data;
-        setAcessCookie("accessToken", accessToken);
+        setAcessCookie("accessToken", accessToken, {
+          path: "/",
+          secure: false,
+          sameSite: "none",
+          httpOnly: true,
+          maxAge: 180,
+        });
 
         if (config?.headers && config.headers?.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
