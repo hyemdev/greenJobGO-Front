@@ -1,5 +1,11 @@
 import axios from "axios";
-import { getCookie, removeCookie, setCookie } from "./cookie";
+import {
+  getCookie,
+  removeCookie,
+  setAcessCookie,
+  setCookie,
+  setRefresCookie,
+} from "./cookie";
 
 // axios 인스턴스 생성
 export const client = axios.create({
@@ -43,7 +49,7 @@ client.interceptors.response.use(
         console.log("리프레시토큰:", data);
 
         const accessToken = data;
-        setCookie("accessToken", accessToken);
+        setAcessCookie("accessToken", accessToken);
 
         if (config?.headers && config.headers?.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
@@ -80,14 +86,14 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
       //   maxAge: 180,
       // };
 
-      setCookie("refreshToken", refreshToken, {
+      setRefresCookie("refreshToken", refreshToken, {
         path: "/",
         secure: true,
         sameSite: "none",
         httpOnly: false,
         maxAge: 180,
       });
-      setCookie("accessToken", accessToken, {
+      setAcessCookie("accessToken", accessToken, {
         path: "/",
         secure: true,
         sameSite: "none",
