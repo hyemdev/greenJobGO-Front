@@ -77,16 +77,6 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
     console.log(res.data);
     if (role && refreshToken && accessToken) {
-      // 빌드 전 secure는 전부 true, httpOnly는 access만 true
-      // maxAge는 토큰 시간에 맞춰서 설정하기
-      // const cookieOptions = {
-      //   path: "/",
-      //   secure: true,
-      //   sameSite: "none",
-      //   httpOnly: true,
-      //   maxAge: 180,
-      // };
-
       setRefresCookie("refreshToken", refreshToken);
 
       setAcessCookie("accessToken", accessToken);

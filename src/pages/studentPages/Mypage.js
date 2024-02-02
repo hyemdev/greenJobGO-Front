@@ -23,7 +23,7 @@ const Mypage = () => {
 
   // const userInfo = useRecoilValue(userInfoAtom);
   const [std, setStd] = useState("");
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState("");
   const navigate = useNavigate();
 
   const fetchData = async () => {

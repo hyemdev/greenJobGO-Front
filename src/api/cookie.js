@@ -8,7 +8,6 @@ export const setRefresCookie = (name, value) => {
     secure: true,
     sameSite: "none",
     httpOnly: false,
-    maxAge: 180,
   });
 };
 
