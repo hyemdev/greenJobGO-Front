@@ -37,15 +37,10 @@ const Login = () => {
       return;
     } else {
       try {
-        const {
-          role,
-          accessToken,
-          refreshToken,
-          vo,
-          refresh,
-          accessTokenTime,
-        } = await fetchLogin(userId, password, setErrorCancelInfo);
+        const { role, accessToken, refreshToken, vo, accessTokenTime } =
+          await fetchLogin(userId, password, setErrorCancelInfo);
         if (role === "ROLE_USER" && accessToken) {
+          console.log(role);
           setAuthState({
             isLogin: true,
             accessToken: accessToken,
@@ -60,18 +55,16 @@ const Login = () => {
             isLogin: true,
             accessToken: accessToken,
             role: role,
-            refresh: refresh,
           });
           navigate("/business");
 
           setTimeout(() => {
-            if (refresh) {
+            if (role === "ROLE_COMPANY") {
               postLogout(accessToken, refreshToken);
               setAuthState({
                 isLogin: false,
                 accessToken: null,
                 role: "",
-                refresh: false,
               });
               navigate("/");
             }

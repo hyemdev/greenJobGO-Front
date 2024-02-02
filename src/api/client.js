@@ -14,6 +14,7 @@ client.interceptors.request.use(
   async config => {
     const token = getCookie("accessToken");
     if (token) {
+      console.log("액세스토큰", token);
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -32,16 +33,19 @@ client.interceptors.response.use(
   async error => {
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
-    if (response && response.status === 401 && refreshToken) {
+    console.log("리프레시토큰:", refreshToken);
+    if (response?.status === 401 && refreshToken) {
+      console.log("리프레시토큰:", refreshToken);
       try {
         const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
+        console.log("리프레시토큰:", data);
 
         const accessToken = data;
         setCookie("accessToken", accessToken);
 
-        if (config && config.headers && config.headers.Authorization) {
+        if (config?.headers && config.headers?.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
           const retryResponse = await client(config);
           return retryResponse;
@@ -66,16 +70,31 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
     const { role, refreshToken, accessToken, vo, accessTokenTime } =
       await res.data;
     if (role && refreshToken && accessToken) {
-      const cookieOptions = {
+      // 빌드 전 secure는 전부 true, httpOnly는 access만 true
+      // maxAge는 토큰 시간에 맞춰서 설정하기
+      // const cookieOptions = {
+      //   path: "/",
+      //   secure: true,
+      //   sameSite: "none",
+      //   httpOnly: true,
+      //   maxAge: 180,
+      // };
+
+      setCookie("refreshToken", refreshToken, {
         path: "/",
         secure: true,
         sameSite: "none",
         httpOnly: false,
         maxAge: 180,
-      };
+      });
+      setCookie("accessToken", accessToken, {
+        path: "/",
+        secure: true,
+        sameSite: "none",
+        httpOnly: true,
+        maxAge: 180,
+      });
 
-      setCookie("refreshToken", refreshToken, cookieOptions);
-      setCookie("accessToken", accessToken, cookieOptions);
       setErrorCancelInfo("");
 
       if (role === "ROLE_USER") {
@@ -86,7 +105,6 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
           accessToken,
           refreshToken,
           vo,
-          refresh: true,
           accessTokenTime,
         };
       }

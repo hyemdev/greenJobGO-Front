@@ -9,7 +9,6 @@ export const AuthStateAtom = atom({
     isLogin: false,
     accessToken: null,
     role: "",
-    refresh: true,
     id: "",
     editableYn: "",
     portfolioYn: "",
