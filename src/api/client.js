@@ -48,13 +48,7 @@ client.interceptors.response.use(
         console.log("리프레시토큰:", data);
 
         const accessToken = data;
-        setAcessCookie("accessToken", accessToken, {
-          path: "/",
-          secure: false,
-          sameSite: "none",
-          httpOnly: true,
-          maxAge: 180,
-        });
+        setAcessCookie("accessToken", accessToken);
 
         if (config?.headers && config.headers?.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
@@ -80,6 +74,8 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
     const { role, refreshToken, accessToken, vo, accessTokenTime } =
       await res.data;
+
+    console.log(res.data);
     if (role && refreshToken && accessToken) {
       // 빌드 전 secure는 전부 true, httpOnly는 access만 true
       // maxAge는 토큰 시간에 맞춰서 설정하기
@@ -91,21 +87,9 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
       //   maxAge: 180,
       // };
 
-      setRefresCookie("refreshToken", refreshToken, {
-        path: "/",
-        secure: false,
-        sameSite: "none",
-        httpOnly: false,
-        maxAge: 180,
-      });
+      setRefresCookie("refreshToken", refreshToken);
 
-      setAcessCookie("accessToken", accessToken, {
-        path: "/",
-        secure: false,
-        sameSite: "none",
-        httpOnly: true,
-        maxAge: 180,
-      });
+      setAcessCookie("accessToken", accessToken);
 
       setErrorCancelInfo("");
 

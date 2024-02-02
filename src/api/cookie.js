@@ -5,7 +5,7 @@ const cookies = new Cookies();
 export const setRefresCookie = (name, value) => {
   return cookies.set(name, value, {
     path: "/",
-    secure: false,
+    secure: true,
     sameSite: "none",
     httpOnly: false,
     maxAge: 180,
@@ -15,9 +15,9 @@ export const setRefresCookie = (name, value) => {
 export const setAcessCookie = (name, value) => {
   return cookies.set(name, value, {
     path: "/",
-    secure: false,
+    secure: true,
     sameSite: "none",
-    httpOnly: true,
+    httpOnly: false,
     maxAge: 180,
   });
 };
