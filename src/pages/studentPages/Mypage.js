@@ -61,7 +61,7 @@ const Mypage = () => {
         <div className="thumb-img">
           {file.img?.img && (
             <img
-              src={`/img/student/${std?.istudent}/${file.img?.img}`}
+              src={`https://greenjobgo.kr/img/student/${std?.istudent}/${file.img?.img}`}
               alt="thumb-img"
               onError={onImgError}
             />

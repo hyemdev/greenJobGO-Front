@@ -83,7 +83,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`/img/student/${istudent}/${item.file}`}
+                          href={`https://greenjobgo.kr/img/student/${istudent}/${item.file}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -143,7 +143,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`/img/student/${istudent}/${item.fileLink}`}
+                          href={`https://greenjobgo.kr/img/student/${istudent}/${item.fileLink}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

@@ -4,6 +4,7 @@ import {
   removeCookie,
   setAcessCookie,
   setRefreshCookie,
+  setCookie,
 } from "./cookie";
 
 // axios 인스턴스 생성
@@ -17,15 +18,17 @@ export const client = axios.create({
 // 요청 인터셉터 설정
 client.interceptors.request.use(
   async config => {
+    console.log("요청1Acess:", token);
     const token = getCookie("accessToken");
+    console.log("요청2Acess:", token);
     if (token) {
-      console.log("액세스토큰", token);
+      console.log("요청3Acess:", token);
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
   error => {
-    console.log(error);
+    console.log("요청 인터셉터 실패?", error);
     return Promise.reject(error);
   },
 );
@@ -38,30 +41,30 @@ client.interceptors.response.use(
   async error => {
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
-    console.log(refreshToken);
+    console.log("응답Refresh:", refreshToken);
     if (response.status === 401 && refreshToken) {
       try {
         const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
-        console.log(data);
+        console.log("응답Acess:", data);
 
         const accessToken = data;
-        console.log(accessToken);
-        setAcessCookie("accessToken", accessToken);
-        console.log(accessToken);
+        console.log("응답Acess:", accessToken);
+        setCookie("accessToken", accessToken);
+        console.log("응답Acess:", accessToken);
 
-        console.log(refreshToken);
+        console.log("응답Refresh:", refreshToken);
         if (config.headers && config.headers.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
           const retryResponse = await client(config);
           return retryResponse;
         }
       } catch (error) {
-        console.log("토큰 갱신 실패:", error);
+        console.log("토큰 갱신 리스판스 실패:", error);
       }
     }
-    console.error("요청 실패:", error);
+    console.error("요청 리스판스 실패:", error);
     return Promise.reject(error);
   },
 );
@@ -79,9 +82,9 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
     console.log(res.data);
     if (role && refreshToken && accessToken) {
-      setRefreshCookie("refreshToken", refreshToken);
+      setCookie("refreshToken", refreshToken);
 
-      setAcessCookie("accessToken", accessToken);
+      setCookie("accessToken", accessToken);
 
       setErrorCancelInfo("");
 
