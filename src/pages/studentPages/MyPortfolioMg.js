@@ -19,13 +19,16 @@ const MyPortfolioMg = () => {
   const [errorInfo, setErrorInfo] = useState("");
 
   const authState = useRecoilValue(AuthStateAtom);
-  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  // const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
+  const [std, setStd] = useState("");
+  const [file, setFile] = useState("");
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
       const { std, file } = await getStudentInfo(setErrorInfo);
-      setUserInfo({ std, file });
+      setStd(std);
+      setFile(file);
     } catch (error) {
       console.log(error);
     }
@@ -38,9 +41,6 @@ const MyPortfolioMg = () => {
   const handlePortfolioMove = () => {
     navigate("/student/addportfolio");
   };
-  console.log("get:", userInfo.std);
-  console.log("get:", userInfo.file);
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -60,7 +60,7 @@ const MyPortfolioMg = () => {
         <MyPortfolioButton>
           <div>
             <span>수강하신&ensp;</span>
-            <span>{userInfo.std?.subject?.subjectName}</span>
+            <span>{std?.subject?.subjectName}</span>
             <span>
               의&ensp;포트폴리오를 등록하고 취업의 기회를 넓혀 보세요!
             </span>
@@ -82,7 +82,7 @@ const MyPortfolioMg = () => {
         </MyPortfolioButton>
         <MyPortfolioContent>
           {authState?.portfolioYn === 1 && authState?.aboutMeYn === 1 ? (
-            <YesResume />
+            <YesResume std={std} file={file} />
           ) : (
             <NoResume />
           )}

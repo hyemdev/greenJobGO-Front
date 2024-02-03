@@ -15,16 +15,14 @@ import { AcceptModal, DeleteModal } from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
 import HashTag from "../../components/student/MyPortfolio/HashTag";
 import OkModal from "../../components/OkModal";
-import { useRecoilState } from "recoil";
-import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 
 const AddResume = () => {
   // api 오류 메세지 받아오는 state.
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [errorInfo, setErrorInfo] = useState("");
 
-  const [std, setStd] = useState([]);
-  const [file, setFile] = useState([]);
+  const [std, setStd] = useState("");
+  const [file, setFile] = useState("");
   const [hashTag, setHashTag] = useState("");
   const [hashSave, setHashSave] = useState([]);
   // const [certificate, setCertificate] = useState("");
@@ -33,7 +31,6 @@ const AddResume = () => {
   const [acceptOkModal, setAcceptOkModal] = useState(false);
   const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [uploadResult, setUploadResult] = useState("");
-  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
 
   const navigate = useNavigate();
 
@@ -41,6 +38,8 @@ const AddResume = () => {
     try {
       const { std, file } = await getStudentInfo(setErrorInfo);
       setHashSave(std.certificates);
+      setStd(std);
+      setFile(file);
     } catch (error) {
       console.log(error);
     }
@@ -50,10 +49,10 @@ const AddResume = () => {
     fetchData();
   }, []);
 
-  console.log("get:", userInfo.std);
-  console.log("get:", userInfo.file);
+  console.log("get:", std);
+  console.log("get:", file);
 
-  const istudent = userInfo.std?.istudent;
+  const istudent = std?.istudent;
 
   const handleResumeFileChange = e => {
     const file = e.target.files[0];
@@ -81,7 +80,7 @@ const AddResume = () => {
         setAcceptOkModal(true);
       }
     } catch (error) {
-      // setAcceptOkModal(true);
+      setAcceptOkModal(true);
     }
   };
 
@@ -99,10 +98,10 @@ const AddResume = () => {
   };
 
   const handleDeleteOk = async () => {
-    const ifile = userInfo.file?.resume?.ifile;
+    const ifile = file?.resume?.ifile;
     await deleteFile(istudent, ifile, setErrorInfo);
     setDeleteOkModal(false);
-    // fetchData();
+    fetchData();
   };
 
   const handleRemoveHashTag = async icertificate => {
@@ -204,12 +203,11 @@ const AddResume = () => {
             <h3>기본 정보</h3>
           </div>
           <div>
-            {userInfo.std && (
+            {std && (
               <>
-                <span className="name">{userInfo.std?.name}</span>
+                <span className="name">{std?.name}</span>
                 <span className="age">
-                  {userInfo.std?.gender} {userInfo.std?.birthday} (만{" "}
-                  {userInfo.std?.age}세)
+                  {std?.gender} {std?.birthday} (만 {std?.age}세)
                 </span>
               </>
             )}
@@ -218,15 +216,15 @@ const AddResume = () => {
             <li>
               <div>
                 <span>과정명</span>
-                <span> {userInfo.std?.subject?.subjectName}</span>
+                <span> {std?.subject?.subjectName}</span>
               </div>
               <div>
                 <span>주소</span>
-                <span> {userInfo.std?.address}</span>
+                <span> {std?.address}</span>
               </div>
               <div>
                 <span>Email</span>
-                <span> {userInfo.std?.email}</span>
+                <span> {std?.email}</span>
               </div>
               <div>
                 <div>
@@ -247,16 +245,16 @@ const AddResume = () => {
                 <span>수강기간</span>
                 <span>
                   {" "}
-                  {userInfo.std?.startedAt} ~ {userInfo.std?.endedAt}
+                  {std?.startedAt} ~ {std?.endedAt}
                 </span>
               </div>
               <div>
                 <span> 전화번호</span>
-                <span> {userInfo.std?.mobileNumber}</span>
+                <span> {std?.mobileNumber}</span>
               </div>
               <div>
                 <span>학력</span>
-                <span> {userInfo.std?.education}</span>
+                <span> {std?.education}</span>
               </div>
             </li>
           </ul>
@@ -273,9 +271,7 @@ const AddResume = () => {
               <input
                 type="text"
                 value={
-                  userInfo.file?.resume?.ifile
-                    ? userInfo.std?.introducedLine
-                    : resumeOneWord
+                  file?.resume?.ifile ? std?.introducedLine : resumeOneWord
                 }
                 onChange={e => {
                   setResumeOneWord(e.target.value);
@@ -298,8 +294,8 @@ const AddResume = () => {
               <input
                 className="upload-name"
                 value={
-                  userInfo.file?.resume?.ifile
-                    ? userInfo.file?.resume?.resume
+                  file?.resume?.ifile
+                    ? file?.resume?.resume
                     : resumeFile
                       ? resumeFile.name
                       : "첨부파일"

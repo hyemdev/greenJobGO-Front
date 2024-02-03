@@ -2,13 +2,21 @@ import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
-export const setCookie = (name, value) => {
+export const setRefreshCookie = (name, value) => {
   return cookies.set(name, value, {
     path: "/",
     secure: true,
     sameSite: "none",
     httpOnly: false,
-    maxAge: 180,
+  });
+};
+
+export const setAcessCookie = (name, value) => {
+  return cookies.set(name, value, {
+    path: "/",
+    secure: true,
+    sameSite: "none",
+    httpOnly: false,
   });
 };
 

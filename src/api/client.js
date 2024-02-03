@@ -1,5 +1,10 @@
 import axios from "axios";
-import { getCookie, removeCookie, setCookie } from "./cookie";
+import {
+  getCookie,
+  removeCookie,
+  setAcessCookie,
+  setRefreshCookie,
+} from "./cookie";
 
 // axios 인스턴스 생성
 export const client = axios.create({
@@ -14,6 +19,7 @@ client.interceptors.request.use(
   async config => {
     const token = getCookie("accessToken");
     if (token) {
+      console.log("액세스토큰", token);
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
@@ -32,16 +38,21 @@ client.interceptors.response.use(
   async error => {
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
-    if (response && response.status === 401 && refreshToken) {
+    console.log(refreshToken);
+    if (response.status === 401 && refreshToken) {
       try {
         const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
+        console.log(data);
 
         const accessToken = data;
-        setCookie("accessToken", accessToken);
+        console.log(accessToken);
+        setAcessCookie("accessToken", accessToken);
+        console.log(accessToken);
 
-        if (config && config.headers && config.headers.Authorization) {
+        console.log(refreshToken);
+        if (config.headers && config.headers.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
           const retryResponse = await client(config);
           return retryResponse;
@@ -65,28 +76,27 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
 
     const { role, refreshToken, accessToken, vo, accessTokenTime } =
       await res.data;
-    if (role && refreshToken && accessToken) {
-      const cookieOptions = {
-        path: "/",
-        secure: true,
-        sameSite: "none",
-        httpOnly: false,
-        maxAge: 180,
-      };
 
-      setCookie("refreshToken", refreshToken, cookieOptions);
-      setCookie("accessToken", accessToken, cookieOptions);
+    console.log(res.data);
+    if (role && refreshToken && accessToken) {
+      setRefreshCookie("refreshToken", refreshToken);
+
+      setAcessCookie("accessToken", accessToken);
+
       setErrorCancelInfo("");
 
       if (role === "ROLE_USER") {
+        console.log("수강생액세스", accessToken);
+        console.log("수강생리프레시", refreshToken);
         return { role, accessToken, refreshToken, vo };
       } else if (role === "ROLE_COMPANY") {
+        console.log("기업액세스", accessToken);
+        console.log("기업리프레시", refreshToken);
         return {
           role,
           accessToken,
           refreshToken,
           vo,
-          refresh: true,
           accessTokenTime,
         };
       }

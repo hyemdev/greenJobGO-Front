@@ -4,7 +4,12 @@ import "./App.css";
 import NotFound from "./pages/NotFound";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import Loading from "./components/Loading";
-import { getCookie, removeCookie } from "./api/cookie";
+import {
+  getCookie,
+  removeCookie,
+  setAcessCookie,
+  setRefreshCookie,
+} from "./api/cookie";
 
 // 로그인페이지
 const Login = lazy(() => import("./pages/Login"));
@@ -18,7 +23,6 @@ const PortfolioDetail = lazy(
 const JobManagerList = lazy(
   () => import("./pages/businessPages/JobManagerList"),
 );
-
 // 수강생 페이지
 const Student = lazy(() => import("./pages/studentPages/Student"));
 const MyPortfolioMg = lazy(() => import("./pages/studentPages/MyPortfolioMg"));
@@ -30,18 +34,6 @@ const AddPortFolio = lazy(() => import("./pages/studentPages/AddPortFolio"));
 const AddResume = lazy(() => import("./pages/studentPages/AddResume"));
 
 const App = () => {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    const accessToken = getCookie("accessToken");
-    const refreshToken = getCookie("refreshToken");
-    console.log("refreshToken", refreshToken);
-    console.log("accessToken", accessToken);
-    if (pathname === "/" && (accessToken || refreshToken)) {
-      removeCookie("accessToken");
-      removeCookie("refreshToken");
-    }
-  }, []);
   return (
     <>
       <Suspense fallback={<Loading />}>
