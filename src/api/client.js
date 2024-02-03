@@ -12,6 +12,7 @@ export const client = axios.create({
   baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${getCookie("accessToken")}`,
   },
 });
 
@@ -19,6 +20,7 @@ export const client = axios.create({
 client.interceptors.request.use(
   async config => {
     const token = getCookie("accessToken");
+    console.log(token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
