@@ -27,7 +27,7 @@ const Mypage = () => {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    const { std, file } = await getStudentInfo();
+    const { std, file } = await getStudentInfo(setErrorInfo);
     setStd(std);
     setFile(file);
   };
