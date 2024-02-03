@@ -19,11 +19,9 @@ export const client = axios.create({
 client.interceptors.request.use(
   async config => {
     const token = getCookie("accessToken");
-    console.log("액세스토큰1", token);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    console.log(config);
     return config;
   },
   error => {
@@ -40,20 +38,13 @@ client.interceptors.response.use(
   async error => {
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
-    console.log("리스판스리프레시1", refreshToken);
     if (response.status === 401 && refreshToken) {
       try {
         const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
-        console.log("리스판스액세스1", data);
-
         const accessToken = data;
-        console.log("리스판스액세스2", accessToken);
         setCookie("accessToken", accessToken);
-        console.log("리스판스액세스3", accessToken);
-
-        console.log("리스판스리프레시2", refreshToken);
         if (config.headers && config.headers.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
           const retryResponse = await client(config);
@@ -82,18 +73,13 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
     console.log(res.data);
     if (role && refreshToken && accessToken) {
       setCookie("refreshToken", refreshToken);
-
       setCookie("accessToken", accessToken);
 
       setErrorCancelInfo("");
 
       if (role === "ROLE_USER") {
-        console.log("수강생액세스", accessToken);
-        console.log("수강생리프레시", refreshToken);
         return { role, accessToken, refreshToken, vo };
       } else if (role === "ROLE_COMPANY") {
-        console.log("기업액세스", accessToken);
-        console.log("기업리프레시", refreshToken);
         return {
           role,
           accessToken,
