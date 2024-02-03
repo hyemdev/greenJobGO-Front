@@ -5,6 +5,7 @@ import { LoginInner, LoginWrap } from "../styles/LoginStyle";
 import { useRecoilState } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
 import OkModal from "../components/OkModal";
+import { getCookie, setAcessCookie, setRefreshCookie } from "../api/cookie";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
