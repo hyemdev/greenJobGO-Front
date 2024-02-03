@@ -19,16 +19,15 @@ const cookies = new Cookies();
 //     httpOnly: false,
 //   });
 // };
-
 export const setCookie = (name, value) => {
   return cookies.set(name, value, {
     path: "/",
     secure: true,
     sameSite: "none",
     httpOnly: false,
+    maxAge: 180,
   });
 };
-
 export const getCookie = name => {
   return cookies.get(name);
 };

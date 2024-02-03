@@ -20,10 +20,12 @@ const Login = () => {
 
   const handleLoginId = e => {
     setUserId(e.target.value);
+    // console.log(e.target.value);
   };
 
   const handleLoginPass = e => {
     setPassword(e.target.value);
+    // console.log(e.target.value);
   };
 
   const handleSubmit = async e => {
@@ -38,19 +40,21 @@ const Login = () => {
       try {
         const { role, accessToken, refreshToken, vo, accessTokenTime } =
           await fetchLogin(userId, password, setErrorCancelInfo);
-        if (role === "ROLE_USER") {
+        if (role === "ROLE_USER" && accessToken) {
           console.log(role);
           setAuthState({
             isLogin: true,
+            accessToken: accessToken,
             role: role,
             editableYn: vo?.editableYn,
             portfolioYn: vo?.portfolioYn,
             aboutMeYn: vo?.aboutMeYn,
           });
           navigate("/student");
-        } else if (role === "ROLE_COMPANY") {
+        } else if (role === "ROLE_COMPANY" && accessToken) {
           setAuthState({
             isLogin: true,
+            accessToken: accessToken,
             role: role,
           });
           navigate("/business");
@@ -60,6 +64,7 @@ const Login = () => {
               postLogout(accessToken, refreshToken);
               setAuthState({
                 isLogin: false,
+                accessToken: null,
                 role: "",
               });
               navigate("/");
@@ -74,7 +79,6 @@ const Login = () => {
       }
     }
   };
-
   useEffect(() => {
     if (errorCancelInfo) {
       setErrorModalOpen(true);

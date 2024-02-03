@@ -18,17 +18,16 @@ export const client = axios.create({
 // 요청 인터셉터 설정
 client.interceptors.request.use(
   async config => {
-    console.log("요청1Acess:", token);
     const token = getCookie("accessToken");
-    console.log("요청2Acess:", token);
+    console.log("액세스토큰1", token);
     if (token) {
-      console.log("요청3Acess:", token);
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log(config);
     return config;
   },
   error => {
-    console.log("요청 인터셉터 실패?", error);
+    console.log(error);
     return Promise.reject(error);
   },
 );
@@ -41,30 +40,30 @@ client.interceptors.response.use(
   async error => {
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
-    console.log("응답Refresh:", refreshToken);
+    console.log("리스판스리프레시1", refreshToken);
     if (response.status === 401 && refreshToken) {
       try {
         const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
-        console.log("응답Acess:", data);
+        console.log("리스판스액세스1", data);
 
         const accessToken = data;
-        console.log("응답Acess:", accessToken);
+        console.log("리스판스액세스2", accessToken);
         setCookie("accessToken", accessToken);
-        console.log("응답Acess:", accessToken);
+        console.log("리스판스액세스3", accessToken);
 
-        console.log("응답Refresh:", refreshToken);
+        console.log("리스판스리프레시2", refreshToken);
         if (config.headers && config.headers.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
           const retryResponse = await client(config);
           return retryResponse;
         }
       } catch (error) {
-        console.log("토큰 갱신 리스판스 실패:", error);
+        console.log("토큰 갱신 실패:", error);
       }
     }
-    console.error("요청 리스판스 실패:", error);
+    console.error("요청 실패:", error);
     return Promise.reject(error);
   },
 );
