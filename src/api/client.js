@@ -39,18 +39,21 @@ client.interceptors.response.use(
     const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
     console.log("리프레시토큰:", refreshToken);
-    if (response?.status === 401 && refreshToken) {
+    if (response.status === 401 && refreshToken) {
       console.log("리프레시토큰:", refreshToken);
       try {
         const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
         console.log("리프레시토큰:", data);
+        console.log("리프레시토큰:", refreshToken);
 
         const accessToken = data;
         setAcessCookie("accessToken", accessToken);
 
-        if (config?.headers && config.headers?.Authorization) {
+        console.log("리프레시토큰:", refreshToken);
+        console.log("액세스토큰:", accessToken);
+        if (config.headers && config.headers.Authorization) {
           config.headers.Authorization = `Bearer ${accessToken}`;
           const retryResponse = await client(config);
           return retryResponse;
