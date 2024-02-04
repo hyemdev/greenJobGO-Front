@@ -1,4 +1,4 @@
-import { client } from "./client";
+import client from "../api/client";
 
 export const postFileUpload = async (
   istudent,
@@ -190,7 +190,6 @@ export const patchMainPortfolioSeleted = async (
       `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}`,
     );
     console.log("main", res);
-
   } catch (error) {
     console.log("main", error);
     const { status } = error.response;
