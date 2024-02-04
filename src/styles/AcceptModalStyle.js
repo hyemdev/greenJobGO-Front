@@ -19,8 +19,8 @@ export const AcceptModalWrap = styled.div`
   }
   .content-wrap {
     position: absolute;
-    width: 21.5%;
-    height: 15.5vh;
+    width: 410px;
+    height: 141px;
     top: 50%;
     left: 50%;
     padding: 15px 20px;
@@ -95,8 +95,8 @@ export const CancelModalWrap = styled.div`
   }
   .content-wrap {
     position: absolute;
-    width: 21.5%;
-    height: 15.5vh;
+    width: 410px;
+    height: 141px;
     top: 50%;
     left: 50%;
     padding: 15px 20px;
