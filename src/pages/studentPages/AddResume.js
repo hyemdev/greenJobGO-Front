@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
   AddResumeBaseInfo,
   AddResumeItem,
@@ -15,6 +15,7 @@ import { AcceptModal, DeleteModal } from "../../components/AcceptModal";
 import { getStudentInfo } from "../../api/studentAxios";
 import HashTag from "../../components/student/MyPortfolio/HashTag";
 import OkModal from "../../components/OkModal";
+import UploadLoading from "../../components/UploadLoading";
 
 const AddResume = () => {
   // api 오류 메세지 받아오는 state.
@@ -31,6 +32,7 @@ const AddResume = () => {
   const [acceptOkModal, setAcceptOkModal] = useState(false);
   const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [uploadResult, setUploadResult] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -63,6 +65,7 @@ const AddResume = () => {
   };
 
   const handleResumeUpload = async () => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("file", resumeFile);
 
@@ -73,7 +76,8 @@ const AddResume = () => {
         resumeOneWord,
         setErrorInfo,
       );
-
+      setIsLoading(false);
+      
       setUploadResult(result);
 
       if (result.success === true) {
@@ -302,6 +306,7 @@ const AddResume = () => {
                 }
                 readOnly
               />
+              {isLoading && <UploadLoading />}
               <div>
                 <button onClick={handleResumeUpload}>저장</button>
                 <button onClick={handleDeleteFile}>삭제</button>

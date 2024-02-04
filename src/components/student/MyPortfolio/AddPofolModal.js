@@ -1,5 +1,6 @@
 import React from "react";
 import { PortFolioAddWrap } from "../../../styles/AddPofolModalStyle";
+import UploadLoading from "../../UploadLoading";
 
 const AddPofolModal = ({
   modalOpen,
@@ -15,6 +16,7 @@ const AddPofolModal = ({
   linkOneWord,
   setLinkOneWord,
   handleFileUpload,
+  isLoading,
 }) => {
   const handleDescriptionChange = e => {
     const inputText = e.target.value;
@@ -133,6 +135,7 @@ const AddPofolModal = ({
               ) : null}
               <li>
                 <button onClick={handleFileUpload}>등록</button>
+                {isLoading && <UploadLoading />}
               </li>
             </ul>
           </div>

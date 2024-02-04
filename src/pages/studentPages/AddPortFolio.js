@@ -41,6 +41,7 @@ const AddPortFolio = () => {
   const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [mainCheck, setMainCheck] = useState("");
   const [ifile, setIfile] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   // const userInfo = useRecoilValue(userInfoAtom);
   const navigate = useNavigate();
 
@@ -64,6 +65,7 @@ const AddPortFolio = () => {
   };
 
   const handleFileUpload = async () => {
+    setIsLoading(true);
     let formData = new FormData();
     formData.append("file", selectFile);
     try {
@@ -76,6 +78,8 @@ const AddPortFolio = () => {
         formData,
         setErrorInfo,
       );
+
+      setIsLoading(false);
 
       setUploadResult(result);
 
@@ -196,6 +200,7 @@ const AddPortFolio = () => {
           linkOneWord={linkOneWord}
           setLinkOneWord={setLinkOneWord}
           handleFileUpload={handleFileUpload}
+          isLoading={isLoading}
         />
       )}
       {acceptOkModal && (
@@ -233,6 +238,7 @@ const AddPortFolio = () => {
           handleThumbNailUpload={handleThumbNailUpload}
           handleDeleteFile={handleDeleteFile}
           handleCheckboxChange={handleCheckboxChange}
+          isLoading={isLoading}
         />
       </div>
       <div className="addpofol-buttons">

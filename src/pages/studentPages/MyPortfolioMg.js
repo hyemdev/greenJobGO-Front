@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import NoResume from "../../components/student/MyPortfolio/NoResume";
 import YesResume from "../../components/student/MyPortfolio/YesResume";
 import {
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 import { getStudentInfo } from "../../api/studentAxios";
 import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 import OkModal from "../../components/OkModal";
+import Loading from "../../components/Loading";
 const MyPortfolioMg = () => {
   // 오류 메세지 받아오는 state.
   const [errorModalOpen, setErrorModalOpen] = useState(false);
@@ -80,13 +81,15 @@ const MyPortfolioMg = () => {
             )}
           </div>
         </MyPortfolioButton>
-        <MyPortfolioContent>
-          {authState?.portfolioYn === 1 && authState?.aboutMeYn === 1 ? (
-            <YesResume std={std} file={file} />
-          ) : (
-            <NoResume />
-          )}
-        </MyPortfolioContent>
+        <Suspense fallback={<Loading />}>
+          <MyPortfolioContent>
+            {authState?.portfolioYn === 1 && authState?.aboutMeYn === 1 ? (
+              <YesResume std={std} file={file} />
+            ) : (
+              <NoResume />
+            )}
+          </MyPortfolioContent>
+        </Suspense>
         <div className="btm-buttons">
           {authState.editableYn === 1 &&
           authState.portfolioYn === 1 &&
