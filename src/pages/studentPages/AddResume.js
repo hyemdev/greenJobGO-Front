@@ -62,6 +62,11 @@ const AddResume = () => {
     }
   };
 
+  const handleResumeKeyDown = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
   const handleResumeUpload = async () => {
     const formData = new FormData();
     formData.append("file", resumeFile);
@@ -303,8 +308,18 @@ const AddResume = () => {
                 readOnly
               />
               <div>
-                <button onClick={handleResumeUpload}>저장</button>
-                <button onClick={handleDeleteFile}>삭제</button>
+                <button
+                  onKeyDown={handleResumeKeyDown}
+                  onClick={handleResumeUpload}
+                >
+                  저장
+                </button>
+                <button
+                  onKeyDown={handleResumeKeyDown}
+                  onClick={handleDeleteFile}
+                >
+                  삭제
+                </button>
               </div>
             </div>
             <p>

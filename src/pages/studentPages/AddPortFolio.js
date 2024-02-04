@@ -76,19 +76,19 @@ const AddPortFolio = () => {
         formData,
         setErrorInfo,
       );
-
-      setUploadResult(result);
-
       if (result.success === true) {
         setModalOpen(false);
-        setAcceptOkModal(true);
+        setFileOneWord("");
+        setLinkOneWord("");
+        setLinkUrl("");
+        setSelectFile("");
       }
     } catch (error) {
-      setAcceptOkModal(true);
+      // setAcceptOkModal(true);
     }
   };
 
-  const handleThumbNailUpload = async () => {
+  const handleThumbNailUpload = async e => {
     let formData = new FormData();
     formData.append("file", imgFile);
     try {
@@ -97,13 +97,12 @@ const AddPortFolio = () => {
         formData,
         setErrorInfo,
       );
+      // setUploadResult(result);
 
-      setUploadResult(result);
-
-      if (result.success === true) {
-        setModalOpen(false);
-        setAcceptOkModal(true);
-      }
+      // if (result.success === true) {
+      //   setModalOpen(false);
+      //   setAcceptOkModal(true);
+      // }
     } catch (error) {
       // setAcceptOkModal(true);
     }
@@ -159,9 +158,12 @@ const AddPortFolio = () => {
 
   const handleDeleteOk = async () => {
     const istudent = std.istudent;
-    await deleteFile(istudent, ifile, setErrorInfo);
-    setDeleteOkModal(false);
-    fetchData();
+    const result = await deleteFile(istudent, ifile, setErrorInfo);
+    if (result.success === true) {
+      setDeleteOkModal(false);
+      setIfile("");
+      fetchData();
+    }
   };
 
   const handleDeleteCancel = () => {
