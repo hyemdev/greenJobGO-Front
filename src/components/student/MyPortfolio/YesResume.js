@@ -12,6 +12,8 @@ const YesResume = ({ std, file }) => {
   const handleMovePage = () => {
     navigate("/student/mypage");
   };
+  console.log(std.istudent);
+  console.log(file?.img?.img);
   return (
     <YesResumeWrap>
       <div className="contain">

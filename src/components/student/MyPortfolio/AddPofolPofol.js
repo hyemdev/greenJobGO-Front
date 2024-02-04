@@ -5,9 +5,9 @@ import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 import { FadeLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import { userInfoAtom } from "../../../recoil/atoms/UserInfoState";
 
 const AddPofolPofol = ({
+  std,
   file,
   handleAddModalOpen,
   imgFile,
@@ -16,8 +16,7 @@ const AddPofolPofol = ({
   handleDeleteFile,
   handleCheckboxChange,
 }) => {
-  const userInfo = useRecoilValue(userInfoAtom);
-  const istudent = userInfo.std?.istudent;
+  const istudent = std?.istudent;
 
   return (
     <AddPofolPofolWrap>
@@ -50,7 +49,7 @@ const AddPofolPofol = ({
               <button onClick={handleThumbNailUpload}>등록</button>
               <button
                 onClick={() => {
-                  handleDeleteFile(userInfo.file?.img?.ifile);
+                  handleDeleteFile(file?.img?.ifile);
                 }}
               >
                 삭제
@@ -83,7 +82,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`/img/student/${istudent}/${item.file}`}
+                          href={`https://greenjobgo.kr/img/student/${istudent}/${item.file}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -143,7 +142,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`/img/student/${istudent}/${item.fileLink}`}
+                          href={`https://greenjobgo.kr/img/student/${istudent}/${item.fileLink}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

@@ -34,6 +34,20 @@ const AddPortFolio = lazy(() => import("./pages/studentPages/AddPortFolio"));
 const AddResume = lazy(() => import("./pages/studentPages/AddResume"));
 
 const App = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const accessToken = getCookie("accessToken");
+    const refreshToken = getCookie("refreshToken");
+    console.log("APP.JS리프레시", refreshToken);
+    console.log("APP.JS엑세스", accessToken);
+    if (pathname === "/" && (accessToken || refreshToken)) {
+      console.log("액세스삭제?", accessToken);
+      console.log("리플레시삭제?", refreshToken);
+      removeCookie("accessToken");
+      removeCookie("refreshToken");
+    }
+  }, []);
   return (
     <>
       <Suspense fallback={<Loading />}>

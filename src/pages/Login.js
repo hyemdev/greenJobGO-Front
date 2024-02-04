@@ -44,7 +44,6 @@ const Login = () => {
           console.log(role);
           setAuthState({
             isLogin: true,
-            accessToken: accessToken,
             role: role,
             editableYn: vo?.editableYn,
             portfolioYn: vo?.portfolioYn,
@@ -54,7 +53,6 @@ const Login = () => {
         } else if (role === "ROLE_COMPANY" && accessToken) {
           setAuthState({
             isLogin: true,
-            accessToken: accessToken,
             role: role,
           });
           navigate("/business");
