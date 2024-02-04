@@ -17,15 +17,10 @@ const setAuthHeader = () => {
   }
 };
 
-setAuthHeader();
-
 // 요청 인터셉터 설정
 client.interceptors.request.use(
   async config => {
-    const token = getCookie("accessToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    setAuthHeader();
     return config;
   },
   error => {
