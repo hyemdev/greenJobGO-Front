@@ -80,15 +80,15 @@ const AddPortFolio = () => {
       );
 
       setIsLoading(false);
-
-      setUploadResult(result);
-
+      
+      
       if (result.success === true) {
         setModalOpen(false);
         setFileOneWord("");
         setLinkOneWord("");
         setLinkUrl("");
         setSelectFile("");
+        fetchData();
       }
     } catch (error) {
       // setAcceptOkModal(true);
@@ -188,6 +188,10 @@ const AddPortFolio = () => {
       setErrorModalOpen(false);
     }
   }, [errorInfo]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <AddPortfolioWrap>
       {modalOpen && (
