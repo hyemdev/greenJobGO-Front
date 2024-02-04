@@ -11,7 +11,8 @@ export const ModalWarp = styled.div`
     bottom: 0;
     left: 0;
     z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
   }
   .modal-wrapper {
     width: 784px;
