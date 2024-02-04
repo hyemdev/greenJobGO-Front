@@ -5,6 +5,7 @@ import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
 import { FadeLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import UploadLoading from "../../UploadLoading";
 
 const AddPofolPofol = ({
   std,
@@ -15,6 +16,7 @@ const AddPofolPofol = ({
   handleThumbNailUpload,
   handleDeleteFile,
   handleCheckboxChange,
+  isLoading,
 }) => {
   const istudent = std?.istudent;
 

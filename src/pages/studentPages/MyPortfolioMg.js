@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import NoResume from "../../components/student/MyPortfolio/NoResume";
 import YesResume from "../../components/student/MyPortfolio/YesResume";
 import {
@@ -7,28 +7,32 @@ import {
   MyPortfolioTitle,
   MyPortfolioWrap,
 } from "../../styles/MyPofolMgStyle";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { AuthStateAtom } from "../../recoil/atoms/AuthState";
 import { useNavigate } from "react-router";
 import { getStudentInfo } from "../../api/studentAxios";
-import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 import OkModal from "../../components/OkModal";
+import Loading from "../../components/Loading";
 const MyPortfolioMg = () => {
   // 오류 메세지 받아오는 state.
   const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [errorInfo, setErrorInfo] = useState("");
 
   const authState = useRecoilValue(AuthStateAtom);
-  // const [userInfo, setUserInfo] = useRecoilState(userInfoAtom);
   const [std, setStd] = useState("");
   const [file, setFile] = useState("");
+  const [resumeYn, setResumeYn] = useState("");
+  const [pofolYn, setPofolYn] = useState("");
   const navigate = useNavigate();
 
   const fetchData = async () => {
     try {
-      const { std, file } = await getStudentInfo(setErrorInfo);
+      const { std, file, aboutMeYn, portfolioYn } =
+        await getStudentInfo(setErrorInfo);
       setStd(std);
       setFile(file);
+      setResumeYn(aboutMeYn);
+      setPofolYn(portfolioYn);
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +48,7 @@ const MyPortfolioMg = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
   useEffect(() => {
     if (errorInfo) {
       setErrorModalOpen(true);
@@ -66,31 +71,29 @@ const MyPortfolioMg = () => {
             </span>
           </div>
           <div>
-            {authState.editableYn === 1 && authState.aboutMeYn === 0 ? (
+            {authState.editableYn === 1 && resumeYn === 0 ? (
               <button onClick={handleResumeMove}>이력서 등록</button>
             ) : (
               ""
             )}
-            {authState.editableYn === 1 &&
-            authState.aboutMeYn === 1 &&
-            authState.portfolioYn === 0 ? (
+            {authState.editableYn === 1 && resumeYn === 1 && pofolYn === 0 ? (
               <button onClick={handlePortfolioMove}>포트폴리오 등록</button>
             ) : (
               ""
             )}
           </div>
         </MyPortfolioButton>
-        <MyPortfolioContent>
-          {authState?.portfolioYn === 1 && authState?.aboutMeYn === 1 ? (
-            <YesResume std={std} file={file} />
-          ) : (
-            <NoResume />
-          )}
-        </MyPortfolioContent>
+        <Suspense fallback={<Loading />}>
+          <MyPortfolioContent>
+            {pofolYn === 1 && resumeYn === 1 ? (
+              <YesResume std={std} file={file} />
+            ) : (
+              <NoResume />
+            )}
+          </MyPortfolioContent>
+        </Suspense>
         <div className="btm-buttons">
-          {authState.editableYn === 1 &&
-          authState.portfolioYn === 1 &&
-          authState.aboutMeYn === 1 ? (
+          {authState.editableYn === 1 && pofolYn === 1 && resumeYn === 1 ? (
             <>
               <button onClick={handleResumeMove}>이력서 수정</button>
               <button onClick={handlePortfolioMove}>포트폴리오 수정</button>
