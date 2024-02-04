@@ -3,6 +3,7 @@ import { getCookie, removeCookie, setCookie } from "./cookie";
 
 const client = axios.create({
   baseURL: "/api",
+  withXSRFToken: true,
   headers: {
     "Content-Type": "application/json",
   },
