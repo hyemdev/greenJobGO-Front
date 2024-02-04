@@ -31,7 +31,7 @@ const UploadLoading = () => {
         }}
       >
         <HashLoader color="#228fcf" />
-        <h3 style={{ color: `${Maincolor.red}` }}>잠시만 기다려주세요.</h3>
+        <h3 style={{ color: `${Maincolor.white}` }}>잠시만 기다려주세요.</h3>
       </div>
     </div>
   );
