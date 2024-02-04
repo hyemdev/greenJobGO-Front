@@ -25,13 +25,15 @@ export const postFileUpload = async (
     const res = await client.post(apiUrl, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+
+    console.log("res", res);
     const result = res.status;
     if (result === 200) {
+      setErrorInfo(`업로드가 완료되었습니다.`);
       return { success: true };
-    } else {
-      return { success: false };
     }
   } catch (error) {
+    console.log("err", error);
     const { status } = error.response;
     if (error.response) {
       switch (status) {
@@ -71,13 +73,13 @@ export const postThumbNailUpload = async (istudent, formData, setErrorInfo) => {
         headers: { "Content-Type": "multipart/form-data" },
       },
     );
+    console.log("res", res);
     const result = res.status;
     if (result === 200) {
-      return { success: true };
-    } else {
-      return { success: false };
+      setErrorInfo(`업로드가 완료되었습니다.`);
     }
   } catch (error) {
+    console.log("error", error);
     const { status } = error.response;
     if (error.response) {
       switch (status) {
@@ -227,7 +229,11 @@ export const deleteFile = async (istudent, ifile, setErrorInfo) => {
     const res = await client.delete(
       `/student/file?istudent=${istudent}&ifile=${ifile}`,
     );
-    setErrorInfo("삭제가 완료되었습니다.");
+    const result = res;
+    if (result.status === 200) {
+      setErrorInfo("삭제가 완료되었습니다.");
+      return { success: true };
+    }
   } catch (error) {
     setErrorInfo(`file delete: ${error.message}`);
   }

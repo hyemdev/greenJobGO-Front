@@ -20,6 +20,13 @@ const AddPofolPofol = ({
 }) => {
   const istudent = std?.istudent;
 
+  // 엔터키 동작 막음
+  const handleKeyDown = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <AddPofolPofolWrap>
       <div className="addpofol-header">
@@ -48,8 +55,14 @@ const AddPofolPofol = ({
               readOnly
             />
             <div>
-              <button onClick={handleThumbNailUpload}>등록</button>
               <button
+                onKeyDown={handleKeyDown}
+                onClick={e => handleThumbNailUpload(e)}
+              >
+                등록
+              </button>
+              <button
+                onKeyDown={handleKeyDown}
                 onClick={() => {
                   handleDeleteFile(file?.img?.ifile);
                 }}

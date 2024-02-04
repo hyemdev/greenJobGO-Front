@@ -36,6 +36,7 @@ const AddPofolModal = ({
       setSelectFile(file);
     }
   };
+
   return (
     <PortFolioAddWrap>
       {modalOpen && (

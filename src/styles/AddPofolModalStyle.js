@@ -39,6 +39,10 @@ export const PortFolioAddWrap = styled.div`
     align-items: center;
     height: 70px;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+    }
     > div {
       :last-of-type {
         position: absolute;
