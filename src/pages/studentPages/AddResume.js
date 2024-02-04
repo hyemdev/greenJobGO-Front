@@ -80,7 +80,7 @@ const AddResume = () => {
         setAcceptOkModal(true);
       }
     } catch (error) {
-      setAcceptOkModal(true);
+      // setAcceptOkModal(true);
     }
   };
 

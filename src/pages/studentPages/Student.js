@@ -7,10 +7,10 @@ import StudentPrivacyProtect from "./StudentPrivacyProtect";
 import ConfirmModal from "../../components/ConfirmModal";
 import { recoilPersist } from "recoil-persist";
 import { postLogout } from "../../api/client";
-import { atom, useRecoilState } from "recoil";
+import { atom, useRecoilState, RecoilEnv } from "recoil";
 const { persistAtom } = recoilPersist();
 
-// RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export const AgreeStudentModalAtom = atom({
   // key: `AgreeStudentModalAtom/${v4()}`,
