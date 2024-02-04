@@ -33,16 +33,15 @@ const AddPortFolio = () => {
   const [linkOneWord, setLinkOneWord] = useState("");
   const [uploadResult, setUploadResult] = useState("");
   const [mainYn, setMainYn] = useState(0);
-  const [file, setFile] = useState([]);
-  const [std, setStd] = useState([]);
+  const [file, setFile] = useState("");
+  const [std, setStd] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [acceptOkModal, setAcceptOkModal] = useState(false);
   const [mainYnModal, setMainYnModal] = useState(false);
   const [deleteOkModal, setDeleteOkModal] = useState(false);
   const [mainCheck, setMainCheck] = useState("");
   const [ifile, setIfile] = useState("");
-  const userInfo = useRecoilValue(userInfoAtom);
-  const istudent = userInfo.std?.istudent;
+  // const userInfo = useRecoilValue(userInfoAtom);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -54,6 +53,8 @@ const AddPortFolio = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const istudent = std?.istudent;
 
   const handleImgFileChange = e => {
     const file = e.target.files[0];
@@ -224,6 +225,7 @@ const AddPortFolio = () => {
       </div>
       <div className="addpofol-content">
         <AddPofolPofol
+          std={std}
           file={file}
           handleAddModalOpen={handleAddModalOpen}
           imgFile={imgFile}

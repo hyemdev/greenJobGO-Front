@@ -9,19 +9,25 @@ const client = axios.create({
   },
 });
 
-const setAuthHeader = () => {
-  const accessToken = getCookie("accessToken");
-  if (accessToken) {
-    client.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-  } else {
-    delete client.defaults.headers.common["Authorization"];
-  }
-};
+// const setAuthHeader = () => {
+//   const accessToken = getCookie("accessToken");
+//   if (accessToken) {
+//     client.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+//   } else {
+//     delete client.defaults.headers.common["Authorization"];
+//   }
+// };
 
 // 요청 인터셉터 설정
 client.interceptors.request.use(
   async config => {
-    setAuthHeader();
+    const accessToken = getCookie("accessToken");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+      if (!config.headers) {
+        config.headers = {};
+      }
+    }
     return config;
   },
   error => {
@@ -35,27 +41,54 @@ client.interceptors.response.use(
     return response;
   },
   async error => {
-    const originalRequest = error.config;
+    const { config, response } = error;
     const refreshToken = getCookie("refreshToken");
-    if (error.response.status === 401 && refreshToken) {
+    if (response?.status === 401 && refreshToken) {
       try {
-        const response = await client.post(`/sign/refresh-token`, {
+        const { data } = await client.post(`/sign/refresh-token`, {
           refreshToken,
         });
-        const accessToken = response.data;
+        const accessToken = data;
         setCookie("accessToken", accessToken);
-        setAuthHeader();
-        return client(originalRequest);
+        if (config?.headers && config.headers?.Authorization) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
+          const retryResponse = await client(config);
+          return retryResponse;
+        }
       } catch (error) {
-        console.error("토큰 갱신 실패:", error);
-        removeAuth();
-        return Promise.reject(error);
+        console.log("토큰 갱신 실패:", error);
       }
     }
     console.error("요청 실패:", error);
     return Promise.reject(error);
   },
 );
+// client.interceptors.response.use(
+//   response => {
+//     return response;
+//   },
+//   async error => {
+//     const originalRequest = error.config;
+//     const refreshToken = getCookie("refreshToken");
+//     if (error.response.status === 401 && refreshToken) {
+//       try {
+//         const response = await client.post(`/sign/refresh-token`, {
+//           refreshToken,
+//         });
+//         const accessToken = response.data;
+//         setCookie("accessToken", accessToken);
+//         setAuthHeader();
+//         return client(originalRequest);
+//       } catch (error) {
+//         console.error("토큰 갱신 실패:", error);
+//         removeAuth();
+//         return Promise.reject(error);
+//       }
+//     }
+//     console.error("요청 실패:", error);
+//     return Promise.reject(error);
+//   },
+// );
 
 // 로그인 함수
 export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
@@ -69,7 +102,6 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
     if (role && refreshToken && accessToken) {
       setCookie("refreshToken", refreshToken);
       setCookie("accessToken", accessToken);
-      setAuthHeader();
       setErrorCancelInfo("");
       return { role, accessToken, refreshToken, vo, accessTokenTime };
     } else {
