@@ -136,7 +136,7 @@ const AddPofolModal = ({
               ) : null}
               <li>
                 <button onClick={handleFileUpload}>등록</button>
-                {isLoading && <UploadLoading />}
+                {isLoading && <UploadLoading  />}
               </li>
             </ul>
           </div>
