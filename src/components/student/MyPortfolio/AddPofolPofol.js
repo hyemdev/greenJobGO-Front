@@ -16,7 +16,6 @@ const AddPofolPofol = ({
   handleThumbNailUpload,
   handleDeleteFile,
   handleCheckboxChange,
-  isLoading,
 }) => {
   const istudent = std?.istudent;
 
@@ -42,7 +41,7 @@ const AddPofolPofol = ({
               accept=".jpg, png, jpeg, gif"
               onChange={handleImgFileChange}
             />
-            <label htmlFor="imgfile">파일첨부</label>
+            {file.img?.img ? "" : <label htmlFor="imgfile">파일첨부</label>}
             <input
               className="upload-name"
               value={
