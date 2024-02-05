@@ -142,7 +142,7 @@ const Mypage = () => {
                     alt="portfolio"
                   />
                   <a
-                    href={`/img/student/${std?.istudent}/${file.resume?.resume}`}
+                    href={`https://greenjobgo.kr/img/student/${std?.istudent}/${file.resume?.resume}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -170,7 +170,7 @@ const Mypage = () => {
                         alt="portfolio"
                       />
                       <a
-                        href={`http://112.222.157.156/img/student/${std?.istudent}/${item.file}`}
+                        href={`https://greenjobgo.kr/img/student/${std?.istudent}/${item.file}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -206,7 +206,7 @@ const Mypage = () => {
                         alt="portfolio"
                       />
                       <a
-                        href={`http://112.222.157.156/img/student/${std?.istudent}/${item.fileLink}`}
+                        href={`https://greenjobgo.kr/img/student/${std?.istudent}/${item.fileLink}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

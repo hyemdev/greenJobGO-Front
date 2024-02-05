@@ -82,7 +82,7 @@ const AddResume = () => {
         setErrorInfo,
       );
       setIsLoading(false);
-      
+
       setUploadResult(result);
 
       if (result.success === true) {
@@ -299,7 +299,12 @@ const AddResume = () => {
                 accept=".pdf"
                 onChange={handleResumeFileChange}
               />
-              <label htmlFor="resumefile">파일첨부</label>
+              {file?.resume?.resume ? (
+                ""
+              ) : (
+                <label htmlFor="resumefile">파일첨부</label>
+              )}
+
               <input
                 className="upload-name"
                 value={

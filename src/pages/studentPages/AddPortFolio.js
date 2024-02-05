@@ -104,6 +104,7 @@ const AddPortFolio = () => {
         formData,
         setErrorInfo,
       );
+      fetchData();
       // setUploadResult(result);
 
       // if (result.success === true) {
