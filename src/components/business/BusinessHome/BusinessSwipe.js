@@ -12,12 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import NoitemBox from "./NoitemBox";
 import { Link, useNavigate } from "react-router-dom";
-import { HeaderFocusAtom } from "../../BusinessHeader";
-import { useSetRecoilState } from "recoil";
+// import { HeaderFocusAtom } from "../../BusinessHeader";
+// import { useSetRecoilState } from "recoil";
 
 const BusinessSwipe = ({ swiperData, noItem }) => {
   const navigate = useNavigate();
-  const setSelect = useSetRecoilState(HeaderFocusAtom);
+  // const setSelect = useSetRecoilState(HeaderFocusAtom);
 
   const [swipe, setSwipe] = useState();
   const [isMobile, setIsMobile] = useState(false);
@@ -27,8 +27,8 @@ const BusinessSwipe = ({ swiperData, noItem }) => {
   };
 
   const handelClickPf = e => {
-    console.log("e", e);
-    setSelect("portpoliolist");
+    // console.log("e", e);
+    // setSelect("portpoliolist");
     navigate(`/business/portfoliodetail/${e}`);
   };
 

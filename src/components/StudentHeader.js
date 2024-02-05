@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HeaderSty, MobileHeaderSty } from "../styles/HeaderStyle";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
@@ -80,6 +80,18 @@ const StudentHeader = () => {
       setApiErrorModalOpen(false);
     }
   }, [errorApiInfo]);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname.includes("mypage")) {
+      setSelect("mypage");
+    } else if (pathname.includes("connectcompany")) {
+      setSelect("connectcompany");
+    } else {
+      setSelect("myportfolio");
+    }
+  }, [pathname]);
 
   return (
     <>

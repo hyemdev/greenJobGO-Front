@@ -49,10 +49,12 @@ const Business = () => {
     if (isMobileDevice) {
       navigate("/business/portpoliolist");
       setClickAgree({ isBizAgree: true });
-    } else {
-      navigate("/business");
-    }
+    } 
+    // else {
+    //   navigate("/business");
+    // }
   }, [isMobileDevice]);
+
 
   return (
     <LayoutStyle>

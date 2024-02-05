@@ -18,7 +18,7 @@ const BusinessIntro = () => {
   const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
   const [errorApiInfo, setErrorApiInfo] = useState("");
 
-  const setSelect = useSetRecoilState(HeaderFocusAtom);
+  // const setSelect = useSetRecoilState(HeaderFocusAtom);
 
   const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const BusinessIntro = () => {
   };
 
   const handleTotalListClick = () => {
-    setSelect("portpoliolist");
+    // setSelect("portpoliolist");
     navigate("/business/portpoliolist");
   };
   useEffect(() => {
