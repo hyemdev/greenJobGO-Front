@@ -114,19 +114,84 @@ export const DefaultInfo = styled.div`
     .text-info {
       height: 164px;
       display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 24px 0;
-
-      & > li > span:first-of-type {
-        display: inline-block;
-        width: 60px;
-        margin-right: 18px;
-        font-weight: 700;
-      }
-      & > li > span:nth-of-type(2) {
-        display: inline-block;
-        width: 414px;
+      gap: 24px;
+      > ul {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        :first-of-type {
+          width: 550px;
+          > li {
+            display: flex;
+            gap: 18px;
+            :nth-of-type(1) {
+              display: inline-block;
+              width: 550px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              > span {
+                :last-of-type {
+                  padding-left: 18px;
+                }
+              }
+            }
+            :nth-of-type(2) {
+              > span {
+                :last-of-type {
+                  padding-left: 16px;
+                }
+              }
+            }
+            :nth-of-type(4) {
+              width: 1022px;
+              height: 26px;
+              > span {
+                line-height: 26px;
+              }
+              > div {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                > div {
+                  display: flex;
+                  align-items: center;
+                  color: ${Maincolor.black};
+                  background: ${Maincolor.search};
+                  border-radius: 6px;
+                  padding: 5px 10px;
+                  > span {
+                    font-size: 16px;
+                    font-weight: 400;
+                  }
+                }
+              }
+            }
+            > span {
+              font-size: 16px;
+              font-weight: 400;
+              :first-of-type {
+                font-weight: 700;
+              }
+            }
+          }
+        }
+        :last-of-type {
+          width: 50%;
+          height: 110px;
+          > div {
+            display: flex;
+            gap: 10px;
+            > span {
+              font-size: 16px;
+              font-weight: 400;
+              :first-of-type {
+                font-weight: 700;
+              }
+            }
+          }
+        }
       }
     }
   }

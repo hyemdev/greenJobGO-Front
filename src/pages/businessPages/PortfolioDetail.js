@@ -45,7 +45,7 @@ const PortfolioDetail = () => {
   const handleBack = () => {
     navigate(-1);
   };
-  
+
   useEffect(() => {
     if (errorApiInfo) {
       setApiErrorModalOpen(true);
@@ -77,38 +77,49 @@ const PortfolioDetail = () => {
                 {payload.userData.age}세)
               </li>
             </ul>
-            <ul className="text-info">
-              <li>
-                <span>과정명</span>
-                <span> {payload.userData.subject}</span>
-              </li>
-              <li>
-                <span>주소</span>
-                <span> {payload.userData.address}</span>
-              </li>
-              <li>
-                <span>Email</span>
-                <span> {payload.userData.email}</span>
-              </li>
-              <li>
-                <span>자격증</span>
-                <span> {payload.certificateValue}</span>
-              </li>
-              <li>
-                <span>수강기간</span>
-                <span>
-                  {payload.userData.startedAt} ~ {payload.userData.endedAt}
-                </span>
-              </li>
-              <li>
-                <span> 휴대폰</span>
-                <span> {payload.userData.mobileNumber}</span>
-              </li>
-              <li>
-                <span>학력</span>
-                <span> {payload.userData.education}</span>
-              </li>
-            </ul>
+            <div className="text-info">
+              <ul>
+                <li>
+                  <div></div>
+                  <span>과정명</span>
+                  <span> {payload.userData.subject}</span>
+                </li>
+                <li>
+                  <span>주소</span>
+                  <span> {payload.userData.address}</span>
+                </li>
+                <li>
+                  <span>Email</span>
+                  <span> {payload.userData.email}</span>
+                </li>
+                <li>
+                  <span>자격증</span>
+                  <div>
+                    {payload.certificateValue.map(item => (
+                      <div key={item.icertificate}>
+                        <span>{item.certificate}</span>
+                      </div>
+                    ))}
+                  </div>
+                </li>
+              </ul>
+              <ul>
+                <li>
+                  <span>수강기간</span>
+                  <span>
+                    {payload.userData.startedAt} ~ {payload.userData.endedAt}
+                  </span>
+                </li>
+                <li>
+                  <span> 휴대폰</span>
+                  <span> {payload.userData.mobileNumber}</span>
+                </li>
+                <li>
+                  <span>학력</span>
+                  <span> {payload.userData.education}</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </DefaultInfo>
         <div className="sub-title">이력서 및 자기소개서</div>
