@@ -92,6 +92,7 @@ export const ConfirmModalWarp = styled.div`
     z-index: 99999;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(2px);
+    overflow: "unset";
   }
   .modalConfirm-wrapper {
     position: relative;

@@ -27,7 +27,7 @@ export const HeaderFocusAtom = atom({
 const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
   const [select, setSelect] = useRecoilState(HeaderFocusAtom);
-
+  // const [select, setSelect] = useState("businessintro");
   // api 오류 메세지 받아오는 state.
   const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
   const [errorApiInfo, setErrorApiInfo] = useState("");
@@ -103,6 +103,7 @@ const BusinessHeader = () => {
       setApiErrorModalOpen(false);
     }
   }, [errorApiInfo]);
+
   return (
     <>
       <HeaderSty>
