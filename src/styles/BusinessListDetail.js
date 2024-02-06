@@ -449,25 +449,82 @@ export const PortfolioInfo = styled.div`
   color: ${Maincolor.black};
   overflow-y: auto;
 
-  .portfolio-list {
+  .portfolio-file-list {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.4;
     margin-bottom: 14px;
-    & > li:first-of-type {
+    > li:first-of-type {
       width: 690px;
       height: 40px;
       border-radius: 6px 6px 0px 0px;
       background: ${Maincolor.maingray};
       padding: 10px;
-      & > img {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > img {
         width: 20px;
         height: 20px;
         object-fit: contain;
         margin-right: 8px;
       }
+      .main-pofol {
+        font-size: 14px;
+        background: ${Maincolor.admintxt};
+        border-radius: 4px;
+        > span {
+          width: 70px;
+          height: 28px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          color: ${Maincolor.white};
+        }
+      }
     }
-    & > li:nth-of-type(2) {
+    > li:last-of-type {
+      width: 690px;
+      height: 60px;
+      border-radius: 0px 0px 6px 6px;
+      border: 1px solid ${Maincolor.maingray};
+      padding: 10px;
+    }
+  }
+  .portfolio-link-list {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: 14px;
+    > li:first-of-type {
+      width: 690px;
+      height: 40px;
+      border-radius: 6px 6px 0px 0px;
+      background: ${Maincolor.maingray};
+      padding: 10px;
+      > img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        margin-right: 8px;
+      }
+      .main-pofol {
+        font-size: 14px;
+        background: ${Maincolor.admintxt};
+        border-radius: 4px;
+        > span {
+          width: 70px;
+          height: 28px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          color: ${Maincolor.white};
+        }
+      }
+    }
+    > li:last-of-type {
       width: 690px;
       height: 60px;
       border-radius: 0px 0px 6px 6px;
@@ -487,7 +544,7 @@ export const PortfolioInfo = styled.div`
     color: ${Maincolor.black};
     /* overflow-y: auto; */
 
-    .portfolio-list {
+    .portfolio-file-list {
       font-size: 12px;
       font-weight: 400;
       line-height: 1.5;
@@ -506,6 +563,64 @@ export const PortfolioInfo = styled.div`
           margin-bottom: 3px;
           object-fit: contain;
           margin-right: 5px;
+        }
+        .main-pofol {
+          font-size: 12px;
+          background: ${Maincolor.admintxt};
+          border-radius: 4px;
+          > span {
+            width: 50px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            color: ${Maincolor.white};
+          }
+        }
+      }
+      & > li:nth-of-type(2) {
+        ${ellipsis.one}
+        width: 305px;
+        height: 60px;
+        border-radius: 0px 0px 6px 6px;
+        border: 1px solid ${Maincolor.maingray};
+        padding: 5px;
+      }
+    }
+    .portfolio-link-list {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      & > li:first-of-type {
+        width: 305px;
+        height: 27px;
+        border-radius: 6px 6px 0px 0px;
+        background: ${Maincolor.maingray};
+        padding: 5px;
+        ${ellipsis.one}
+
+        & > img {
+          width: 15px;
+          height: 15px;
+          margin-bottom: 3px;
+          object-fit: contain;
+          margin-right: 5px;
+        }
+        .main-pofol {
+          font-size: 12px;
+          background: ${Maincolor.admintxt};
+          border-radius: 4px;
+          > span {
+            width: 50px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            color: ${Maincolor.white};
+          }
         }
       }
       & > li:nth-of-type(2) {

@@ -11,6 +11,8 @@ import NoImage from "../../assets/NoImage.jpg";
 import { getStdentInfo } from "../../api/businessPortfolioAxios";
 import { v4 } from "uuid";
 import OkModal from "../../components/OkModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
 
 const PortfolioDetail = () => {
   const [payload, setPayload] = useState({
@@ -165,26 +167,43 @@ const PortfolioDetail = () => {
             <>
               {payload.pofolData?.length > 0 &&
                 payload.pofolData.map(item => (
-                  <ul key={v4()} className="portfolio-list">
+                  <ul key={v4()} className="portfolio-file-list">
                     <li>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
-                        alt="portfolio"
-                      />
-                      <a
-                        href={`https://greenjobgo.kr/img/student/${userId}/${item.file}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {item.originFileName}
-                      </a>
+                      <div>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
+                          alt="portfolio"
+                        />
+                        <a
+                          href={`https://greenjobgo.kr/img/student/${userId}/${item.file}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {item.originFileName}
+                        </a>
+                      </div>
+                      <div>
+                        {item?.mainYn === 1 ? (
+                          <div className="main-pofol">
+                            <span>
+                              <FontAwesomeIcon
+                                icon={faCrown}
+                                style={{ color: "#fff" }}
+                              />
+                              대표
+                            </span>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </li>
                     <li>{item.oneWord}</li>
                   </ul>
                 ))}
               {payload.fileLinks?.length > 0 &&
                 payload.fileLinks.map(item => (
-                  <ul key={v4()} className="portfolio-list">
+                  <ul key={v4()} className="portfolio-link-list">
                     <li>
                       <img
                         src={`${process.env.PUBLIC_URL}/assets/ph_link.png`}
