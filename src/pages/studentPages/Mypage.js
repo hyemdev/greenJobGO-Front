@@ -59,13 +59,13 @@ const Mypage = () => {
       <div className="sub-title">기본정보</div>
       <DefaultInfo>
         <div className="thumb-img">
-          {file.img?.img && (
+          {/* {file.img?.img && ( */}
             <img
               src={`https://greenjobgo.kr/img/student/${std?.istudent}/${file.img?.img}`}
               alt="thumb-img"
               onError={onImgError}
             />
-          )}
+          {/* )} */}
         </div>
         <div className="info">
           <ul className="text-upper">
