@@ -190,9 +190,7 @@ export const patchMainPortfolioSeleted = async (
     const res = await client.patch(
       `${process.env.REACT_APP_PM_URL}=${istudent}&ifile=${mainCheck}`,
     );
-    // console.log("main", res);
   } catch (error) {
-    // console.log("main", error);
     const { status } = error.response;
     if (error.response) {
       switch (status) {
