@@ -80,8 +80,7 @@ const AddPortFolio = () => {
       );
 
       setIsLoading(false);
-      
-      
+
       if (result.success === true) {
         setModalOpen(false);
         setFileOneWord("");
@@ -226,6 +225,7 @@ const AddPortFolio = () => {
           handleMainPofolOk={handleMainPofolOk}
           handleMainCancel={handleMainCancel}
           mainYn={mainYn}
+          mainCheck={mainCheck}
         />
       )}
       {deleteOkModal && (

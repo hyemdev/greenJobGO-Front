@@ -309,7 +309,7 @@ const AddResume = () => {
                 className="upload-name"
                 value={
                   file?.resume?.ifile
-                    ? file?.resume?.resume
+                    ? file?.resume?.originFileName
                     : resumeFile
                       ? resumeFile.name
                       : "첨부파일"

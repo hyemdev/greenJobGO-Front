@@ -30,6 +30,7 @@ const Mypage = () => {
     const { std, file } = await getStudentInfo(setErrorInfo);
     setStd(std);
     setFile(file);
+    console.log(file);
   };
 
   useEffect(() => {
@@ -60,11 +61,11 @@ const Mypage = () => {
       <DefaultInfo>
         <div className="thumb-img">
           {/* {file.img?.img && ( */}
-            <img
-              src={`https://greenjobgo.kr/img/student/${std?.istudent}/${file.img?.img}`}
-              alt="thumb-img"
-              onError={onImgError}
-            />
+          <img
+            src={`https://greenjobgo.kr/img/student/${std?.istudent}/${file.img?.img}`}
+            alt="thumb-img"
+            onError={onImgError}
+          />
           {/* )} */}
         </div>
         <div className="info">
@@ -146,7 +147,7 @@ const Mypage = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {file.resume?.resume}
+                    &nbsp;{file.resume?.originFileName}
                   </a>
                 </div>
               ) : (
@@ -174,7 +175,7 @@ const Mypage = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {item.file}
+                        {item.originFileName}
                       </a>
                     </div>
                     <div>
@@ -206,7 +207,7 @@ const Mypage = () => {
                         alt="portfolio"
                       />
                       <a
-                        href={`https://greenjobgo.kr/img/student/${std?.istudent}/${item.fileLink}`}
+                        href={`https://${item.fileLink}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
