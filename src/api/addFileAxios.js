@@ -10,7 +10,7 @@ export const postFileUpload = async (
   setErrorInfo,
 ) => {
   try {
-    const baseUrl = `/student/file?istudent=${istudent}&iFileCategory=${fileType}`;
+    const baseUrl = `${process.env.REACT_APP_SFI_URL}=${istudent}&iFileCategory=${fileType}`;
 
     let apiUrl;
 
@@ -67,7 +67,7 @@ export const postFileUpload = async (
 export const postThumbNailUpload = async (istudent, formData, setErrorInfo) => {
   try {
     const res = await client.post(
-      `/student/file?istudent=${istudent}&iFileCategory=4`,
+      `${process.env.REACT_APP_SFI_URL}=${istudent}&iFileCategory=4`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -77,6 +77,7 @@ export const postThumbNailUpload = async (istudent, formData, setErrorInfo) => {
     const result = res.status;
     if (result === 200) {
       setErrorInfo(`업로드가 완료되었습니다.`);
+      return;
     }
   } catch (error) {
     console.log("error", error);
@@ -118,7 +119,7 @@ export const postResumeUpload = async (
 ) => {
   try {
     const res = await client.post(
-      `/student/file?istudent=${istudent}&iFileCategory=1&introducedLine=${resumeOneWord}`,
+      `${process.env.REACT_APP_SFI_URL}=${istudent}&iFileCategory=1&introducedLine=${resumeOneWord}`,
       formData,
       {
         headers: { "Content-Type": "multipart/form-data" },
@@ -167,7 +168,7 @@ export const postResumeUpload = async (
 export const postcertificate = async (istudent, hashSave) => {
   try {
     const res = await client.post(
-      `/student/certificate?istudent=${istudent}&certificates=${hashSave}`,
+      `${process.env.REACT_APP_CF_URL}=${istudent}&certificates=${hashSave}`,
     );
     const result = res.status;
 
@@ -189,7 +190,7 @@ export const patchMainPortfolioSeleted = async (
 ) => {
   try {
     const res = await client.patch(
-      `/student/portfolio-main?istudent=${istudent}&ifile=${mainCheck}`,
+      `${process.env.REACT_APP_PM_URL}=${istudent}&ifile=${mainCheck}`,
     );
     console.log("main", res);
   } catch (error) {
@@ -227,12 +228,14 @@ export const patchMainPortfolioSeleted = async (
 export const deleteFile = async (istudent, ifile, setErrorInfo) => {
   try {
     const res = await client.delete(
-      `/student/file?istudent=${istudent}&ifile=${ifile}`,
+      `${process.env.REACT_APP_SFI_URL}=${istudent}&ifile=${ifile}`,
     );
     const result = res;
     if (result.status === 200) {
       setErrorInfo("삭제가 완료되었습니다.");
       return { success: true };
+    } else {
+      return { success: false };
     }
   } catch (error) {
     setErrorInfo(`file delete: ${error.message}`);
@@ -242,7 +245,7 @@ export const deleteFile = async (istudent, ifile, setErrorInfo) => {
 export const deleteCertificate = async (istudent, icertificate) => {
   try {
     const res = await client.delete(
-      `/student/certificate?istudent=${istudent}&icertificate=${icertificate}`,
+      `${process.env.REACT_APP_CF_URL}=${istudent}&icertificate=${icertificate}`,
     );
     const result = res;
     if (result.status === 200) {

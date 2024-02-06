@@ -165,12 +165,16 @@ const AddPortFolio = () => {
 
   const handleDeleteOk = async () => {
     const istudent = std.istudent;
-    const result = await deleteFile(istudent, ifile, setErrorInfo);
-    if (result.success === true) {
+    try {
+      const result = await deleteFile(istudent, ifile, setErrorInfo);
       setDeleteOkModal(false);
       setIfile("");
       fetchData();
+    } catch (error) {
+      console.log(error);
     }
+    // if (result.success === true) {
+    // }
   };
 
   const handleDeleteCancel = () => {

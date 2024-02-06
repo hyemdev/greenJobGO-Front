@@ -39,7 +39,7 @@ export const NoitemList = styled.div`
     font-size: 16px;
     font-weight: 500;
   }
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 1600px) {
     margin: 0 auto;
     width: 360px;
     height: 295px;

@@ -62,7 +62,7 @@ const Mypage = () => {
         <div className="thumb-img">
           {/* {file.img?.img && ( */}
           <img
-            src={`https://greenjobgo.kr/img/student/${std?.istudent}/${file.img?.img}`}
+            src={`${process.env.REACT_APP_BASEFILE_URL}/${std?.istudent}/${file.img?.img}`}
             alt="thumb-img"
             onError={onImgError}
           />
@@ -143,7 +143,7 @@ const Mypage = () => {
                     alt="portfolio"
                   />
                   <a
-                    href={`https://greenjobgo.kr/img/student/${std?.istudent}/${file.resume?.resume}`}
+                    href={`${process.env.REACT_APP_BASEFILE_URL}/${std?.istudent}/${file.resume?.resume}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -171,7 +171,7 @@ const Mypage = () => {
                         alt="portfolio"
                       />
                       <a
-                        href={`https://greenjobgo.kr/img/student/${std?.istudent}/${item.file}`}
+                        href={`${process.env.REACT_APP_BASEFILE_URL}/${std?.istudent}/${item.file}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

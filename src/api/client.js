@@ -2,7 +2,7 @@ import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
 
 const client = axios.create({
-  baseURL: "/api",
+  baseURL: process.env.REACT_APP_API_URL,
   withXSRFToken: true,
   headers: {
     "Content-Type": "application/json",

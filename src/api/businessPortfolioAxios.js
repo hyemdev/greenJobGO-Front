@@ -2,7 +2,7 @@ import client from "../api/client";
 
 export const getCategory = async (setCategoryData, setErrorApiInfo) => {
   try {
-    const res = await client.get(`/admin/category`);
+    const res = await client.get(`${process.env.REACT_APP_CT_URL}`);
     setCategoryData(res.data);
   } catch (error) {
     setErrorApiInfo(`Category: ${error.message}`);
@@ -58,7 +58,7 @@ export const getStudentList = async (
   setErrorApiInfo,
 ) => {
   try {
-    let apiUrl = `/company/student/list?page=${page}&size=6&sort=istudent%2CASC`;
+    let apiUrl = `${process.env.REACT_APP_CS_URL}/list?page=${page}&size=6&sort=istudent%2CASC`;
     if (category) {
       apiUrl += `&icategory=${category}`;
     }
@@ -88,7 +88,7 @@ export const getStudentList = async (
 
 export const getStdentInfo = async (userId, setPayload, setErrorApiInfo) => {
   try {
-    const res = await client.get(`/company/student/${userId}`);
+    const res = await client.get(`${process.env.REACT_APP_CS_URL}/${userId}`);
 
     const { certificates, birthday, ...vo } = res.data.vo;
     const { aboutMe, thumbnail, portfolio, fileLink } = res.data.file;

@@ -19,7 +19,7 @@ const YesResume = ({ std, file }) => {
       <div className="contain">
         <div>
           <img
-            src={`https://greenjobgo.kr/img/student/${std?.istudent}/${file?.img?.img}`}
+            src={`${process.env.REACT_APP_BASEFILE_URL}/${std?.istudent}/${file?.img?.img}`}
             alt="자료없음"
             onError={onImgError}
           />

@@ -156,6 +156,7 @@ export const SwiperWrapStyle = styled.div`
       width: 300px;
       height: 204px;
       display: block;
+      object-fit: contain;
       width: 100%;
     }
     .txt {

@@ -7,7 +7,9 @@ export const getCompanyList = async (
   setErrorApiInfo,
 ) => {
   try {
-    const res = await client.get(`/student/company?page=${page}&size=12`);
+    const res = await client.get(
+      `${process.env.REACT_APP_SC_URL}?page=${page}&size=12`,
+    );
     setListData(res.data.list);
     setCount(res.data.page.idx);
   } catch (error) {

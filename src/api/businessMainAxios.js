@@ -5,7 +5,8 @@ export const getBigcate = async (setCategory, setErrorApiInfo) => {
   console.log("카테정보 불러옵니다");
 
   try {
-    const res = await client.get(`/admin/category`);
+    const res = await client.get(`${process.env.REACT_APP_CT_URL}`);
+    // const res = await client.get(`/admin/category`);
     const result = await res.data;
     setCategory(result);
     return result;
@@ -21,10 +22,9 @@ export const getMainImgList = async ({
   setNoItem,
   setErrorApiInfo,
 }) => {
-  console.log("카테정보 불러옵니다");
-
   try {
-    const res = await client.get(`/company/mainstudent?icategory=${clickCate}`);
+    const res = await client.get(`${process.env.REACT_APP_CM_URL}icategory=${clickCate}`);
+    // const res = await client.get(`/company/mainstudent?icategory=${clickCate}`);
     const result = await res.data.list;
     console.log("스와이퍼용 데이터", result);
     setSwiperData(result);

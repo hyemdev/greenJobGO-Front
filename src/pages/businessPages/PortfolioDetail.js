@@ -147,7 +147,7 @@ const PortfolioDetail = () => {
                       alt="portfolio"
                     />
                     <a
-                      href={`https://greenjobgo.kr/img/student/${userId}/${payload.resume.file}`}
+                      href={`${process.env.REACT_APP_BASEFILE_URL}/${userId}/${payload.resume.file}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -175,7 +175,7 @@ const PortfolioDetail = () => {
                           alt="portfolio"
                         />
                         <a
-                          href={`https://greenjobgo.kr/img/student/${userId}/${item.file}`}
+                          href={`${process.env.REACT_APP_BASEFILE_URL}/${userId}/${item.file}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

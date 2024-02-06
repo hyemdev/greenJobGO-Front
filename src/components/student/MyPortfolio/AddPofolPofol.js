@@ -96,7 +96,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`https://greenjobgo.kr/img/student/${istudent}/${item.file}`}
+                          href={`${process.env.REACT_APP_BASEFILE_URL}/${istudent}/${item.file}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

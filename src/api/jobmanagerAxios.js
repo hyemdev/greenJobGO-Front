@@ -6,7 +6,7 @@ export const getJobManagerInfo = async ({
   setErrorApiInfo,
 }) => {
   try {
-    const res = await client.get(`/company/employee`);
+    const res = await client.get(`${process.env.REACT_APP_CE_URL}`);
     const result = await res.data;
 
     console.log("job mng 정보 들어옴", result);
