@@ -126,7 +126,7 @@ export const DefaultInfo = styled.div`
             gap: 18px;
             :nth-of-type(1) {
               display: inline-block;
-              width: 550px;
+              width: 560px;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
@@ -177,18 +177,18 @@ export const DefaultInfo = styled.div`
             }
           }
         }
+
         :last-of-type {
           width: 50%;
           height: 110px;
-          > div {
-            display: flex;
-            gap: 10px;
-            > span {
-              font-size: 16px;
+          li > span {
+            font-size: 16px;
+            :first-of-type {
+              font-weight: 700;
+            }
+            :last-of-type {
               font-weight: 400;
-              :first-of-type {
-                font-weight: 700;
-              }
+              padding-left: 16px;
             }
           }
         }
@@ -197,7 +197,8 @@ export const DefaultInfo = styled.div`
   }
   @media all and (max-width: 767px) {
     min-width: 350px;
-    height: 620px;
+    height: auto;
+    /* max-height: 800px; */
     margin: 0 auto;
     border-radius: 0 0 10px 10px;
     border: 1px solid ${Maincolor.maingray};
@@ -216,6 +217,7 @@ export const DefaultInfo = styled.div`
       color: ${Maincolor.black};
       letter-spacing: -0.3px;
       margin-top: 20px;
+      height: auto;
 
       .text-upper {
         margin-bottom: 20px;
@@ -237,24 +239,99 @@ export const DefaultInfo = styled.div`
         }
       }
       .text-info {
-        height: 100%;
-        font-size: 12px;
-
-        & > li {
-          display: flex;
-          justify-content: flex-start;
-          gap: 10px;
-          /* margin-bottom: 10px; */
-          span:first-of-type {
-            width: 35px;
-            display: inline-block;
-            font-weight: 700;
+        width: 320px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        ul {
+          :first-of-type {
+            width: 320px;
+            gap: 20px;
+            & li {
+              display: flex;
+              > span {
+                :first-of-type {
+                  font-size: 12px;
+                }
+                :last-of-type {
+                  padding-left: 8px;
+                  font-size: 12px;
+                }
+              }
+              /* 과정명 */
+              :nth-of-type(1) {
+                display: block;
+                width: 320px;
+                /* white-space: wrap; */
+              }
+              /* 주소 */
+              :nth-of-type(2) {
+                display: block;
+              }
+              /* 이메일 */
+              :nth-of-type(3) {
+                display: block;
+              }
+              /* 자격증 */
+              :nth-of-type(4) {
+                width: 300px;
+                height: auto;
+                > span {
+                  font-size: 12px;
+                  line-height: 16px;
+                  padding-left: 0;
+                }
+                > div {
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 5px;
+                  > div {
+                    display: flex;
+                    /* align-items: center; */
+                    color: ${Maincolor.black};
+                    background: ${Maincolor.search};
+                    border-radius: 6px;
+                    padding: 3px 5px;
+                    > span {
+                      font-size: 12px;
+                      font-weight: 400;
+                    }
+                  }
+                }
+              }
+            }
           }
-          span:nth-of-type(2) {
-            display: inline-block;
-            width: 240px;
-            word-break: normal;
-            letter-spacing: -0.18px;
+        }
+
+        /* 수강기간 */
+        ul {
+          :last-of-type {
+            height: 100px;
+            margin-top: 10px;
+            width: 320px;
+            li > span {
+              :first-of-type {
+                width: 50px;
+                font-size: 12px;
+              }
+              :last-of-type {
+                padding-left: 8px;
+                width: 250px;
+                font-size: 12px;
+              }
+            }
+            li {
+              font-size: 12px;
+              > span {
+                :first-of-type {
+                  font-weight: 700;
+                }
+                :last-of-type {
+                  margin-left: 10px;
+                }
+              }
+            }
           }
         }
       }

@@ -80,7 +80,7 @@ const PortfolioDetail = () => {
             <div className="text-info">
               <ul>
                 <li>
-                  <div></div>
+                  {/* <div></div> */}
                   <span>과정명</span>
                   <span> {payload.userData.subject}</span>
                 </li>
@@ -145,7 +145,7 @@ const PortfolioDetail = () => {
                       alt="portfolio"
                     />
                     <a
-                      href={`/img/student/${userId}/${payload.resume}`}
+                      href={`https://greenjobgo.kr/img/student/${userId}/${payload.resume}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -172,7 +172,7 @@ const PortfolioDetail = () => {
                         alt="portfolio"
                       />
                       <a
-                        href={`/img/student/${userId}/${item.file}`}
+                        href={`https://greenjobgo.kr/img/student/${userId}/${item.file}`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
