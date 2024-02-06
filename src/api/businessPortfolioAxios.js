@@ -94,13 +94,13 @@ export const getStdentInfo = async (userId, setPayload, setErrorApiInfo) => {
     const { aboutMe, thumbnail, portfolio, fileLink } = res.data.file;
 
     const birthYear = birthday.split("-", 1);
-
+    console.log();
     setPayload({
       userData: vo,
       certificateValue: certificates,
       birth: birthYear,
       thumbNail: thumbnail ? thumbnail.file : null,
-      resume: aboutMe ? aboutMe.file : null,
+      resume: aboutMe,
       pofolData: portfolio || [],
       fileLinks: fileLink || [],
     });

@@ -138,18 +138,18 @@ const PortfolioDetail = () => {
             <ul>
               <li>이력서 및 자기소개서</li>
               <li>
-                {payload.resume && payload.resume ? (
+                {payload.resume && payload.resume.file ? (
                   <div>
                     <img
                       src={`${process.env.PUBLIC_URL}/assets/ph_file.png`}
                       alt="portfolio"
                     />
                     <a
-                      href={`https://greenjobgo.kr/img/student/${userId}/${payload.resume}`}
+                      href={`https://greenjobgo.kr/img/student/${userId}/${payload.resume.file}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {payload.resume}
+                      {payload.resume.originFileName}
                     </a>
                   </div>
                 ) : (
@@ -161,7 +161,7 @@ const PortfolioDetail = () => {
         </ResumeInfo>
         <div className="sub-title">포트폴리오</div>
         <PortfolioInfo>
-          {payload.pofolData.length > 0 || payload.fileLinks.length > 0 ? (
+          {payload.pofolData?.length > 0 || payload.fileLinks?.length > 0 ? (
             <>
               {payload.pofolData?.length > 0 &&
                 payload.pofolData.map(item => (
@@ -176,7 +176,7 @@ const PortfolioDetail = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {item.file}
+                        {item.originFileName}
                       </a>
                     </li>
                     <li>{item.oneWord}</li>
