@@ -153,12 +153,10 @@ const AddPortFolio = () => {
       setMainCheck([ifile]);
       setMainYn(0);
       setMainYnModal(true);
-      // console.log(mainCheck);
     } else {
       setMainCheck([ifile]);
       setMainYn(1);
       setMainYnModal(true);
-      // console.log(mainCheck);
     }
     fetchData();
   };
