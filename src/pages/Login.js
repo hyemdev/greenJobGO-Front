@@ -99,6 +99,7 @@ const Login = () => {
                 placeholder="아이디를 입력해주세요."
                 value={userId}
                 onChange={e => handleLoginId(e)}
+                autoComplete="username"
               />
             </div>
             <div>
@@ -109,6 +110,7 @@ const Login = () => {
                 placeholder="비밀번호를 입력해주세요."
                 value={password}
                 onChange={e => handleLoginPass(e)}
+                autoComplete="current-password"
               />
             </div>
             <div>
