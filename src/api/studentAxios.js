@@ -6,9 +6,6 @@ export const getStudentInfo = async setErrorInfo => {
 
     const { std, file, aboutMeYn, portfolioYn } = res.data;
 
-    console.log(res.data);
-    console.log(res.data);
-
     return { std, file, aboutMeYn, portfolioYn };
   } catch (error) {
     await setErrorInfo(`Student Info: ${error.message}`);

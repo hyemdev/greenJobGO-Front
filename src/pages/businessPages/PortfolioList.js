@@ -110,7 +110,6 @@ const PortfolioList = () => {
 
   // 카테변경값 저장
   const handleCategoryFilter = e => {
-    console.log("category e", e.target.value);
     setPageState(prev => ({
       ...prev,
       // page: 1,
@@ -128,7 +127,6 @@ const PortfolioList = () => {
 
     window.scrollTo({ top: 0 });
     // setPage(e);
-    console.log("page e", e);
   };
 
   useEffect(() => {

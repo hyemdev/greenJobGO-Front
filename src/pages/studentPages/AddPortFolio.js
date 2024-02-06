@@ -153,12 +153,12 @@ const AddPortFolio = () => {
       setMainCheck([ifile]);
       setMainYn(0);
       setMainYnModal(true);
-      console.log(mainCheck);
+      // console.log(mainCheck);
     } else {
       setMainCheck([ifile]);
       setMainYn(1);
       setMainYnModal(true);
-      console.log(mainCheck);
+      // console.log(mainCheck);
     }
     fetchData();
   };
@@ -171,7 +171,7 @@ const AddPortFolio = () => {
       setIfile("");
       fetchData();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     // if (result.success === true) {
     // }

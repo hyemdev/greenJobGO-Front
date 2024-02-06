@@ -30,7 +30,7 @@ const Mypage = () => {
     const { std, file } = await getStudentInfo(setErrorInfo);
     setStd(std);
     setFile(file);
-    console.log(file);
+    // console.log(file);
   };
 
   useEffect(() => {

@@ -41,7 +41,6 @@ const Login = () => {
         const { role, accessToken, refreshToken, vo, accessTokenTime } =
           await fetchLogin(userId, password, setErrorCancelInfo);
         if (role === "ROLE_USER" && accessToken) {
-          console.log(role);
           setAuthState({
             isLogin: true,
             role: role,
@@ -68,12 +67,12 @@ const Login = () => {
               navigate("/");
             }
           }, accessTokenTime);
-          console.log(accessTokenTime);
+          // console.log(accessTokenTime);
         } else {
           navigate("/");
         }
       } catch (error) {
-        console.log("errorrrrrrrr", error);
+        // console.log("errorrrrrrrr", error);
       }
     }
   };

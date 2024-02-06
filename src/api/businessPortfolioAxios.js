@@ -94,7 +94,6 @@ export const getStdentInfo = async (userId, setPayload, setErrorApiInfo) => {
     const { aboutMe, thumbnail, portfolio, fileLink } = res.data.file;
 
     const birthYear = birthday.split("-", 1);
-    console.log();
     setPayload({
       userData: vo,
       certificateValue: certificates,

@@ -34,7 +34,7 @@ const MyPortfolioMg = () => {
       setResumeYn(aboutMeYn);
       setPofolYn(portfolioYn);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

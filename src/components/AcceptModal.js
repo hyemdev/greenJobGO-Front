@@ -35,8 +35,6 @@ export const MainYnModal = ({
   mainYn,
   mainCheck,
 }) => {
-  console.log(mainCheck);
-  console.log(mainYn);
   return (
     <>
       {mainYnModal && (

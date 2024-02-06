@@ -2,7 +2,7 @@ import React from "react";
 import { ConfirmModalWarp, ModalOkBtn } from "../styles/GlobalStyle";
 
 const OkModal = ({ header, open, close, onConfirm, children }) => {
-  console.log("오케이 모달 작동됩니다");
+  // console.log("오케이 모달 작동됩니다");
   const stopPropagation = e => {
     e.stopPropagation();
   };

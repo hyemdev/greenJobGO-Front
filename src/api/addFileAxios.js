@@ -26,14 +26,14 @@ export const postFileUpload = async (
       headers: { "Content-Type": "multipart/form-data" },
     });
 
-    console.log("res", res);
+    // console.log("res", res);
     const result = res.status;
     if (result === 200) {
       setErrorInfo(`업로드가 완료되었습니다.`);
       return { success: true };
     }
   } catch (error) {
-    console.log("err", error);
+    // console.log("err", error);
     const { status } = error.response;
     if (error.response) {
       switch (status) {
@@ -73,14 +73,14 @@ export const postThumbNailUpload = async (istudent, formData, setErrorInfo) => {
         headers: { "Content-Type": "multipart/form-data" },
       },
     );
-    console.log("res", res);
+    // console.log("res", res);
     const result = res.status;
     if (result === 200) {
       setErrorInfo(`업로드가 완료되었습니다.`);
       return;
     }
   } catch (error) {
-    console.log("error", error);
+    // console.log("error", error);
     const { status } = error.response;
     if (error.response) {
       switch (status) {
@@ -125,8 +125,6 @@ export const postResumeUpload = async (
         headers: { "Content-Type": "multipart/form-data" },
       },
     );
-    console.log("이력서 전송 성공", res.data);
-    console.log("이력서 전송 성공", res.status);
     const result = res.status;
 
     if (result === 200) {
@@ -178,7 +176,7 @@ export const postcertificate = async (istudent, hashSave) => {
       return { success: false };
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -192,9 +190,9 @@ export const patchMainPortfolioSeleted = async (
     const res = await client.patch(
       `${process.env.REACT_APP_PM_URL}=${istudent}&ifile=${mainCheck}`,
     );
-    console.log("main", res);
+    // console.log("main", res);
   } catch (error) {
-    console.log("main", error);
+    // console.log("main", error);
     const { status } = error.response;
     if (error.response) {
       switch (status) {
@@ -254,6 +252,6 @@ export const deleteCertificate = async (istudent, icertificate) => {
       return { success: false };
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };

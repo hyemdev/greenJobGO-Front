@@ -43,7 +43,7 @@ const AddResume = () => {
       setStd(std);
       setFile(file);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -51,8 +51,6 @@ const AddResume = () => {
     fetchData();
   }, []);
 
-  console.log("get:", std);
-  console.log("get:", file);
 
   const istudent = std?.istudent;
 
@@ -158,7 +156,7 @@ const AddResume = () => {
         await postcertificate(istudent, newHashTag);
         fetchData();
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     }
 

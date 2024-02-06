@@ -33,7 +33,6 @@ const BusinessHeader = () => {
   const [errorApiInfo, setErrorApiInfo] = useState("");
   const [logoutModalOpen, setLogoutModalOpen] = useState(false);
 
-  console.log("select", select);
   const navigate = useNavigate();
 
   const location = useLocation();
