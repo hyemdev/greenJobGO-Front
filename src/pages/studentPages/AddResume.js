@@ -51,7 +51,6 @@ const AddResume = () => {
     fetchData();
   }, []);
 
-
   const istudent = std?.istudent;
 
   const handleResumeFileChange = e => {
@@ -277,6 +276,7 @@ const AddResume = () => {
             <div className="oneword">
               <input
                 type="text"
+                id="resume-oneword"
                 value={
                   file?.resume?.ifile ? std?.introducedLine : resumeOneWord
                 }
@@ -305,6 +305,7 @@ const AddResume = () => {
 
               <input
                 className="upload-name"
+                id="resumefile-name"
                 value={
                   file?.resume?.ifile
                     ? file?.resume?.originFileName

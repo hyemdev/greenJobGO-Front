@@ -48,10 +48,9 @@ client.interceptors.response.use(
           return retryResponse;
         }
       } catch (error) {
-        // console.log("토큰 갱신 실패:", error);
+        console.log("관리자에게 문의해주세요.");
       }
     }
-    console.error("요청 실패:", error);
     return Promise.reject(error);
   },
 );
@@ -91,7 +90,7 @@ export const postLogout = async () => {
     await client.post("/sign/logout");
     removeAuth();
   } catch (error) {
-    console.error("로그아웃 실패:", error);
+    console.error("로그아웃 실패");
   }
 };
 

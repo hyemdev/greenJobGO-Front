@@ -34,12 +34,13 @@ const AddPofolPofol = ({
             <input
               type="file"
               id="imgfile"
-              accept=".jpg, png, jpeg, gif"
+              accept="image/jpg, image/png, image/jpeg, image/gif"
               onChange={handleImgFileChange}
             />
             {file.img?.img ? "" : <label htmlFor="imgfile">파일첨부</label>}
             <input
               className="upload-name"
+              id="imgfile-name"
               value={
                 file?.img?.ifile
                   ? file.img.originFileName
@@ -129,6 +130,7 @@ const AddPofolPofol = ({
                     <div>
                       <input
                         type="checkbox"
+                        id="main-pofol-check"
                         value={item.ifile}
                         checked={item.mainYn === 1}
                         onChange={e => handleCheckboxChange(e, item.ifile)}
@@ -189,6 +191,7 @@ const AddPofolPofol = ({
                     <div>
                       <input
                         type="checkbox"
+                        id="main-filelink-check"
                         value={item.ifile}
                         checked={item.mainYn === 1}
                         onChange={e => handleCheckboxChange(e, item.ifile)}
