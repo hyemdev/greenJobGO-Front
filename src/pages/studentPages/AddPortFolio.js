@@ -8,8 +8,6 @@ import {
 import { AddPortfolioWrap } from "../../styles/AddPortfolioStyle";
 import AddPofolPofol from "../../components/student/MyPortfolio/AddPofolPofol";
 import AddPofolModal from "../../components/student/MyPortfolio/AddPofolModal";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 import {
   AcceptModal,
   DeleteModal,
@@ -18,7 +16,6 @@ import {
 import { getStudentInfo } from "../../api/studentAxios";
 import { useNavigate } from "react-router";
 import OkModal from "../../components/OkModal";
-import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 
 const AddPortFolio = () => {
   // 오류 메세지 받아오는 state.
@@ -42,7 +39,6 @@ const AddPortFolio = () => {
   const [mainCheck, setMainCheck] = useState("");
   const [ifile, setIfile] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // const userInfo = useRecoilValue(userInfoAtom);
   const navigate = useNavigate();
 
   const fetchData = async () => {
@@ -171,8 +167,7 @@ const AddPortFolio = () => {
     } catch (error) {
       // console.log(error);
     }
-    // if (result.success === true) {
-    // }
+
   };
 
   const handleDeleteCancel = () => {

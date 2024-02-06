@@ -7,12 +7,9 @@ import {
   PortfolioInfo,
   ResumeInfo,
 } from "../../styles/MypageStyle";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userInfo } from "../../recoil/selectors/UserInfoSelector";
 import { v4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import { userInfoAtom } from "../../recoil/atoms/UserInfoState";
 import { getStudentInfo } from "../../api/studentAxios";
 import OkModal from "../../components/OkModal";
 
@@ -21,7 +18,6 @@ const Mypage = () => {
   const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
   const [errorInfo, setErrorInfo] = useState("");
 
-  // const userInfo = useRecoilValue(userInfoAtom);
   const [std, setStd] = useState("");
   const [file, setFile] = useState("");
   const navigate = useNavigate();

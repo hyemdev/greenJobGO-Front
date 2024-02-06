@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchLogin, postLogout } from "../api/client";
 import { LoginInner, LoginWrap } from "../styles/LoginStyle";
 import { useRecoilState } from "recoil";
 import { AuthStateAtom } from "../recoil/atoms/AuthState";
 import OkModal from "../components/OkModal";
-import { getCookie, setAcessCookie, setRefreshCookie } from "../api/cookie";
 
 const Login = () => {
   const [userId, setUserId] = useState("");
@@ -20,12 +19,10 @@ const Login = () => {
 
   const handleLoginId = e => {
     setUserId(e.target.value);
-    // console.log(e.target.value);
   };
 
   const handleLoginPass = e => {
     setPassword(e.target.value);
-    // console.log(e.target.value);
   };
 
   const handleSubmit = async e => {
@@ -67,7 +64,6 @@ const Login = () => {
               navigate("/");
             }
           }, accessTokenTime);
-          // console.log(accessTokenTime);
         } else {
           navigate("/");
         }

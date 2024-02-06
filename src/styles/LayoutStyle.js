@@ -13,7 +13,6 @@ export const ContentWrap = styled.div`
   margin-top: 100px;
   padding: 20px 0;
   & > div {
-    /* width: 1660px; */
   }
   @media all and (max-width: 767px) {
     margin-top: 40px;

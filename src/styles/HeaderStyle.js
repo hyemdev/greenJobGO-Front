@@ -7,7 +7,6 @@ export const HeaderSty = styled.div`
   left: 0;
   z-index: 999;
   width: 100vw;
-  /* max-width: 196rem; */
   height: 100px;
   display: flex;
   align-items: center;
@@ -77,7 +76,6 @@ export const HeaderSty = styled.div`
     top: 0;
     left: 0;
     z-index: 999;
-    /* width: 100vw; */
     width: 100%;
     min-width: 360px;
     height: 52px;
@@ -92,7 +90,6 @@ export const HeaderSty = styled.div`
       justify-content: space-around;
       align-items: center;
       cursor: default;
-      /* gap: 40px; */
       /* 상단로고style */
       .upper-logo-div {
         width: 159px;

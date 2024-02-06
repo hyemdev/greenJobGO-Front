@@ -9,14 +9,6 @@ const client = axios.create({
   },
 });
 
-// const setAuthHeader = () => {
-//   const accessToken = getCookie("accessToken");
-//   if (accessToken) {
-//     client.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-//   } else {
-//     delete client.defaults.headers.common["Authorization"];
-//   }
-// };
 
 // 요청 인터셉터 설정
 client.interceptors.request.use(
@@ -63,32 +55,6 @@ client.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-// client.interceptors.response.use(
-//   response => {
-//     return response;
-//   },
-//   async error => {
-//     const originalRequest = error.config;
-//     const refreshToken = getCookie("refreshToken");
-//     if (error.response.status === 401 && refreshToken) {
-//       try {
-//         const response = await client.post(`/sign/refresh-token`, {
-//           refreshToken,
-//         });
-//         const accessToken = response.data;
-//         setCookie("accessToken", accessToken);
-//         setAuthHeader();
-//         return client(originalRequest);
-//       } catch (error) {
-//         console.error("토큰 갱신 실패:", error);
-//         removeAuth();
-//         return Promise.reject(error);
-//       }
-//     }
-//     console.error("요청 실패:", error);
-//     return Promise.reject(error);
-//   },
-// );
 
 // 로그인 함수
 export const fetchLogin = async (userId, password, setErrorCancelInfo) => {

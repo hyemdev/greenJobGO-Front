@@ -335,7 +335,6 @@ export const ContentListViewer = styled.div`
             display: inline-block;
             width: 70px;
             font-weight: 500;
-            /* margin-right: 10px; */
           }
         }
         .date {
@@ -346,7 +345,6 @@ export const ContentListViewer = styled.div`
             display: inline-block;
             width: 70px;
             font-weight: 500;
-            /* margin-right: 10px; */
           }
         }
       }
@@ -441,7 +439,6 @@ export const ContentListViewer = styled.div`
   @media all and (max-width: 767px) {
     .galleryStyle {
       display: flex;
-      /* justify-content: center; */
       flex-wrap: wrap;
       gap: 20px;
       padding: 10px 0px;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HeaderSty, MobileHeaderSty } from "../styles/HeaderStyle";
+import { HeaderSty } from "../styles/HeaderStyle";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postLogout } from "../api/client";
 import { useRecoilState, useResetRecoilState } from "recoil";

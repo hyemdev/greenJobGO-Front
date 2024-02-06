@@ -30,7 +30,6 @@ export const ModalWarp = styled.div`
   .modal-content {
     position: relative;
     height: 100%;
-    /* padding: 16px; */
     .btns {
       display: flex;
       justify-content: center;
@@ -79,12 +78,10 @@ export const BusinessAgreesSty = styled.div`
     margin: 0 auto;
     padding: 40px;
     > img {
-      /* width: 384px; */
       width: 100%;
       height: 30px;
       padding: 0 150px;
       object-fit: contain;
-      /* margin: 40px; */
       margin-bottom: 70px;
     }
     .protect-title {
@@ -123,7 +120,6 @@ export const BusinessAgreesSty = styled.div`
     }
     .footer-text {
       padding: 10px;
-      /* margin-top: 10px; */
       font-size: 14px;
       font-weight: 500;
       line-height: 1.5;

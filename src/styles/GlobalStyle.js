@@ -39,7 +39,6 @@ export const ellipsis = {
 
 /* 공통 확인버튼 */
 export const BtnGlobal = styled.button`
-  /* .confirm-btn { */
   width: 150px;
   height: 50px;
   border-radius: 8px;
@@ -137,9 +136,6 @@ export const ConfirmModalWarp = styled.div`
   /* 모달 내용 */
   .modalConfirm-content {
     position: relative;
-    /* top: 50px;
-    left: 20px; */
-    /* height: 100%; */
     height: 50px;
     padding: 0px 20px 0px 30px;
     font-size: 14px;

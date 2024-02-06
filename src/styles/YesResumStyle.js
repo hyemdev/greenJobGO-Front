@@ -29,8 +29,6 @@ export const YesResumeWrap = styled.div`
         .content {
           display: flex;
           flex-direction: column;
-          /* justify-content: center; */
-          /* justify-content: space-between; */
           width: 100%;
           height: 100%;
           padding: 15px 0 0 60px;

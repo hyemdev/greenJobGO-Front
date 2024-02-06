@@ -2,11 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import BusinessSwipe from "../../components/business/BusinessHome/BusinessSwipe";
 import { BusinessStyWrap } from "../../styles/BusinessIntroStyle";
 import { getBigcate, getMainImgList } from "../../api/businessMainAxios";
-import { Link, useNavigate } from "react-router-dom";
-import BusinessPrivacyProtect from "./BusinessPrivacyProtect";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { HeaderFocusAtom } from "../../components/BusinessHeader";
-import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
+
 import OkModal from "../../components/OkModal";
 
 const BusinessIntro = () => {
@@ -18,7 +15,6 @@ const BusinessIntro = () => {
   const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
   const [errorApiInfo, setErrorApiInfo] = useState("");
 
-  // const setSelect = useSetRecoilState(HeaderFocusAtom);
 
   const navigate = useNavigate();
 

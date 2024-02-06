@@ -1,11 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { AddPofolPofolWrap } from "../../../styles/AddPortfolioStyle";
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
-import { userInfo } from "../../../recoil/selectors/UserInfoSelector";
-import { FadeLoader } from "react-spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import UploadLoading from "../../UploadLoading";
 
 const AddPofolPofol = ({
   std,

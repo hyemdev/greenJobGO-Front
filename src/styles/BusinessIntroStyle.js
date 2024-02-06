@@ -31,7 +31,6 @@ export const BusinessStyWrap = styled.div`
           text-align: center;
           letter-spacing: -0.24px;
           font-family: "Noto Sans KR";
-          /* line-height: 1.2; */
         }
       }
     }
@@ -85,7 +84,6 @@ export const BusinessStyWrap = styled.div`
             text-align: center;
             letter-spacing: -0.24px;
             font-family: "Noto Sans KR";
-            /* line-height: 1.2; */
           }
         }
       }
@@ -143,10 +141,6 @@ export const SwiperWrapStyle = styled.div`
   .swiper-button-next {
     display: none;
   }
-  /* .swiper-button-prev::after,
-  .swiper-button-next::after {
-    display: none;
-  } */
   .swiper-slide {
     width: 300px;
     text-align: center;
@@ -211,10 +205,6 @@ export const SwiperWrapStyle = styled.div`
     .swiper-button-next {
       display: none;
     }
-    /* .swiper-button-prev::after,
-  .swiper-button-next::after {
-    display: none;
-  } */
     .swiper-slide {
       text-align: center;
       img {

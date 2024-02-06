@@ -8,7 +8,6 @@ export const ListDetailWrapSty = styled.div`
     color: ${Maincolor.black};
     font-size: 24px;
     font-weight: 700;
-    /* margin-top: 20px; */
     margin-bottom: 40px;
   }
   .sub-title {
@@ -40,9 +39,7 @@ export const ListDetailWrapSty = styled.div`
   }
   @media all and (max-width: 767px) {
     margin: 0 auto;
-    /* width: 100vw; */
     width: 360px;
-    /* min-width: 340px; */
     min-width: 350px;
     padding: 20px 5px;
     & > h2 {
@@ -198,7 +195,6 @@ export const DefaultInfo = styled.div`
   @media all and (max-width: 767px) {
     min-width: 350px;
     height: auto;
-    /* max-height: 800px; */
     margin: 0 auto;
     border-radius: 0 0 10px 10px;
     border: 1px solid ${Maincolor.maingray};
@@ -263,7 +259,6 @@ export const DefaultInfo = styled.div`
               :nth-of-type(1) {
                 display: block;
                 width: 320px;
-                /* white-space: wrap; */
               }
               /* 주소 */
               :nth-of-type(2) {
@@ -288,7 +283,6 @@ export const DefaultInfo = styled.div`
                   gap: 5px;
                   > div {
                     display: flex;
-                    /* align-items: center; */
                     color: ${Maincolor.black};
                     background: ${Maincolor.search};
                     border-radius: 6px;
@@ -542,7 +536,6 @@ export const PortfolioInfo = styled.div`
     margin-bottom: 20px;
     padding: 20px;
     color: ${Maincolor.black};
-    /* overflow-y: auto; */
 
     .portfolio-file-list {
       font-size: 12px;

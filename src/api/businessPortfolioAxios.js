@@ -9,43 +9,6 @@ export const getCategory = async (setCategoryData, setErrorApiInfo) => {
   }
 };
 
-// export const getStudentGalleryList = async (
-//   setGalleryData,
-//   setCount,
-//   page,
-//   category,
-//   searchsubj,
-//   searchname,
-//   setNothing,
-// ) => {
-//   try {
-//     let apiUrl = `/company/student?page=${page}&size=6&sort=istudent%2CASC`;
-//     if (category) {
-//       apiUrl += `&icategory=${category}`;
-//     }
-
-//     if (searchsubj) {
-//       apiUrl += `&subjectName=${searchsubj}`;
-//     }
-
-//     if (searchname) {
-//       apiUrl += `&studentName=${searchname}`;
-//     }
-
-//     const res = await client.get(apiUrl);
-
-//     setCount(res.data.totalcount);
-//     setGalleryData(res.data.vo);
-//     setNothing(false);
-//     if (res.data.vo.length === 0) {
-//       setNothing(true);
-//       console.log("결과 없어요");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const getStudentList = async (
   setListData,
   // setCount,

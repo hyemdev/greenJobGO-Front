@@ -5,7 +5,6 @@ import { BusinessPortfolioWrap } from "../../styles/BusinessPortfolioStyle";
 import ListPaging from "../../components/business/PortfolioList/ListPaging";
 import {
   getCategory,
-  getStudentGalleryList,
   getStudentList,
 } from "../../api/businessPortfolioAxios";
 import NoImage from "../../assets/NoImage.jpg";
@@ -49,19 +48,6 @@ const PortfolioList = () => {
     e.target.src = NoImage;
   };
 
-  // 갤러리형 수강생 목록
-  // const studentGalleryData = () => {
-  //   getStudentGalleryList(
-  //     setGalleryData,
-  //     setCount,
-  //     page,
-  //     category,
-  //     searchsubj,
-  //     searchname,
-  //     setNothing,
-  //   );
-  // };
-
   // 리스트형 수강생 목록
   const studentList = () => {
     getStudentList(
@@ -80,11 +66,6 @@ const PortfolioList = () => {
   useEffect(() => {
     studentList();
 
-    // if (viewState === true) {
-    //   studentGalleryData();
-    // } else if (viewState === false) {
-    //   studentList();
-    // }
     getCategory(setCategoryData, setErrorApiInfo);
   }, [page, viewState]);
 
@@ -100,12 +81,6 @@ const PortfolioList = () => {
     }));
     await studentList();
 
-    // if (viewState === true) {
-    //   studentGalleryData();
-    // } else if (viewState === false) {
-    //   studentList();
-    // }
-    // setPage(1);
   };
 
   // 카테변경값 저장
@@ -117,8 +92,6 @@ const PortfolioList = () => {
       searchsubj: "",
       searchname: "",
     }));
-    // setCategory(e.target.value);
-    // setPage(1);
   };
 
   // 페이지네이션 클릭시
@@ -126,7 +99,6 @@ const PortfolioList = () => {
     setPageState(prev => ({ ...prev, page: e }));
 
     window.scrollTo({ top: 0 });
-    // setPage(e);
   };
 
   useEffect(() => {

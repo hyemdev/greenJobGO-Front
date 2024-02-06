@@ -1,6 +1,4 @@
 import React from "react";
-import { v4 } from "uuid";
-import NoImage from "../../../assets/NoImage.jpg";
 import { BtnGlobal } from "../../../styles/GlobalStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";

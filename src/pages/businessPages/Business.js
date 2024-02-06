@@ -14,7 +14,6 @@ const { persistAtom } = recoilPersist();
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export const AgreeModalAtom = atom({
-  // key: `AgreeModalAtom/${v4()}`,
   key: `AgreeModalAtom`,
   default: { isBizAgree: false },
   effects_UNSTABLE: [persistAtom],
@@ -50,9 +49,7 @@ const Business = () => {
       navigate("/business/portpoliolist");
       setClickAgree({ isBizAgree: true });
     } 
-    // else {
-    //   navigate("/business");
-    // }
+   
   }, [isMobileDevice]);
 
 

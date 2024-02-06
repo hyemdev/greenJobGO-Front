@@ -36,7 +36,6 @@ export const ListPagingSty = styled.div`
       font-size: 14px;
     }
     .active {
-      /* background-color: ${Maincolor.admintxt}; */
     }
   }
   @media all and (max-width: 767px) {

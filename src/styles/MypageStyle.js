@@ -43,7 +43,6 @@ export const DefaultInfo = styled.div`
   margin: 0 auto;
   height: 320px;
   border-radius: 0 0 10px 10px;
-  /* border-radius: 10px; */
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;
@@ -167,38 +166,6 @@ export const DefaultInfo = styled.div`
         }
       }
     }
-    /* .text-info {
-      height: 164px;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 24px 0;
-      & > li > span:first-of-type {
-        display: inline-block;
-        width: 60px;
-        margin-right: 18px;
-        font-weight: 700;
-      }
-      & > li > span:nth-of-type(2) {
-        display: inline-block;
-        width: 414px;
-      }
-      & > li:nth-of-type(4) {
-        display: flex;
-        align-items: center;
-        > div {
-          color: ${Maincolor.black};
-          background: ${Maincolor.search};
-          border-radius: 6px;
-          padding: 5px 10px;
-          margin-right: 5px;
-          > span {
-            font-size: 16px;
-            font-weight: 400;
-          }
-        }
-      }
-    } */
   }
 `;
 
@@ -253,7 +220,6 @@ export const ResumeInfo = styled.div`
 export const PortfolioInfo = styled.div`
   margin: 0 auto;
   max-height: 408px;
-  /* border-radius: 0 0 10px 0; */
   border: 1px solid ${Maincolor.maingray};
   margin-bottom: 40px;
   padding: 40px;

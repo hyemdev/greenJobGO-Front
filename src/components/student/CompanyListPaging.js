@@ -7,19 +7,7 @@ import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons
 
 const CompanyListPaging = ({ page, setPage, count }) => {
   return (
-    //  <PagiWrap>
-    //   <Pagination
-    //     activePage={page}
-    //     itemsCountPerPage={12}
-    //     totalItemsCount={count}
-    //     pageRangeDisplayed={10}
-    //     marginPagesDisplayed={0}
-    //     prevPageText={"‹"}
-    //     nextPageText={"›"}
-    //     onChange={setPage}
-    //   /> 
-    //    </PagiWrap>
-    <ListPagingSty>
+     <ListPagingSty>
       <Pagination
         activePage={page}
         itemsCountPerPage={12}

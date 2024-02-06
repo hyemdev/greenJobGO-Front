@@ -13,7 +13,6 @@ const { persistAtom } = recoilPersist();
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
 export const AgreeStudentModalAtom = atom({
-  // key: `AgreeStudentModalAtom/${v4()}`,
   key: `AgreeStudentModalAtom`,
   default: { isStdAgree: false },
   effects_UNSTABLE: [persistAtom],

@@ -10,23 +10,12 @@ import { useMediaQuery } from "react-responsive";
 import { BusinessPageAtom } from "../pages/businessPages/PortfolioList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines, faUser } from "@fortawesome/free-regular-svg-icons";
-// const { persistAtom } = recoilPersist();
-// import { recoilPersist } from "recoil-persist";
 
 import ConfirmModal from "./ConfirmModal";
 import OkModal from "./OkModal";
 
-// RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
-
-// export const HeaderFocusAtom = atom({
-//   key: `HeaderFocusAtom`,
-//   default: "businessintro",
-//   effects_UNSTABLE: [persistAtom],
-// });
-
 const BusinessHeader = () => {
   const [authState, setAuthState] = useRecoilState(AuthStateAtom);
-  // const [select, setSelect] = useRecoilState(HeaderFocusAtom);
   const [select, setSelect] = useState("businessintro");
   // api 오류 메세지 받아오는 state.
   const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
@@ -42,7 +31,6 @@ const BusinessHeader = () => {
 
   const ResetBizAgreeRecoil = useResetRecoilState(AgreeModalAtom);
   const ResetBusinessPageRecoil = useResetRecoilState(BusinessPageAtom);
-  // const ResetHeaderFocusRecoil = useResetRecoilState(HeaderFocusAtom);
 
   const menus = [
     {

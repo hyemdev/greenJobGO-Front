@@ -11,8 +11,6 @@ const UploadLoading = () => {
         top: "0",
         width: "100%",
         height: "100%",
-        // width: "782px",
-        // height: "494px",
         background: "rgba(0, 0, 0, 0.3)",
         backdropFilter: "blur(2px)",
         zIndex: "9999",
