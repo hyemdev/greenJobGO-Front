@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Maincolor } from "./GlobalStyle";
 
 export const ConnectCompanyWrap = styled.div`
   width: 1400px;
@@ -22,7 +23,7 @@ export const ConnectCompanyWrap = styled.div`
         border-radius: 12px;
         h3 {
           font-size: 18px;
-          margin-bottom: 20px;
+          margin-bottom: 30px;
         }
         .company-info {
           font-size: 15px;
@@ -34,6 +35,9 @@ export const ConnectCompanyWrap = styled.div`
               span {
                 :first-of-type {
                   font-weight: 500;
+                }
+                :last-of-type {
+                  color: ${Maincolor.grayDeep};
                 }
               }
               margin-bottom: 10px;
@@ -48,6 +52,10 @@ export const ConnectCompanyWrap = styled.div`
                   gap: 10px;
                   font-weight: 500;
                 }
+              }
+              a {
+                padding-left: 2px;
+                color: ${Maincolor.grayDeep};
               }
             }
           }
