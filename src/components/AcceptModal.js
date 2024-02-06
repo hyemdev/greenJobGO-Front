@@ -33,7 +33,10 @@ export const MainYnModal = ({
   handleMainPofolOk,
   handleMainCancel,
   mainYn,
+  mainCheck,
 }) => {
+  console.log(mainCheck);
+  console.log(mainYn);
   return (
     <>
       {mainYnModal && (
@@ -43,16 +46,21 @@ export const MainYnModal = ({
               <div className="header">
                 <span>✖</span>
               </div>
-              {mainYn === 0 ? (
+              {mainYn === 0 && mainCheck.length === 0 && (
                 <div className="content">
-                  <span>대표 포트폴리오로 등록하시겠습니까?</span>
-                </div>
-              ) : (
-                <div className="content">
-                  <span>대표 포트폴리오 등록을 취소하시겠습니까?</span>
+                  <span>대표 포트폴리오로 등록 하시겠습니까?</span>
                 </div>
               )}
-
+              {mainYn === 1 && mainCheck.length === 1 && (
+                <div className="content">
+                  <span>대표 포트폴리오 등록을 취소 하시겠습니까?</span>
+                </div>
+              )}
+              {mainYn === 0 && mainCheck.length === 1 && (
+                <div className="content">
+                  <span>이미 대표 포트폴리오가 등록 되어있습니다.</span>
+                </div>
+              )}
               <div className="btns">
                 <button onClick={handleMainCancel}>취소</button>
                 <button onClick={handleMainPofolOk}>확인</button>

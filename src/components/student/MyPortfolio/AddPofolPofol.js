@@ -46,7 +46,7 @@ const AddPofolPofol = ({
               className="upload-name"
               value={
                 file?.img?.ifile
-                  ? file?.img?.img
+                  ? file.img.originFileName
                   : imgFile
                     ? imgFile.name
                     : "첨부파일"
@@ -100,7 +100,7 @@ const AddPofolPofol = ({
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {item.file}
+                          {item.originFileName}
                         </a>
                       </div>
                       <div>
@@ -156,7 +156,7 @@ const AddPofolPofol = ({
                           alt="portfolio"
                         />
                         <a
-                          href={`https://greenjobgo.kr/img/student/${istudent}/${item.fileLink}`}
+                          href={`https://${item.fileLink}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >

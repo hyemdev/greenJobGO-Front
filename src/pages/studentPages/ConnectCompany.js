@@ -29,7 +29,7 @@ const ConnectCompany = () => {
       <div className="connect-company-inner">
         <ul>
           {listData &&
-            listData.map((item, index) => (
+            listData.map((item) => (
               <li key={item.companyCode}>
                 <h3>{item.companyName}</h3>
                 <div className="company-info">
@@ -39,7 +39,13 @@ const ConnectCompany = () => {
                   </div>
                   <div>
                     <span>홈페이지</span>
-                    <span>{item.homepage}</span>
+                    <a
+                      href={`https://${item.homepage}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.homepage}
+                    </a>
                   </div>
                 </div>
               </li>
