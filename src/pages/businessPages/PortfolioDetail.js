@@ -7,7 +7,7 @@ import {
   PortfolioInfo,
   ResumeInfo,
 } from "../../styles/BusinessListDetail";
-import NoImage from "../../assets/NoImage.jpg";
+import NoImage from "../../assets/DefaultImg.png";
 import { getStdentInfo } from "../../api/businessPortfolioAxios";
 import { v4 } from "uuid";
 import OkModal from "../../components/OkModal";

@@ -1,6 +1,6 @@
 import React from "react";
 import { YesResumeWrap } from "../../../styles/YesResumStyle";
-import NoImage from "../../../assets/NoImage.jpg";
+import NoImage from "../../../assets/DefaultImg.png";
 import { useNavigate } from "react-router";
 
 const YesResume = ({ std, file }) => {

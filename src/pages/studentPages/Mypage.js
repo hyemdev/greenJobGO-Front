@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import NoImage from "../../assets/NoImage.jpg";
+import NoImage from "../../assets/DefaultImg.png";
 import {
   DefaultInfo,
   MypageWrap,

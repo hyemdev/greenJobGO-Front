@@ -1,6 +1,6 @@
 import React from "react";
 import { v4 } from "uuid";
-import NoImage from "../../../assets/NoImage.jpg";
+import NoImage from "../../../assets/DefaultImg.png";
 import { Link } from "react-router-dom";
 
 const Listgallery = ({ listData, onImgError }) => {

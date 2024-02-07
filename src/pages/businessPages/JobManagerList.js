@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { JobManagerBoxWrap } from "../../styles/BusinessJobmanager";
-import NoImage from "../../assets/NoImage.jpg";
+import NoImage from "../../assets/DefaultImg.png";
 import { getJobManagerInfo } from "../../api/jobmanagerAxios";
 import OkModal from "../../components/OkModal";
 

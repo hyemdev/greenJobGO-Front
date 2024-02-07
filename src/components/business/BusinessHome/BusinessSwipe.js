@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import NoImage from "../../../assets/NoImage.jpg";
+import NoImage from "../../../assets/DefaultImg.png";
 
 import "swiper/css";
 import "swiper/css/navigation";

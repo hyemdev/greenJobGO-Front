@@ -7,7 +7,7 @@ import {
   getCategory,
   getStudentList,
 } from "../../api/businessPortfolioAxios";
-import NoImage from "../../assets/NoImage.jpg";
+import NoImage from "../../assets/DefaultImg.png";
 import OkModal from "../../components/OkModal";
 
 import { atom, useRecoilState, RecoilEnv } from "recoil";
