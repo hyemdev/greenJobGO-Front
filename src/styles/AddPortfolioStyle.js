@@ -226,6 +226,9 @@ export const AddPofolPofolWrap = styled.div`
                   padding: 10px;
                   border: 1px solid ${Maincolor.input};
                   border-radius: 6px;
+                  > span {
+                    word-break: break-all;
+                  }
                 }
               }
             }

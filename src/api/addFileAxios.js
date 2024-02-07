@@ -234,7 +234,34 @@ export const deleteFile = async (istudent, ifile, setErrorInfo) => {
       return { success: false };
     }
   } catch (error) {
-    setErrorInfo(`file delete: ${error.message}`);
+    const { status } = error.response;
+    if (error.response) {
+      switch (status) {
+        case 452:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 453:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 454:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 456:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 457:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        case 458:
+          setErrorInfo(`${error.response.data.message}`);
+          break;
+        default:
+          setErrorInfo(`file delete: ${error.message}`);
+      }
+    } else {
+      setErrorInfo(`file delete: ${error.message}`);
+    }
+    // setErrorInfo(`file delete: ${error.message}`);
   }
 };
 

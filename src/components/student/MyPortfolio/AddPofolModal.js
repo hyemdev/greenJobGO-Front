@@ -21,7 +21,7 @@ const AddPofolModal = ({
   const handleDescriptionChange = e => {
     const inputText = e.target.value;
 
-    const limitedText = inputText.slice(0, 150);
+    const limitedText = inputText.slice(0, 100);
     if (fileType === 2) {
       setFileOneWord(limitedText);
     } else if (fileType === 3) {
@@ -94,7 +94,7 @@ const AddPofolModal = ({
                     <textarea
                       cols="30"
                       rows="5"
-                      placeholder="포트폴리오 소개 내용을 작성해주세요.(최대 150자)"
+                      placeholder="포트폴리오 소개 내용을 작성해주세요.(최대 100자)"
                       value={fileOneWord}
                       onChange={handleDescriptionChange}
                     />
@@ -121,7 +121,7 @@ const AddPofolModal = ({
                     <textarea
                       cols="30"
                       rows="5"
-                      placeholder="포트폴리오 소개 내용을 작성해주세요.(최대 150자)"
+                      placeholder="포트폴리오 소개 내용을 작성해주세요.(최대 100자)"
                       value={linkOneWord}
                       onChange={handleDescriptionChange}
                     />
