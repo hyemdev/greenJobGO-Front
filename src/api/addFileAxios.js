@@ -261,7 +261,6 @@ export const deleteFile = async (istudent, ifile, setErrorInfo) => {
     } else {
       setErrorInfo(`file delete: ${error.message}`);
     }
-    // setErrorInfo(`file delete: ${error.message}`);
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AddResumeBaseInfo,
   AddResumeItem,
@@ -53,6 +53,7 @@ const AddResume = () => {
 
   const istudent = std?.istudent;
 
+  // 파일 이름 표시
   const handleResumeFileChange = e => {
     const file = e.target.files[0];
 
@@ -61,11 +62,14 @@ const AddResume = () => {
     }
   };
 
+  // 엔터 방지
   const handleResumeKeyDown = e => {
     if (e.keyCode === 13) {
       e.preventDefault();
     }
   };
+
+  // 이력서 업로드
   const handleResumeUpload = async () => {
     setIsLoading(true);
     const formData = new FormData();
@@ -103,6 +107,7 @@ const AddResume = () => {
     navigate("/student/myportfolio");
   };
 
+  // 파일 삭제
   const handleDeleteOk = async () => {
     const ifile = file?.resume?.ifile;
     await deleteFile(istudent, ifile, setErrorInfo);
@@ -110,6 +115,7 @@ const AddResume = () => {
     fetchData();
   };
 
+  // 자격증 해시태그 삭제
   const handleRemoveHashTag = async icertificate => {
     await deleteCertificate(istudent, icertificate);
     fetchData();
@@ -119,6 +125,7 @@ const AddResume = () => {
     setDeleteOkModal(false);
   };
 
+  // 자격증 해시태그 추가
   const handleAddHashTag = async e => {
     const command = ["Comma", "Enter", "NumpadEnter"];
     if (!command.includes(e.code)) return;
