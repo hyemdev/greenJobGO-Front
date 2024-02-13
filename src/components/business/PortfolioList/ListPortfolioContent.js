@@ -14,9 +14,6 @@ import { useRecoilState } from "recoil";
 const ListPortfolioContent = ({
   listData,
   count,
-  // galleryData,
-  // viewState,
-  // setViewState,
   onImgError,
   nothing,
 }) => {

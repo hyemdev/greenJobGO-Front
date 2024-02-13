@@ -53,6 +53,7 @@ const AddPortFolio = () => {
 
   const istudent = std?.istudent;
 
+  // 파일 이름 표시
   const handleImgFileChange = e => {
     const file = e.target.files[0];
     if (file) {
@@ -60,6 +61,7 @@ const AddPortFolio = () => {
     }
   };
 
+  // 포트폴리오 파일 업로드
   const handleFileUpload = async () => {
     setIsLoading(true);
     let formData = new FormData();
@@ -90,6 +92,7 @@ const AddPortFolio = () => {
     }
   };
 
+  // 포폴 대표이미지 업로드
   const handleThumbNailUpload = async e => {
     let formData = new FormData();
     formData.append("file", imgFile);
@@ -100,17 +103,12 @@ const AddPortFolio = () => {
         setErrorInfo,
       );
       fetchData();
-      // setUploadResult(result);
-
-      // if (result.success === true) {
-      //   setModalOpen(false);
-      //   setAcceptOkModal(true);
-      // }
     } catch (error) {
       // setAcceptOkModal(true);
     }
   };
 
+  // 파일 삭제 모달
   const handleDeleteFile = ifile => {
     if (ifile) {
       setIfile(ifile);
@@ -144,6 +142,7 @@ const AddPortFolio = () => {
     setMainYnModal(false);
   };
 
+  // 대표 포트폴리오 선택 체크박스
   const handleCheckboxChange = (e, ifile) => {
     if (e.target.checked) {
       setMainCheck([ifile]);
@@ -157,6 +156,7 @@ const AddPortFolio = () => {
     fetchData();
   };
 
+  // 파일 삭제
   const handleDeleteOk = async () => {
     const istudent = std.istudent;
     try {
