@@ -297,7 +297,7 @@ export const ContentListViewer = styled.div`
       border: 1px solid ${Maincolor.maingray};
       padding: 30px 40px;
       display: flex;
-      justify-content: left;
+      justify-content: space-between;
       align-items: center;
       .thumb-img {
         width: 295px;
@@ -312,7 +312,7 @@ export const ContentListViewer = styled.div`
         display: flex;
         justify-content: left;
         flex-direction: column;
-        width: 600px;
+        width: 700px;
         margin-left: 60px;
         color: ${Maincolor.black};
 
@@ -330,7 +330,7 @@ export const ContentListViewer = styled.div`
           margin-top: 52px;
           font-size: 14px;
           font-weight: 400;
-          ${ellipsis}
+          /* ${ellipsis} */
           & > span:first-of-type {
             display: inline-block;
             width: 70px;
@@ -349,10 +349,10 @@ export const ContentListViewer = styled.div`
         }
       }
       .detail-view-btn {
-        width: 220px;
-        margin-left: 167px;
+        width: 200px;
+        /* margin-left: 167px; */
         & button {
-          width: 220px;
+          width: 200px;
           background: ${Maincolor.admintxt};
           border-radius: 6px;
         }
