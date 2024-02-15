@@ -330,7 +330,7 @@ export const ContentListViewer = styled.div`
           margin-top: 52px;
           font-size: 14px;
           font-weight: 400;
-          /* ${ellipsis} */
+          ${ellipsis.one}
           & > span:first-of-type {
             display: inline-block;
             width: 70px;
@@ -350,7 +350,6 @@ export const ContentListViewer = styled.div`
       }
       .detail-view-btn {
         width: 200px;
-        /* margin-left: 167px; */
         & button {
           width: 200px;
           background: ${Maincolor.admintxt};
