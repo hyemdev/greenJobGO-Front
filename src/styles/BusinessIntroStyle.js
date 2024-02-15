@@ -33,6 +33,12 @@ export const BusinessStyWrap = styled.div`
           font-family: "Noto Sans KR";
         }
       }
+      .cate-name:hover {
+        background: ${Maincolor.adminmode};
+      }
+      .active-name {
+        background: ${Maincolor.maingray};
+      }
     }
   }
   .main-portfolio-linkBtn {

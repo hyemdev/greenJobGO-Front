@@ -15,7 +15,6 @@ const BusinessIntro = () => {
   const [apiErrorModalOpen, setApiErrorModalOpen] = useState(false);
   const [errorApiInfo, setErrorApiInfo] = useState("");
 
-
   const navigate = useNavigate();
 
   const handleTabBtnClick = item => {
@@ -23,9 +22,9 @@ const BusinessIntro = () => {
   };
 
   const handleTotalListClick = () => {
-    // setSelect("portpoliolist");
     navigate("/business/portpoliolist");
   };
+
   useEffect(() => {
     if (clickCate) {
       getMainImgList({ setSwiperData, clickCate, setNoItem, setErrorApiInfo });
@@ -41,6 +40,12 @@ const BusinessIntro = () => {
     getBigcate(setCategory, setErrorApiInfo);
   }, []);
 
+  useEffect(() => {
+    if (category.length > 0 && clickCate === "1") {
+      const targetCate = category[0];
+      setClickCate(targetCate.iclassification);
+    }
+  }, [category]);
   return (
     <BusinessStyWrap>
       <h2> 수강생 포트폴리오 </h2>
@@ -48,6 +53,9 @@ const BusinessIntro = () => {
         <ul>
           {category?.map(item => (
             <li
+              className={
+                clickCate === item.iclassification ? "active-name" : "cate-name"
+              }
               key={`cate${item.iclassification}`}
               onClick={() => handleTabBtnClick(item.iclassification)}
             >
