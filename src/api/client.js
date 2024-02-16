@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getCookie, removeCookie, setCookie } from "./cookie";
+import { useEffect } from "react";
 
 const client = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -9,54 +10,106 @@ const client = axios.create({
   },
 });
 
+const Interceptor = ({ children }) => {
+  const requestInterceptor = client.interceptors.request.use(
+    async config => {
+      const accessToken = getCookie("accessToken");
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+        if (!config.headers) {
+          config.headers = {};
+        }
+      }
+      return config;
+    },
+    error => {
+      return Promise.reject(error);
+    },
+  );
+  const responseInterceptor = client.interceptors.response.use(
+    response => {
+      return response;
+    },
+    async error => {
+      const { config, response } = error;
+      const refreshToken = getCookie("refreshToken");
+      if (response?.status === 401 && refreshToken) {
+        try {
+          const { data } = await client.post(`/sign/refresh-token`, {
+            refreshToken,
+          });
+          const accessToken = data;
+          setCookie("accessToken", accessToken);
+          if (config?.headers && config.headers?.Authorization) {
+            config.headers.Authorization = `Bearer ${accessToken}`;
+            const retryResponse = await client(config);
+            return retryResponse;
+          }
+        } catch (error) {
+          console.log("관리자에게 문의해주세요.");
+        }
+      }
+      return Promise.reject(error);
+    },
+  );
+
+  useEffect(() => {
+    return () => {
+      client.interceptors.request.eject(requestInterceptor);
+      client.interceptors.response.eject(responseInterceptor);
+    };
+  }, [responseInterceptor, requestInterceptor]);
+
+  return children;
+};
 
 // 요청 인터셉터 설정
-client.interceptors.request.use(
-  async config => {
-    const accessToken = getCookie("accessToken");
-    if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-      if (!config.headers) {
-        config.headers = {};
-      }
-    }
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  },
-);
+// client.interceptors.request.use(
+//   async config => {
+//     const accessToken = getCookie("accessToken");
+//     if (accessToken) {
+//       config.headers.Authorization = `Bearer ${accessToken}`;
+//       if (!config.headers) {
+//         config.headers = {};
+//       }
+//     }
+//     return config;
+//   },
+//   error => {
+//     return Promise.reject(error);
+//   },
+// );
 
 // 응답 인터셉터 설정
-client.interceptors.response.use(
-  response => {
-    return response;
-  },
-  async error => {
-    const { config, response } = error;
-    const refreshToken = getCookie("refreshToken");
-    if (response?.status === 401 && refreshToken) {
-      try {
-        const { data } = await client.post(`/sign/refresh-token`, {
-          refreshToken,
-        });
-        const accessToken = data;
-        setCookie("accessToken", accessToken);
-        if (config?.headers && config.headers?.Authorization) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
-          const retryResponse = await client(config);
-          return retryResponse;
-        }
-      } catch (error) {
-        console.log("관리자에게 문의해주세요.");
-      }
-    }
-    return Promise.reject(error);
-  },
-);
+// client.interceptors.response.use(
+//   response => {
+//     return response;
+//   },
+//   async error => {
+//     const { config, response } = error;
+//     const refreshToken = getCookie("refreshToken");
+//     if (response?.status === 401 && refreshToken) {
+//       try {
+//         const { data } = await client.post(`/sign/refresh-token`, {
+//           refreshToken,
+//         });
+//         const accessToken = data;
+//         setCookie("accessToken", accessToken);
+//         if (config?.headers && config.headers?.Authorization) {
+//           config.headers.Authorization = `Bearer ${accessToken}`;
+//           const retryResponse = await client(config);
+//           return retryResponse;
+//         }
+//       } catch (error) {
+//         console.log("관리자에게 문의해주세요.");
+//       }
+//     }
+//     return Promise.reject(error);
+//   },
+// );
 
 // 로그인 함수
-export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
+const fetchLogin = async (userId, password, setErrorCancelInfo) => {
   try {
     const res = await client.post(`/sign/sign-in`, {
       email: userId,
@@ -77,18 +130,12 @@ export const fetchLogin = async (userId, password, setErrorCancelInfo) => {
   }
 };
 
-// 토큰삭제 함수
-const removeAuth = () => {
-  removeCookie("accessToken");
-  removeCookie("refreshToken");
-  delete client.defaults.headers.common["Authorization"];
-};
-
 // 로그아웃 함수
-export const postLogout = async () => {
+const postLogout = async () => {
   try {
     await client.post("/sign/logout");
-    removeAuth();
+    removeCookie("accessToken");
+    removeCookie("refreshToken");
   } catch (error) {
     console.error("로그아웃 실패");
   }
@@ -109,3 +156,4 @@ const handleLoginError = (error, setErrorCancelInfo) => {
 };
 
 export default client;
+export { Interceptor, fetchLogin, postLogout };
