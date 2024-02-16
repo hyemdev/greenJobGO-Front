@@ -5,13 +5,13 @@ import { useRecoilValue } from "recoil";
 
 export const PrivateRoutes = ({ element }) => {
   const navigate = useNavigate();
-  const { isLogin } = useRecoilValue(AuthStateAtom);
+  const { isLogin, accessToken } = useRecoilValue(AuthStateAtom);
 
   useEffect(() => {
-    if (!isLogin) {
+    if (!isLogin || !accessToken) {
       navigate("/");
     }
-  }, [isLogin, navigate]);
+  }, [isLogin, accessToken, navigate]);
 
-  return isLogin ? element : null;
+  return isLogin && accessToken ? element : null;
 };
