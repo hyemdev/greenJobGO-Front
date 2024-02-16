@@ -4,12 +4,7 @@ import "./App.css";
 import NotFound from "./pages/NotFound";
 import { PrivateRoutes } from "./components/PrivateRoutes";
 import Loading from "./components/Loading";
-import {
-  getCookie,
-  removeCookie,
-  setAcessCookie,
-  setRefreshCookie,
-} from "./api/cookie";
+import { removeCookie } from "./api/cookie";
 import { Interceptor } from "./api/client";
 
 // 로그인페이지
@@ -38,9 +33,7 @@ const App = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const accessToken = getCookie("accessToken");
-    const refreshToken = getCookie("refreshToken");
-    if (pathname === "/" && (accessToken || refreshToken)) {
+    if (pathname === "/") {
       removeCookie("accessToken");
       removeCookie("refreshToken");
     }
