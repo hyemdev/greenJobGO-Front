@@ -20,9 +20,10 @@ export const getMainImgList = async ({
   setErrorApiInfo,
 }) => {
   try {
-    const res = await client.get(`${process.env.REACT_APP_CM_URL}icategory=${clickCate}`);
+    const res = await client.get(
+      `${process.env.REACT_APP_CM_URL}icategory=${clickCate}`,
+    );
     const result = await res.data.list;
-    // console.log("스와이퍼용 데이터", result);
     setSwiperData(result);
     {
       result.length === 0 ? setNoItem(true) : setNoItem(false);
