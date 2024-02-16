@@ -41,6 +41,7 @@ const Login = () => {
           setAuthState({
             isLogin: true,
             role: role,
+            accessToken: accessToken,
             editableYn: vo?.editableYn,
             portfolioYn: vo?.portfolioYn,
             aboutMeYn: vo?.aboutMeYn,
@@ -50,6 +51,7 @@ const Login = () => {
           setAuthState({
             isLogin: true,
             role: role,
+            accessToken: accessToken,
           });
           navigate("/business");
 
