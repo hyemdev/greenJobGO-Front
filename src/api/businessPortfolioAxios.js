@@ -5,8 +5,24 @@ export const getCategory = async (setCategoryData, setErrorApiInfo) => {
     const res = await client.get(`${process.env.REACT_APP_CT_URL}`);
     setCategoryData(res.data);
   } catch (error) {
-    setErrorApiInfo(`Category: ${error.message}`);
-  }
+    const { response } = error;
+    const { status } = response;
+    if (response) {
+      switch (status) {
+        case 500:
+          setErrorApiInfo(`[${status}Error] 서버 내부 오류`);
+          break;
+        case 401:
+          setErrorApiInfo(
+            `[${status}Error] 로그인 시간이 만료되었습니다. 로그아웃 후 재접속 해주세요.`,
+          );
+          break;
+        default:
+          setErrorApiInfo("네트워크 오류 또는 서버 응답이 없습니다.");
+      }
+    } else {
+      throw new Error("Network Error");
+    }  }
 };
 
 export const getStudentList = async (
@@ -45,8 +61,24 @@ export const getStudentList = async (
       setNothing(true);
     }
   } catch (error) {
-    setErrorApiInfo(`Student Portfoilo info: ${error.message}`);
-  }
+    const { response } = error;
+    const { status } = response;
+    if (response) {
+      switch (status) {
+        case 500:
+          setErrorApiInfo(`[${status}Error] 서버 내부 오류`);
+          break;
+        case 401:
+          setErrorApiInfo(
+            `[${status}Error] 로그인 시간이 만료되었습니다. 로그아웃 후 재접속 해주세요.`,
+          );
+          break;
+        default:
+          setErrorApiInfo("네트워크 오류 또는 서버 응답이 없습니다.");
+      }
+    } else {
+      throw new Error("Network Error");
+    }  }
 };
 
 export const getStdentInfo = async (userId, setPayload, setErrorApiInfo) => {
@@ -67,6 +99,22 @@ export const getStdentInfo = async (userId, setPayload, setErrorApiInfo) => {
       fileLinks: fileLink || [],
     });
   } catch (error) {
-    setErrorApiInfo(`Student Info: ${error.message}`);
-  }
+    const { response } = error;
+    const { status } = response;
+    if (response) {
+      switch (status) {
+        case 500:
+          setErrorApiInfo(`[${status}Error] 서버 내부 오류`);
+          break;
+        case 401:
+          setErrorApiInfo(
+            `[${status}Error] 로그인 시간이 만료되었습니다. 로그아웃 후 재접속 해주세요.`,
+          );
+          break;
+        default:
+          setErrorApiInfo("네트워크 오류 또는 서버 응답이 없습니다.");
+      }
+    } else {
+      throw new Error("Network Error");
+    }  }
 };

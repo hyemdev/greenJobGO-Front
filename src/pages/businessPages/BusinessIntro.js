@@ -26,15 +26,12 @@ const BusinessIntro = () => {
   };
 
   useEffect(() => {
-    if (clickCate) {
-      getMainImgList({ setSwiperData, clickCate, setNoItem, setErrorApiInfo });
-    }
     if (errorApiInfo) {
       setApiErrorModalOpen(true);
     } else {
       setApiErrorModalOpen(false);
     }
-  }, [clickCate, errorApiInfo]);
+  }, [errorApiInfo]);
 
   useEffect(() => {
     getBigcate(setCategory, setErrorApiInfo);
@@ -45,7 +42,10 @@ const BusinessIntro = () => {
       const targetCate = category[0];
       setClickCate(targetCate.iclassification);
     }
-  }, [category]);
+    if (clickCate) {
+      getMainImgList({ setSwiperData, clickCate, setNoItem, setErrorApiInfo });
+    }
+  }, [category, clickCate]);
   return (
     <BusinessStyWrap>
       <h2> 수강생 포트폴리오 </h2>

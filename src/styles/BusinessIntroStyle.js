@@ -11,10 +11,13 @@ export const BusinessStyWrap = styled.div`
   }
   /* 메인 스와이퍼 탭메뉴 */
   .main-tab-menu {
+    margin: 0 auto;
+    width: 1400px;
     & > ul {
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
       gap: 10px;
       margin: 40px 0;
       & > li {
@@ -58,7 +61,7 @@ export const BusinessStyWrap = styled.div`
     }
   }
 
-  @media all and (max-width: 1600px) {
+  @media all and (max-width: 1400px) {
     margin-top: 50px;
     width: 360px;
     h2 {
@@ -69,6 +72,8 @@ export const BusinessStyWrap = styled.div`
     }
     /* 메인 스와이퍼 탭메뉴 */
     .main-tab-menu {
+      margin: 0 auto;
+      width: 360px;
       & > ul {
         display: flex;
         justify-content: center;

@@ -8,6 +8,23 @@ export const getStudentInfo = async setErrorInfo => {
 
     return { std, file, aboutMeYn, portfolioYn };
   } catch (error) {
-    await setErrorInfo(`Student Info: ${error.message}`);
+    const { response } = error;
+    const { status } = response;
+    if (response) {
+      switch (status) {
+        case 500:
+          setErrorInfo(`[${status}Error] 서버 내부 오류`);
+          break;
+        case 401:
+          setErrorInfo(
+            `[${status}Error] 로그인 시간이 만료되었습니다. 로그아웃 후 재접속 해주세요.`,
+          );
+          break;
+        default:
+          setErrorInfo("네트워크 오류 또는 서버 응답이 없습니다.");
+      }
+    } else {
+      throw new Error("Network Error");
+    }
   }
 };
