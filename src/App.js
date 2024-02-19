@@ -47,7 +47,7 @@ const App = () => {
             <Route path="/" element={<Login />} />
             {/* 수강생 페이지 */}
             <Route
-              path="/student/*"
+              path="/student/"
               element={<PrivateRoutes element={<Student />} />}
             >
               {/* 나의 포트폴리오 관리*/}
@@ -61,11 +61,11 @@ const App = () => {
               <Route path="mypage" element={<Mypage />} />
               {/* 협약기업 리스트 */}
               <Route path="connectcompany" element={<ConnectCompany />} />{" "}
-              <Route path="*" element={<NotFound />} />
+              {/* <Route path="*" element={<NotFound />} /> */}
             </Route>
             {/* 기업페이지 */}
             <Route
-              path="/business/*"
+              path="/business/"
               element={<PrivateRoutes element={<Business />} />}
             >
               {/* 기업 페이지 초기화면 */}
@@ -80,7 +80,7 @@ const App = () => {
               />
               {/* 취업담당자 리스트 */}
               <Route path="jobmanagerlist" element={<JobManagerList />} />
-              <Route path="*" element={<NotFound />} />
+              {/* <Route path="*" element={<NotFound />} /> */}
             </Route>
             {/* 경로 외 접속 시 낫파운드 */}
             <Route index path="*" element={<NotFound />} />
