@@ -27,7 +27,7 @@ export const MyPortfolioTitle = styled.li`
   font-size: 24px;
   font-weight: 700;
   color: #000000;
-  padding: 20px 0 40px 0;
+  padding: 0px 0 40px 0;
 `;
 export const MyPortfolioButton = styled.li`
   display: flex;

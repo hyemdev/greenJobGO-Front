@@ -39,8 +39,7 @@ export const ListDetailWrapSty = styled.div`
   }
   @media all and (max-width: 767px) {
     margin: 0 auto;
-    width: 360px;
-    min-width: 350px;
+    width: 350px;
     padding: 20px 5px;
     & > h2 {
       color: ${Maincolor.black};
@@ -193,7 +192,7 @@ export const DefaultInfo = styled.div`
     }
   }
   @media all and (max-width: 767px) {
-    min-width: 350px;
+    width: 350px;
     height: auto;
     margin: 0 auto;
     border-radius: 0 0 10px 10px;
@@ -380,7 +379,7 @@ export const ResumeInfo = styled.div`
     }
   }
   @media all and (max-width: 767px) {
-    min-width: 350px;
+    width: 350px;
     margin: 0 auto;
     height: 190px;
     border-radius: 0 0 10px 10px;
@@ -528,7 +527,7 @@ export const PortfolioInfo = styled.div`
   }
 
   @media all and (max-width: 767px) {
-    min-width: 350px;
+    width: 350px;
     max-height: 100%;
     margin: 0 auto;
     border-radius: 0 0 10px 10px;

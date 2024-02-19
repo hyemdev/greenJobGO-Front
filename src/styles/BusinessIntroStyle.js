@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Maincolor } from "./GlobalStyle";
 
 export const BusinessStyWrap = styled.div`
-  margin-top: 130px;
+  margin-top: 110px;
   h2 {
     text-align: center;
     font-size: 24px;

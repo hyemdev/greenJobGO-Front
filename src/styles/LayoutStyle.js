@@ -11,8 +11,9 @@ export const ContentWrap = styled.div`
   justify-content: center;
   margin: 0 auto;
   margin-top: 100px;
-  padding: 20px 0;
   & > div {
+      padding: 40px 0;
+
   }
   @media all and (max-width: 767px) {
     margin-top: 40px;

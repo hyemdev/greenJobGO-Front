@@ -10,7 +10,6 @@ export const BusinessPortfolioWrap = styled.div`
     color: ${Maincolor.black};
     font-size: 24px;
     font-weight: 700;
-    margin-top: 20px;
   }
   @media all and (max-width: 767px) {
     width: 360px;

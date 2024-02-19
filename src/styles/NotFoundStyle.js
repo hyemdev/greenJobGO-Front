@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Maincolor } from "./GlobalStyle";
 
 export const NotFoundWrap = styled.div`
+  width: 100%;
   background: ${Maincolor.adminmode};
   .inner {
     width: 720px;

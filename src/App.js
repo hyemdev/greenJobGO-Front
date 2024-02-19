@@ -60,7 +60,8 @@ const App = () => {
               {/* 마이 페이지 */}
               <Route path="mypage" element={<Mypage />} />
               {/* 협약기업 리스트 */}
-              <Route path="connectcompany" element={<ConnectCompany />} />
+              <Route path="connectcompany" element={<ConnectCompany />} />{" "}
+              <Route path="*" element={<NotFound />} />
             </Route>
             {/* 기업페이지 */}
             <Route
@@ -79,6 +80,7 @@ const App = () => {
               />
               {/* 취업담당자 리스트 */}
               <Route path="jobmanagerlist" element={<JobManagerList />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
             {/* 경로 외 접속 시 낫파운드 */}
             <Route index path="*" element={<NotFound />} />
